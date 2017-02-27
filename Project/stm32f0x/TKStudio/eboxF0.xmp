@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="Windows-1252" ?>
+<TKStudioProject Name="eboxF0" ProjectGUID="{E50FA235-6E26-48f8-8131-A9F1132DEA6A}" BuildTool="15" ToolVer="" Version="3.00" Author="YinHandong[Òüº®¶¬]">
+    <Configurations>
+        <Configuration Name="DebugRel" OP="0" XROM="0,0,0,0#0,0,0,0#0,0,0,0" XRAM="0,0,0,0#0,0,0,0#0,0,0,0" OldName="DebugRel" OutBig="0" McLib="0" CLK="8.000000" Cross="0" IROM="1,0x08000000,0x00004000,1#0,0,0,0" IRAM="1,0x20000000,0x00001000,0#0,0,0,0" OldCPU="STM32F100C4" OPTDBG="1,-1,1,0,1,1,()" DEVICE="STM32F100C4" VENDOR="STMicroelectronics" FAMINY="3" SIMCLK="8.000000">
+            <MDK_Output OutName="0,.\DebugRel\eboxF0" OutType="1" OutBatch="0" OutHex="0" OutList="0,.\DebugRel" Debug="1" Browse="0" />
+            <MDK_User BfC="0,()#0,()" BfB="0,()#0,()" AfB="0,()#0,()" Beep="1" SDebug="0" />
+            <MDK_CParam Def="" uDef="" Inc="" Misc="" Opt="0,0" Code="0,0,0,0,0,0" Language="0,0,0,0" List="0" />
+            <MDK_AsmParam Def="" uDef="" Inc="" Misc="" Code="0,0,0,0,0,0" Language="0" List="1,1" />
+            <MDK_Linker Misc="" UseDef="1" Code="0,0,0,1,()" Sct="" List="1,1,1,1,1,1,1,1,1" first="" />
+            <MDK_Debug DbgType="0" sfSIM="0,1,(),()" hwSIM="1,1,1,()" Drv="(),()" SrvOpt="" />
+            <DeviceProperties Item0='BOOK0=DATASHTS\ST\STM32F10xxx.PDF(&quot;Reference Manual&quot;)' Item1='CPU=IRAM(0x20000000-0x20000FFF) IROM(0x8000000-0x8003FFF) CLOCK(8000000) CPUTYPE(&quot;Cortex-M3&quot;)' Item2='FLDLL=UL2CM3(-O14 -S0 -C0 -N00(&quot;ARM Cortex-M3&quot;) -D00(1BA00477) -L00(4) -FO7 -FD20000000 -FC800 -FN1 -FF0STM32F10x_16 -FS08000000 -FL04000)' Item3='MON=SARMCM3.DLL TCM.DLL(&quot;-pCM3&quot;)' Item4='REGFILE=stm32f10x.h(&quot;ST\STM32F10x&quot;)' Item5='SFILE=&quot;STARTUP\ST\STM32F10x\startup_stm32f10x_ld_vl.s&quot; (&quot;STM32 Low density Value Line Startup Code&quot;)' Item6='SIM=SARMCM3.DLL  DCM.DLL(&quot;-pCM3&quot;)' Item7="SVD=SFD\ST\STM32F10xx\STM32F10xx4.sfr" />
+            <DeviceDescription Description="ARM 32-bit Cortex-M3 Microcontroller, 24MHz, 16kB Flash, 4kB SRAM,&#x0D;&#x0A;PLL, Embedded Internal RC 8MHz and 40kHz, Real-Time Clock, &#x0D;&#x0A;Power Saving Modes, JTAG and SWD, &#x0D;&#x0A;7-channel DMA, Nested Interrupt Controller,&#x0D;&#x0A;12-bit 10-ch A/D Converter, 2 12-bit 2-ch D/A converters, 37 Fast I/O Ports, &#x0D;&#x0A;SPI, I2C, 2 USART, CRC calculation unit, &#x0D;&#x0A;SysTick Timer, 2 Watchdog Timers,&#x0D;&#x0A;16-bit 6-chn advanced timer with PWM,&#x0D;&#x0A;5 16-bit Timers with Input Capture, Output Compare and PWM" />
+        </Configuration>
+    </Configurations>
+    <Files>
+        <Filter Name="HAL">
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_adc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_adc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_can.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_cec.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_comp.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_conf_template.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_cortex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_crc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_crc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dac.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dac_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_def.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dma.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dma_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_flash.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_flash_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_gpio.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_gpio_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2c.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2c_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2s.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_irda.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_irda_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_iwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pcd.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pcd_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pwr.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pwr_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rcc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rcc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rtc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rtc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smartcard.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smartcard_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smbus.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_spi.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_spi_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tim.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tim_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tsc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_uart.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_uart_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_usart.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_usart_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_wwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_adc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_bus.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_comp.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_cortex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_crc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_crs.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_dac.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_dma.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_exti.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_gpio.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_i2c.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_iwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_pwr.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_rcc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_rtc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_spi.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_system.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_tim.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_usart.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_utils.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_wwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32_assert_template.h" FileType="4" ro="0" bss="0" rw="0" />
+            <Filter Name="Legacy">
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h" FileType="4" ro="0" bss="0" rw="0" />
+            </Filter>
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c" FileType="1" Output="stm32f0xx_hal.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc.c" FileType="1" Output="stm32f0xx_hal_adc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc_ex.c" FileType="1" Output="stm32f0xx_hal_adc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_can.c" FileType="1" Output="stm32f0xx_hal_can.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cec.c" FileType="1" Output="stm32f0xx_hal_cec.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_comp.c" FileType="1" Output="stm32f0xx_hal_comp.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cortex.c" FileType="1" Output="stm32f0xx_hal_cortex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_crc.c" FileType="1" Output="stm32f0xx_hal_crc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_crc_ex.c" FileType="1" Output="stm32f0xx_hal_crc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dac.c" FileType="1" Output="stm32f0xx_hal_dac.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dac_ex.c" FileType="1" Output="stm32f0xx_hal_dac_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dma.c" FileType="1" Output="stm32f0xx_hal_dma.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash.c" FileType="1" Output="stm32f0xx_hal_flash.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash_ex.c" FileType="1" Output="stm32f0xx_hal_flash_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_gpio.c" FileType="1" Output="stm32f0xx_hal_gpio.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c.c" FileType="1" Output="stm32f0xx_hal_i2c.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c_ex.c" FileType="1" Output="stm32f0xx_hal_i2c_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2s.c" FileType="1" Output="stm32f0xx_hal_i2s.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_irda.c" FileType="1" Output="stm32f0xx_hal_irda.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_iwdg.c" FileType="1" Output="stm32f0xx_hal_iwdg.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_msp_template.c" FileType="1" Output="stm32f0xx_hal_msp_template.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd.c" FileType="1" Output="stm32f0xx_hal_pcd.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd_ex.c" FileType="1" Output="stm32f0xx_hal_pcd_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr.c" FileType="1" Output="stm32f0xx_hal_pwr.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr_ex.c" FileType="1" Output="stm32f0xx_hal_pwr_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc.c" FileType="1" Output="stm32f0xx_hal_rcc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc_ex.c" FileType="1" Output="stm32f0xx_hal_rcc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc.c" FileType="1" Output="stm32f0xx_hal_rtc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc_ex.c" FileType="1" Output="stm32f0xx_hal_rtc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smartcard.c" FileType="1" Output="stm32f0xx_hal_smartcard.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smartcard_ex.c" FileType="1" Output="stm32f0xx_hal_smartcard_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smbus.c" FileType="1" Output="stm32f0xx_hal_smbus.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi.c" FileType="1" Output="stm32f0xx_hal_spi.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi_ex.c" FileType="1" Output="stm32f0xx_hal_spi_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim.c" FileType="1" Output="stm32f0xx_hal_tim.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim_ex.c" FileType="1" Output="stm32f0xx_hal_tim_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tsc.c" FileType="1" Output="stm32f0xx_hal_tsc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart.c" FileType="1" Output="stm32f0xx_hal_uart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart_ex.c" FileType="1" Output="stm32f0xx_hal_uart_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_usart.c" FileType="1" Output="stm32f0xx_hal_usart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_wwdg.c" FileType="1" Output="stm32f0xx_hal_wwdg.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_adc.c" FileType="1" Output="stm32f0xx_ll_adc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_comp.c" FileType="1" Output="stm32f0xx_ll_comp.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crc.c" FileType="1" Output="stm32f0xx_ll_crc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crs.c" FileType="1" Output="stm32f0xx_ll_crs.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dac.c" FileType="1" Output="stm32f0xx_ll_dac.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dma.c" FileType="1" Output="stm32f0xx_ll_dma.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_exti.c" FileType="1" Output="stm32f0xx_ll_exti.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_gpio.c" FileType="1" Output="stm32f0xx_ll_gpio.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_i2c.c" FileType="1" Output="stm32f0xx_ll_i2c.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_pwr.c" FileType="1" Output="stm32f0xx_ll_pwr.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c" FileType="1" Output="stm32f0xx_ll_rcc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rtc.c" FileType="1" Output="stm32f0xx_ll_rtc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_spi.c" FileType="1" Output="stm32f0xx_ll_spi.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_tim.c" FileType="1" Output="stm32f0xx_ll_tim.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_usart.c" FileType="1" Output="stm32f0xx_ll_usart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_utils.c" FileType="1" Output="stm32f0xx_ll_utils.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="USER">
+            <File RelativePath="..\..\..\User\ebox_it.cpp" FileType="3" Output="ebox_it.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\User\main.cpp" FileType="3" Output="main.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\User\system_stm32f0xx.c" FileType="1" Output="system_stm32f0xx.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="ebox">
+            <Filter Name="core">
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_template.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\common.cpp" FileType="3" Output="common.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_core.cpp" FileType="3" Output="ebox_core.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_it.cpp" FileType="3" Output="ebox_it.o" ro="0" bss="0" rw="0" />
+            </Filter>
+            <Filter Name="Peripherals">
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\analog.cpp" FileType="3" Output="analog.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\CAN.cpp" FileType="3" Output="CAN.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\dac.cpp" FileType="3" Output="dac.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_analog.cpp" FileType="3" Output="ebox_analog.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_gpio.cpp" FileType="3" Output="ebox_gpio.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp" FileType="3" Output="ebox_tim.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_uart.cpp" FileType="3" Output="ebox_uart.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\exti.cpp" FileType="3" Output="exti.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\gpio.cpp" FileType="3" Output="gpio.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\i2c.cpp" FileType="3" Output="i2c.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\iflash.cpp" FileType="3" Output="iflash.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\in_capture.cpp" FileType="3" Output="in_capture.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\pwm.cpp" FileType="3" Output="pwm.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\rtc.cpp" FileType="3" Output="rtc.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softi2c.cpp" FileType="3" Output="softi2c.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softspi.cpp" FileType="3" Output="softspi.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\SPI.cpp" FileType="3" Output="SPI.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\timer.cpp" FileType="3" Output="timer.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\uart.cpp" FileType="3" Output="uart.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\wdg.cpp" FileType="3" Output="wdg.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_spi.cpp" FileType="3" Output="ebox_spi.o" ro="0" bss="0" rw="0" />
+            </Filter>
+            <Filter Name="cpu">
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32_define.h" FileType="4" ro="0" bss="0" rw="0" />
+            </Filter>
+            <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox_define.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\ebox\object.cpp" FileType="3" Output="object.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="File Group">
+            <Filter Name="Device">
+                <Filter Name="ST">
+                    <Filter Name="STM32F0xx">
+                        <Filter Name="Include">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x6.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f030x8.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f030xc.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f031x6.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f038xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f042x6.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f048xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f051x8.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f058xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f070x6.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f070xb.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f071xb.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f072xb.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f078xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f091xc.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f098xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\stm32f0xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include\system_stm32f0xx.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                        <Filter Name="Source">
+                            <Filter Name="Templates">
+                                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\system_stm32f0xx.c" FileType="1" Output="system_stm32f0xx.o" ro="0" bss="0" rw="0" />
+                                <Filter Name="arm">
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030x6.s" FileType="2" Output="startup_stm32f030x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030x8.s" FileType="2" Output="startup_stm32f030x8.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030xc.s" FileType="2" Output="startup_stm32f030xc.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f031x6.s" FileType="2" Output="startup_stm32f031x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f038xx.s" FileType="2" Output="startup_stm32f038xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f042x6.s" FileType="2" Output="startup_stm32f042x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f048xx.s" FileType="2" Output="startup_stm32f048xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f051x8.s" FileType="2" Output="startup_stm32f051x8.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f058xx.s" FileType="2" Output="startup_stm32f058xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f070x6.s" FileType="2" Output="startup_stm32f070x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f070xb.s" FileType="2" Output="startup_stm32f070xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f071xb.s" FileType="2" Output="startup_stm32f071xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f072xb.s" FileType="2" Output="startup_stm32f072xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f078xx.s" FileType="2" Output="startup_stm32f078xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f091xc.s" FileType="2" Output="startup_stm32f091xc.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f098xx.s" FileType="2" Output="startup_stm32f098xx.o" ro="0" bss="0" rw="0" />
+                                </Filter>
+                                <Filter Name="gcc">
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f030x6.s" FileType="2" Output="startup_stm32f030x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f030x8.s" FileType="2" Output="startup_stm32f030x8.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f030xc.s" FileType="2" Output="startup_stm32f030xc.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f031x6.s" FileType="2" Output="startup_stm32f031x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f038xx.s" FileType="2" Output="startup_stm32f038xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f042x6.s" FileType="2" Output="startup_stm32f042x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f048xx.s" FileType="2" Output="startup_stm32f048xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f051x8.s" FileType="2" Output="startup_stm32f051x8.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f058xx.s" FileType="2" Output="startup_stm32f058xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f070x6.s" FileType="2" Output="startup_stm32f070x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f070xb.s" FileType="2" Output="startup_stm32f070xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f071xb.s" FileType="2" Output="startup_stm32f071xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f072xb.s" FileType="2" Output="startup_stm32f072xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f078xx.s" FileType="2" Output="startup_stm32f078xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f091xc.s" FileType="2" Output="startup_stm32f091xc.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\gcc\startup_stm32f098xx.s" FileType="2" Output="startup_stm32f098xx.o" ro="0" bss="0" rw="0" />
+                                </Filter>
+                                <Filter Name="iar">
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f030x6.s" FileType="2" Output="startup_stm32f030x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f030x8.s" FileType="2" Output="startup_stm32f030x8.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f030xc.s" FileType="2" Output="startup_stm32f030xc.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f031x6.s" FileType="2" Output="startup_stm32f031x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f038xx.s" FileType="2" Output="startup_stm32f038xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f042x6.s" FileType="2" Output="startup_stm32f042x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f048xx.s" FileType="2" Output="startup_stm32f048xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f051x8.s" FileType="2" Output="startup_stm32f051x8.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f058xx.s" FileType="2" Output="startup_stm32f058xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f070x6.s" FileType="2" Output="startup_stm32f070x6.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f070xb.s" FileType="2" Output="startup_stm32f070xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f071xb.s" FileType="2" Output="startup_stm32f071xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f072xb.s" FileType="2" Output="startup_stm32f072xb.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f078xx.s" FileType="2" Output="startup_stm32f078xx.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f091xc.s" FileType="2" Output="startup_stm32f091xc.o" ro="0" bss="0" rw="0" />
+                                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\iar\startup_stm32f098xx.s" FileType="2" Output="startup_stm32f098xx.o" ro="0" bss="0" rw="0" />
+                                    <Filter Name="linker" />
+                                </Filter>
+                            </Filter>
+                        </Filter>
+                    </Filter>
+                </Filter>
+            </Filter>
+            <Filter Name="DSP_Lib">
+                <Filter Name="Examples">
+                    <Filter Name="arm_class_marks_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_class_marks_example\ARM\arm_class_marks_example_f32.c" FileType="1" Output="arm_class_marks_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                        <Filter Name="GCC">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_class_marks_example\GCC\arm_class_marks_example_f32.c" FileType="1" Output="arm_class_marks_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_convolution_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_convolution_example\ARM\arm_convolution_example_f32.c" FileType="1" Output="arm_convolution_example_f32.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_convolution_example\ARM\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_convolution_example\ARM\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                        <Filter Name="GCC">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_convolution_example\GCC\arm_convolution_example_f32.c" FileType="1" Output="arm_convolution_example_f32.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_convolution_example\GCC\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_convolution_example\GCC\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_dotproduct_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_dotproduct_example\ARM\arm_dotproduct_example_f32.c" FileType="1" Output="arm_dotproduct_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                        <Filter Name="GCC">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_dotproduct_example\GCC\arm_dotproduct_example_f32.c" FileType="1" Output="arm_dotproduct_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_fft_bin_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fft_bin_example\ARM\arm_fft_bin_data.c" FileType="1" Output="arm_fft_bin_data.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fft_bin_example\ARM\arm_fft_bin_example_f32.c" FileType="1" Output="arm_fft_bin_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                        <Filter Name="GCC">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fft_bin_example\GCC\arm_fft_bin_data.c" FileType="1" Output="arm_fft_bin_data.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fft_bin_example\GCC\arm_fft_bin_example_f32.c" FileType="1" Output="arm_fft_bin_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_fir_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fir_example\ARM\arm_fir_data.c" FileType="1" Output="arm_fir_data.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fir_example\ARM\arm_fir_example_f32.c" FileType="1" Output="arm_fir_example_f32.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fir_example\ARM\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_fir_example\ARM\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_graphic_equalizer_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_graphic_equalizer_example\ARM\arm_graphic_equalizer_data.c" FileType="1" Output="arm_graphic_equalizer_data.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_graphic_equalizer_example\ARM\arm_graphic_equalizer_example_q31.c" FileType="1" Output="arm_graphic_equalizer_example_q31.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_graphic_equalizer_example\ARM\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_graphic_equalizer_example\ARM\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_linear_interp_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_linear_interp_example\ARM\arm_linear_interp_data.c" FileType="1" Output="arm_linear_interp_data.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_linear_interp_example\ARM\arm_linear_interp_example_f32.c" FileType="1" Output="arm_linear_interp_example_f32.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_linear_interp_example\ARM\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_linear_interp_example\ARM\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_matrix_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_matrix_example\ARM\arm_matrix_example_f32.c" FileType="1" Output="arm_matrix_example_f32.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_matrix_example\ARM\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_matrix_example\ARM\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_signal_converge_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_signal_converge_example\ARM\arm_signal_converge_data.c" FileType="1" Output="arm_signal_converge_data.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_signal_converge_example\ARM\arm_signal_converge_example_f32.c" FileType="1" Output="arm_signal_converge_example_f32.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_signal_converge_example\ARM\math_helper.c" FileType="1" Output="math_helper.o" ro="0" bss="0" rw="0" />
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_signal_converge_example\ARM\math_helper.h" FileType="4" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_sin_cos_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_sin_cos_example\ARM\arm_sin_cos_example_f32.c" FileType="1" Output="arm_sin_cos_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                    <Filter Name="arm_variance_example">
+                        <Filter Name="ARM">
+                            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Examples\arm_variance_example\ARM\arm_variance_example_f32.c" FileType="1" Output="arm_variance_example_f32.o" ro="0" bss="0" rw="0" />
+                        </Filter>
+                    </Filter>
+                </Filter>
+                <Filter Name="Source">
+                    <Filter Name="BasicMathFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_abs_f32.c" FileType="1" Output="arm_abs_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_abs_q15.c" FileType="1" Output="arm_abs_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_abs_q31.c" FileType="1" Output="arm_abs_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_abs_q7.c" FileType="1" Output="arm_abs_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_add_f32.c" FileType="1" Output="arm_add_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_add_q15.c" FileType="1" Output="arm_add_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_add_q31.c" FileType="1" Output="arm_add_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_add_q7.c" FileType="1" Output="arm_add_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_f32.c" FileType="1" Output="arm_dot_prod_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_q15.c" FileType="1" Output="arm_dot_prod_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_q31.c" FileType="1" Output="arm_dot_prod_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_dot_prod_q7.c" FileType="1" Output="arm_dot_prod_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_mult_f32.c" FileType="1" Output="arm_mult_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_mult_q15.c" FileType="1" Output="arm_mult_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_mult_q31.c" FileType="1" Output="arm_mult_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_mult_q7.c" FileType="1" Output="arm_mult_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_negate_f32.c" FileType="1" Output="arm_negate_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_negate_q15.c" FileType="1" Output="arm_negate_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_negate_q31.c" FileType="1" Output="arm_negate_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_negate_q7.c" FileType="1" Output="arm_negate_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_offset_f32.c" FileType="1" Output="arm_offset_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_offset_q15.c" FileType="1" Output="arm_offset_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_offset_q31.c" FileType="1" Output="arm_offset_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_offset_q7.c" FileType="1" Output="arm_offset_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_scale_f32.c" FileType="1" Output="arm_scale_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_scale_q15.c" FileType="1" Output="arm_scale_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_scale_q31.c" FileType="1" Output="arm_scale_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_scale_q7.c" FileType="1" Output="arm_scale_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_shift_q15.c" FileType="1" Output="arm_shift_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_shift_q31.c" FileType="1" Output="arm_shift_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_shift_q7.c" FileType="1" Output="arm_shift_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_sub_f32.c" FileType="1" Output="arm_sub_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_sub_q15.c" FileType="1" Output="arm_sub_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_sub_q31.c" FileType="1" Output="arm_sub_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\BasicMathFunctions\arm_sub_q7.c" FileType="1" Output="arm_sub_q7.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="CommonTables">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\CommonTables\arm_common_tables.c" FileType="1" Output="arm_common_tables.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\CommonTables\arm_const_structs.c" FileType="1" Output="arm_const_structs.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="ComplexMathFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_conj_f32.c" FileType="1" Output="arm_cmplx_conj_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_conj_q15.c" FileType="1" Output="arm_cmplx_conj_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_conj_q31.c" FileType="1" Output="arm_cmplx_conj_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_dot_prod_f32.c" FileType="1" Output="arm_cmplx_dot_prod_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_dot_prod_q15.c" FileType="1" Output="arm_cmplx_dot_prod_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_dot_prod_q31.c" FileType="1" Output="arm_cmplx_dot_prod_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_f32.c" FileType="1" Output="arm_cmplx_mag_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_q15.c" FileType="1" Output="arm_cmplx_mag_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_q31.c" FileType="1" Output="arm_cmplx_mag_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_squared_f32.c" FileType="1" Output="arm_cmplx_mag_squared_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_squared_q15.c" FileType="1" Output="arm_cmplx_mag_squared_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mag_squared_q31.c" FileType="1" Output="arm_cmplx_mag_squared_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_cmplx_f32.c" FileType="1" Output="arm_cmplx_mult_cmplx_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_cmplx_q15.c" FileType="1" Output="arm_cmplx_mult_cmplx_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_cmplx_q31.c" FileType="1" Output="arm_cmplx_mult_cmplx_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_real_f32.c" FileType="1" Output="arm_cmplx_mult_real_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_real_q15.c" FileType="1" Output="arm_cmplx_mult_real_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ComplexMathFunctions\arm_cmplx_mult_real_q31.c" FileType="1" Output="arm_cmplx_mult_real_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="ControllerFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_init_f32.c" FileType="1" Output="arm_pid_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_init_q15.c" FileType="1" Output="arm_pid_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_init_q31.c" FileType="1" Output="arm_pid_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_reset_f32.c" FileType="1" Output="arm_pid_reset_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_reset_q15.c" FileType="1" Output="arm_pid_reset_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_pid_reset_q31.c" FileType="1" Output="arm_pid_reset_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_sin_cos_f32.c" FileType="1" Output="arm_sin_cos_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\ControllerFunctions\arm_sin_cos_q31.c" FileType="1" Output="arm_sin_cos_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="FastMathFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_cos_f32.c" FileType="1" Output="arm_cos_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_cos_q15.c" FileType="1" Output="arm_cos_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_cos_q31.c" FileType="1" Output="arm_cos_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_sin_f32.c" FileType="1" Output="arm_sin_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_sin_q15.c" FileType="1" Output="arm_sin_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_sin_q31.c" FileType="1" Output="arm_sin_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_sqrt_q15.c" FileType="1" Output="arm_sqrt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FastMathFunctions\arm_sqrt_q31.c" FileType="1" Output="arm_sqrt_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="FilteringFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_32x64_init_q31.c" FileType="1" Output="arm_biquad_cascade_df1_32x64_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_32x64_q31.c" FileType="1" Output="arm_biquad_cascade_df1_32x64_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_f32.c" FileType="1" Output="arm_biquad_cascade_df1_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_fast_q15.c" FileType="1" Output="arm_biquad_cascade_df1_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_fast_q31.c" FileType="1" Output="arm_biquad_cascade_df1_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_init_f32.c" FileType="1" Output="arm_biquad_cascade_df1_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_init_q15.c" FileType="1" Output="arm_biquad_cascade_df1_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_init_q31.c" FileType="1" Output="arm_biquad_cascade_df1_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_q15.c" FileType="1" Output="arm_biquad_cascade_df1_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df1_q31.c" FileType="1" Output="arm_biquad_cascade_df1_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df2T_f32.c" FileType="1" Output="arm_biquad_cascade_df2T_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df2T_f64.c" FileType="1" Output="arm_biquad_cascade_df2T_f64.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df2T_init_f32.c" FileType="1" Output="arm_biquad_cascade_df2T_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_df2T_init_f64.c" FileType="1" Output="arm_biquad_cascade_df2T_init_f64.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_stereo_df2T_f32.c" FileType="1" Output="arm_biquad_cascade_stereo_df2T_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_biquad_cascade_stereo_df2T_init_f32.c" FileType="1" Output="arm_biquad_cascade_stereo_df2T_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_f32.c" FileType="1" Output="arm_conv_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_fast_opt_q15.c" FileType="1" Output="arm_conv_fast_opt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_fast_q15.c" FileType="1" Output="arm_conv_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_fast_q31.c" FileType="1" Output="arm_conv_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_opt_q15.c" FileType="1" Output="arm_conv_opt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_opt_q7.c" FileType="1" Output="arm_conv_opt_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_f32.c" FileType="1" Output="arm_conv_partial_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_fast_opt_q15.c" FileType="1" Output="arm_conv_partial_fast_opt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_fast_q15.c" FileType="1" Output="arm_conv_partial_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_fast_q31.c" FileType="1" Output="arm_conv_partial_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_opt_q15.c" FileType="1" Output="arm_conv_partial_opt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_opt_q7.c" FileType="1" Output="arm_conv_partial_opt_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_q15.c" FileType="1" Output="arm_conv_partial_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_q31.c" FileType="1" Output="arm_conv_partial_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_partial_q7.c" FileType="1" Output="arm_conv_partial_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_q15.c" FileType="1" Output="arm_conv_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_q31.c" FileType="1" Output="arm_conv_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_conv_q7.c" FileType="1" Output="arm_conv_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_f32.c" FileType="1" Output="arm_correlate_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_fast_opt_q15.c" FileType="1" Output="arm_correlate_fast_opt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_fast_q15.c" FileType="1" Output="arm_correlate_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_fast_q31.c" FileType="1" Output="arm_correlate_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_opt_q15.c" FileType="1" Output="arm_correlate_opt_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_opt_q7.c" FileType="1" Output="arm_correlate_opt_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_q15.c" FileType="1" Output="arm_correlate_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_q31.c" FileType="1" Output="arm_correlate_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_correlate_q7.c" FileType="1" Output="arm_correlate_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_f32.c" FileType="1" Output="arm_fir_decimate_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_fast_q15.c" FileType="1" Output="arm_fir_decimate_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_fast_q31.c" FileType="1" Output="arm_fir_decimate_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_init_f32.c" FileType="1" Output="arm_fir_decimate_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_init_q15.c" FileType="1" Output="arm_fir_decimate_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_init_q31.c" FileType="1" Output="arm_fir_decimate_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_q15.c" FileType="1" Output="arm_fir_decimate_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_decimate_q31.c" FileType="1" Output="arm_fir_decimate_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_f32.c" FileType="1" Output="arm_fir_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_fast_q15.c" FileType="1" Output="arm_fir_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_fast_q31.c" FileType="1" Output="arm_fir_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_init_f32.c" FileType="1" Output="arm_fir_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_init_q15.c" FileType="1" Output="arm_fir_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_init_q31.c" FileType="1" Output="arm_fir_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_init_q7.c" FileType="1" Output="arm_fir_init_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_f32.c" FileType="1" Output="arm_fir_interpolate_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_init_f32.c" FileType="1" Output="arm_fir_interpolate_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_init_q15.c" FileType="1" Output="arm_fir_interpolate_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_init_q31.c" FileType="1" Output="arm_fir_interpolate_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_q15.c" FileType="1" Output="arm_fir_interpolate_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_interpolate_q31.c" FileType="1" Output="arm_fir_interpolate_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_f32.c" FileType="1" Output="arm_fir_lattice_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_init_f32.c" FileType="1" Output="arm_fir_lattice_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_init_q15.c" FileType="1" Output="arm_fir_lattice_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_init_q31.c" FileType="1" Output="arm_fir_lattice_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_q15.c" FileType="1" Output="arm_fir_lattice_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_lattice_q31.c" FileType="1" Output="arm_fir_lattice_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_q15.c" FileType="1" Output="arm_fir_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_q31.c" FileType="1" Output="arm_fir_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_q7.c" FileType="1" Output="arm_fir_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_f32.c" FileType="1" Output="arm_fir_sparse_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_f32.c" FileType="1" Output="arm_fir_sparse_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_q15.c" FileType="1" Output="arm_fir_sparse_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_q31.c" FileType="1" Output="arm_fir_sparse_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_init_q7.c" FileType="1" Output="arm_fir_sparse_init_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_q15.c" FileType="1" Output="arm_fir_sparse_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_q31.c" FileType="1" Output="arm_fir_sparse_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_fir_sparse_q7.c" FileType="1" Output="arm_fir_sparse_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_f32.c" FileType="1" Output="arm_iir_lattice_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_init_f32.c" FileType="1" Output="arm_iir_lattice_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_init_q15.c" FileType="1" Output="arm_iir_lattice_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_init_q31.c" FileType="1" Output="arm_iir_lattice_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_q15.c" FileType="1" Output="arm_iir_lattice_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_iir_lattice_q31.c" FileType="1" Output="arm_iir_lattice_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_f32.c" FileType="1" Output="arm_lms_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_init_f32.c" FileType="1" Output="arm_lms_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_init_q15.c" FileType="1" Output="arm_lms_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_init_q31.c" FileType="1" Output="arm_lms_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_f32.c" FileType="1" Output="arm_lms_norm_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_init_f32.c" FileType="1" Output="arm_lms_norm_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_init_q15.c" FileType="1" Output="arm_lms_norm_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_init_q31.c" FileType="1" Output="arm_lms_norm_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_q15.c" FileType="1" Output="arm_lms_norm_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_norm_q31.c" FileType="1" Output="arm_lms_norm_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_q15.c" FileType="1" Output="arm_lms_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\FilteringFunctions\arm_lms_q31.c" FileType="1" Output="arm_lms_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="MatrixFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_add_f32.c" FileType="1" Output="arm_mat_add_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_add_q15.c" FileType="1" Output="arm_mat_add_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_add_q31.c" FileType="1" Output="arm_mat_add_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_cmplx_mult_f32.c" FileType="1" Output="arm_mat_cmplx_mult_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_cmplx_mult_q15.c" FileType="1" Output="arm_mat_cmplx_mult_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_cmplx_mult_q31.c" FileType="1" Output="arm_mat_cmplx_mult_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_init_f32.c" FileType="1" Output="arm_mat_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_init_q15.c" FileType="1" Output="arm_mat_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_init_q31.c" FileType="1" Output="arm_mat_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_inverse_f32.c" FileType="1" Output="arm_mat_inverse_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_inverse_f64.c" FileType="1" Output="arm_mat_inverse_f64.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_f32.c" FileType="1" Output="arm_mat_mult_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_fast_q15.c" FileType="1" Output="arm_mat_mult_fast_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_fast_q31.c" FileType="1" Output="arm_mat_mult_fast_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_q15.c" FileType="1" Output="arm_mat_mult_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_mult_q31.c" FileType="1" Output="arm_mat_mult_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_scale_f32.c" FileType="1" Output="arm_mat_scale_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_scale_q15.c" FileType="1" Output="arm_mat_scale_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_scale_q31.c" FileType="1" Output="arm_mat_scale_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_sub_f32.c" FileType="1" Output="arm_mat_sub_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_sub_q15.c" FileType="1" Output="arm_mat_sub_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_sub_q31.c" FileType="1" Output="arm_mat_sub_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_trans_f32.c" FileType="1" Output="arm_mat_trans_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_trans_q15.c" FileType="1" Output="arm_mat_trans_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\MatrixFunctions\arm_mat_trans_q31.c" FileType="1" Output="arm_mat_trans_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="StatisticsFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_max_f32.c" FileType="1" Output="arm_max_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_max_q15.c" FileType="1" Output="arm_max_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_max_q31.c" FileType="1" Output="arm_max_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_max_q7.c" FileType="1" Output="arm_max_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_mean_f32.c" FileType="1" Output="arm_mean_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_mean_q15.c" FileType="1" Output="arm_mean_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_mean_q31.c" FileType="1" Output="arm_mean_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_mean_q7.c" FileType="1" Output="arm_mean_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_min_f32.c" FileType="1" Output="arm_min_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_min_q15.c" FileType="1" Output="arm_min_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_min_q31.c" FileType="1" Output="arm_min_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_min_q7.c" FileType="1" Output="arm_min_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_power_f32.c" FileType="1" Output="arm_power_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_power_q15.c" FileType="1" Output="arm_power_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_power_q31.c" FileType="1" Output="arm_power_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_power_q7.c" FileType="1" Output="arm_power_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_rms_f32.c" FileType="1" Output="arm_rms_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_rms_q15.c" FileType="1" Output="arm_rms_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_rms_q31.c" FileType="1" Output="arm_rms_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_std_f32.c" FileType="1" Output="arm_std_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_std_q15.c" FileType="1" Output="arm_std_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_std_q31.c" FileType="1" Output="arm_std_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_var_f32.c" FileType="1" Output="arm_var_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_var_q15.c" FileType="1" Output="arm_var_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\StatisticsFunctions\arm_var_q31.c" FileType="1" Output="arm_var_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="SupportFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_copy_f32.c" FileType="1" Output="arm_copy_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_copy_q15.c" FileType="1" Output="arm_copy_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_copy_q31.c" FileType="1" Output="arm_copy_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_copy_q7.c" FileType="1" Output="arm_copy_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_fill_f32.c" FileType="1" Output="arm_fill_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_fill_q15.c" FileType="1" Output="arm_fill_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_fill_q31.c" FileType="1" Output="arm_fill_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_fill_q7.c" FileType="1" Output="arm_fill_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_float_to_q15.c" FileType="1" Output="arm_float_to_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_float_to_q31.c" FileType="1" Output="arm_float_to_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_float_to_q7.c" FileType="1" Output="arm_float_to_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q15_to_float.c" FileType="1" Output="arm_q15_to_float.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q15_to_q31.c" FileType="1" Output="arm_q15_to_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q15_to_q7.c" FileType="1" Output="arm_q15_to_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q31_to_float.c" FileType="1" Output="arm_q31_to_float.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q31_to_q15.c" FileType="1" Output="arm_q31_to_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q31_to_q7.c" FileType="1" Output="arm_q31_to_q7.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q7_to_float.c" FileType="1" Output="arm_q7_to_float.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q7_to_q15.c" FileType="1" Output="arm_q7_to_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\SupportFunctions\arm_q7_to_q31.c" FileType="1" Output="arm_q7_to_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                    <Filter Name="TransformFunctions">
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_bitreversal.c" FileType="1" Output="arm_bitreversal.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_bitreversal2.S" FileType="2" Output="arm_bitreversal2.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_f32.c" FileType="1" Output="arm_cfft_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_q15.c" FileType="1" Output="arm_cfft_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_q31.c" FileType="1" Output="arm_cfft_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_f32.c" FileType="1" Output="arm_cfft_radix2_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_init_f32.c" FileType="1" Output="arm_cfft_radix2_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_init_q15.c" FileType="1" Output="arm_cfft_radix2_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_init_q31.c" FileType="1" Output="arm_cfft_radix2_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_q15.c" FileType="1" Output="arm_cfft_radix2_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix2_q31.c" FileType="1" Output="arm_cfft_radix2_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_f32.c" FileType="1" Output="arm_cfft_radix4_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_init_f32.c" FileType="1" Output="arm_cfft_radix4_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_init_q15.c" FileType="1" Output="arm_cfft_radix4_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_init_q31.c" FileType="1" Output="arm_cfft_radix4_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_q15.c" FileType="1" Output="arm_cfft_radix4_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix4_q31.c" FileType="1" Output="arm_cfft_radix4_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_cfft_radix8_f32.c" FileType="1" Output="arm_cfft_radix8_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_dct4_f32.c" FileType="1" Output="arm_dct4_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_dct4_init_f32.c" FileType="1" Output="arm_dct4_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_dct4_init_q15.c" FileType="1" Output="arm_dct4_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_dct4_init_q31.c" FileType="1" Output="arm_dct4_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_dct4_q15.c" FileType="1" Output="arm_dct4_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_dct4_q31.c" FileType="1" Output="arm_dct4_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_f32.c" FileType="1" Output="arm_rfft_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_fast_f32.c" FileType="1" Output="arm_rfft_fast_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_fast_init_f32.c" FileType="1" Output="arm_rfft_fast_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_init_f32.c" FileType="1" Output="arm_rfft_init_f32.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_init_q15.c" FileType="1" Output="arm_rfft_init_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_init_q31.c" FileType="1" Output="arm_rfft_init_q31.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_q15.c" FileType="1" Output="arm_rfft_q15.o" ro="0" bss="0" rw="0" />
+                        <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\DSP_Lib\Source\TransformFunctions\arm_rfft_q31.c" FileType="1" Output="arm_rfft_q31.o" ro="0" bss="0" rw="0" />
+                    </Filter>
+                </Filter>
+            </Filter>
+            <Filter Name="Include">
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\arm_common_tables.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\arm_const_structs.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\arm_math.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\cmsis_armcc.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\cmsis_armcc_V6.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\cmsis_gcc.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cm0.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cm0plus.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cm3.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cm4.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cm7.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cmFunc.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cmInstr.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_cmSimd.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_sc000.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include\core_sc300.h" FileType="4" ro="0" bss="0" rw="0" />
+            </Filter>
+            <Filter Name="Lib">
+                <Filter Name="GCC" />
+            </Filter>
+            <Filter Name="RTOS">
+                <Filter Name="Template">
+                    <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\CMSIS\RTOS\Template\cmsis_os.h" FileType="4" ro="0" bss="0" rw="0" />
+                </Filter>
+            </Filter>
+        </Filter>
+        <Filter Name="eDrive">
+            <File RelativePath="..\..\..\common\edriver\LTC1446.cpp" FileType="3" Output="LTC1446.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\edriver\at24c02.cpp" FileType="3" Output="at24c02.o" ro="0" bss="0" rw="0" />
+        </Filter>
+    </Files>
+</TKStudioProject>
