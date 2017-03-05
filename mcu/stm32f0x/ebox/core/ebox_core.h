@@ -60,11 +60,6 @@ typedef struct
 
 extern cpu_t cpu;
 
-
-/*!< 2 bits for pre-emption priority
-2 bits for subpriority */
-//#define NVIC_GROUP_CONFIG NVIC_PriorityGroup_2//以后NVIC_PriorityGroupConfig()函数不需要再被调用。更不能再以非NVIC_GROUP_CONFIG值填充调用
-
 ///////全局变量、函数///////////////////////////////////////////////
 extern __IO uint64_t millis_seconds;//提供一个mills()等效的全局变量。降低cpu调用开销
 
@@ -75,8 +70,12 @@ uint64_t micros(void);//获取系统当前运行了多长时间。单位：us
 uint64_t millis(void);//获取系统当前运行了多长时间。单位：ms
 void delay_ms(uint64_t ms);//延时n毫秒。可在任意情况下使用，包括禁止所有中断的情况。精度正负1us。
 void delay_us(uint16_t us);//延时n微秒。可在任意情况下使用，包括禁止所有中断的情况。精度正负1us。
-void set_systick_user_event_per_sec(uint16_t frq);//设定用户中断事件的相应频率。frq[1,1000],frq最好是2的倍数
-void attach_systick_user_event(void (*callback_fun)(void));//绑定systick中断调用函数，调用频率由用户决定，频率为1hz-1000hz
+//void set_systick_user_event_per_sec(uint16_t frq);//设定用户中断事件的相应频率。frq[1,1000],frq最好是2的倍数
+//void attach_systick_user_event(void (*callback_fun)(void));//绑定systick中断调用函数，调用频率由用户决定，频率为1hz-1000hz
+
+
+uint8_t SystickCallBackRegister(fun_noPara_t fun); // 绑定中断回调函数，使用默认周期 1ms
+uint8_t SystickCallBackRegister1(fun_noPara_t fun,uint16_t multiple); // 绑定中断回调函数，允许则定义周期 = multiple * 1ms; 最大65535
 
 
 __STATIC_INLINE void  delay_us_32(__IO uint16_t us)

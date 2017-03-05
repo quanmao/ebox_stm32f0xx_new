@@ -28,7 +28,8 @@
 #define no_interrupts() 	    __disable_irq()//禁止所有中断
 
 typedef enum {
-	E_OK = 1,
+    E_NG = 0,
+	E_OK ,
 	E_WATE,
 	E_BUSY,
 	E_TIMEOUT,
@@ -44,7 +45,10 @@ typedef enum
     unlock
 }E_LOCK_T;
 
-typedef void (*callback_fun_type)(void);
+// 空函数，不做任何操作，用来给函数指针赋值，防止函数指针 = null时被调用，出错
+void nullFun(void);
+typedef void (*fun_noPara_t)(void);
+typedef void (*fun_onePara_t)(unsigned int);
 
 ////////系统debug支持////////////////////////////////////////////////////////////////
 
