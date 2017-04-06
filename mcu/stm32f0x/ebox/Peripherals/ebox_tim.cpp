@@ -34,11 +34,11 @@ void E_TIMBase1::init(uint16_t _period, uint16_t _prescaler){
 		//LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
 
 		/* Set the pre-scaler value */
-//		prescaler = __LL_TIM_CALC_PSC(SystemCoreClock, 10000);	//µ÷ÊÔÓÃ
+//		prescaler = __LL_TIM_CALC_PSC(SystemCoreClock, 10000);	//è°ƒè¯•ç”¨
 		LL_TIM_SetPrescaler(timx, prescaler);
 		
 		/* Set the auto-reload value to have an initial update event frequency of 10 Hz */
-//		period = __LL_TIM_CALC_ARR(SystemCoreClock, LL_TIM_GetPrescaler(timx), 1); //µ÷ÊÔÓÃ
+//		period = __LL_TIM_CALC_ARR(SystemCoreClock, LL_TIM_GetPrescaler(timx), 1); //è°ƒè¯•ç”¨
 		LL_TIM_SetAutoReload(timx, period);
   
 		/* Enable the update interrupt */
@@ -58,7 +58,7 @@ void E_TIMBase1::init(uint16_t _period, uint16_t _prescaler){
 uint32_t E_TIMBase1::GetSourceClock(void){
 	    uint32_t timer_clock = 0x00;
     
-  	// ¼ÆËãTIMÊ±ÖÓÆµÂÊ
+  	// è®¡ç®—TIMæ—¶é’Ÿé¢‘ç‡
 	if (LL_RCC_GetAPB1Prescaler() == 0)
 	{
 		timer_clock = cpu.clock.pclk1;
@@ -73,7 +73,7 @@ void E_TIMBase1::calculate(uint32_t frq){
 
 	for (prescaler = 1; prescaler <= 0xffff; prescaler++)
 	{
-		// ¼ÆÊıÆ÷ÆµÂÊ = Ê±ÖÓ/·ÖÆµ; ¼ÆÊı¸öÊı = ¼ÆÊıÆ÷ÆµÂÊ/ĞèÒªµÄÆµÂÊ
+		// è®¡æ•°å™¨é¢‘ç‡ = æ—¶é’Ÿ/åˆ†é¢‘; è®¡æ•°ä¸ªæ•° = è®¡æ•°å™¨é¢‘ç‡/éœ€è¦çš„é¢‘ç‡
 		period = timer_clock / (prescaler) / frq;		
 		if ((0xffff >= period) && (period >= 1))
 		{
@@ -90,7 +90,7 @@ E_TIMBase::E_TIMBase(TIM_TypeDef *TIMx){
 void E_TIMBase::init(uint16_t period, uint16_t prescaler){
 	 index = PeriphIndex((uint32_t)timx,Periph_MAP);
 	 LL_APB1_GRP1_EnableClock(Periph_MAP[index].rcc);
-	 // ÒÔÏÂ´úÂëÀ´×Ôpwm.cpp
+	 // ä»¥ä¸‹ä»£ç æ¥è‡ªpwm.cpp
 	 LL_TIM_SetClockSource(timx,LL_TIM_CLOCKSOURCE_INTERNAL);	
 	 LL_TIM_EnableARRPreload(timx);
 		/* Reset value is LL_TIM_OCPOLARITY_HIGH */
@@ -106,7 +106,7 @@ void E_TIMBase::init(uint16_t period, uint16_t prescaler){
 uint32_t E_TIMBase::GetSourceClock(void){
     uint32_t timer_clock = 0x00;
     
-  	// ¼ÆËãTIMÊ±ÖÓÆµÂÊ
+  	// è®¡ç®—TIMæ—¶é’Ÿé¢‘ç‡
 	if (LL_RCC_GetAPB1Prescaler() == 0)
 	{
 		timer_clock = cpu.clock.pclk1;
@@ -122,7 +122,7 @@ E_PWM::E_PWM(E_PinBase *pin):E_TIMBase(pin){
 
 /**
  *@name     void PWM::set_oc_polarity(uint8_t flag)
- *@brief    ÉèÖÃ¼«ĞÔ
+ *@brief    è®¾ç½®ææ€§
  *@param    flag:  1 HIGH  0 LOW
  *@retval   None
 */
@@ -134,22 +134,22 @@ void E_PWM::SetPorlicy(uint8_t porlicy)
 
 /**
  *@name     void PWM::set_frq(uint32_t frq)
- *@brief    ÉèÖÃÆµÂÊ£¬ÒªÉè¶¨µÄÆµÂÊ¼ÆËã period(ÖÜÆÚ) prescaler£¨Ô¤·ÖÆµ£©
- *@param    frq  ÒªÊä³öµÄÆµÂÊ
+ *@brief    è®¾ç½®é¢‘ç‡ï¼Œè¦è®¾å®šçš„é¢‘ç‡è®¡ç®— period(å‘¨æœŸ) prescalerï¼ˆé¢„åˆ†é¢‘ï¼‰
+ *@param    frq  è¦è¾“å‡ºçš„é¢‘ç‡
  *@retval   None
 */
 void E_PWM::SetFrequency(uint16_t frq)
 {
-	uint16_t period  = 0;		// ÖÜÆÚ
-	uint32_t prescaler = 1;		// Ô¤·ÖÆµ
+	uint16_t period  = 0;		// å‘¨æœŸ
+	uint32_t prescaler = 1;		// é¢„åˆ†é¢‘
 	
 	duty = 500;	
 	timx = (TIM_TypeDef*)PWM_MAP[PinIndex(pin->id,PWM_MAP)].periph;
 
-	if (frq >= GetMaxFrequency())//¿ØÖÆÆµÂÊ£¬±£Ö¤ÆäÓĞ1%¾«¶È
+	if (frq >= GetMaxFrequency())//æ§åˆ¶é¢‘ç‡ï¼Œä¿è¯å…¶æœ‰1%ç²¾åº¦
 		frq = GetMaxFrequency();
 
-	//Ç§·ÖÖ®Ò»¾«¶È·ÖÅä·½°¸
+	//åƒåˆ†ä¹‹ä¸€ç²¾åº¦åˆ†é…æ–¹æ¡ˆ
 	for (; prescaler <= 0xffff; prescaler++)
 	{
 		period = GetSourceClock() / (prescaler) / frq;
@@ -160,9 +160,9 @@ void E_PWM::SetFrequency(uint16_t frq)
 		}
 	}
 
-	if (prescaler == 65536)//ÉÏÊöËã·¨·ÖÅäÊ§°Ü
+	if (prescaler == 65536)//ä¸Šè¿°ç®—æ³•åˆ†é…å¤±è´¥
 	{
-		//°Ù·ÖÖ®Ò»·ÖÅä·½°¸
+		//ç™¾åˆ†ä¹‹ä¸€åˆ†é…æ–¹æ¡ˆ
 		for (prescaler = 1; prescaler <= 0xffff; prescaler++)
 		{
 			period = GetSourceClock() / (prescaler) / frq;

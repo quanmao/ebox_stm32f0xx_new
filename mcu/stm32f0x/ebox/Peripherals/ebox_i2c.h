@@ -28,37 +28,37 @@ class E_I2c
 {
 
 public:
-    E_I2c(I2C_TypeDef *I2Cx, E_PinBase *scl, E_PinBase *sda);
-    void		begin(uint16_t speed);
-    void    config();
-    uint32_t    read_config();
+	E_I2c(I2C_TypeDef *I2Cx, E_PinBase *scl, E_PinBase *sda);
+	void	begin(uint16_t speed);
+	void    config();
+	uint32_t    read_config();
 
-    int8_t	writeChar(uint8_t slave_address, uint8_t data);
-    int8_t  writeBuf(uint8_t slave_address,uint8_t *data,uint16_t num_to_write);
-    int8_t	writeBuf(uint8_t slave_address,uint8_t reg_address,uint8_t *data, uint16_t num_to_write);
+	int8_t	writeChar(uint8_t slave_address, uint8_t data);
+	int8_t  writeBuf(uint8_t slave_address,uint8_t *data,uint16_t num_to_write);
+	int8_t	writeBuf(uint8_t slave_address,uint8_t reg_address,uint8_t *data, uint16_t num_to_write);
 
-    int8_t	readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read);
-    int8_t	readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read);
-    int8_t	wait_dev_busy(uint8_t slave_address);
+	int8_t	readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read);
+	int8_t	readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read);
+	int8_t	wait_dev_busy(uint8_t slave_address);
 public:
-    int8_t take_i2c_right(uint32_t timing);
-    int8_t release_i2c_right(void);
+	int8_t take_i2c_right(uint32_t timing);
+	int8_t release_i2c_right(void);
 
 private:
-    I2C_TypeDef *_i2cx;
-		uint8_t 		_index;
-    uint32_t    _timing;
-    uint8_t     busy;
+	I2C_TypeDef *_i2cx;
+	uint8_t 		_index;
+	uint32_t    _timing;
+	uint8_t     busy;
 };
 
 
 /*
-	1.Ö§³ÖÈÎºÎIOÒı½Å£»
-	2.º¯Êı½Ó¿ÚºÍÓ²¼şI2CÍêÈ«Ò»Ñù¿ÉÒÔ»¥ÏàÌæ´ú
-	×¢Òâ£º
-				1.¸ÃÀàµÄspeedÊÇÓÉdelay_usÑÓÊ±º¯Êı¿ØÖÆ¡£ÂÔÓĞ²»×¼
-				2.speedÉèÖÃÖ»ÄÜÎª100000£¬200000,300k,400k¡£Èç¹û²»ÊÇ´ËÖµ£¬Ôò»á½«speedµÄÖµÖ±½Ó´«µİ¸ødelay_us.¼´delay_us(speed);
-				3.³õÆÚµ÷ÊÔI2CÉè±¸½¨ÒéÊ¹ÓÃ100k¡£»òÕß´óÓÚ10µÄÖµ
+	1.æ”¯æŒä»»ä½•IOå¼•è„šï¼›
+	2.å‡½æ•°æ¥å£å’Œç¡¬ä»¶I2Cå®Œå…¨ä¸€æ ·å¯ä»¥äº’ç›¸æ›¿ä»£
+	æ³¨æ„ï¼š
+				1.è¯¥ç±»çš„speedæ˜¯ç”±delay_uså»¶æ—¶å‡½æ•°æ§åˆ¶ã€‚ç•¥æœ‰ä¸å‡†
+				2.speedè®¾ç½®åªèƒ½ä¸º100000ï¼Œ200000,300k,400kã€‚å¦‚æœä¸æ˜¯æ­¤å€¼ï¼Œåˆ™ä¼šå°†speedçš„å€¼ç›´æ¥ä¼ é€’ç»™delay_us.å³delay_us(speed);
+				3.åˆæœŸè°ƒè¯•I2Cè®¾å¤‡å»ºè®®ä½¿ç”¨100kã€‚æˆ–è€…å¤§äº10çš„å€¼
 */
 //class SoftI2c
 //{

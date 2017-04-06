@@ -28,14 +28,14 @@
 /* Definitions of environment analog values */
 /* Value of analog reference voltage (Vref+), connected to analog voltage   */
 /* supply Vdda (unit: mV).                                                  */
-#define VDDA_APPLI                       ((uint32_t)3300)
+#define VDDA_APPLI                       ((uint32_t)2499)
 
 
 extern void ADC1_init(void);
 extern int get_channel(PIN_ID pin);
 extern uint16_t analogin_read(uint16_t *channel);
 //extern void analogin_read(uint32_t *channel,uint16_t *buffer, uint16_t size);
-extern uint16_t analogin_read_voltage(uint32_t *channel);
+extern uint16_t analogin_read_voltage(uint16_t *channel);
 extern void DMA_configuration(void);
 extern uint16_t analog_read_temperature(void);
 
@@ -49,6 +49,10 @@ class E_Analog{
 	
 	uint16_t read() {		
         return analogin_read(&channel);
+  }
+  
+  uint16_t getVoltage(){
+	  return analogin_read_voltage(&channel);
   }
 	private:
 	uint16_t channel;	

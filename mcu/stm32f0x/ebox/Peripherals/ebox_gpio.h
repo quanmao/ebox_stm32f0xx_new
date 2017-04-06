@@ -36,7 +36,7 @@ public:
 };
 
 /**
- *@brief    eboxÍ¨ÓÃgpio½Ó¿Ú£¬¼Ì³Ğ×ÔE_PinBaseÀà¡£ÊÊºÏ¶Ôµ¥¸öpin½øĞĞ²Ù×÷
+ *@brief    eboxé€šç”¨gpioæ¥å£ï¼Œç»§æ‰¿è‡ªE_PinBaseç±»ã€‚é€‚åˆå¯¹å•ä¸ªpinè¿›è¡Œæ“ä½œ
 */
 class E_GPIO: public E_PinBase{
 public:
@@ -53,29 +53,29 @@ public:
 
     uint8_t read(void);
 		
-			//²Ù×÷·ûÖØÔØ
+			//æ“ä½œç¬¦é‡è½½
 	operator int();
 	uint8_t operator =(E_GPIO&);
 	E_GPIO operator = (uint8_t value);
 };
 
 /**
- *@brief    eboxÍ¨ÓÃgpio½Ó¿Ú£¬ÊÊºÏ¶ÔÍ¬Ò»PortµÄ¶à¸öPinÍ¬Ê±²Ù×÷
+ *@brief    eboxé€šç”¨gpioæ¥å£ï¼Œé€‚åˆå¯¹åŒä¸€Portçš„å¤šä¸ªPinåŒæ—¶æ“ä½œ
 */
 class E_PORT{
 public:
     /**
-       *@brief    ²Ù×÷Í¬Ò»¸öPortµÄ¶à¸öpin£¬¿ÉÒÔÁ¬Ğø£¬¿ÉÒÔ²»Á¬Ğø
-       *@param    port ¶Ë¿Ú£» mask Òª²Ù×÷µÄpin£¬
-       *    Àı1£º Òª¿ØÖÆ PA2,PA3,PA4; Ôò port = E_PORTA, mask = 0x1c;¼´£¨0001 1100£©
-       *    Àı2£º Òª¿ØÖÆ PA0,PA4,PA5; Ôò port = E_PORTA, mask = 0x31;¼´£¨0011 0001£©       
+       *@brief    æ“ä½œåŒä¸€ä¸ªPortçš„å¤šä¸ªpinï¼Œå¯ä»¥è¿ç»­ï¼Œå¯ä»¥ä¸è¿ç»­
+       *@param    port ç«¯å£ï¼› mask è¦æ“ä½œçš„pinï¼Œ
+       *    ä¾‹1ï¼š è¦æ§åˆ¶ PA2,PA3,PA4; åˆ™ port = E_PORTA, mask = 0x1c;å³ï¼ˆ0001 1100ï¼‰
+       *    ä¾‹2ï¼š è¦æ§åˆ¶ PA0,PA4,PA5; åˆ™ port = E_PORTA, mask = 0x31;å³ï¼ˆ0011 0001ï¼‰       
        *@retval   NONE
        */
     E_PORT(uint8_t port, uint32_t mask = 0xffffffff);
     /**
-       *@brief    ²Ù×÷Í¬Ò»¸öPortµÄ¶à¸öpin£¬Ö»ÄÜÊÇÁ¬ĞøPin
-       *@param    port ¶Ë¿Ú£» pinnum Òª²Ù×÷µÄPinÊıÁ¿£¬pinoffset Ïà¶ÔÓëpin0µÄÆ«ÒÆ
-       *    Àı£º Òª¿ØÖÆ PA2,PA3,PA4; Ôò port = E_PORTA, pinnum = 3, pinoffset = 2
+       *@brief    æ“ä½œåŒä¸€ä¸ªPortçš„å¤šä¸ªpinï¼Œåªèƒ½æ˜¯è¿ç»­Pin
+       *@param    port ç«¯å£ï¼› pinnum è¦æ“ä½œçš„Pinæ•°é‡ï¼Œpinoffset ç›¸å¯¹ä¸pin0çš„åç§»
+       *    ä¾‹ï¼š è¦æ§åˆ¶ PA2,PA3,PA4; åˆ™ port = E_PORTA, pinnum = 3, pinoffset = 2
        *@retval   NONE
        */
     E_PORT(uint8_t port, uint8_t pinnum, uint8_t pinoffset);
@@ -87,10 +87,10 @@ public:
 
     uint16_t read(void);
 
-    //²Ù×÷·ûÖØÔØ
-    // Ïàµ±ÓÚE_PORT.read()
+    //æ“ä½œç¬¦é‡è½½
+    // ç›¸å½“äºE_PORT.read()
     operator uint16_t();
-    // Ïàµ±ÓÚE_PORT.write()
+    // ç›¸å½“äºE_PORT.write()
     void operator = (uint16_t value);
 
 private:
@@ -102,7 +102,7 @@ private:
 };
 
 /**
- *@brief    eboxÍ¨ÓÃgpio½Ó¿Ú£¬¼Ì³Ğ×ÔE_PinBaseÀà¡£½«²»Í¬PortµÄ¶à¸öPin×éºÏ½øĞĞ²Ù×÷
+ *@brief    eboxé€šç”¨gpioæ¥å£ï¼Œç»§æ‰¿è‡ªE_PinBaseç±»ã€‚å°†ä¸åŒPortçš„å¤šä¸ªPinç»„åˆè¿›è¡Œæ“ä½œ
  */
 class E_BUS{
 public:
@@ -119,16 +119,16 @@ public:
 
     uint16_t read(void);
 
-    //²Ù×÷·ûÖØÔØ
+    //æ“ä½œç¬¦é‡è½½
 
      void operator = (uint16_t value);
 //    E_BUS& operator= (E_BUS& rhs);
 
 		/**
-		 *@brief ÖØÔØÏÂ±êÔËËã·û£¬·µ»ØÀàĞÍE_GPIO, indexÎªÊı×éÏÂ±ê¡£
+		 *@brief é‡è½½ä¸‹æ ‡è¿ç®—ç¬¦ï¼Œè¿”å›ç±»å‹E_GPIO, indexä¸ºæ•°ç»„ä¸‹æ ‡ã€‚
 		 */
     E_GPIO& operator[] (uint16_t index);
-		// Ïàµ±ÓÚwrite
+		// ç›¸å½“äºwrite
     operator uint16_t();
 
 private:

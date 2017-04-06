@@ -21,7 +21,7 @@
 
 
 /**
- *@brief    ³õÊ¼»¯¶Ë¿ÚÐÅÏ¢,Ê¹ÄÜÊ±ÖÓ
+ *@brief    åˆå§‹åŒ–ç«¯å£ä¿¡æ¯,ä½¿èƒ½æ—¶é’Ÿ
  *@param    NONE
  *@retval   NONE
 */
@@ -71,8 +71,8 @@ E_PinBase::E_PinBase(PIN_ID pin){
 }
 
 /**
- *@brief    ÅäÖÃ¶Ë¿Ú
- *@param    mode -- ÊäÈëÊä³öÄ£Ê½; af -- µÚ¶þ¹¦ÄÜÎ»
+ *@brief    é…ç½®ç«¯å£
+ *@param    mode -- è¾“å…¥è¾“å‡ºæ¨¡å¼; af -- ç¬¬äºŒåŠŸèƒ½ä½
  *@retval   NONE
 */
 void E_PinBase::mode(PIN_MODE mode,uint16_t af){
@@ -84,15 +84,15 @@ void E_PinBase::mode(PIN_MODE mode,uint16_t af){
     LL_GPIO_SetPinOutputType(this->_port,this->_pin,E_PinMode_MAP[mode].OutputType);
     LL_GPIO_SetPinPull(this->_port,this->_pin,E_PinMode_MAP[mode].Pull);
     LL_GPIO_SetPinSpeed(this->_port,this->_pin,LL_GPIO_SPEED_FREQ_HIGH);
-    //af×î´óÎª7
+    //afæœ€å¤§ä¸º7
     if (af <= 8){
         (_pin<LL_GPIO_PIN_8)?(LL_GPIO_SetAFPin_0_7(_port,_pin,af)):(LL_GPIO_SetAFPin_8_15(_port,_pin,af));
     }
 }
 
 /**
- *@brief    GPIOÊä³öÉèÖÃ
- *@param    val£º1£ºÊä³ö¸ßµçÆ½£»0£ºÊä³öµÍµçÆ½
+ *@brief    GPIOè¾“å‡ºè®¾ç½®
+ *@param    valï¼š1ï¼šè¾“å‡ºé«˜ç”µå¹³ï¼›0ï¼šè¾“å‡ºä½Žç”µå¹³
  *@retval   NONE
 */
 void E_GPIO::write(uint8_t val){
@@ -100,7 +100,7 @@ void E_GPIO::write(uint8_t val){
 }
 
 /**
- *@brief    ·µ»ØÖ¸¶¨PinÖµ
+ *@brief    è¿”å›žæŒ‡å®šPinå€¼
  *@param    NONE
  *@retval   0 or 1
 */
@@ -111,7 +111,7 @@ uint8_t E_GPIO::read(void)
 }
 
 /**
- *@brief    GPIOÊä³öµçÆ½·­×ª
+ *@brief    GPIOè¾“å‡ºç”µå¹³ç¿»è½¬
  *@param    NONE
  *@retval   NONE
 */
@@ -121,7 +121,7 @@ void E_GPIO::toggle(void)
 }
 
 /**
- *@brief    GPIOÊä³öµÍµçÆ½
+ *@brief    GPIOè¾“å‡ºä½Žç”µå¹³
  *@param    NONE
  *@retval   NONE
 */
@@ -131,7 +131,7 @@ void E_GPIO::reset(void)
 }
 
 /**
- *@brief    GPIOÊä³ö¸ßµçÆ½
+ *@brief    GPIOè¾“å‡ºé«˜ç”µå¹³
  *@param    NONE
  *@retval   NONE
 */
@@ -141,7 +141,7 @@ void E_GPIO::set(void)
 }
 
 /**
- *@brief    ²Ù×÷·ûÖØÔØ
+ *@brief    æ“ä½œç¬¦é‡è½½
  *@param    NONE
  *@retval   NONE
 */
@@ -213,8 +213,8 @@ void E_PORT::init_port(uint8_t port){
 }
 
 /**
- *@brief    ÉèÖÃ¶Ë¿ÚÖ¸¶¨PIN(mask)µÄÄ£Ê½
- *@param    mode ²Î¿¼PIN_MODE
+ *@brief    è®¾ç½®ç«¯å£æŒ‡å®šPIN(mask)çš„æ¨¡å¼
+ *@param    mode å‚è€ƒPIN_MODE
  *@retval   NONE
 */
 void E_PORT::mode(PIN_MODE mode){  
@@ -230,7 +230,7 @@ void E_PORT::mode(PIN_MODE mode){
 }
 
 /**
- *@brief    ÉèÖÃ¶Ë¿ÚÖ¸¶¨PIN(mask)Îª1
+ *@brief    è®¾ç½®ç«¯å£æŒ‡å®šPIN(mask)ä¸º1
  *@param    NONE
  *@retval   NONE
 */
@@ -241,7 +241,7 @@ void E_PORT::setAll(void){
 }
 
 /**
- *@brief    ÉèÖÃ¶Ë¿ÚÖ¸¶¨PIN(mask)Îª0
+ *@brief    è®¾ç½®ç«¯å£æŒ‡å®šPIN(mask)ä¸º0
  *@param    NONE
  *@retval   NONE
 */
@@ -252,7 +252,7 @@ void E_PORT::resetAll(void){
 }
 
 /**
- *@brief    Ïò¶Ë¿ÚÐ´Êý¾Ý
+ *@brief    å‘ç«¯å£å†™æ•°æ®
  *@param    uint16_t val
  *@retval   NONE
 */
@@ -262,7 +262,7 @@ void E_PORT::write(uint16_t val){
 }
 
 /**
- *@brief    ´Ó¶Ë¿Ú¶ÁÈ¡Êý¾Ý
+ *@brief    ä»Žç«¯å£è¯»å–æ•°æ®
  *@param    uint16_t val
  *@retval   NONE
 */
@@ -271,7 +271,7 @@ uint16_t E_PORT::read(void){
 }
 
 /**
- *@brief    ²Ù×÷·ûÖØÔØ
+ *@brief    æ“ä½œç¬¦é‡è½½
  *@param    NONE
  *@retval   NONE
 */
@@ -291,7 +291,7 @@ void E_PORT::operator =(uint16_t value)
     //return *this;
 }
 
-// E_BUS ÊµÏÖ
+// E_BUS å®žçŽ°
 
 E_BUS::E_BUS(PIN_ID p0,PIN_ID p1,PIN_ID p2,PIN_ID p3,PIN_ID p4,PIN_ID p5,
              PIN_ID p6,PIN_ID p7,PIN_ID p8,PIN_ID p9,PIN_ID p10,PIN_ID p11,
@@ -359,7 +359,7 @@ void E_BUS::resetAll(void){
 }
 
 /**
- *@brief    ²Ù×÷·ûÖØÔØ
+ *@brief    æ“ä½œç¬¦é‡è½½
  *@param    NONE
  *@retval   NONE
 */

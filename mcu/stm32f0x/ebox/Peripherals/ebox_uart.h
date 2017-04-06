@@ -26,16 +26,16 @@
 
 
 class E_UART{
-	public:
-		E_UART(USART_TypeDef *UARTx,E_PinBase *PinTx,E_PinBase *PinRx);
-		void begin(uint32_t speed);
-		
-	private:
-	  USART_TypeDef *UARTx;
-	  E_PinBase *Rx;
-		E_PinBase *Tx;
-		
-		uint8_t index;
+public:
+	E_UART(USART_TypeDef *UARTx,E_PinBase *PinTx,E_PinBase *PinRx);
+	void begin(uint32_t speed);
+
+private:
+	USART_TypeDef *UARTx;
+	E_PinBase *Rx;
+	E_PinBase *Tx;
+
+	uint8_t index;
 };
 
 #endif

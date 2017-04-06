@@ -22,15 +22,15 @@
 #include "stm32f0xx_ll_rcc.h"
 
 
-// ·ÖÆµ£¬½¨Á¢£¬±£³Ö£¬¸ßµçÆ½£¬µÍµçÆ½
+// åˆ†é¢‘ï¼Œå»ºç«‹ï¼Œä¿æŒï¼Œé«˜ç”µå¹³ï¼Œä½ç”µå¹³
 #define I2C_TIMING    __LL_I2C_CONVERT_TIMINGS(0xb, 0xc7, 0xc3, 0x02, 0x04)
 
 /**
  *@name     I2c(I2C_TypeDef *I2Cx, Gpio *scl_pin, Gpio *sda_pin)
- *@brief      I2C¹¹Ôìº¯Êı
+ *@brief      I2Cæ„é€ å‡½æ•°
  *@param    I2Cx:  I2C1,I2C2
- *          scl_pin:  Ê±ÖÓPin
- *          sda_pin:  Êı¾İPin
+ *          scl_pin:  æ—¶é’ŸPin
+ *          sda_pin:  æ•°æ®Pin
  *@retval   None
 */
 E_I2c::E_I2c(I2C_TypeDef *I2Cx, E_PinBase *scl, E_PinBase *sda)
@@ -44,8 +44,8 @@ E_I2c::E_I2c(I2C_TypeDef *I2Cx, E_PinBase *scl, E_PinBase *sda)
 
 /**
  *@name     begin(uint16_t speed)
- *@brief    ¸ù¾İi2cÊ±ÖÓºÍÉèÖÃËÙÂÊspeed¼ÆËãtiming¡£Ä¬ÈÏ400k @8M
- *@param    speed:  ËÙÂÊ 10,100,400 ·Ö±ğ´ú±í10k£¬100k£¬400k
+ *@brief    æ ¹æ®i2cæ—¶é’Ÿå’Œè®¾ç½®é€Ÿç‡speedè®¡ç®—timingã€‚é»˜è®¤400k @8M
+ *@param    speed:  é€Ÿç‡ 10,100,400 åˆ†åˆ«ä»£è¡¨10kï¼Œ100kï¼Œ400k
  *@retval   None
 */
 void  E_I2c::begin(uint16_t speed)
@@ -78,7 +78,7 @@ void  E_I2c::begin(uint16_t speed)
 					}
 				break;
 				case 8:					
-			default:	// Ä¬ÈÏÏµÍ³Ê±ÖÓÎª8M
+			default:	// é»˜è®¤ç³»ç»Ÿæ—¶é’Ÿä¸º8M
 				switch(speed){
 						case 10:
 							_timing = __LL_I2C_CONVERT_TIMINGS(0x1, 0xc7, 0xc3, 0x02, 0x04);	// 10k 	@8M
@@ -96,9 +96,9 @@ void  E_I2c::begin(uint16_t speed)
 
 void E_I2c::config()
 {	
-		// Ê¹ÄÜI2CÊ±ÖÓ
+		// ä½¿èƒ½I2Cæ—¶é’Ÿ
 		LL_APB1_GRP1_EnableClock(I2C_MAP[_index].Periph);
-		// I2C1 ĞèÒªÑ¡ÔñÌØ¶¨µÄÊ±ÖÓ
+		// I2C1 éœ€è¦é€‰æ‹©ç‰¹å®šçš„æ—¶é’Ÿ
 		(_i2cx == I2C1)?(LL_RCC_SetI2CClockSource(LL_RCC_I2C1_CLKSOURCE_SYSCLK)):(void());
 	
     LL_I2C_Disable(_i2cx);
@@ -113,14 +113,14 @@ uint32_t E_I2c::read_config()
 
 /**
  *@name     writeChar(uint8_t slave_address,uint8_t data)
- *@brief    I2CĞ´ÈëÒ»¸ö×Ö½Ú. start->data->stop
+ *@brief    I2Cå†™å…¥ä¸€ä¸ªå­—èŠ‚. start->data->stop
  *@param    I2Cx:  I2C1,I2C2
- *          uint8_t data:  ÒªĞ´ÈëµÄÊı¾İ
+ *          uint8_t data:  è¦å†™å…¥çš„æ•°æ®
  *@retval   None
 */
 int8_t E_I2c::writeChar(uint8_t slave_address,uint8_t data)
 {
-    // Ğ´ÈëµØÖ·¼Ä´æÆ÷ºÍÊı¾İ
+    // å†™å…¥åœ°å€å¯„å­˜å™¨å’Œæ•°æ®
     LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
 
     while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
@@ -137,10 +137,10 @@ int8_t E_I2c::writeChar(uint8_t slave_address,uint8_t data)
 
 /**
  *@name     writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_write)
- *@brief    I2CÁ¬ĞøĞ´ start->data....->stop
+ *@brief    I2Cè¿ç»­å†™ start->data....->stop
  *@param    I2Cx:  I2C1,I2C2
- *          uint8_t *data:  ÒªĞ´ÈëµÄÊı¾İ
- *          uint16_t num_to_write  ÒªĞ´ÈëµÄÊı¾İ³¤¶È
+ *          uint8_t *data:  è¦å†™å…¥çš„æ•°æ®
+ *          uint16_t num_to_write  è¦å†™å…¥çš„æ•°æ®é•¿åº¦
  *@retval   None
 */
 int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_write)
@@ -159,7 +159,7 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
         num_to_write = num_to_write - 255;
         // num_to_writ>255: RELOAD,NBYTE=0xFF,NOSTART
         while (num_to_write > 255){
-            // ·¢ËÍµØÖ·¼Ä´æÆ÷
+            // å‘é€åœ°å€å¯„å­˜å™¨
             LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,0xFF,LL_I2C_MODE_RELOAD,LL_I2C_GENERATE_NOSTARTSTOP);
 
             while (!LL_I2C_IsActiveFlag_TCR(_i2cx))
@@ -183,7 +183,7 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
         }
         LL_I2C_ClearFlag_STOP(_i2cx);
     }else{
-        // Ğ´ÈëµØÖ·¼Ä´æÆ÷ºÍÊı¾İ
+        // å†™å…¥åœ°å€å¯„å­˜å™¨å’Œæ•°æ®
         LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_write,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
 
         while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
@@ -201,16 +201,16 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
 
 /**
  *@name     writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data, uint16_t num_to_write)
- *@brief    ÔÚÖ¸¶¨Î»ÖÃÁ¬ĞøĞ´ÈëÊı¾İ start->reg_address->data....->stop
+ *@brief    åœ¨æŒ‡å®šä½ç½®è¿ç»­å†™å…¥æ•°æ® start->reg_address->data....->stop
  *@param    I2Cx:  I2C1,I2C2
- *          uint8_t reg_address:¼Ä´æÆ÷µØÖ·
- *          uint8_t *data:  ÒªĞ´ÈëµÄÊı¾İ
- *          uint16_t num_to_write  ÒªĞ´ÈëµÄÊı¾İ³¤¶È
+ *          uint8_t reg_address:å¯„å­˜å™¨åœ°å€
+ *          uint8_t *data:  è¦å†™å…¥çš„æ•°æ®
+ *          uint16_t num_to_write  è¦å†™å…¥çš„æ•°æ®é•¿åº¦
  *@retval   None
 */
 int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data, uint16_t num_to_write)
 {
-    // ·¢ËÍµØÖ·¼Ä´æÆ÷
+    // å‘é€åœ°å€å¯„å­˜å™¨
     LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_SOFTEND,LL_I2C_GENERATE_START_WRITE);
     while (!LL_I2C_IsActiveFlag_TC(_i2cx))
     {
@@ -219,11 +219,11 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
             LL_I2C_TransmitData8(_i2cx,reg_address);
         }
     }
-    // ·¢ËÍÊı¾İ
+    // å‘é€æ•°æ®
     if (num_to_write >255){
         // num_to_writ>255: RELOAD,NBYTE=0xFF,NOSTART
         while (num_to_write > 255){
-            // ·¢ËÍµØÖ·¼Ä´æÆ÷
+            // å‘é€åœ°å€å¯„å­˜å™¨
             LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,0xFF,LL_I2C_MODE_RELOAD,LL_I2C_GENERATE_NOSTARTSTOP);
 
             while (!LL_I2C_IsActiveFlag_TCR(_i2cx))
@@ -247,7 +247,7 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
         }
         LL_I2C_ClearFlag_STOP(_i2cx);
     }else{
-        // Ğ´ÈëµØÖ·¼Ä´æÆ÷ºÍÊı¾İ
+        // å†™å…¥åœ°å€å¯„å­˜å™¨å’Œæ•°æ®
         LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_write,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_NOSTARTSTOP);
 
         while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
@@ -265,17 +265,17 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 
 /**
  *@name     readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read)
- *@brief    I2C´ÓÖ¸¶¨Î»ÖÃÁ¬Ğø¶ÁÈ¡ start->write(reg_address)->read(data....)->stop
+ *@brief    I2Cä»æŒ‡å®šä½ç½®è¿ç»­è¯»å– start->write(reg_address)->read(data....)->stop
  *@param    I2Cx:  I2C1,I2C2
- *					uint8_t slave_address£º´ÓÉè±¸µØÖ·
- *					uint8_t reg_address£ºÒª¶ÁÈ¡µÄÎ»ÖÃ
- *          uint8_t *data:  Êı¾İ»º³å£¬±£´æ¶Áµ½µÄÊı¾İ
- *          uint16_t num_to_write  Òª¶ÁÈ¡µÄÊı¾İ³¤¶È
+ *					uint8_t slave_addressï¼šä»è®¾å¤‡åœ°å€
+ *					uint8_t reg_addressï¼šè¦è¯»å–çš„ä½ç½®
+ *          uint8_t *data:  æ•°æ®ç¼“å†²ï¼Œä¿å­˜è¯»åˆ°çš„æ•°æ®
+ *          uint16_t num_to_write  è¦è¯»å–çš„æ•°æ®é•¿åº¦
  *@retval   None
 */
 int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read)
 {
-    // ·¢ËÍµØÖ·¼Ä´æÆ÷
+    // å‘é€åœ°å€å¯„å­˜å™¨
     LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_SOFTEND,LL_I2C_GENERATE_START_WRITE);
     while (!LL_I2C_IsActiveFlag_TC(_i2cx))
     {
@@ -284,7 +284,7 @@ int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,
             LL_I2C_TransmitData8(_i2cx,reg_address);
         }
     }
-    // ·¢ËÍ¶ÁÖ¸Áî£¬´Óµ±Ç°µØÖ·¿ªÊ¼¶ÁÈ¡Êı¾İ
+    // å‘é€è¯»æŒ‡ä»¤ï¼Œä»å½“å‰åœ°å€å¼€å§‹è¯»å–æ•°æ®
     LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_read,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
     while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
     {
@@ -299,15 +299,15 @@ int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,
 
 /**
  *@name     readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read)
- *@brief    I2CÁ¬Ğø¶Á
+ *@brief    I2Cè¿ç»­è¯»
  *@param    I2Cx:  I2C1,I2C2
- *          uint8_t *data:  Êı¾İ»º³å£¬±£´æ¶Áµ½µÄÊı¾İ
- *          uint16_t num_to_write  Òª¶ÁÈ¡µÄÊı¾İ³¤¶È
+ *          uint8_t *data:  æ•°æ®ç¼“å†²ï¼Œä¿å­˜è¯»åˆ°çš„æ•°æ®
+ *          uint16_t num_to_write  è¦è¯»å–çš„æ•°æ®é•¿åº¦
  *@retval   None
 */
 int8_t E_I2c::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read)
 {
-    // ·¢ËÍ¶ÁÖ¸Áî£¬´Óµ±Ç°µØÖ·¿ªÊ¼¶ÁÈ¡Êı¾İ
+    // å‘é€è¯»æŒ‡ä»¤ï¼Œä»å½“å‰åœ°å€å¼€å§‹è¯»å–æ•°æ®
     LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_read,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
     while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
     {
@@ -322,8 +322,8 @@ int8_t E_I2c::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read)
 
 /**
  *@name     wait_dev_busy(uint8_t slave_address)
- *@brief    µÈ´ıÉè±¸¿ÕÏĞ¡£ÏòÖ¸¶¨Éè±¸·¢ËÍstartÖ¸Áî£¬Èç¹ûÉè±¸Ã¦£¬Ôò·µ»ØNACK,·ñÔò·µ»ØACK,Ö÷Éè±¸·¢ËÍstopÖ¸Áî
- *@param    slave_address:  Éè±¸µØÖ·
+ *@brief    ç­‰å¾…è®¾å¤‡ç©ºé—²ã€‚å‘æŒ‡å®šè®¾å¤‡å‘é€startæŒ‡ä»¤ï¼Œå¦‚æœè®¾å¤‡å¿™ï¼Œåˆ™è¿”å›NACK,å¦åˆ™è¿”å›ACK,ä¸»è®¾å¤‡å‘é€stopæŒ‡ä»¤
+ *@param    slave_address:  è®¾å¤‡åœ°å€
  *@retval   None
 */
 int8_t E_I2c::wait_dev_busy(uint8_t slave_address)
@@ -344,7 +344,7 @@ int8_t E_I2c::wait_dev_busy(uint8_t slave_address)
         {
             return 1;
         }
-    }while (LL_I2C_IsActiveFlag_NACK(_i2cx) == 1); //Èç¹ûÎŞÏìÓ¦£¬Ôò¼ÌĞøµÈ´ı
+    }while (LL_I2C_IsActiveFlag_NACK(_i2cx) == 1); //å¦‚æœæ— å“åº”ï¼Œåˆ™ç»§ç»­ç­‰å¾…
 
     LL_I2C_ClearFlag_STOP(_i2cx);
 
