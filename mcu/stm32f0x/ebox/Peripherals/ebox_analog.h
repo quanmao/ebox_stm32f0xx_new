@@ -32,7 +32,7 @@
 
 
 extern void ADC1_init(void);
-extern int get_channel(PIN_ID pin);
+extern int get_channel(E_PinID pin);
 extern uint16_t analogin_read(uint16_t *channel);
 //extern void analogin_read(uint32_t *channel,uint16_t *buffer, uint16_t size);
 extern uint16_t analogin_read_voltage(uint16_t *channel);

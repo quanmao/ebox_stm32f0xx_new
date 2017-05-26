@@ -39,7 +39,7 @@ class E_UART: public Print{
 public:
 //	E_UART(USART_TypeDef *UARTx,E_PinBase *PinTx,E_PinBase *PinRx);
 
-	E_UART(USART_TypeDef *UARTx,PIN_ID PinTx,PIN_ID PinRx);
+	E_UART(USART_TypeDef *UARTx,E_PinID PinTx,E_PinID PinRx);
 
 	// initial uart
 	void begin(uint32_t speed);

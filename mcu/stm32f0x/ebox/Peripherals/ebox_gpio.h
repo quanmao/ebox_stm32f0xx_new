@@ -4,7 +4,11 @@
   * @author  cat_li
   * @version V2.0
   * @date    2016/10/21
-  * @brief   
+  * @brief   GPIO相关接口，共提供了四个类
+		1   E_PinBase 基类，当该pin作为uart,i2c,spi等外设时使用，不提供读写功能
+		2   E_GPIO 通用GPIO接口，继承自E_PinBase，提供读写功能，每次读写只操作单IO
+		3   E_PORT 通用GPIO接口，对同一个Port的若干端口并行操作，效率高
+		4   E_BUS  通用GPIO接口，对不同Port的若干端口并行操作，效率低
   ******************************************************************************
   * @attention
   *
@@ -21,28 +25,35 @@
 
 #include "stm32_define.h"
 
-#define GETPIN(A) 	 			(uint16_t)(1<<(A&0x0f))
+// 获取Pin,返回值0-15
+#define GETPIN(A) 	 	  (uint16_t)(1<<(A&0x0f))
+// 获取端口索引，返回0x00,0x10,0x20,0x30,0x40,0x50
 #define GETPORTINDEX(A)   (A)&0xf0
 
+/**
+  *@brief ebox gpio接口基类，仅在使用af功能时创建。不具备读写功能
+  */
 class E_PinBase{
 protected:
     GPIO_TypeDef *_port;
     uint16_t _pin;
 public:
-    PIN_ID _id;
+    E_PinID _id;
 
-    E_PinBase(PIN_ID pin);
-    void mode(PIN_MODE mode,uint16_t af);
+    E_PinBase(E_PinID pin);
+    void mode(E_PinMode mode,uint16_t af);
 };
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 /**
  *@brief    ebox通用gpio接口，继承自E_PinBase类。适合对单个pin进行操作
 */
 class E_GPIO: public E_PinBase{
 public:
-    E_GPIO(PIN_ID pin): E_PinBase(pin){}
+    E_GPIO(E_PinID pin): E_PinBase(pin){}
 
-    void mode(PIN_MODE mode){
+    void mode(E_PinMode mode){
         E_PinBase::mode(mode,0);
     }
 
@@ -59,6 +70,8 @@ public:
 	E_GPIO operator = (uint8_t value);
 };
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 /**
  *@brief    ebox通用gpio接口，适合对同一Port的多个Pin同时操作
 */
@@ -71,15 +84,15 @@ public:
        *    例2： 要控制 PA0,PA4,PA5; 则 port = E_PORTA, mask = 0x31;即（0011 0001）       
        *@retval   NONE
        */
-    E_PORT(uint8_t port, uint32_t mask = 0xffffffff);
+    E_PORT(E_Port port, uint32_t mask = 0xffffffff);
     /**
        *@brief    操作同一个Port的多个pin，只能是连续Pin
        *@param    port 端口； pinnum 要操作的Pin数量，pinoffset 相对与pin0的偏移
        *    例： 要控制 PA2,PA3,PA4; 则 port = E_PORTA, pinnum = 3, pinoffset = 2
        *@retval   NONE
        */
-    E_PORT(uint8_t port, uint8_t pinnum, uint8_t pinoffset);
-    void mode(PIN_MODE mode);
+    E_PORT(E_Port port, uint8_t pinnum, uint8_t pinoffset);
+    void mode(E_PinMode mode);
 
     void 	write(uint16_t val);
     void 	setAll(void);
@@ -101,17 +114,19 @@ private:
     void init_port(uint8_t port);
 };
 
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
 /**
  *@brief    ebox通用gpio接口，继承自E_PinBase类。将不同Port的多个Pin组合进行操作
  */
 class E_BUS{
 public:
-    E_BUS(PIN_ID p0,PIN_ID p1 = P_NC,PIN_ID p2 = P_NC,PIN_ID p3 = P_NC,PIN_ID p4 = P_NC,PIN_ID p5 = P_NC,
-          PIN_ID p6 = P_NC,PIN_ID p7 = P_NC,PIN_ID p8 = P_NC,PIN_ID p9 = P_NC,PIN_ID p10 = P_NC,PIN_ID p11 = P_NC,
-          PIN_ID p12 = P_NC,PIN_ID p13 = P_NC,PIN_ID p14 = P_NC,PIN_ID p15 = P_NC);
+    E_BUS(E_PinID p0,E_PinID p1 = P_NC,E_PinID p2 = P_NC,E_PinID p3 = P_NC,E_PinID p4 = P_NC,E_PinID p5 = P_NC,
+          E_PinID p6 = P_NC,E_PinID p7 = P_NC,E_PinID p8 = P_NC,E_PinID p9 = P_NC,E_PinID p10 = P_NC,E_PinID p11 = P_NC,
+          E_PinID p12 = P_NC,E_PinID p13 = P_NC,E_PinID p14 = P_NC,E_PinID p15 = P_NC);
 
-    E_BUS(PIN_ID Pins[16]);
-    void mode(PIN_MODE mode);
+    E_BUS(E_PinID Pins[16]);
+    void mode(E_PinMode mode);
 
     void 		write(uint16_t val);
     void 		setAll(void);

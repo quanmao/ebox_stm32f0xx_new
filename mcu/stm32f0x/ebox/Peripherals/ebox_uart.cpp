@@ -31,10 +31,10 @@ void serial_irq_init(uint8_t index, uart_irq_handler handler, uint32_t id)
 
 /**
  *@brief    uart构造函数
- *@param    USART_TypeDef *UARTx -- uart端口; PIN_ID PinTx -- Tx pin id; IN_ID PinRx -- rx pin id;
+ *@param    USART_TypeDef *UARTx -- uart端口; E_PinID PinTx -- Tx pin id; IN_ID PinRx -- rx pin id;
  *@retval   NONE
 */
-E_UART::E_UART(USART_TypeDef *UARTx,PIN_ID PinTx,PIN_ID PinRx)
+E_UART::E_UART(USART_TypeDef *UARTx,E_PinID PinTx,E_PinID PinRx)
 {
 		this->UARTx = UARTx;
 		Rx = new E_PinBase(PinRx);

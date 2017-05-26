@@ -20,7 +20,7 @@
 
 
 	
-int get_channel(PIN_ID pin){
+int get_channel(E_PinID pin){
 	
 		switch ((uint32_t)pin)
 		{

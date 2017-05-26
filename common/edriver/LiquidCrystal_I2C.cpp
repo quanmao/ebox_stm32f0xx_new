@@ -49,7 +49,7 @@ LiquidCrystal_I2C::LiquidCrystal_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t l
 
 LiquidCrystal_I2C::LiquidCrystal_I2C(E_I2c *i2c,uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows)
 {
-	_i2c = i2c;
+  _i2c = i2c;
   _Addr = lcd_Addr;
   _cols = lcd_cols;
   _rows = lcd_rows;
@@ -316,4 +316,3 @@ void LiquidCrystal_I2C::draw_horizontal_graph(uint8_t row, uint8_t column, uint8
 void LiquidCrystal_I2C::draw_vertical_graph(uint8_t row, uint8_t column, uint8_t len,  uint8_t pixel_row_end){}
 void LiquidCrystal_I2C::setContrast(uint8_t new_val){}
 
-	

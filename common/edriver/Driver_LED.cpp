@@ -39,7 +39,7 @@ NUMLED::NUMLED(E_PORT *digital,E_GPIO *A0,E_GPIO *A1,E_GPIO *A2,E_GPIO *A3){
     _close();
 }
 
-NUMLED::NUMLED(E_PORT *digital,PIN_ID A0,PIN_ID A1,PIN_ID A2,PIN_ID A3){
+NUMLED::NUMLED(E_PORT *digital,E_PinID A0,E_PinID A1,E_PinID A2,E_PinID A3){
     _digital = digital;
     _A0 = new E_GPIO(A0);
     _A1 = new E_GPIO(A1);
