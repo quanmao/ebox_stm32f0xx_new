@@ -17,10 +17,23 @@
   */
 
 #include "ebox.h"
+
+E_GPIO PA5(PA_5);
+E_UART usart(USART1,PA_9,PA_10);
+
+void rxirq(void){
+	PA5 = 1;
+}
+
 void setup()
 {
-    ebox_init();
-    uart1.begin(115200);
+	ebox_init();
+	PA5.mode(OUTPUT_PP);
+	usart.begin(115200);
+	usart.attach(&PA5,&E_GPIO::reset,TxIrq);
+	usart.attach(&rxirq,RxIrq);
+	usart.enable_irq(TxIrq);
+	usart.enable_irq(RxIrq);
 }
 char buf[] = "hello world !\r\n";
 int main(void)
@@ -28,8 +41,8 @@ int main(void)
     setup();
     while(1)
     {
-        uart1.printf("hello World !\r\n");
-        uart1.printf_length(buf, sizeof(buf));
+        usart.print("hello World !\r\n");
+        usart.print("stm32f0 usart print %d \r\n");
         delay_ms(1000);
     }
 }
