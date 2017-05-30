@@ -4,7 +4,10 @@
   * @author  cat_li
   * @version V2.0
   * @date    2016/11/15
-  * @brief   stm32f0
+  * @brief   仅工作在主模式
+		1  2017/5/30  移除E_PinBase的构造函数，使用PIN_ID
+									增加超时，防止程序死掉。
+									读写函数增加返回状态
   ******************************************************************************
   * @attention
   *
@@ -24,13 +27,14 @@
 #include "ebox_gpio.h"
 #include "stm32f0xx_ll_i2c.h"
 
+
 class E_I2c
 {
 
 public:
-	E_I2c(I2C_TypeDef *I2Cx, E_PinBase *scl, E_PinBase *sda);
+	E_I2c(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout = 0x1000);
 	void	begin(uint16_t speed);
-	void    config();
+	void  config();
 	uint32_t    read_config();
 
 	int8_t	writeChar(uint8_t slave_address, uint8_t data);
@@ -45,10 +49,11 @@ public:
 	int8_t release_i2c_right(void);
 
 private:
-	I2C_TypeDef *_i2cx;
-	uint8_t 		_index;
-	uint32_t    _timing;
+	I2C_TypeDef *_i2cx;		// i2c外设
+	uint8_t 	_index;		//
+	uint32_t    _timing;	// i2c时序
 	uint8_t     busy;
+	uint16_t	_timeout;	// 超时时间
 };
 
 

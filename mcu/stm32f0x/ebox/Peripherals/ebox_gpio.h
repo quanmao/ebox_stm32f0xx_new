@@ -41,7 +41,7 @@ public:
     E_PinID _id;
 
     E_PinBase(E_PinID pin);
-    void mode(E_PinMode mode,uint16_t af);
+    void mode(E_PinMode mode,uint8_t af);
 };
 
 /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/

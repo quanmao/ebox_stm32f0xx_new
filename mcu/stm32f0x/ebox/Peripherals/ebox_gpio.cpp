@@ -74,20 +74,20 @@ E_PinBase::E_PinBase(E_PinID pin){
  *@param    mode -- 输入输出模式; af -- 第二功能位
  *@retval   NONE
 */
-void E_PinBase::mode(E_PinMode mode,uint16_t af){
-
+void E_PinBase::mode(E_PinMode mode,uint8_t af){
 
 	//LL_AHB1_GRP1_EnableClock(E_PORT_MAP[GETPORT(id)].Periphs);
-
-	LL_GPIO_SetPinMode(this->_port,this->_pin,E_PinMode_MAP[mode].mode);
-	LL_GPIO_SetPinOutputType(this->_port,this->_pin,E_PinMode_MAP[mode].OutputType);
-	LL_GPIO_SetPinPull(this->_port,this->_pin,E_PinMode_MAP[mode].Pull);
+	
+	LL_GPIO_SetPinMode(this->_port,this->_pin,GET_MODE(mode));
+	LL_GPIO_SetPinOutputType(this->_port,this->_pin,GET_OTYPER(mode));
+	LL_GPIO_SetPinPull(this->_port,this->_pin,GET_PUPD(mode));
 	LL_GPIO_SetPinSpeed(this->_port,this->_pin,LL_GPIO_SPEED_FREQ_HIGH);
 	//af最大为7
 	if (af <= 8){
 		(_pin<LL_GPIO_PIN_8)?(LL_GPIO_SetAFPin_0_7(_port,_pin,af)):(LL_GPIO_SetAFPin_8_15(_port,_pin,af));
 	}
 }
+
 
 /**
  *@brief    GPIO输出设置
@@ -219,10 +219,10 @@ void E_PORT::init_port(uint8_t port){
 void E_PORT::mode(E_PinMode mode){
 	uint16_t i;
 	for (i=0;i<16;i++){
-		if (_mask & (1<<i)){
-			LL_GPIO_SetPinMode(_port,(1<<i),E_PinMode_MAP[mode].mode);
-			LL_GPIO_SetPinOutputType(_port,i,E_PinMode_MAP[mode].OutputType);
-			LL_GPIO_SetPinPull(_port,i,E_PinMode_MAP[mode].Pull);
+		if (_mask & (1<<i)){	
+			LL_GPIO_SetPinMode(_port,(1<<i),GET_MODE(mode));
+			LL_GPIO_SetPinOutputType(_port,i,GET_OTYPER(mode));
+			LL_GPIO_SetPinPull(_port,i,GET_PUPD(mode));
 			LL_GPIO_SetPinSpeed(_port,i,LL_GPIO_SPEED_FREQ_HIGH);
 		}
 	}

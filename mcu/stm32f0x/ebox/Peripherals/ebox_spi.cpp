@@ -18,11 +18,19 @@
 
 #include "ebox_spi.h"
 
-E_SPI::E_SPI(SPI_TypeDef *SPIx, E_PinBase *sck, E_PinBase *miso, E_PinBase *mosi){
+E_SPI::E_SPI(SPI_TypeDef *SPIx, E_PinID sck, E_PinID miso, E_PinID mosi){
+	E_PinBase _sck(sck),_miso(miso),_mosi(mosi);
+
 	_spi = SPIx;
-	sck->mode(AF_PP_PU,0);
-	miso->mode(AF_PP_PU,0);
-	mosi->mode(AF_PP_PU,0);
+
+	_index = getIndex(sck,SPI_MAP);
+	_sck.mode(SPI_MAP[_index]._pin_date,SPI_MAP[_index]._pin_af);
+	_index = getIndex(miso,SPI_MAP);
+	_miso.mode(SPI_MAP[_index]._pin_date,SPI_MAP[_index]._pin_af);
+	_index = getIndex(mosi,SPI_MAP);
+	_mosi.mode(SPI_MAP[_index]._pin_date,SPI_MAP[_index]._pin_af);
+	
+	_index = getPeriphIndex((uint32_t)SPIx,SPI_INFO);
 }
 
 void E_SPI::config(E_SPI_CONFIG_T *spi_config)
@@ -75,7 +83,7 @@ void E_SPI::config(E_SPI_CONFIG_T *spi_config)
     LL_SPI_SetMode(_spi, LL_SPI_MODE_MASTER);
     LL_SPI_Enable(_spi);
 	
-		LL_SPI_Enable(SPI1);
+		LL_SPI_Enable(_spi);
 }
 
 uint8_t E_SPI::writeChar(uint8_t data)
@@ -91,7 +99,7 @@ uint8_t E_SPI::writeChar(uint8_t data)
 	//return 0;
 }
 
-uint8_t E_SPI::writeBuf(uint8_t *data, uint16_t data_length)
+int8_t E_SPI::writeBuf(uint8_t *data, uint16_t data_length)
 {
 	__IO uint8_t dummyByte;
 	if (data_length == 0)
@@ -117,7 +125,7 @@ uint8_t E_SPI::read()
 
 }
 
-uint8_t E_SPI::read(uint8_t *recv_data)
+int8_t E_SPI::read(uint8_t *recv_data)
 {
 	while ((_spi->SR & LL_SPI_SR_TXE) == RESET)
 		;
@@ -129,7 +137,7 @@ uint8_t E_SPI::read(uint8_t *recv_data)
 	return 0;
 }
 
-uint8_t E_SPI::read(uint8_t *recv_data, uint16_t data_length)
+int8_t E_SPI::read(uint8_t *recv_data, uint16_t data_length)
 {
 	if (data_length == 0)
 		return -1;
