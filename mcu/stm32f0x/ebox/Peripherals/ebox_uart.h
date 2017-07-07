@@ -39,13 +39,13 @@ enum IrqType {
 typedef void (*uart_irq_handler)(uint32_t id, IrqType type);
 
 
-class E_UART: public Print{
+class E_UART:public Print{
 public:
 
 	E_UART(USART_TypeDef *UARTx,E_PinID PinTx,E_PinID PinRx);
 
 	// initial uart
-	void begin(uint32_t speed,uint8_t data_bit, uint8_t parity, float stop_bit,uint8_t _use_dma =1);
+	void begin(uint32_t speed,uint8_t data_bit, uint8_t parity, float stop_bit,uint8_t _use_dma);
 	void begin(uint32_t speed,uint32_t data_bit=LL_USART_DATAWIDTH_8B, uint32_t parity =LL_USART_PARITY_NONE, uint32_t stop_bit =LL_USART_STOPBITS_1 ,uint8_t use_dma =1);
 
 	void enable_irq(IrqType type);
@@ -68,7 +68,6 @@ public:
 	*/
 	void attach(void (*fptr)(void), IrqType type);
 
-
 	/**
 	 *@brief    绑定成员回调函数
 	 *@param    IrqType type 中断类型，RxIrq(接收到数据),TxIrq（数据发送完成）;
@@ -82,8 +81,6 @@ public:
 			_irq[type].attach(tptr, mptr);
 		}
 	}
-
-
 
 private:
 	USART_TypeDef *UARTx;

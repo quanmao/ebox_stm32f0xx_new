@@ -129,7 +129,7 @@ uint32_t E_I2c::read_config()
 */
 int8_t E_I2c::writeChar(uint8_t slave_address,uint8_t data)
 {
-	uint8_t time = _timeout;
+	uint16_t time = _timeout;
 	// 写入地址寄存器和数据
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
 	
@@ -139,10 +139,10 @@ int8_t E_I2c::writeChar(uint8_t slave_address,uint8_t data)
 		{
 			LL_I2C_TransmitData8(_i2cx,data);
 		}
-		if ((time--) == 0)
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	LL_I2C_ClearFlag_STOP(_i2cx);
 
@@ -159,7 +159,7 @@ int8_t E_I2c::writeChar(uint8_t slave_address,uint8_t data)
 */
 int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_write)
 {
-	uint8_t time = _timeout;
+	uint16_t time = _timeout;
 	if (num_to_write >255){
 		// num_to_writ>255: RELOAD,NBYTE=0xFF,START
 		LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,0xFF,LL_I2C_MODE_RELOAD,LL_I2C_GENERATE_START_WRITE);
@@ -170,10 +170,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
 			{
 				LL_I2C_TransmitData8(_i2cx,*data++);
 			}
-			if ((time--) == 0)
-			{
-				return E_TIMEOUT;
-			}
+//			if ((time--) == 0)
+//			{
+//				return E_TIMEOUT;
+//			}
 		}
 		num_to_write = num_to_write - 255;
 		// num_to_writ>255: RELOAD,NBYTE=0xFF,NOSTART
@@ -188,10 +188,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
 				{
 					LL_I2C_TransmitData8(_i2cx,*data++);
 				}
-				if ((time--) == 0)
-				{
-					return E_TIMEOUT;
-				}
+//				if ((time--) == 0)
+//				{
+//					return E_TIMEOUT;
+//				}
 			}
 			num_to_write = num_to_write - 255;
 		}
@@ -204,10 +204,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
 			{
 				LL_I2C_TransmitData8(_i2cx,*data++);
 			}
-			if ((time--) == 0)
-			{
-				return E_TIMEOUT;
-			}
+//			if ((time--) == 0)
+//			{
+//				return E_TIMEOUT;
+//			}
 		}
 		LL_I2C_ClearFlag_STOP(_i2cx);
 	}else{
@@ -220,10 +220,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
 			{
 				LL_I2C_TransmitData8(_i2cx,*data++);
 			}
-			if ((time--) == 0)
-			{
-				return E_TIMEOUT;
-			}
+//			if ((time--) == 0)
+//			{
+//				return E_TIMEOUT;
+//			}
 		}
 		LL_I2C_ClearFlag_STOP(_i2cx);
 	}
@@ -242,7 +242,7 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
 */
 int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data, uint16_t num_to_write)
 {
-	uint8_t time = _timeout;
+	uint16_t time = _timeout;
 	// 发送地址寄存器
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_SOFTEND,LL_I2C_GENERATE_START_WRITE);
 
@@ -252,10 +252,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 		{
 			LL_I2C_TransmitData8(_i2cx,reg_address);
 		}
-		if ((time--) == 0)
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	// 发送数据
 	if (num_to_write >255){
@@ -270,10 +270,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 				{
 					LL_I2C_TransmitData8(_i2cx,*data++);
 				}
-				if ((time--) == 0)
-				{
-					return E_TIMEOUT;
-				}
+//				if ((time--) == 0)
+//				{
+//					return E_TIMEOUT;
+//				}
 			}
 			num_to_write = num_to_write - 255;
 		}
@@ -286,10 +286,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 			{
 				LL_I2C_TransmitData8(_i2cx,*data++);
 			}
-			if ((time--) == 0)
-			{
-				return E_TIMEOUT;
-			}
+//			if ((time--) == 0)
+//			{
+//				return E_TIMEOUT;
+//			}
 		}
 		LL_I2C_ClearFlag_STOP(_i2cx);
 	}else{
@@ -302,10 +302,10 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 			{
 				LL_I2C_TransmitData8(_i2cx,*data++);
 			}
-			if ((time--) == 0)
-			{
-				return E_TIMEOUT;
-			}
+//			if ((time--) == 0)
+//			{
+//				return E_TIMEOUT;
+//			}
 		}
 		LL_I2C_ClearFlag_STOP(_i2cx);
 	}
@@ -325,7 +325,7 @@ int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 */
 int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read)
 {
-	uint8_t time = _timeout;
+	uint16_t time = _timeout;
 	// 发送地址寄存器
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_SOFTEND,LL_I2C_GENERATE_START_WRITE);
 	while (!LL_I2C_IsActiveFlag_TC(_i2cx))
@@ -334,10 +334,10 @@ int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,
 		{
 			LL_I2C_TransmitData8(_i2cx,reg_address);
 		}
-		if ((time--) == 0)
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	// 发送读指令，从当前地址开始读取数据
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_read,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
@@ -348,10 +348,10 @@ int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,
 		{
 			*data++ = LL_I2C_ReceiveData8(_i2cx);
 		}
-		if ((time--) == 0)
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	LL_I2C_ClearFlag_STOP(_i2cx);
 	return E_OK;
@@ -367,7 +367,7 @@ int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,
 */
 int8_t E_I2c::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read)
 {
-	uint8_t time = _timeout;
+	uint16_t time = _timeout;
 	// 发送读指令，从当前地址开始读取数据
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_read,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
 	while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
@@ -376,10 +376,10 @@ int8_t E_I2c::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read)
 		{
 			*data++ = LL_I2C_ReceiveData8(_i2cx);
 		}
-		if ((time--) == 0)
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	LL_I2C_ClearFlag_STOP(_i2cx);
 	return E_OK;

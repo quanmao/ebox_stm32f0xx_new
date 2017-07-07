@@ -13,3 +13,12 @@
 *.txt
 *.bin
 mbeds.xmp.lnk
+Project/stm32f0x/mdk/Listings/startup_stm32f072xb.lst
+Project/stm32f0x/mdk/Objects/ebox.sct
+Project/stm32f0x/mdk/Objects/ExtDll.iex
+*.TMP
+Project/stm32f0x/mdk/stm32f0x.uvoptx
+Project/stm32f0x/mdk/stm32f0x.uvprojx
+Project/stm32f0x/mdk/stm32f0x.uvprojx
+Project/stm32f0x/TKStudio/eboxF0.tuo
+Project/stm32f0x/TKStudio/eboxF0.xmp

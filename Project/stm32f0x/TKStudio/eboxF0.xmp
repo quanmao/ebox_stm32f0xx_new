@@ -164,8 +164,6 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp" FileType="3" Output="ebox_tim.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_uart.cpp" FileType="3" Output="ebox_uart.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\exti.cpp" FileType="3" Output="exti.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\gpio.cpp" FileType="3" Output="gpio.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\i2c.cpp" FileType="3" Output="i2c.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\iflash.cpp" FileType="3" Output="iflash.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\in_capture.cpp" FileType="3" Output="in_capture.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\pwm.cpp" FileType="3" Output="pwm.o" ro="0" bss="0" rw="0" />
@@ -177,6 +175,8 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\uart.cpp" FileType="3" Output="uart.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\wdg.cpp" FileType="3" Output="wdg.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_spi.cpp" FileType="3" Output="ebox_spi.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_i2c.cpp" FileType="3" Output="ebox_i2c.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_irq.cpp" FileType="3" Output="ebox_irq.o" ro="0" bss="0" rw="0" />
             </Filter>
             <Filter Name="cpu">
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32_define.h" FileType="4" ro="0" bss="0" rw="0" />
@@ -687,6 +687,9 @@
         <Filter Name="eDrive">
             <File RelativePath="..\..\..\common\edriver\LTC1446.cpp" FileType="3" Output="LTC1446.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\common\edriver\at24c02.cpp" FileType="3" Output="at24c02.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\edriver\Driver_LED.cpp" FileType="3" Output="Driver_LED.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\edriver\LiquidCrystal_I2C.cpp" FileType="3" Output="LiquidCrystal_I2C.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\..\my-lib\drive\ebox\INA219.cpp" FileType="3" Output="INA219.o" ro="0" bss="0" rw="0" />
         </Filter>
     </Files>
 </TKStudioProject>

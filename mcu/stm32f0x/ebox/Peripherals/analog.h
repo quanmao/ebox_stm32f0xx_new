@@ -45,60 +45,61 @@ public:
      * @param pin AnalogIn pin to connect to
      * @param name (optional) A string to identify the object
      */
-	Analog(Gpio *pin) {
+	Analog(E_GPIO *pin) {
 		pin->mode(AIN);
 		
-		switch ((uint32_t)pin->id)
+		
+		switch ((uint32_t)pin->_id)
 		{
 // PA0-7			
-			case PA0_ID:
+			case PA_0:
 				Channel = LL_ADC_CHANNEL_0 ;
 				break;
-			case PA1_ID:
+			case PA_1:
 				Channel = LL_ADC_CHANNEL_1 ;
 				break;
-			case PA2_ID:
+			case PA_2:
 				Channel = LL_ADC_CHANNEL_2 ;
 				break;	
-			case PA3_ID:
+			case PA_3:
 				Channel = LL_ADC_CHANNEL_3 ;
 				break;
-			case PA4_ID:
+			case PA_4:
 				Channel = LL_ADC_CHANNEL_4 ;
 				break;
-			case PA5_ID:
+			case PA_5:
 				Channel = LL_ADC_CHANNEL_5 ;
 				break;
-			case PA6_ID:
+			case PA_6:
 				Channel = LL_ADC_CHANNEL_6 ;
 				break;	
-			case PA7_ID:
+			case PA_7:
 				Channel = LL_ADC_CHANNEL_7 ;
 				break;
 // PB0,1				
-			case PB0_ID:
+			case PB_0:
 				Channel = LL_ADC_CHANNEL_8 ;
 				break;
-			case PB1_ID:
+			case PB_1:
 				Channel = LL_ADC_CHANNEL_9 ;
 				break;	
 // PC0-5				
-			case PC0_ID:
+			case PC_0:
 				Channel = LL_ADC_CHANNEL_10 ;
 				break;
-			case PC1_ID:
+			case PC_1:
 				Channel = LL_ADC_CHANNEL_11 ;
 				break;
-			case PC2_ID:
+			case PC_2:
 				Channel = LL_ADC_CHANNEL_12 ;
 				break;
-			case PC3_ID:
+			case PC_3:
 				Channel = LL_ADC_CHANNEL_13 ;
 				break;
-			case PC4_ID:
+			case PC_4:
 				Channel = LL_ADC_CHANNEL_14 ;
 				break;
-			case PC5_ID:
+			case PC_5:
 				Channel = LL_ADC_CHANNEL_15 ;
 				break;				
 			default:

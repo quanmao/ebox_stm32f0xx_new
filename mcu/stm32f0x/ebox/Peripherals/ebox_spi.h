@@ -7,18 +7,18 @@
   * @brief   仅工作在主模式
 		1  2017/5/30  移除E_PinBase的构造函数，使用PIN_ID
 									增加超时，防止程序死掉。
-									读写函数增加返回状态 
+									读写函数增加返回状态
   ******************************************************************************
   * @attention
   *
-  * No part of this software may be used for any commercial activities by any form 
-  * or means, without the prior written consent of shentq. This specification is 
+  * No part of this software may be used for any commercial activities by any form
+  * or means, without the prior written consent of shentq. This specification is
   * preliminary and is subject to change at any time without notice. shentq assumes
   * no responsibility for any errors contained herein.
   * <h2><center>&copy; Copyright 2015 shentq. All Rights Reserved.</center></h2>
   ******************************************************************************
   */
-	
+
 #ifndef __EBOX_SPI_H_
 #define __EBOX_SPI_H_
 
@@ -54,21 +54,21 @@ typedef struct
 }E_SPI_CONFIG_T;
 
 class E_SPI{
-	public:
-	 E_SPI(SPI_TypeDef *SPIx, E_PinID sck, E_PinID miso, E_PinID mosi);
-	 
-	 void 	 config(E_SPI_CONFIG_T *spi_config);
-	
-	 uint8_t	 writeChar(uint8_t data);
-     int8_t 	 writeBuf(uint8_t *data, uint16_t data_length);
-	 uint8_t   read();
-	 int8_t   read(uint8_t *recv_data);
-	 int8_t   read(uint8_t *recv_data, uint16_t data_length);
-	
-	private:
-	 SPI_TypeDef *_spi;	
-   E_LOCK_T     _lock;
-   uint8_t _index;
+public:
+	E_SPI(SPI_TypeDef *SPIx, E_PinID sck, E_PinID miso, E_PinID mosi);
+
+	void 	 config(E_SPI_CONFIG_T *spi_config);
+
+	uint8_t	 writeChar(uint8_t data);
+	int8_t 	 writeBuf(uint8_t *data, uint16_t data_length);
+	uint8_t   read();
+	int8_t   read(uint8_t *recv_data);
+	int8_t   read(uint8_t *recv_data, uint16_t data_length);
+
+private:
+	SPI_TypeDef *_spi;
+	E_LOCK_T     _lock;
+	uint8_t _index;
 };
 
 #endif

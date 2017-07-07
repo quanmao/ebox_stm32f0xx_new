@@ -4,7 +4,11 @@
   * @author  cat_li
   * @version V2.0
   * @date    2016/10/21
-  * @brief
+  * @brief   GPIO相关接口，共提供了四个类
+		1   E_PinBase 基类，当该pin作为uart,i2c,spi等外设时使用，不提供读写功能
+		2   E_GPIO 通用GPIO接口，继承自E_PinBase，提供读写功能，每次读写只操作单IO
+		3   E_PORT 通用GPIO接口，对同一个Port的若干端口并行操作，效率高
+		4   E_BUS  通用GPIO接口，对不同Port的若干端口并行操作，效率低
   ******************************************************************************
   * @attention
   *

@@ -56,7 +56,7 @@ typedef void (*fun_onePara_t)(unsigned int);
 //extern Uart uart1;//根据不同的串口名称此处需要做相应的修改
 #define DBG(...) uart1.printf(__VA_ARGS__)
 #else
-#define  DBG(...)
+#define DBG(...)
 #endif
 
 #endif

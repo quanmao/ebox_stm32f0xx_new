@@ -32,7 +32,7 @@ class E_I2c
 {
 
 public:
-	E_I2c(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout = 0x1000);
+	E_I2c(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout = 0x6000);
 	void	begin(uint16_t speed);
 	void  config();
 	uint32_t    read_config();

@@ -3,8 +3,8 @@
   * @file    main.cpp
   * @author  shentq
   * @version V1.2
-  * @date    2016/08/14
-  * @brief   ebox application example .
+  * @date    2017/07/07
+  * @brief   uart例程，包含中断绑定 .
   ******************************************************************************
   * @attention
   *
@@ -21,6 +21,7 @@
 E_GPIO PA5(PA_5);
 E_UART usart(USART1,PA_9,PA_10);
 
+// 接收中断回调函数
 void rxirq(void){
 	PA5 = 1;
 }
@@ -30,8 +31,10 @@ void setup()
 	ebox_init();
 	PA5.mode(OUTPUT_PP);
 	usart.begin(115200);
+	// 绑定中断回调函数，可以绑定对象成员，也可以绑定静态函数
 	usart.attach(&PA5,&E_GPIO::reset,TxIrq);
 	usart.attach(&rxirq,RxIrq);
+	// 开中断
 	usart.enable_irq(TxIrq);
 	usart.enable_irq(RxIrq);
 }

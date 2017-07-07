@@ -173,8 +173,7 @@ void PendSV_Handler(void)
   * @param  None
   * @retval None
   */
-
-extern void ebox_SysTick_Handler(void);
+extern void ebox_SysTick_Handler(void);  // 具体的实现在ebox_core.cpp中
 void SysTick_Handler(void)
 {	
 		ebox_SysTick_Handler();

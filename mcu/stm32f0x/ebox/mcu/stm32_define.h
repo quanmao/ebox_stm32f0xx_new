@@ -294,8 +294,8 @@ typedef struct{
 	IrqIndex_t 	_irqIndex;
 }Periph_S;
 
-#define AF_FUN_NC P_NC,(E_PinMode)NC,(uint8_t)NC,NC
-#define Periph_Com_NC (uint8_t)NC,(uint8_t)NC,(uint8_t)NC
+// #define AF_FUN_NC P_NC,(E_PinMode)NC,(uint8_t)NC,NC
+// #define Periph_Com_NC (uint8_t)NC,(uint8_t)NC,(uint8_t)NC
 
 
 
@@ -324,10 +324,10 @@ static const Periph_S UART_INFO[] = {
 };
 	
 static const AF_FUN_S I2C_MAP[]={
-	PB_6,AF_OD_PU,LL_GPIO_AF_1,I2C1_BASE,
-	PB_7,AF_OD_PU,LL_GPIO_AF_1,I2C1_BASE,
-	PB_8,AF_OD_PU,LL_GPIO_AF_1,I2C1_BASE,
-	PB_9,AF_OD_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_6,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_7,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_8,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_9,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
 	P_NC
 };
 

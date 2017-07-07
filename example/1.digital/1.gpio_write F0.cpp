@@ -1,11 +1,11 @@
 /**
   ******************************************************************************
-  * @file   : *.cpp
+  * @file   : gpio_write.cpp
   * @author : cat_li
   * @version: V2.0
-  * @date   : 2016/11/10
+  * @date   : 2017/07/07
 
-  * @brief   ebox application example .
+  * @brief   F0µÄGPIOÀý³Ì
   *
   * Copyright 2016 shentq. All Rights Reserved.         
   ******************************************************************************
