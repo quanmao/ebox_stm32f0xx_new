@@ -3,9 +3,9 @@
   * @file   : *.cpp
   * @author : cat_li
   * @version: V2.0
-  * @date   : 2016/11/10
+  * @date   : 2017/07/07
 
-  * @brief   ebox application example .
+  * @brief   ina219Àý³Ì .
   *
   * Copyright 2016 shentq. All Rights Reserved.
   ******************************************************************************
@@ -19,9 +19,9 @@
 #include "INA219.h"
 
 E_GPIO PA5(PA_5);
-E_I2c ic(I2C1,new E_PinBase(PB_8),new E_PinBase(PB_9));
+E_I2c ic(I2C1,PB_8,PB_9);
 INA219 ina219(&ic,0x80);
-E_UART usart(USART1,new E_PinBase(PA_9),new E_PinBase(PA_10));
+E_UART usart(USART1,PA_9,PA_10);
 
 int main(){
 	float v;
