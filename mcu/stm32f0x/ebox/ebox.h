@@ -30,12 +30,5 @@
 #include "ebox_spi.h"
 #include "ebox_i2c.h"
 
-
-////////////////////////////////////////////////////////////////////////////////
-//创建所有引脚对象和宏定义其指针
-//extern Uart uart1;
-////extern Uart uart2;
-
-
 #endif
 

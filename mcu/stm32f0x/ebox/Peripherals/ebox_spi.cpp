@@ -1,10 +1,13 @@
 /**
   ******************************************************************************
-  * @file    ebox_i2c.cpp
+  * @file    ebox_spi.cpp
   * @author  cat_li
   * @version V2.0
   * @date    2016/11/11
-  * @brief   
+  * @brief   仅工作在主模式
+		1  2017/5/30  移除E_PinBase的构造函数，使用PIN_ID
+					增加超时，防止程序死掉。
+					读写函数增加返回状态
   ******************************************************************************
   * @attention
   *
@@ -30,7 +33,7 @@ E_SPI::E_SPI(SPI_TypeDef *SPIx, E_PinID sck, E_PinID miso, E_PinID mosi){
 	_index = getIndex(mosi,SPI_MAP);
 	_mosi.mode(SPI_MAP[_index]._pin_date,SPI_MAP[_index]._pin_af);
 	
-	_index = getPeriphIndex((uint32_t)SPIx,SPI_INFO);
+//	_index = getPeriphIndex((uint32_t)SPIx,SPI_INFO);
 }
 
 void E_SPI::config(E_SPI_CONFIG_T *spi_config)
@@ -78,25 +81,20 @@ void E_SPI::config(E_SPI_CONFIG_T *spi_config)
     LL_SPI_SetTransferDirection(_spi,LL_SPI_FULL_DUPLEX);
     LL_SPI_SetDataWidth(_spi, LL_SPI_DATAWIDTH_8BIT);
     LL_SPI_SetNSSMode(_spi, LL_SPI_NSS_SOFT);
-    LL_SPI_SetRxFIFOThreshold(_spi, LL_SPI_RX_FIFO_TH_QUARTER);
+	  LL_SPI_SetRxFIFOThreshold(_spi, LL_SPI_RX_FIFO_TH_QUARTER);
 
     LL_SPI_SetMode(_spi, LL_SPI_MODE_MASTER);
     LL_SPI_Enable(_spi);
-	
-		LL_SPI_Enable(_spi);
 }
 
 uint8_t E_SPI::writeChar(uint8_t data)
 {
-	while ((_spi->SR & LL_SPI_SR_TXE) == RESET)
-		;
+	while(!LL_SPI_IsActiveFlag_TXE(_spi));
 	*((__IO uint8_t *)&_spi->DR) = data;
-////	LL_SPI_TransmitData8(SPI1,data);
-//	 _spi->DR = data;
-		while ((_spi->SR & LL_SPI_SR_RXNE) == RESET)
-		;
-	return LL_SPI_ReceiveData8(SPI1);
-	//return 0;
+//	LL_SPI_TransmitData8(_spi,data);
+		while(!LL_SPI_IsActiveFlag_RXNE(_spi));
+	return LL_SPI_ReceiveData8(_spi);
+//	return 0;
 }
 
 int8_t E_SPI::writeBuf(uint8_t *data, uint16_t data_length)
@@ -118,9 +116,10 @@ uint8_t E_SPI::read()
 	while ((_spi->SR & LL_SPI_SR_TXE) == RESET)
 		;
 	*((__IO uint8_t *)&_spi->DR) = 0xff;
+//	LL_SPI_TransmitData8(_spi,0xff);
 	while ((_spi->SR & LL_SPI_SR_RXNE) == RESET)
 		;
-	 return (LL_SPI_ReceiveData8(SPI1));
+	 return (LL_SPI_ReceiveData8(_spi));
 	//return(_spi->DR);
 
 }

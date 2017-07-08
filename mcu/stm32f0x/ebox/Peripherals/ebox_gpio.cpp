@@ -109,7 +109,6 @@ void E_GPIO::write(uint8_t val){
 */
 uint8_t E_GPIO::read(void)
 {
-
 	return ((_port->IDR & _pin) == _pin)?(1):(0);
 }
 

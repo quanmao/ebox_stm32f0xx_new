@@ -303,7 +303,7 @@ typedef struct{
 static const AF_FUN_S SPI_MAP[] = {
 	PA_5,AF_PP_PU,0,SPI1_BASE,
 	PA_6,AF_PP_PU,0,SPI1_BASE,
-	PA_6,AF_PP_PU,0,SPI1_BASE,
+	PA_7,AF_PP_PU,0,SPI1_BASE,
 	P_NC
 };
 	
