@@ -18,6 +18,8 @@
   ******************************************************************************
   */
 #include "ebox_uart.h"
+#include "ebox_mem.h"
+#include <stdarg.h>
 #include "stm32f0xx_ll_usart.h"
 #include <stdio.h>
 
@@ -140,13 +142,66 @@ void E_UART::begin(uint32_t speed,uint32_t data_bit, uint32_t parity, uint32_t s
  *@name     size_t Uart::write(uint8_t c)
  *@brief    串口方式发送一个字节
  *@param    ch：要发送的字符
- *@retval   已发送的数据
+ *@retval   固定返回1
 */
 size_t E_UART::write(uint8_t c)
 {
 	while (!LL_USART_IsActiveFlag_TXE(UARTx)){};//单字节等待，等待寄存器空
 	LL_USART_TransmitData8(UARTx,c);
 	return 1;
+}
+
+/**
+ *@name     size_t Uart::write(const uint8_t *buffer, size_t size)
+ *@brief    串口方式发送字符串
+ *@param    buffer：要发送的字符串
+ *@retval   已发送的数据长度
+*/
+size_t E_UART::write(const uint8_t *buffer, size_t size){
+	while (size--)
+	{
+		while (!LL_USART_IsActiveFlag_TXE(UARTx)){};//单字节等待，等待寄存器空
+		LL_USART_TransmitData8(UARTx,*buffer++);
+	}
+	return size;
+}
+
+/**
+ *@name     E_UART::printf(const char *fmt, ...)
+ *@brief    串口格式化输出
+ *@param    fmt：请百度printf函数
+ *@retval   none
+*/
+void E_UART::printf(const char *fmt, ...)
+{
+    int     size1 = 0;
+    size_t  size2 = 256;
+
+//    wait_busy();
+    if(_buf != NULL)
+        ebox_free(_buf);
+//    set_busy();
+    va_list va_params;
+    va_start(va_params, fmt);
+    
+    do{
+        _buf = (char *)ebox_malloc(size2);
+        if(_buf == NULL)
+            return ;
+//        size1 = _vsnprintf(_buf, size2,fmt, va_params);
+				size1 = vsnprintf(_buf,size2, fmt, va_params);
+        if(size1 == -1  || size1 > size2)
+        {
+            size2+=128;
+            size1 = -1;
+            ebox_free(_buf);
+        }
+    }while(size1 == -1);
+		//size1 = vsnprintf(_buf,size2, fmt, va_params); 
+   // size1 = vsprintf(_buf, fmt, va_params); 
+    va_end(va_params);
+    write(_buf, size1);
+
 }
 
 /**

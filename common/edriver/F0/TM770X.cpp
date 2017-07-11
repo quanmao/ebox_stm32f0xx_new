@@ -41,7 +41,6 @@ TM770X::TM770X(E_SPI *spi,type_T tm_id,E_PinID DRDY,E_PinID CS,E_PinID RST){
 */
 void TM770X::begin(uint16_t prescaler,uint8_t d_num){
 	E_SPI_CONFIG_T tm7702_spi;
-	uint8_t i = 0;
 
 	if (_cs != NULL) _cs->mode(OUTPUT_PP_PU);
 	if (_drdy != NULL) _drdy->mode(INPUT_PU);

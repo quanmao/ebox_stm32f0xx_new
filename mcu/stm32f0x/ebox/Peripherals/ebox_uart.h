@@ -53,11 +53,13 @@ public:
 
 	//write method
 	virtual size_t  write(uint8_t c);
-//	virtual size_t  write(const uint8_t *buffer, size_t size);
+	virtual size_t  write(const uint8_t *buffer, size_t size);
 	using   Print::write;
 
 	//read method
 	uint16_t read();
+	
+	void   printf(const char *fmt, ...);
 	void   wait_busy();
 	void   set_busy();
 	/**
@@ -86,6 +88,8 @@ private:
 	USART_TypeDef *UARTx;
 	E_PinBase *Rx;
 	E_PinBase *Tx;
+	
+	char   *_buf;
 
 	static void _irq_handler(uint32_t id, IrqType irq_type);
 protected:

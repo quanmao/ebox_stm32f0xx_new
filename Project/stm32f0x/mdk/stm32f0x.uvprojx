@@ -335,7 +335,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F072xB USE_FULL_LL_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include;..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc;..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include;..\..\..\mcu\stm32f0x\ebox;..\..\..\mcu\stm32f0x\ebox\core;..\..\..\mcu\stm32f0x\ebox\Peripherals;..\..\..\common\util;..\..\..\common\edriver;..\..\..\common\network;..\..\..\common\fat;..\..\..\common\edriver\WiFi;..\..\..\user;..\..\..\common\util\printf;..\..\..\mcu\stm32f0x\ebox\mcu;..\..\..\common\edriver\F0</IncludePath>
+              <IncludePath>..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include;..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc;..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include;..\..\..\mcu\stm32f0x\ebox;..\..\..\mcu\stm32f0x\ebox\core;..\..\..\mcu\stm32f0x\ebox\Peripherals;..\..\..\common\util;..\..\..\common\edriver;..\..\..\common\network;..\..\..\common\fat;..\..\..\common\edriver\WiFi;..\..\..\user;..\..\..\common\util\printf;..\..\..\mcu\stm32f0x\ebox\mcu;..\..\..\common\edriver\F0;..\..\..\..\my-lib\drive\ebox</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1828,7 +1828,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
+                  <IncludeInBuild>2</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>

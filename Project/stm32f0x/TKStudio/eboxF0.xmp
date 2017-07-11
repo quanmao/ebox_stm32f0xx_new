@@ -691,5 +691,32 @@
             <File RelativePath="..\..\..\common\edriver\LiquidCrystal_I2C.cpp" FileType="3" Output="LiquidCrystal_I2C.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\..\my-lib\drive\ebox\INA219.cpp" FileType="3" Output="INA219.o" ro="0" bss="0" rw="0" />
         </Filter>
+        <Filter Name="util">
+            <File RelativePath="..\..\..\common\util\calendar.cpp" FileType="3" Output="calendar.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\calendar.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\color_convert.cpp" FileType="3" Output="color_convert.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\color_convert.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\dtostrf.c" FileType="1" Output="dtostrf.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\dtostrf.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\ebox_mem.c" FileType="1" Output="ebox_mem.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\ebox_mem.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\heap.c" FileType="1" Output="heap.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\heap.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\itoa.c" FileType="1" Output="itoa.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\itoa.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\OneWire.cpp" FileType="3" Output="OneWire.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\OneWire.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\oneWrite.cpp" FileType="3" Output="oneWrite.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\oneWrite.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\Print.cpp" FileType="3" Output="Print.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\Print.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\Printable.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\ringbuf.cpp" FileType="3" Output="ringbuf.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\ringbuf.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\util.cpp" FileType="3" Output="util.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\util.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\WString.cpp" FileType="3" Output="WString.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\util\WString.h" FileType="4" ro="0" bss="0" rw="0" />
+        </Filter>
     </Files>
 </TKStudioProject>
