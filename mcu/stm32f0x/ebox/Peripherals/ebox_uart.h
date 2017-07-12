@@ -7,6 +7,8 @@
   * @brief
 	1  2017/5/25  移除E_PinBase的构造函数，使用PIN_ID
 	2  2017/5/30	完善uart接口
+	3	 2017/7/12	添加printf输出
+		已知问题，没有进行忙检测
   ******************************************************************************
   * @attention
   *
@@ -24,8 +26,8 @@
 #include "stm32_define.h"
 #include "stm32f0xx_ll_usart.h"
 #include "ebox_define.h"
+#include	"stdlib.h"
 #include "ebox_gpio.h"
-#include "print.h"
 #include "ebox_Template.h"
 
 #define UART_NUM (2)
@@ -39,7 +41,7 @@ enum IrqType {
 typedef void (*uart_irq_handler)(uint32_t id, IrqType type);
 
 
-class E_UART:public Print{
+class E_UART{
 public:
 
 	E_UART(USART_TypeDef *UARTx,E_PinID PinTx,E_PinID PinRx);
@@ -52,9 +54,8 @@ public:
 	void disable_irq(IrqType type);
 
 	//write method
-	virtual size_t  write(uint8_t c);
-	virtual size_t  write(const uint8_t *buffer, size_t size);
-	using   Print::write;
+	uint8_t  write(uint8_t c);
+	uint8_t  write(const char *buffer, int size);
 
 	//read method
 	uint16_t read();

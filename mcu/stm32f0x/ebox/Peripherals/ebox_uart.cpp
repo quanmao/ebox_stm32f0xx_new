@@ -7,6 +7,7 @@
   * @brief   
 	1  2017/5/25  移除E_PinBase的构造函数，使用PIN_ID
 	2  2017/5/30	完善uart接口
+	3	 2017/7/12	添加printf输出
   ******************************************************************************
   * @attention
   *
@@ -18,9 +19,9 @@
   ******************************************************************************
   */
 #include "ebox_uart.h"
-#include "ebox_mem.h"
-#include <stdarg.h>
+#include "ebox_config.h"
 #include "stm32f0xx_ll_usart.h"
+#include <stdarg.h>
 #include <stdio.h>
 
 static uint32_t serial_irq_ids[UART_NUM];  // 保存对象地址，供静态成员识别对象，并访问对象的普通成员
@@ -144,7 +145,7 @@ void E_UART::begin(uint32_t speed,uint32_t data_bit, uint32_t parity, uint32_t s
  *@param    ch：要发送的字符
  *@retval   固定返回1
 */
-size_t E_UART::write(uint8_t c)
+uint8_t E_UART::write(uint8_t c)
 {
 	while (!LL_USART_IsActiveFlag_TXE(UARTx)){};//单字节等待，等待寄存器空
 	LL_USART_TransmitData8(UARTx,c);
@@ -157,7 +158,7 @@ size_t E_UART::write(uint8_t c)
  *@param    buffer：要发送的字符串
  *@retval   已发送的数据长度
 */
-size_t E_UART::write(const uint8_t *buffer, size_t size){
+uint8_t E_UART::write(const char *buffer, int size){
 	while (size--)
 	{
 		while (!LL_USART_IsActiveFlag_TXE(UARTx)){};//单字节等待，等待寄存器空
@@ -174,34 +175,37 @@ size_t E_UART::write(const uint8_t *buffer, size_t size){
 */
 void E_UART::printf(const char *fmt, ...)
 {
-    int     size1 = 0;
-    size_t  size2 = 256;
+	int  size1 = 0;
+	uint8_t  size2 = BUF_BLOCK;
 
 //    wait_busy();
-    if(_buf != NULL)
-        ebox_free(_buf);
-//    set_busy();
-    va_list va_params;
-    va_start(va_params, fmt);
-    
-    do{
-        _buf = (char *)ebox_malloc(size2);
-        if(_buf == NULL)
-            return ;
-//        size1 = _vsnprintf(_buf, size2,fmt, va_params);
-				size1 = vsnprintf(_buf,size2, fmt, va_params);
-        if(size1 == -1  || size1 > size2)
-        {
-            size2+=128;
-            size1 = -1;
-            ebox_free(_buf);
-        }
-    }while(size1 == -1);
-		//size1 = vsnprintf(_buf,size2, fmt, va_params); 
-   // size1 = vsprintf(_buf, fmt, va_params); 
-    va_end(va_params);
-    write(_buf, size1);
+	if (_buf != NULL)
+		free(_buf);
+//       ebox_free(_buf);
 
+//    set_busy();
+
+	va_list va_params;
+	va_start(va_params, fmt);
+
+	do{
+		//分配内存
+		_buf = (char *)malloc(size2);
+		if (_buf == NULL)
+			return ;
+		//格式化到缓冲区
+		size1 = vsnprintf(_buf,size2, fmt, va_params);
+		//如果内存不够，重新申请更大的内存空间
+		if (size1 == -1  || size1 > size2)
+		{
+			size2+=BUF_BLOCK;
+			size1 = -1;
+			free(_buf);			
+		}
+	}while (size1 == -1);
+
+	va_end(va_params);
+	write(_buf, size1);
 }
 
 /**

@@ -25,6 +25,11 @@
 //是否使用DEBUG  1 使用  0 不使用
 #define EBOX_DEBUG  0
 
+/*内存块大小，动态分配内存时增量,过小容易导致多次才能分配成功，过大浪费内存。最大不能
+ *超过启动文件 starup_stm32fxxxx.s 中的 Heap_Size
+ */
+#define	BUF_BLOCK		64
+
 
 #endif
 
