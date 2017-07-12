@@ -21,9 +21,14 @@
 #ifndef __EBOX_CONFIG_H
 #define __EBOX_CONFIG_H
 
-
 //是否使用DEBUG  1 使用  0 不使用
-#define EBOX_DEBUG  0
+#define EBOX_DEBUG  1
+//根据不同的输出设备调用不同的输出函数，并且要保证已经初始化
+#if EBOX_DEBUG
+#define DBG(...) usart.printf(__VA_ARGS__)
+#else
+#define DBG(...)
+#endif
 
 /*内存块大小，动态分配内存时增量,过小容易导致多次才能分配成功，过大浪费内存。最大不能
  *超过启动文件 starup_stm32fxxxx.s 中的 Heap_Size

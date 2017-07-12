@@ -21,6 +21,7 @@
 #ifndef __EBOX_DEFINE_H
 #define __EBOX_DEFINE_H
 
+#include "ebox_config.h"
 
 #define EBOX_VERSION "2.0"
 
@@ -50,14 +51,6 @@ void nullFun(void);
 typedef void (*fun_noPara_t)(void);
 typedef void (*fun_onePara_t)(unsigned int);
 
-////////系统debug支持////////////////////////////////////////////////////////////////
-
-#if EBOX_DEBUG
-//extern Uart uart1;//根据不同的串口名称此处需要做相应的修改
-#define DBG(...) uart1.printf(__VA_ARGS__)
-#else
-#define DBG(...)
-#endif
 
 #endif
 
