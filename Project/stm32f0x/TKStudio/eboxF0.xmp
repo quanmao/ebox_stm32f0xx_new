@@ -156,9 +156,6 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_it.cpp" FileType="3" Output="ebox_it.o" ro="0" bss="0" rw="0" />
             </Filter>
             <Filter Name="Peripherals">
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\analog.cpp" FileType="3" Output="analog.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\CAN.cpp" FileType="3" Output="CAN.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\dac.cpp" FileType="3" Output="dac.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_analog.cpp" FileType="3" Output="ebox_analog.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_gpio.cpp" FileType="3" Output="ebox_gpio.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp" FileType="3" Output="ebox_tim.o" ro="0" bss="0" rw="0" />
@@ -176,14 +173,13 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\wdg.cpp" FileType="3" Output="wdg.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_spi.cpp" FileType="3" Output="ebox_spi.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_i2c.cpp" FileType="3" Output="ebox_i2c.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_irq.cpp" FileType="3" Output="ebox_irq.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_exti.cpp" FileType="3" Output="ebox_exti.o" ro="0" bss="0" rw="0" />
             </Filter>
             <Filter Name="cpu">
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32_define.h" FileType="4" ro="0" bss="0" rw="0" />
             </Filter>
             <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox.h" FileType="4" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox_define.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\ebox\object.cpp" FileType="3" Output="object.o" ro="0" bss="0" rw="0" />
         </Filter>
         <Filter Name="File Group">
             <Filter Name="Device">

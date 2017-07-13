@@ -201,39 +201,39 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>60</LineNumber>
+          <LineNumber>173</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134224406</Address>
+          <Address>134219694</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\common\edriver\F0\TM770X.cpp</Filename>
+          <Filename>..\..\..\mcu\stm32f0x\ebox\core\ebox_exti.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ebox\../../../common/edriver/F0/TM770X.cpp\60</Expression>
+          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/core/ebox_exti.cpp\173</Expression>
         </Bp>
         <Bp>
           <Number>1</Number>
           <Type>0</Type>
-          <LineNumber>58</LineNumber>
+          <LineNumber>68</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
+          <Address>134222048</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\..\common\edriver\F0\TM770X.cpp</Filename>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\example\4.exti\1.exti.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression></Expression>
+          <Expression>\\ebox\../../../example/4.exti/1.exti.cpp\68</Expression>
         </Bp>
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>245</LineNumber>
+          <LineNumber>81</LineNumber>
           <EnabledFlag>1</EnabledFlag>
           <Address>0</Address>
           <ByteObject>0</ByteObject>
@@ -242,55 +242,7 @@
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\..\common\edriver\F0\TM770X.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>57</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\..\common\edriver\F0\TM770X.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>59</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\..\common\edriver\F0\TM770X.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
-          <LineNumber>244</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\..\..\common\edriver\F0\TM770X.cpp</Filename>
+          <Filename>..\..\..\example\4.exti\1.exti.cpp</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -315,6 +267,11 @@
           <count>3</count>
           <WinNumber>1</WinNumber>
           <ItemText>value,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pin_ids</ItemText>
         </Ww>
       </WatchWindow1>
       <MemoryWindow1>
@@ -362,16 +319,8 @@
       <bLin2Auto>0</bLin2Auto>
       <SystemViewers>
         <Entry>
-          <Name>System Viewer\GPIOA</Name>
-          <WinId>35903</WinId>
-        </Entry>
-        <Entry>
-          <Name>System Viewer\I2C1</Name>
+          <Name>System Viewer\EXTI</Name>
           <WinId>35905</WinId>
-        </Entry>
-        <Entry>
-          <Name>System Viewer\SPI1</Name>
-          <WinId>35904</WinId>
         </Entry>
       </SystemViewers>
     </TargetOption>
@@ -1226,18 +1175,6 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\..\..\mcu\stm32f0x\ebox\core\ebox_irq.cpp</PathWithFileName>
-      <FilenameWithoutPath>ebox_irq.cpp</FilenameWithoutPath>
-      <RteFlg>0</RteFlg>
-      <bShared>0</bShared>
-    </File>
-    <File>
-      <GroupNumber>5</GroupNumber>
-      <FileNumber>69</FileNumber>
-      <FileType>8</FileType>
-      <tvExp>0</tvExp>
-      <tvExpOptDlg>0</tvExpOptDlg>
-      <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\mcu\stm32f0x\ebox\core\ebox_core.cpp</PathWithFileName>
       <FilenameWithoutPath>ebox_core.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
@@ -1245,7 +1182,7 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>70</FileNumber>
+      <FileNumber>69</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
@@ -1257,13 +1194,25 @@
     </File>
     <File>
       <GroupNumber>5</GroupNumber>
-      <FileNumber>71</FileNumber>
+      <FileNumber>70</FileNumber>
       <FileType>8</FileType>
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_i2c.cpp</PathWithFileName>
       <FilenameWithoutPath>ebox_i2c.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>5</GroupNumber>
+      <FileNumber>71</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\mcu\stm32f0x\ebox\core\ebox_exti.cpp</PathWithFileName>
+      <FilenameWithoutPath>ebox_exti.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1339,7 +1288,7 @@
 
   <Group>
     <GroupName>util</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1524,6 +1473,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\example\2.analog\3.analog_read--F0.cpp</PathWithFileName>
       <FilenameWithoutPath>3.analog_read--F0.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>91</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\example\4.exti\1.exti.cpp</PathWithFileName>
+      <FilenameWithoutPath>1.exti.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
