@@ -17,6 +17,7 @@
 #include "stm32f0xx_ll_bus.h"
 #include "stm32f0xx_ll_gpio.h"
 #include "stm32f0xx_ll_tim.h"
+#include "ebox_define.h"
 
 #define NC  0xFFFFFFFF
 
@@ -269,13 +270,42 @@ typedef struct{
 	IrqIndex_t 	_irqIndex;
 }Periph_S;
 
+typedef struct{
+	uint32_t 	_base;
+	fun_onePara_t	_EnableClock;
+	uint32_t 	_rcc;
+	IRQn_Type	_irq;
+	IrqIndex_t 	_irqIndex;
+}Periph_SS;
+
+#define TIMxCH1 0x01
+#define TIMxCH2 0x02
+#define TIMxCH3 0x03
+#define TIMxCH4 0x04
+
+static const AF_FUN_S TIM_MAP[] ={
+	PA_6,AF_PP,LL_GPIO_AF_1,TIMxCH1,
+	PA_7,AF_PP,LL_GPIO_AF_1,TIMxCH2,
+	// TIM2,CH2,CH3,CH4
+	PA_1,AF_PP,LL_GPIO_AF_2,TIMxCH2,
+	PA_2,AF_PP,LL_GPIO_AF_2,TIMxCH3,
+	PA_3,AF_PP,LL_GPIO_AF_2,TIMxCH4,
+	P_NC
+};
+
+static const Periph_SS TIM_INFO[]={
+	TIM3_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn,Irq1,
+	TIM2_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM2,TIM2_IRQn,Irq1,
+	NC
+};
+
 static const AF_FUN_S SPI_MAP[] = {
 	PA_5,AF_PP_PU,0,SPI1_BASE,
 	PA_6,AF_PP_PU,0,SPI1_BASE,
 	PA_7,AF_PP_PU,0,SPI1_BASE,
 	P_NC
 };
-	
+		
 static const Periph_S SPI_INFO[] = {
 	SPI1_BASE,LL_APB1_GRP2_PERIPH_SPI1,USART1_IRQn,Irq1,
 	NC
@@ -317,6 +347,19 @@ __STATIC_INLINE uint8_t getPeriphIndex(uint32_t periph_base,const Periph_S *emap
 	while (!((emap+i)->_periph_base  == periph_base ))
 	{
 		if ((emap+i)->_periph_base == NC){
+			return (uint8_t)NC;
+		}
+		i++;
+	}
+	return i;
+}
+
+__STATIC_INLINE uint8_t getPeriphIndex1(uint32_t periph_base,const Periph_SS *emap)
+{
+	uint8_t i = 0;
+	while (!((emap+i)->_base  == periph_base ))
+	{
+		if ((emap+i)->_base == NC){
 			return (uint8_t)NC;
 		}
 		i++;

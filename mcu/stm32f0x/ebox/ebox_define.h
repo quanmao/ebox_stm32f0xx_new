@@ -25,7 +25,7 @@
 
 #define EBOX_VERSION "2.0"
 
-#define interrupts() 			__enable_irq()//允许所有中断
+#define interrupts() 					__enable_irq()//允许所有中断
 #define no_interrupts() 	    __disable_irq()//禁止所有中断
 
 typedef enum {
@@ -51,6 +51,7 @@ void nullFun(void);
 typedef void (*fun_noPara_t)(void);
 typedef void (*fun_onePara_t)(unsigned int);
 
+#define PI 3.1415926
 
 #endif
 
