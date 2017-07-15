@@ -23,11 +23,13 @@
 
 uint32_t xx;
 
-// 分别创建串口，exti，gpio对象
-E_GPIO	PA5(PC_13);
+// 串口，led
 E_UART usart(USART1,PA_9,PA_10);
-E_EXTI userbtn(PC_13);
 E_GPIO led(PA_5);
+// 两种方式创建exti对象
+E_GPIO	PA5(PC_13);
+E_EXTI userbtn(&PA5);
+E_EXTI userbt1(PA_0,INPUT_PU);
 
 /**
  *@brief    静态回调函数
@@ -72,13 +74,14 @@ void setup()
     usart.begin(115200);
 		usart.printf("----------------EXTI TEST----------------\r\n");
     led.mode(OUTPUT_PP);
-//    ex.begin();
-//    userbtn.attach(fall,FALLING);
-//		userbtn.attach(rise,RISING);
+		// 上升沿，下降沿均触发
 		userbtn.attach(fallrise,FALL_RISING);
-	
-//    userbtn.attach(&test,&Test::event);
-    userbtn.ENABLE(FALL_RISING);
+		userbtn.ENABLE(FALL_RISING);
+		// 上升沿，下降沿调用不同的回调函数
+    userbt1.attach(rise,RISING);
+		userbt1.attach(&test,&Test::event,FALLING);
+		userbt1.ENABLE(FALL_RISING);	
+
 }
 
 

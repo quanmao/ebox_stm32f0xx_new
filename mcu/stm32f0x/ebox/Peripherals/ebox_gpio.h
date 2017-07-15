@@ -25,11 +25,6 @@
 
 #include "stm32_define.h"
 
-// 获取Pin,返回值0-15
-#define GETPIN(A) 	 	  (uint16_t)(1<<(A&0x0f))
-// 获取端口索引，返回0x00,0x10,0x20,0x30,0x40,0x50
-#define GETPORTINDEX(A)   (A)&0xf0
-
 /**
   *@brief ebox gpio接口基类，仅在使用af功能时创建。不具备读写功能
   */
