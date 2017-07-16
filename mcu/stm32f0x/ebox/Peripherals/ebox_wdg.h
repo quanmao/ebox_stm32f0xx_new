@@ -1,10 +1,11 @@
 /**
   ******************************************************************************
-  * @file    wdg.h
-  * @author  shentq
-  * @version V1.2
-  * @date    2016/08/14
-  * @brief   
+  * @file    ebox_wdg.h
+  * @author  cat_li
+  * @version V2.0
+  * @date    2017/7/16
+  * @brief   STM32F0,基于HAL库LL层
+		建议移入core.cpp文件
   ******************************************************************************
   * @attention
   *
@@ -15,33 +16,30 @@
   * <h2><center>&copy; Copyright 2015 shentq. All Rights Reserved.</center></h2>
   ******************************************************************************
   */
-/**
- * Modification History:
- * -LQM (2016/9/5)
- *      *移植到STM32F0,基于HAL库LL层
- */
 /* Define to prevent recursive inclusion -------------------------------------*/
 
-#ifndef __WDG_H
-#define __WDG_H
+#ifndef __EBOX_WDG_H_
+#define __EBOX_WDG_H_
 #include "common.h"
+#include "stm32f0xx_ll_iwdg.h"
 
-/**
- * 初始化独立看门狗
-   基本计算方法
- * pr:分频数:0~7(只有低 3 位有效!)
- * 分频因子=4*2^pr.但最大值只能是 256!
- * rlr:重装载寄存器值:低 11 位有效.
- * 时间计算(大概):Tout=((4*2^prer)*rlr)/40 (ms).
-   本函数内部已经做了相关计算；
-    输入参数为ms；1000代表1000ms；请在1s内喂一次狗。否则将会复位
- */
-class Iwdg
+
+class E_WDG
 {
 public:
-    Iwdg() {};
-    void begin(uint16_t ms);
-    void feed();
+	E_WDG() {};
+	/**
+	*@brief    启动看门狗,最长延时26208ms
+	*@param    ms 延时时长，单位ms
+	*@retval   NONE
+	*/
+	void begin(uint16_t ms);
+	/**
+	*@brief    喂狗,当看门够去最长26208时，建议喂狗间隔不要超过25s
+	*@param    none
+	*@retval   NONE
+	*/
+	void feed();
 };
 
 #endif

@@ -242,11 +242,10 @@ void E_PWM::SetDutyCycle(uint16_t duty)
 	pulse = (uint16_t) (( percent  * _period ));
 	DBG("pulse is : %d \r\n",pulse);
 	
-		_OCsetCompare(_timx, pulse);
-		LL_TIM_CC_EnableChannel(_timx,_ch);
-		LL_TIM_OC_SetMode(_timx, _ch, LL_TIM_OCMODE_PWM1);
-		LL_TIM_OC_EnablePreload(_timx, _ch);
-
+	_OCsetCompare(_timx, pulse);
+	LL_TIM_CC_EnableChannel(_timx,_ch);
+	LL_TIM_OC_SetMode(_timx, _ch, LL_TIM_OCMODE_PWM1);
+	LL_TIM_OC_EnablePreload(_timx, _ch);
 	/* Enable counter */
 	LL_TIM_EnableCounter(_timx);
 }

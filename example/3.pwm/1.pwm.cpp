@@ -40,7 +40,7 @@ void setup()
     usart.printf("hclk:%d\r\n",cpu.clock.hclk);
     usart.printf("pclk1:%d\r\n",cpu.clock.pclk1);
 
-//		pwm1.begin(40000,100);
+//	pwm1.begin(40000,100);
 		pwm2.begin(4000,500);
 	//pwm1.SetPorlicy(0);
 //    usart.printf("max frq = %dKhz\r\n",pwm1.GetMaxFrequency()/1000);
@@ -57,12 +57,12 @@ int main(void)
 
     while(1)
     {
-//        x = x + PI * 0.01;
-//        if(x >= PI)x = 0;
-//        y = 2000 - (sin(x) + 1) * 1000;
+        x = x + PI * 0.01;
+        if(x >= PI)x = 0;
+        y = 2000 - (sin(x) + 1) * 1000;
 
-//       // pwm1.SetDutyCycle(y);
-//        delay_ms(10);
+        pwm2.SetDutyCycle(y);
+        delay_ms(10);
     }
 
 }

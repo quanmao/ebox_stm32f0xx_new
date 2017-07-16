@@ -29,6 +29,7 @@
 #include "ebox_exti.h"
 #include "ebox_spi.h"
 #include "ebox_i2c.h"
+#include "ebox_wdg.h"
 
 #endif
 

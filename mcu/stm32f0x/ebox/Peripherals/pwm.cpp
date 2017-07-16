@@ -43,21 +43,21 @@ Pwm::Pwm(Gpio *pwm_pin)
 }
 void Pwm::begin(uint32_t frq, uint16_t duty)
 {
-    this->duty = duty;
+	this->duty = duty;
 
-		init_info(pwm_pin);
-		pwm_pin->mode(AF_PP,af_configration);
+	init_info(pwm_pin);
+	pwm_pin->mode(AF_PP,af_configration);
 
-    set_oc_polarity(1);
-    set_frq(frq);
-    set_duty(duty);
+	set_oc_polarity(1);
+	set_frq(frq);
+	set_duty(duty);
 }
 
 /**
  *@name     void PWM::base_init(uint16_t period, uint16_t prescaler)
  *@brief    TIM PWM模式输出基本设置
  *@param    period:  周期
- *			prescaler: 预分频
+ *		   prescaler: 预分频
  *@retval   None
 */
 void Pwm::base_init(uint16_t period, uint16_t prescaler)
