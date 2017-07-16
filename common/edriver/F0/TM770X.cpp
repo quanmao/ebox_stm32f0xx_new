@@ -97,21 +97,21 @@ void TM770X::sapmlingRate(rate5_t rate,clock_T clk){
 extern E_UART usart;
 void TM770X::_readReg()
 {
-//	usart.print("/***************************/");
-  usart.println();
-	// 读设置寄存器
-	_writeByte(0x00 | READ );
-	usart.print("通讯默认0x00,实际：");
-	usart.print(_readByte());
-//	uart1.printf("通讯寄存器默认0x00,实际：%x \n", _readByte());
-	_writeByte(0x10 | READ );
-	usart.print(" | 设置默认0x01,实际：");
-	usart.print(_readByte());
-//	uart1.printf("设置寄存器默认0x01,实际：%x \n", _readByte());
-	// 读时钟寄存器
-	_writeByte(0x20 | READ );
-	usart.print(" | 时钟默认0x05,实际：");
-	usart.print(_readByte());
+////	usart.print("/***************************/");
+//  usart.println();
+//	// 读设置寄存器
+//	_writeByte(0x00 | READ );
+//	usart.print("通讯默认0x00,实际：");
+//	usart.print(_readByte());
+////	uart1.printf("通讯寄存器默认0x00,实际：%x \n", _readByte());
+//	_writeByte(0x10 | READ );
+//	usart.print(" | 设置默认0x01,实际：");
+//	usart.print(_readByte());
+////	uart1.printf("设置寄存器默认0x01,实际：%x \n", _readByte());
+//	// 读时钟寄存器
+//	_writeByte(0x20 | READ );
+//	usart.print(" | 时钟默认0x05,实际：");
+//	usart.print(_readByte());
 //	uart1.printf("滤波高寄存器,默认0x05,实际：%x \n", _readByte());
 //	_writeByte(0x30 | READ );
 //	uart1.printf("数据寄存器 ,实际：%x \n", _readByte(3));
