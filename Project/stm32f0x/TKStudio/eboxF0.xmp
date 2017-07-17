@@ -160,21 +160,17 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_gpio.cpp" FileType="3" Output="ebox_gpio.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp" FileType="3" Output="ebox_tim.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_uart.cpp" FileType="3" Output="ebox_uart.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\exti.cpp" FileType="3" Output="exti.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\iflash.cpp" FileType="3" Output="iflash.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\in_capture.cpp" FileType="3" Output="in_capture.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\pwm.cpp" FileType="3" Output="pwm.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\rtc.cpp" FileType="3" Output="rtc.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softi2c.cpp" FileType="3" Output="softi2c.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softspi.cpp" FileType="3" Output="softspi.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\SPI.cpp" FileType="3" Output="SPI.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\timer.cpp" FileType="3" Output="timer.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\uart.cpp" FileType="3" Output="uart.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\wdg.cpp" FileType="3" Output="wdg.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_spi.cpp" FileType="3" Output="ebox_spi.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_i2c.cpp" FileType="3" Output="ebox_i2c.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_exti.cpp" FileType="3" Output="ebox_exti.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_wdg.cpp" FileType="3" Output="ebox_wdg.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_iflash.cpp" FileType="3" Output="ebox_iflash.o" ro="0" bss="0" rw="0" />
             </Filter>
             <Filter Name="cpu">
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32_define.h" FileType="4" ro="0" bss="0" rw="0" />
