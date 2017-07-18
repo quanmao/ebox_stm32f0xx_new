@@ -1,10 +1,11 @@
 /**
   ******************************************************************************
-  * @file    ebox_config.h
+  * @file    ebox_debug.h
   * @author  cat_li
   * @version V2.0
-  * @date    2016/10/21
-  * @brief   ebox配置裁剪文件
+  * @date    2017/7/18
+  * @brief   初始版本,基于串口输出调试信息，串口需要在外部创建，并和此处同名，同
+		时要进行初始化
   ******************************************************************************
   * @attention
   *
@@ -16,25 +17,16 @@
   ******************************************************************************
   */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+#ifndef  __EBOX_DEBUG_H_
+#define  __EBOX_DEBUG_H_
+//根据不同的输出设备调用不同的输出函数，并且要保证已经初始化
+#include "ebox_uart.h"
+extern E_UART usart;
 
-#ifndef __EBOX_CONFIG_H
-#define __EBOX_CONFIG_H
-
-//是否使用DEBUG,需要在ebox_debug.h文件中定义输出设备 1 使用  0 不使用
-#define EBOX_DEBUG  0
-
-/*内存块大小，动态分配内存时增量,过小容易导致多次才能分配成功，过大浪费内存。最大不能
- *超过启动文件 starup_stm32fxxxx.s 中的 Heap_Size
- */
-#define	BUF_BLOCK		64
-
-/* flash写入新数据时，是否擦除覆盖当前区块的其它数据; 
- * 0 写入新数据，并保留当前区块其他位置旧数据。 需要占用FLASH_PAGE_SIZE大小的内存作为缓冲区
- * 1 只保留新写入的数据。 节省内存
- */
-#define FLASH_OVERRIDE	1
-
-
+#if EBOX_DEBUG
+#define DBG(...) usart.printf(__VA_ARGS__)
+#else
+#define DBG(...)
 #endif
 
+#endif
