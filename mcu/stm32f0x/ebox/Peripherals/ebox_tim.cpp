@@ -19,8 +19,7 @@
 #include "ebox_core.h"
 #include "stm32f0xx_ll_tim.h"
 #include "stm32f0xx_ll_rcc.h"
-	#include "ebox_uart.h"
-	extern E_UART usart;
+#include "ebox_debug.h"
 
 E_TIMBase1::E_TIMBase1(TIM_TypeDef *TIMx){
 	timx = TIMx;

@@ -1,37 +1,31 @@
 /**
   ******************************************************************************
-  * @file    iflash.h
-  * @author  shentq
-  * @version V1.2
-  * @date    2016/08/14
-  * @brief   
+  * @file    ebox_iflash.h
+  * @author  cat_li
+  * @version V2.0
+  * @date    2017/7/17
+  * @brief   初始版本,基于STM32F0 HAL库LL层
   ******************************************************************************
   * @attention
   *
-  * No part of this software may be used for any commercial activities by any form 
-  * or means, without the prior written consent of shentq. This specification is 
+  * No part of this software may be used for any commercial activities by any form
+  * or means, without the prior written consent of shentq. This specification is
   * preliminary and is subject to change at any time without notice. shentq assumes
   * no responsibility for any errors contained herein.
   * <h2><center>&copy; Copyright 2015 shentq. All Rights Reserved.</center></h2>
   ******************************************************************************
   */
-/**
- * Modification History:
- * -LQM (2016/10/18)
- *      *移植到STM32F0,基于HAL库LL层
- */
-/* Define to prevent recursive inclusion -------------------------------------*/
 
 #ifndef   __EBOX_IFLASH_H__
 #define   __EBOX_IFLASH_H__
 #include "common.h"
 #include "stm32f0xx_hal_flash_ex.h"
 
- #ifdef __cplusplus
- extern "C" {
- #endif
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-/* Base address of the Flash sectors */
+	/* Base address of the Flash sectors */
 #define ADDR_FLASH_PAGE_0     ((uint32_t)0x08000000) /* Base @ of Page 0, 2 Kbytes */
 #define ADDR_FLASH_PAGE_1     ((uint32_t)0x08000800) /* Base @ of Page 1, 2 Kbytes */
 #define ADDR_FLASH_PAGE_2     ((uint32_t)0x08001000) /* Base @ of Page 2, 2 Kbytes */
@@ -96,23 +90,45 @@
 #define ADDR_FLASH_PAGE_61    ((uint32_t)0x0801E800) /* Base @ of Page 61, 2 Kbytes */
 #define ADDR_FLASH_PAGE_62    ((uint32_t)0x0801F000) /* Base @ of Page 62, 2 Kbytes */
 #define ADDR_FLASH_PAGE_63    ((uint32_t)0x0801F800) /* Base @ of Page 63, 2 Kbytes */
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-#define FLASH_USER_START_ADDR   ADDR_FLASH_PAGE_62   /* Start @ of user Flash area */
+	/* Private typedef -----------------------------------------------------------*/
+	/* Private define ------------------------------------------------------------*/
+#define FLASH_USER_START_ADDR   ADDR_FLASH_PAGE_50   /* Start @ of user Flash area */
 #define FLASH_USER_END_ADDR     ADDR_FLASH_PAGE_63 + FLASH_PAGE_SIZE   /* End @ of user Flash area */
 
 class E_Flash
 {
 public:
-		E_Flash(uint8_t i){};
-    int read(uint32_t iAddress, uint8_t *buf, int32_t iNbrToRead) ;
-    int write(uint32_t iAddress, uint8_t *buf, uint32_t iNbrToWrite);
-    uint16_t write_without_check(uint32_t iAddress, uint8_t *buf, uint16_t iNumByteToWrite);
+	/**
+	*@brief    构造函数,设定的flash大小 = nPage * FLASH_PAGE_SIZE
+	*@param    uint8_t startAddr  从第几个扇区开始
+	   uint8_t nPage		页面数 > 0
+	*@retval   E_FlashStates
+	*/
+	E_Flash(uint8_t startAddr,uint8_t nPage = 1);
+	/**
+	*@brief    读出一组数据
+	*@param    uint32_t offsetAdd  	要读取的地址
+	   uint8_t *buf			保存读取的数据
+	   uint32_t iNbrToWrite	要读取的数据长度
+	*@retval   读出的数据长度。 如果 0 错误
+	*/
+	int read(uint32_t offsetAdd, uint8_t *buf, uint32_t iNbrToRead) ;
+	/**
+	*@brief    写入一组数据
+	*@param    uint32_t offsetAdd  	要写入的地址
+	   uint8_t *buf			要写入的数据
+	   uint32_t iNbrToWrite	要写入的数据长度
+	*@retval   写入的数据长度。 如果 0 错误
+	*/
+	int write(uint32_t offsetAdd, uint8_t *buf,uint32_t iNbrToWrite);
+private:
+	uint32_t _start_addr;	// 起始地址
+	uint32_t _end_addr;		// 结束地址
 };
 
 
- #ifdef __cplusplus
- }
+#ifdef __cplusplus
+}
 #endif
 
 #endif
