@@ -1,10 +1,10 @@
 /**
   ******************************************************************************
-  * @file    rtc.cpp
-  * @author  shentq
-  * @version V1.2
-  * @date    2016/08/14
-  * @brief   
+  * @file    ebox_rtc.h
+  * @author  cat_li
+  * @version V2.0
+  * @date    2017/7/18
+  * @brief   STM32F0 @ HAL lib
   ******************************************************************************
   * @attention
   *
@@ -15,99 +15,119 @@
   * <h2><center>&copy; Copyright 2015 shentq. All Rights Reserved.</center></h2>
   ******************************************************************************
   */
-/**
- * Modification History:
- * -LQM (2016/9/12)
- *      *移植到STM32F0,基于HAL库LL层,仅支持闹铃中断
- */
 /* Includes ------------------------------------------------------------------*/
-#include "rtc.h"
+#include "ebox_rtc.h"
+#include "stm32f0xx_ll_exti.h"
 #include "ebox.h"
+#include "ebox_debug.h"
 
+
+#define RTC_TIMEOUT	5000	// 5s
 /* Define used to indicate date/time updated */
 #define RTC_BKP_DATE_TIME_UPDTATED ((uint32_t)0x32F2)
 
 //Rtc rtc;
-callback_fun_type rtc_callback;//
+fun_noPara_t rtc_callback;//
 
 /**
-  * @brief  Enter in initialization mode
-  * @note In this mode, the calendar counter is stopped and its value can be updated
-  * @param  None
-  * @retval RTC_ERROR_NONE if no error
-  */
-uint32_t Enter_RTC_InitMode(void)
-{
-  /* Set Initialization mode */
-  LL_RTC_EnableInitMode(RTC);  
-  /* Check if the Initialization mode is set */
-  while (LL_RTC_IsActiveFlag_INIT(RTC) != 1)
-  {
-  }  
-  return 0;
-}
-
-/**
-  * @brief  Wait until the RTC Time and Date registers (RTC_TR and RTC_DR) are
-  *         synchronized with RTC APB clock.
+  * @brief  等待Time&Date寄存器与RTC(APB)时钟同步
   * @param  None
   * @retval RTC_ERROR_NONE if no error (RTC_ERROR_TIMEOUT will occur if RTC is 
   *         not synchronized)
   */
-uint32_t WaitForSynchro_RTC(void)
+__INLINE uint32_t ebox_WaitForSynchro_RTC(void)
 {
+	uint64_t end = GetEndTime(5000);
   /* Clear RSF flag */
   LL_RTC_ClearFlag_RS(RTC);
   /* Wait the registers to be synchronised */
   while(LL_RTC_IsActiveFlag_RS(RTC) != 1)
   {
+	  if (IsTimeOut(end))
+	  {
+		  DBG("时钟同步超时\r\n");
+			return 0;
+	  }
   }
+  return 0;
+}
+/**
+  * @brief  进入赋值模式
+  * @note   该模式计数器停止，可以更新RTC值
+  * @param  None
+  * @retval RTC_ERROR_NONE if no error
+  */
+uint32_t ebox_Enter_RTC_InitMode(void)
+{
+	uint64_t end = GetEndTime(RTC_TIMEOUT);
+  /* Set Initialization mode */
+  LL_RTC_EnableInitMode(RTC);  
+  /* Check if the Initialization mode is set */
+  while (LL_RTC_IsActiveFlag_INIT(RTC) != 1)
+  {
+		if (IsTimeOut(end))
+	  {
+		  DBG("进入赋值模式超时\r\n");
+			return 0;
+	  }
+  }  
   return 0;
 }
 
 /**
-  * @brief  Exit Initialization mode 
+  * @brief  退出赋值模式
   * @param  None
   * @retval RTC_ERROR_NONE if no error
   */
-uint32_t Exit_RTC_InitMode(void)
+uint32_t ebox_Exit_RTC_InitMode(void)
 {
   LL_RTC_DisableInitMode(RTC);
-  
   /* Wait for synchro */
   /* Note: Needed only if Shadow registers is enabled LL_RTC_IsShadowRegBypassEnabled function can be used */
-  return (WaitForSynchro_RTC());
+  return (ebox_WaitForSynchro_RTC());
 }
 
-int Rtc::begin(uint8_t clock_source)
-{
-	int ret = EOTHER;
 
-	if (clock_source)	//LSE
+
+
+
+int E_RTC::begin(uint8_t clock_source)
+{
+	int ret = E_OTHER;
+
+	if (_clocks)	//LSE
 	{
-		if ((is_config() == 0) || (LL_RCC_LSE_IsReady() == 0))	//时钟掉电，需要重新设置
+		if ((is_config() == 0) )	//时钟掉电，需要重新设置
+		//if ((is_config() == 0) || (LL_RCC_LSE_IsReady() == 0))	//时钟掉电，需要重新设置
 		{
-			if (config(1) != EOK)
+			if (_config(clock_lse) != E_OK)
 			{
-				config(0);
+				_config(clock_lsi);
+				DBG("LSE时钟启动失败,使用LSI时钟\r\n");
 				//LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1, 0x00);
-				ret = EOTHER;
+				ret = E_OTHER;
 			}			
 		}
 		else	// 时钟保持工作，不需要设置
 		{
-			ret = EOK;
+			ret = E_OK;
 		}
 	}else{	// 其他两种时钟源VDD掉电后RTC状态不定，所以需要初始化
-		config(0);
+		_config(clock_lsi);
 		//LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1, 0x00);
 	}
 	return ret;
 }
 
-int Rtc::config(uint8_t flag)
+/**
+ *@name     setDate
+ *@brief    设置日期
+ *@param    Date_T date 日期
+ *@retval   none
+*/
+int E_RTC::_config(ClockS clock)
 {
-	int ret = 500;
+	uint32_t ret = 50000;
 	// 默认为内部LSI
 	uint32_t RTC_ASYNCH_PREDIV = LSI_ASYNCH_PREDIV;
 	uint32_t RTC_SYNCH_PREDIV = LSI_SYNCH_PREDIV;
@@ -121,7 +141,7 @@ int Rtc::config(uint8_t flag)
 	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
 	LL_PWR_EnableBkUpAccess();
 	/*##-2- Configure LSE/LSI as RTC clock source ###############################*/
-	if (flag)		// 1 LSE
+	if (clock)		// 1 LSE
 	{
 		if (LL_RCC_LSE_IsReady() == 0)
 		{
@@ -133,7 +153,7 @@ int Rtc::config(uint8_t flag)
 			{
 				if (ret-- == 0)
 				{
-					return ETIMEOUT;
+					return E_TIMEOUT;
 				}
 			}
 			// 外部晶振LSE配置
@@ -151,7 +171,7 @@ int Rtc::config(uint8_t flag)
 		{
 			if (ret-- == 0)
 			{
-				return ETIMEOUT;
+				return E_TIMEOUT;
 			}
 		}
 		LL_RCC_ForceBackupDomainReset();
@@ -165,7 +185,7 @@ int Rtc::config(uint8_t flag)
 	/*##-4- Disable RTC registers write protection ##############################*/
 	LL_RTC_DisableWriteProtection(RTC);
 	/*##-5- Enter in initialization mode #######################################*/
-	if (Enter_RTC_InitMode() != 0){}
+	if (ebox_Enter_RTC_InitMode() != 0){}
 	/*##-6- Configure RTC ######################################################*/
 	/* Configure RTC prescaler and RTC data registers */
 	/* Set Hour Format */
@@ -176,14 +196,14 @@ int Rtc::config(uint8_t flag)
 	LL_RTC_SetSynchPrescaler(RTC, RTC_SYNCH_PREDIV);
 
 	/*##-7- Exit of initialization mode #######################################*/
-	Exit_RTC_InitMode();
+	ebox_Exit_RTC_InitMode();
 	/*##-8- Enable RTC registers write protection #############################*/
 	LL_RTC_EnableWriteProtection(RTC);
 	nvic(ENABLE);
-	return EOK;
+	return E_OK;
 }
 
-uint8_t Rtc::is_config(void)
+uint8_t E_RTC::is_config(void)
 {
 #if defined(RTC_BACKUP_SUPPORT)
 	return (LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR1) == RTC_BKP_DATE_TIME_UPDTATED);
@@ -193,7 +213,8 @@ uint8_t Rtc::is_config(void)
 #endif
 }
 
-void Rtc::set_config_flag(void)
+
+void E_RTC::set_config_flag(void)
 {
 #if defined(RTC_BACKUP_SUPPORT)
 	/*##-8- Writes a data in a RTC Backup data Register1 #######################*/
@@ -201,37 +222,56 @@ void Rtc::set_config_flag(void)
 #endif
 }
 
-void Rtc::set_Date(Date_T date)
+/**
+ *@name     setDate
+ *@brief    设置日期
+ *@param    Date_T date 日期
+ *@retval   none
+*/
+void E_RTC::setDate(Date_T date)
 {
 	/*##-1- Disable RTC registers write protection ############################*/
 	LL_RTC_DisableWriteProtection(RTC);
-	Enter_RTC_InitMode();
+	ebox_Enter_RTC_InitMode();
 	/* Set Date: 2016年9月14*/
 	LL_RTC_DATE_Config(RTC, __LL_RTC_CONVERT_BIN2BCD(date.WeekDay), __LL_RTC_CONVERT_BIN2BCD(date.Day), __LL_RTC_CONVERT_BIN2BCD(date.Month), __LL_RTC_CONVERT_BIN2BCD(date.Year));
 
-	Exit_RTC_InitMode();
+	ebox_Exit_RTC_InitMode();
 	/*##-8- Enable RTC registers write protection #############################*/
 	LL_RTC_EnableWriteProtection(RTC);
 }
 
-void Rtc::set_time(Time_T time)
+/**
+ *@name     setTime
+ *@brief    设置时间
+ *@param    Time_T time 时间
+ *@retval   none
+*/
+void E_RTC::setTime(Time_T time)
 {
 	/*##-1- Disable RTC registers write protection ############################*/
 	LL_RTC_DisableWriteProtection(RTC);
-	Enter_RTC_InitMode();
+	ebox_Enter_RTC_InitMode();
 	/* Set Time: 24小时 00:00:00*/
 	LL_RTC_TIME_Config(RTC,__LL_RTC_CONVERT_BIN2BCD(time.Format12_24), __LL_RTC_CONVERT_BIN2BCD(time.Hours), __LL_RTC_CONVERT_BIN2BCD(time.Minutes), __LL_RTC_CONVERT_BIN2BCD(time.Seconds));
-	Exit_RTC_InitMode();
+	ebox_Exit_RTC_InitMode();
 	/*##-8- Enable RTC registers write protection #############################*/
 	LL_RTC_EnableWriteProtection(RTC);
 	set_config_flag();
 }
 
-void Rtc::set_alarm(Time_T time)
+/**
+ *@name     setAlarm
+ *@brief    设置闹铃
+ *@param    Time_T time 闹铃时间
+ *@retval   none
+*/
+void E_RTC::setAlarm(Time_T time)
 {
+	DBG("enter set alarm------\r\n");
 	/*##-1- Disable RTC registers write protection ############################*/
 	LL_RTC_DisableWriteProtection(RTC);
-	Enter_RTC_InitMode();
+	ebox_Enter_RTC_InitMode();
 	/* Set Alarm to 12:00:25
 	   RTC Alarm Generation: Alarm on Hours, Minutes and Seconds (ignore date/weekday)*/
 	LL_RTC_ALMA_ConfigTime(RTC, __LL_RTC_CONVERT_BIN2BCD(time.Format12_24), __LL_RTC_CONVERT_BIN2BCD(time.Hours), __LL_RTC_CONVERT_BIN2BCD(time.Minutes), __LL_RTC_CONVERT_BIN2BCD(time.Seconds));
@@ -243,13 +283,13 @@ void Rtc::set_alarm(Time_T time)
 	LL_RTC_ClearFlag_ALRA(RTC);
 	/* Enable IT Alarm */
 	LL_RTC_EnableIT_ALRA(RTC);
-	Exit_RTC_InitMode();
+	ebox_Exit_RTC_InitMode();
 	/*##-8- Enable RTC registers write protection #############################*/
 	LL_RTC_EnableWriteProtection(RTC);
 }
 
 
-void Rtc::nvic(FunctionalState state)
+void E_RTC::nvic(FunctionalState state)
 {
 	/* RTC Alarm Interrupt Configuration: EXTI configuration */
 	LL_EXTI_EnableIT_0_31(LL_EXTI_LINE_17);
@@ -263,7 +303,7 @@ void Rtc::nvic(FunctionalState state)
 //{
 //    rtc_callback_table[0] = cb_fun;
 //}
-void Rtc::attach_alarm_interrupt(void (*cb_fun)(void))
+void E_RTC::attach_alarm_interrupt(void (*cb_fun)(void))
 {
     rtc_callback = cb_fun;
 }
@@ -277,7 +317,7 @@ void Rtc::attach_alarm_interrupt(void (*cb_fun)(void))
 // 
 //}
 
-void Rtc::alarm_ON_OFF(FunctionalState state)
+void E_RTC::alarm_ON_OFF(FunctionalState state)
 {
 	LL_RTC_DisableWriteProtection(RTC);	
 	/* Clear the Alarm interrupt pending bit */
@@ -290,7 +330,7 @@ void Rtc::alarm_ON_OFF(FunctionalState state)
 	LL_RTC_EnableWriteProtection(RTC);
 }
 
-void Rtc::get_date_time(date_time_t *datetime)
+void E_RTC::getDateTime(date_time_t *datetime)
 {
 	datetime->year 	= __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC));
 	datetime->month = __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC));
@@ -302,7 +342,7 @@ void Rtc::get_date_time(date_time_t *datetime)
 	datetime->sec 	= __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetSecond(RTC));
 };
 
-void Rtc::get_time(Time_T *time)
+void E_RTC::getTime(Time_T *time)
 {
 	time->Format12_24 = __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetFormat(RTC));
 	time->Hours 		= __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetHour(RTC));
@@ -310,7 +350,7 @@ void Rtc::get_time(Time_T *time)
 	time->Seconds 	= __LL_RTC_CONVERT_BCD2BIN(LL_RTC_TIME_GetSecond(RTC));
 }
 
-void Rtc::get_date(Date_T *date)
+void E_RTC::getDate(Date_T *date)
 {
 	date->Year	 = __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetYear(RTC));
 	date->Month	 = __LL_RTC_CONVERT_BCD2BIN(LL_RTC_DATE_GetMonth(RTC));

@@ -162,7 +162,6 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_uart.cpp" FileType="3" Output="ebox_uart.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\in_capture.cpp" FileType="3" Output="in_capture.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\pwm.cpp" FileType="3" Output="pwm.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\rtc.cpp" FileType="3" Output="rtc.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softi2c.cpp" FileType="3" Output="softi2c.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softspi.cpp" FileType="3" Output="softspi.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\timer.cpp" FileType="3" Output="timer.o" ro="0" bss="0" rw="0" />
@@ -171,6 +170,7 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_exti.cpp" FileType="3" Output="ebox_exti.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_wdg.cpp" FileType="3" Output="ebox_wdg.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_iflash.cpp" FileType="3" Output="ebox_iflash.o" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_rtc.cpp" FileType="3" Output="ebox_rtc.o" ro="0" bss="0" rw="0" />
             </Filter>
             <Filter Name="cpu">
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32_define.h" FileType="4" ro="0" bss="0" rw="0" />
@@ -710,6 +710,15 @@
             <File RelativePath="..\..\..\common\util\util.h" FileType="4" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\common\util\WString.cpp" FileType="3" Output="WString.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\common\util\WString.h" FileType="4" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="example">
+            <File RelativePath="..\..\..\example\1.exti.cpp" FileType="3" Output="1.exti.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\1.gpio_write F0.cpp" FileType="3" Output="1.gpio_write F0.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\1.helloWorld.cpp" FileType="3" Output="1.helloWorld.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\1.iflash.cpp" FileType="3" Output="1.iflash.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\1.pwm.cpp" FileType="3" Output="1.pwm.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\3.analog_read--F0.cpp" FileType="3" Output="3.analog_read--F0.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\4.rtc_calendar F0.cpp" FileType="3" Output="4.rtc_calendar F0.o" ro="0" bss="0" rw="0" />
         </Filter>
     </Files>
 </TKStudioProject>

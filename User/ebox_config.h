@@ -22,7 +22,7 @@
 #define __EBOX_CONFIG_H
 
 //是否使用DEBUG,需要在ebox_debug.h文件中定义输出设备 1 使用  0 不使用
-#define EBOX_DEBUG  0
+#define EBOX_DEBUG  1
 
 /*内存块大小，动态分配内存时增量,过小容易导致多次才能分配成功，过大浪费内存。最大不能
  *超过启动文件 starup_stm32fxxxx.s 中的 Heap_Size

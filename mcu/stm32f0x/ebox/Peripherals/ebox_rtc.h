@@ -1,10 +1,13 @@
 /**
   ******************************************************************************
-  * @file    rtc.h
-  * @author  shentq
-  * @version V1.2
-  * @date    2016/08/14
-  * @brief   
+  * @file    ebox_rtc.h
+  * @author  cat_li
+  * @version V2.0
+  * @date    2017/7/18
+  * @brief   STM32F0 @ HAL lib
+			已知bug
+			1	无法使用LSE作为时钟
+			2	复位后时钟同时复位
   ******************************************************************************
   * @attention
   *
@@ -15,16 +18,10 @@
   * <h2><center>&copy; Copyright 2015 shentq. All Rights Reserved.</center></h2>
   ******************************************************************************
   */
-/**
- * Modification History:
- * -LQM (2016/9/12)
- *      *移植到STM32F0,基于HAL库LL层,仅支持闹铃中断
- */
-/* Define to prevent recursive inclusion -------------------------------------*/
 
-#ifndef __RTC_H
-#define __RTC_H
-#include "common.h"
+#ifndef __EBOX_RTC_H_
+#define __EBOX_RTC_H_
+#include "ebox_core.h"
 
 /**
  * 说明:
@@ -65,10 +62,27 @@ typedef struct{
 	uint32_t Year;		// 0-99
 }Date_T;
 
-class Rtc
+typedef struct
 {
+	uint8_t year;
+	uint8_t month;
+	uint8_t date;
+	uint8_t hour;
+	uint8_t min;
+	uint8_t sec;
+	uint8_t week;
+}date_time_t;
 
+typedef enum 
+{
+	clock_lsi = 0,
+	clock_lse
+}ClockS;
+
+class E_RTC
+{
 public:
+	E_RTC(ClockS clock){_clocks = clock;};
 	int begin(uint8_t clock_source);//1:LSE;0:LSI如果使用外部晶振
 	//正常返回EOK
 	//失败后会返回一个ETIMEOUT错误,并自动转为内部晶振。
@@ -82,24 +96,23 @@ public:
 //	void sec_interrupt(FunctionalState state);
 
 
-	void set_Date(Date_T date);
-	void set_time(Time_T time);
+	void setDate(Date_T date);
+	void setTime(Time_T time);
 	
-	void set_alarm(Time_T time);
+	void setAlarm(Time_T time);
 	
-	void get_date_time(date_time_t *datetime);
-	void get_time(Time_T *time);
-	void get_date(Date_T *date);
+	void getDateTime(date_time_t *datetime);
+	void getTime(Time_T *time);
+	void getDate(Date_T *date);
 
 
 private:
-	int    config(uint8_t flag);
+	ClockS	_clocks;
+	int    	_config(ClockS clock);
 	uint8_t is_config(void);
 	void    set_config_flag(void);
 	void    nvic(FunctionalState state);
 };
-
-// extern Rtc 	rtc;
 
 #endif
 

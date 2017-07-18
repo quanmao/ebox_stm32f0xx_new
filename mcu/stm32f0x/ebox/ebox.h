@@ -31,6 +31,7 @@
 #include "ebox_i2c.h"
 #include "ebox_wdg.h"
 #include "ebox_iflash.h"
+#include "ebox_rtc.h"
 
 #endif
 

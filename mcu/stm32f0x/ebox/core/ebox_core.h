@@ -37,15 +37,14 @@ extern "C" {
 #include "stm32f0xx_ll_cortex.h"
 #include "stm32f0xx_ll_pwr.h"
 #include "stm32f0xx_ll_bus.h"
+#include "stm32f0xx_ll_rtc.h"
 	
 
 	
 typedef struct
 {
-//	uint32_t pll_vco;
 	uint32_t core;		// SYSCLK 系统时钟
 	uint32_t hclk;		// AHB总线时钟，有系统时钟分频得到，一般不分频，等于系统时钟
-	//uint32_t pclk2;		// APB2外设时钟,F0没有
 	uint32_t pclk1;		// APB1外设时钟
 }cpu_clock_t; 
 
@@ -53,8 +52,8 @@ typedef struct
 {
 	uint32_t    ability;//cpu calculate plus per second;
 	cpu_clock_t	clock;
-//	uint32_t    chip_id[3];
-//	uint16_t    flash_size;
+	uint32_t    chip_id[3];
+	uint16_t    flash_size;
 //	char        company[8];
 }cpu_t;
 
@@ -82,9 +81,6 @@ __STATIC_INLINE void  delay_us_32(__IO uint16_t us)
 {
 		while(us--);
 }
-
-
-
 
 static void get_system_clock(cpu_clock_t *clock);
 static void get_chip_info(void);

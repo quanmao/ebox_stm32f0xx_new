@@ -24,7 +24,7 @@
 #define systick_interrupt()     SysTick->CTRL |=0x0002
 
 // 标记屏蔽中断的次数,在ebox_define中调用
-__IO uint8_t irqCount = 0;
+volatile uint8_t irqCount = 0;
 cpu_t cpu;
 
 #ifdef __cplusplus
@@ -91,11 +91,6 @@ extern "C" {
         LL_PLL_ConfigSystemClock_HSI(&sUTILS_PLLInitStruct, &sUTILS_ClkInitStruct);
     }
 
-    //extern uint16_t  AD_value[];
-
-
-
-
     void ebox_init(void)
     {
         SystemClock_Config();
@@ -160,12 +155,6 @@ extern "C" {
         end = micros() + ms * 1000 - 3;
         while (micros() < end);
     }
-
-//    void delay_us(uint16_t us)
-//    {
-//        uint64_t end = micros() + us - 3;
-//        while(micros() < end);
-//    }
 
     void  delay_us(uint16_t us)
     {
@@ -232,10 +221,10 @@ extern "C" {
     */
     static void get_chip_info(void)
     {
-//		cpu.chip_id[2] = LL_GetUID_Word0(); //低字节
-//		cpu.chip_id[1] = LL_GetUID_Word1(); //
-//		cpu.chip_id[0] = LL_GetUID_Word2(); //高字节
-//		cpu.flash_size = LL_GetFlashSize();   //芯片flash容量
+		cpu.chip_id[2] = LL_GetUID_Word0(); //低字节
+		cpu.chip_id[1] = LL_GetUID_Word1(); //
+		cpu.chip_id[0] = LL_GetUID_Word2(); //高字节
+		cpu.flash_size = LL_GetFlashSize();   //芯片flash容量
     }
 
 #ifdef __cplusplus

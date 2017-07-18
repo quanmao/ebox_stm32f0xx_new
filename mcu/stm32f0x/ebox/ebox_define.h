@@ -5,6 +5,8 @@
   * @version V2.0
   * @date    2016/10/21
   * @brief   
+	  2017/7/18  cat_li
+	  1 可能存在的风险，GetEndTime,WaitTimeOut未考虑millis_seconds溢出问题
   ******************************************************************************
   * @attention
   *
@@ -22,16 +24,17 @@
 #define __EBOX_DEFINE_H
 
 #include "ebox_config.h"
+#include "stdint.h"
 
 #define EBOX_VERSION "STM32F0-2.0"
 
-extern __IO uint8_t irqCount;
+extern volatile uint8_t irqCount;
 // 必须成对出现
 #define interrupts() 			if (--irqCount == 0) __enable_irq(); //允许所有中断
 #define no_interrupts() 	    __disable_irq();irqCount++;			 //禁止所有中断
 
 typedef enum {
-    E_NG = 0,
+  E_NG = 0,
 	E_OK ,
 	E_WATE,
 	E_BUSY,
@@ -54,6 +57,10 @@ typedef void (*fun_noPara_t)(void);
 typedef void (*fun_onePara_t)(unsigned int);
 
 #define PI 3.1415926
+
+#define GetEndTime(timeOut)						millis_seconds + timeOut
+// 超时,返回1 否则返回0
+#define IsTimeOut(endTime)					millis_seconds >= endTime
 
 #define SetBit(data,offset)						((date) |= 1U << (offset))
 #define ResetBit(data,offset)					((date) &= ~(1U << (offset)))
