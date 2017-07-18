@@ -23,10 +23,12 @@
 
 #include "ebox_config.h"
 
-#define EBOX_VERSION "2.0"
+#define EBOX_VERSION "STM32F0-2.0"
 
-#define interrupts() 					__enable_irq()//允许所有中断
-#define no_interrupts() 	    __disable_irq()//禁止所有中断
+extern __IO uint8_t irqCount;
+// 必须成对出现
+#define interrupts() 			if (--irqCount == 0) __enable_irq(); //允许所有中断
+#define no_interrupts() 	    __disable_irq();irqCount++;			 //禁止所有中断
 
 typedef enum {
     E_NG = 0,
@@ -52,6 +54,17 @@ typedef void (*fun_noPara_t)(void);
 typedef void (*fun_onePara_t)(unsigned int);
 
 #define PI 3.1415926
+
+#define SetBit(data,offset)						((date) |= 1U << (offset))
+#define ResetBit(data,offset)					((date) &= ~(1U << (offset)))
+#define GetBit(data,offset)						(((data)>>(offset)) & 0x01)
+// 获取32bit变量中的第x个uint8_t,uint16_t
+#define GetUint8_t0(data)						((uint8_t*)(&(data)))[0]
+#define GetUint8_t1(data)						((uint8_t*)(&(data)))[1]
+#define GetUint8_t2(data)						((uint8_t*)(&(data)))[2]
+#define GetUint8_t3(data)						((uint8_t*)(&(data)))[3]
+#define GetUint16_t0(data)						((uint16_t*)(&(data)))[0]
+#define GetUint16_t0(data)						((uint16_t*)(&(data)))[0]
 
 #endif
 

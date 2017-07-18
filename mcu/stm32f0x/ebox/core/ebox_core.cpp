@@ -23,7 +23,8 @@
 #define systick_no_interrupt()  SysTick->CTRL &=0xfffffffd
 #define systick_interrupt()     SysTick->CTRL |=0x0002
 
-
+// 标记屏蔽中断的次数,在ebox_define中调用
+__IO uint8_t irqCount = 0;
 cpu_t cpu;
 
 #ifdef __cplusplus
