@@ -38,18 +38,18 @@ fun_noPara_t rtc_callback;//
 __INLINE uint32_t ebox_WaitForSynchro_RTC(void)
 {
 	uint64_t end = GetEndTime(5000);
-  /* Clear RSF flag */
-  LL_RTC_ClearFlag_RS(RTC);
-  /* Wait the registers to be synchronised */
-  while(LL_RTC_IsActiveFlag_RS(RTC) != 1)
-  {
-	  if (IsTimeOut(end))
-	  {
-		  DBG("时钟同步超时\r\n");
+	/* Clear RSF flag */
+	LL_RTC_ClearFlag_RS(RTC);
+	/* Wait the registers to be synchronised */
+	while (LL_RTC_IsActiveFlag_RS(RTC) != 1)
+	{
+		if (IsTimeOut(end))
+		{
+			DBG("时钟同步超时\r\n");
 			return 0;
-	  }
-  }
-  return 0;
+		}
+	}
+	return 0;
 }
 /**
   * @brief  进入赋值模式
@@ -60,18 +60,18 @@ __INLINE uint32_t ebox_WaitForSynchro_RTC(void)
 uint32_t ebox_Enter_RTC_InitMode(void)
 {
 	uint64_t end = GetEndTime(RTC_TIMEOUT);
-  /* Set Initialization mode */
-  LL_RTC_EnableInitMode(RTC);  
-  /* Check if the Initialization mode is set */
-  while (LL_RTC_IsActiveFlag_INIT(RTC) != 1)
-  {
+	/* Set Initialization mode */
+	LL_RTC_EnableInitMode(RTC);
+	/* Check if the Initialization mode is set */
+	while (LL_RTC_IsActiveFlag_INIT(RTC) != 1)
+	{
 		if (IsTimeOut(end))
-	  {
-		  DBG("进入赋值模式超时\r\n");
+		{
+			DBG("进入赋值模式超时\r\n");
 			return 0;
-	  }
-  }  
-  return 0;
+		}
+	}
+	return 0;
 }
 
 /**
@@ -94,27 +94,27 @@ uint32_t ebox_Exit_RTC_InitMode(void)
 int E_RTC::begin(uint8_t clock_source)
 {
 	int ret = E_OTHER;
-
+	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+	LL_PWR_EnableBkUpAccess();
 	if (_clocks)	//LSE
 	{
 		if ((is_config() == 0) )	//时钟掉电，需要重新设置
-		//if ((is_config() == 0) || (LL_RCC_LSE_IsReady() == 0))	//时钟掉电，需要重新设置
 		{
-			if (_config(clock_lse) != E_OK)
-			{
-				_config(clock_lsi);
-				DBG("LSE时钟启动失败,使用LSI时钟\r\n");
-				//LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1, 0x00);
-				ret = E_OTHER;
-			}			
+				if (_config(clock_lse) != E_OK)
+				{
+					_config(clock_lsi);
+					DBG("LSE时钟启动失败,使用LSI时钟\r\n");
+					//LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1, 0x00);
+					ret = E_OTHER;
+				}
 		}
 		else	// 时钟保持工作，不需要设置
 		{
+			DBG("使用LSE,无需配置时钟\r\n");
 			ret = E_OK;
 		}
 	}else{	// 其他两种时钟源VDD掉电后RTC状态不定，所以需要初始化
 		_config(clock_lsi);
-		//LL_RTC_BAK_SetRegister(RTC, LL_RTC_BKP_DR1, 0x00);
 	}
 	return ret;
 }
@@ -127,7 +127,7 @@ int E_RTC::begin(uint8_t clock_source)
 */
 int E_RTC::_config(ClockS clock)
 {
-	uint32_t ret = 50000;
+	uint64_t end = GetEndTime(5000);
 	// 默认为内部LSI
 	uint32_t RTC_ASYNCH_PREDIV = LSI_ASYNCH_PREDIV;
 	uint32_t RTC_SYNCH_PREDIV = LSI_SYNCH_PREDIV;
@@ -139,37 +139,42 @@ int E_RTC::_config(ClockS clock)
 	   - Reset the Back up Domain
 	   - Configure the needed RTC clock source */
 	LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);
+	// 允许访问备份域
 	LL_PWR_EnableBkUpAccess();
 	/*##-2- Configure LSE/LSI as RTC clock source ###############################*/
 	if (clock)		// 1 LSE
 	{
-		if (LL_RCC_LSE_IsReady() == 0)
-		{
+					// 强制备份域重置
 			LL_RCC_ForceBackupDomainReset();
 			LL_RCC_ReleaseBackupDomainReset();
+					// 外部晶振LSE配置
+			RTC_ASYNCH_PREDIV = LSE_ASYNCH_PREDIV;
+			RTC_SYNCH_PREDIV = LSE_SYNCH_PREDIV;
+		if (LL_RCC_LSE_IsReady() == 0)
+		{
+			// 使能LSE
 			LL_RCC_LSE_Enable();
-
 			while (LL_RCC_LSE_IsReady() != 1)
 			{
-				if (ret-- == 0)
+				if (IsTimeOut(end))
 				{
+					DBG("LSE 未启动，检查外部晶振 \r\n");
 					return E_TIMEOUT;
 				}
 			}
-			// 外部晶振LSE配置
-			RTC_ASYNCH_PREDIV = LSE_ASYNCH_PREDIV;
-			RTC_SYNCH_PREDIV = LSE_SYNCH_PREDIV;
-			/* Enable LSE only if disabled.*/
+
+			// 选择LSE作为时钟源
 			LL_RCC_SetRTCClockSource(LL_RCC_RTC_CLKSOURCE_LSE);
 			/* Enable RTC Clock */
 			LL_RCC_EnableRTC();
+			DBG("LSE 启动成功！\r\n");
 		}
 	}else{				// 0 LSI
 		/* Enable LSI */
 		LL_RCC_LSI_Enable();
 		while (LL_RCC_LSI_IsReady() != 1)
 		{
-			if (ret-- == 0)
+			if (IsTimeOut(end))
 			{
 				return E_TIMEOUT;
 			}
@@ -180,19 +185,20 @@ int E_RTC::_config(ClockS clock)
 		/*##-3- Enable RTC peripheral Clocks #######################################*/
 		/* Enable RTC Clock */
 		LL_RCC_EnableRTC();
+		DBG("LSI 启动成功！\r\n");
 	}
 
 	/*##-4- Disable RTC registers write protection ##############################*/
 	LL_RTC_DisableWriteProtection(RTC);
 	/*##-5- Enter in initialization mode #######################################*/
-	if (ebox_Enter_RTC_InitMode() != 0){}
+	ebox_Enter_RTC_InitMode();
 	/*##-6- Configure RTC ######################################################*/
 	/* Configure RTC prescaler and RTC data registers */
-	/* Set Hour Format */
+	// 设置时间格式
 	LL_RTC_SetHourFormat(RTC, LL_RTC_HOURFORMAT_24HOUR);
-	/* Set Asynch Prediv (value according to source clock) */
+	/* Set Asynch Prediv (value according to source clock) 异步分频因子 */
 	LL_RTC_SetAsynchPrescaler(RTC, RTC_ASYNCH_PREDIV);
-	/* Set Synch Prediv (value according to source clock) */
+	/* Set Synch Prediv (value according to source clock)  同不分频因子 */
 	LL_RTC_SetSynchPrescaler(RTC, RTC_SYNCH_PREDIV);
 
 	/*##-7- Exit of initialization mode #######################################*/
@@ -203,17 +209,27 @@ int E_RTC::_config(ClockS clock)
 	return E_OK;
 }
 
+/**
+ *@name     is_config
+ *@brief    检查时钟是否配置过
+ *@param    none
+ *@retval   0 不支持或未配置
+*/
 uint8_t E_RTC::is_config(void)
 {
 #if defined(RTC_BACKUP_SUPPORT)
 	return (LL_RTC_BAK_GetRegister(RTC, LL_RTC_BKP_DR1) == RTC_BKP_DATE_TIME_UPDTATED);
-	//return 0;
 #else
 	return 0;
 #endif
 }
 
-
+/**
+ *@name     set_config_flag
+ *@brief    备份域写信息,用来识别时钟是否已经配置过
+ *@param    none
+ *@retval   none
+*/
 void E_RTC::set_config_flag(void)
 {
 #if defined(RTC_BACKUP_SUPPORT)
@@ -268,7 +284,6 @@ void E_RTC::setTime(Time_T time)
 */
 void E_RTC::setAlarm(Time_T time)
 {
-	DBG("enter set alarm------\r\n");
 	/*##-1- Disable RTC registers write protection ############################*/
 	LL_RTC_DisableWriteProtection(RTC);
 	ebox_Enter_RTC_InitMode();

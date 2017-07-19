@@ -32,6 +32,7 @@ E_RTC rtc(clock_lse);
 // 串口，led
 E_UART usart(USART1,PA_9,PA_10);
 E_GPIO led(PA_5);
+
 /*
 *********************************************************************************************************
 *	函 数 名: PrintfLogo
@@ -42,12 +43,6 @@ E_GPIO led(PA_5);
 */
 static void PrintfLogo(void)
 {
-	/* 检测CPU ID */
-	{
-		usart.printf("\r\nCPU : STM32F0xx, LQFP176, UID = %08X %08X %08X ,flash size = %d \n\r"
-			, cpu.chip_id[2], cpu.chip_id[1], cpu.chip_id[0],cpu.flash_size);
-	}
-
 	usart.printf("\n\r");
 	usart.printf("*************************************************************\n\r");
 	usart.printf("* \r\n");	/* 打印一行空格 */
@@ -59,6 +54,8 @@ static void PrintfLogo(void)
 	usart.printf("* 固件库版本 : V%d.%d.%d (STM32 HAL lib)\r\n", __STM32F0_DEVICE_VERSION_MAIN,
 			__STM32F0_DEVICE_VERSION_SUB1,__STM32F0_DEVICE_VERSION_SUB2);
 	usart.printf("* EBOX库版本 : %s (ebox)\r\n", EBOX_VERSION);
+			usart.printf("* CPUID = %08X %08X %08X ,flash size = %d KB \n\r"
+			, cpu.chip_id[2], cpu.chip_id[1], cpu.chip_id[0],cpu.flash_size);
 	usart.printf("* \r\n");	/* 打印一行空格 */
 	usart.printf("*************************************************************\n\r");
 }
@@ -69,9 +66,14 @@ static void PrintfLogo(void)
 void exit()
 {
 	Time_T time;
-	usart.printf("\r\n 闹铃");
+	usart.printf("\n\r");
+	usart.printf("***********************闹铃******************************\n\r");
 	rtc.getTime(&time);
-	usart.printf(" %2d:%02d:%2d ",time.Hours,time.Minutes,time.Seconds);
+	usart.printf("***** %2d:%02d:%2d  ******",time.Hours,time.Minutes,time.Seconds);
+	time.Minutes += 1;
+	rtc.setAlarm(time);
+	usart.printf("\r\n ");
+	usart.printf("*************************************************************\n\r");
 }
 
 void setup()
@@ -89,10 +91,12 @@ void setup()
 		rtc.setDate(date);
 		rtc.setTime(time);
 	}
-	delay_ms(100);
+//	delay_ms(100);
 	// 设置闹铃
-	time.Minutes += 2;
+	rtc.getTime(&time);
+	time.Minutes += 1;
 	rtc.setAlarm(time);
+	usart.printf("\n\r 闹铃时间设定为：%2d:%02d:%2d秒",time.Hours,time.Minutes,time.Seconds);
 	rtc.attach_alarm_interrupt(&exit);
 }
 
