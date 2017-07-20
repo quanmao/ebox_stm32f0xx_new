@@ -287,6 +287,8 @@ void E_RTC::setAlarm(Time_T time)
 	/*##-1- Disable RTC registers write protection ############################*/
 	LL_RTC_DisableWriteProtection(RTC);
 	ebox_Enter_RTC_InitMode();
+	/* Disable Alarm*/
+	LL_RTC_ALMA_Disable(RTC);
 	/* Set Alarm to 12:00:25
 	   RTC Alarm Generation: Alarm on Hours, Minutes and Seconds (ignore date/weekday)*/
 	LL_RTC_ALMA_ConfigTime(RTC, __LL_RTC_CONVERT_BIN2BCD(time.Format12_24), __LL_RTC_CONVERT_BIN2BCD(time.Hours), __LL_RTC_CONVERT_BIN2BCD(time.Minutes), __LL_RTC_CONVERT_BIN2BCD(time.Seconds));
