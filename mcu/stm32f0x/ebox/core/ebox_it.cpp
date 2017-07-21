@@ -1,10 +1,8 @@
 /**
   ******************************************************************************
   * @file    ebox_it.cpp
-  * @author  shentq
-  * @version V1.2
-  * @date    2016/08/14
-  * @brief   
+  * @author  cat_li
+  * @brief   TIMx_IT 
   ******************************************************************************
   * @attention
   *
@@ -188,14 +186,14 @@ extern "C" {
 //            TIM_ClearITPendingBit(TIM5 , TIM_FLAG_CC4);
 //        }
 //    }
-//    void TIM6_IRQHandler(void)
-//    {
-//        if(TIM_GetITStatus(TIM6 , TIM_IT_Update) == SET)
-//        {
-//						tim_irq_callback(TIM6_IT_Update);
-//            TIM_ClearITPendingBit(TIM6 , TIM_FLAG_Update);
-//        }
-//    }
+	void TIM6_IRQHandler(void)
+	{
+		if (TIM_GetITStatus(TIM6 , TIM_IT_Update) == SET)
+		{
+			tim_irq_callback(TIM6_IT_Update);
+			TIM_ClearITPendingBit(TIM6 , TIM_FLAG_Update);
+		}
+	}
 //    void TIM7_IRQHandler(void)
 //    {
 //        if(TIM_GetITStatus(TIM7 , TIM_IT_Update) == SET)

@@ -23,40 +23,84 @@
 #include "ebox_define.h"
 #include "stm32_define.h"
 #include "ebox_gpio.h"
+#include "ebox_Template.h"
+//#include "FunctionPointer.h"
 // 函数指针,指向LL_TIM_OC_SetCompareCH4(TIM_TypeDef *TIMx, uint32_t CompareValue) 函数
 typedef void (*pfun)(TIM_TypeDef *,uint32_t);
 
-class E_TIMBase1{
-public:
-	E_TIMBase1(TIM_TypeDef *TIMx);
+//class E_TIMBase1{
+//public:
+//	E_TIMBase1(TIM_TypeDef *TIMx);
 
+//	void calculate(uint32_t frq);
+//	void init(uint16_t _period, uint16_t _prescaler);
+
+//	uint32_t GetSourceClock(void);
+
+//	TIM_TypeDef  *timx;
+//	uint32_t 	 period;
+//	uint32_t	 prescaler;
+//};
+
+
+
+
+class E_base{
+	public:
+	E_base(TIM_TypeDef *TIMx);
 	void calculate(uint32_t frq);
-	void init(uint16_t _period, uint16_t _prescaler);
-
-	uint32_t GetSourceClock(void);
-
-	TIM_TypeDef  *timx;
-	uint32_t 	 period;
-	uint32_t	 prescaler;
-};
-
-
-
-class E_TIMBase{
-public:
-	E_TIMBase(TIM_TypeDef *TIMx,E_PinID id);
-	E_TIMBase(TIM_TypeDef *TIMx);
-
 	void init(uint16_t period, uint16_t prescaler);
+	void setCountMode(uint32_t CounterMode);
+	
 	uint32_t GetSourceClock(void);
-protected:
-	uint32_t	_ch;		//通道
-	TIM_TypeDef *_timx;		//tim
-  pfun  _OCsetCompare;
-private:
-	uint8_t 	_index;
-	E_PinBase 	*_pin;
+protected:	
+	TIM_TypeDef  *_timx;		// 通道
+	uint32_t 	 _period;		// 周期
+	uint32_t	 _prescaler;	// 分频
 };
+
+class E_TIME:E_base{
+public:
+	E_TIME(TIM_TypeDef *TIMx):E_base(TIMx){};
+	void setFrequency(uint32_t frq);
+	void start();
+	void stop();
+	
+	uint32_t GetMaxFrequency(void);
+		
+//	void attach(void (*fptr)(void));	
+//	template<typename T>
+//	void attach(T* tptr, void (T::*mptr)(void)){
+//			_pirq.attach(tptr, mptr);
+//	}
+private:
+	FunctionPointer _pirq;
+};
+
+
+
+
+
+
+
+
+
+
+//class E_TIMBase{
+//public:
+//	E_TIMBase(TIM_TypeDef *TIMx,E_PinID id);
+//	E_TIMBase(TIM_TypeDef *TIMx);
+
+//	void init(uint16_t period, uint16_t prescaler);
+//	uint32_t GetSourceClock(void);
+//protected:
+//	uint32_t	_ch;		//通道
+//	TIM_TypeDef *_timx;		//tim
+//  pfun  _OCsetCompare;
+//private:
+//	uint8_t 	_index;
+//	E_PinBase 	*_pin;
+//};
 
 
 //class E_TIMER:E_TIMBase{
@@ -81,22 +125,22 @@ private:
 //		uint32_t channel;
 //};
 
-class E_PWM:E_TIMBase{
-public:
-	E_PWM(TIM_TypeDef *TIMx,E_PinID pin):E_TIMBase(TIMx,pin){
-	}
-	void begin(uint32_t frq,uint16_t duty);
-	
-	void SetPorlicy(uint8_t porlicy);
-	void SetFrequency(uint32_t frq);
-	void SetDutyCycle(uint16_t duty);
-	
-	uint32_t GetMaxFrequency(void);
+//class E_PWM:E_TIMBase{
+//public:
+//	E_PWM(TIM_TypeDef *TIMx,E_PinID pin):E_TIMBase(TIMx,pin){
+//	}
+//	void begin(uint32_t frq,uint16_t duty);
+//	
+//	void SetPorlicy(uint8_t porlicy);
+//	void SetFrequency(uint32_t frq);
+//	void SetDutyCycle(uint16_t duty);
+//	
+//	uint32_t GetMaxFrequency(void);
 
-private:
-	uint16_t _period;	// 周期
-	uint16_t _duty;		// 占空比
-	uint8_t	 _accuracy; // 精度	
-};
+//private:
+//	uint16_t _period;	// 周期
+//	uint16_t _duty;		// 占空比
+//	uint8_t	 _accuracy; // 精度	
+//};
 
 #endif

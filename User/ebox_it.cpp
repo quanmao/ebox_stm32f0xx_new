@@ -63,10 +63,7 @@
 
 extern "C" {
 	
-void TIM6_DAC_IRQHandler(void)
-{
-	 LL_TIM_ClearFlag_UPDATE(TIM6);
-}
+
 
 void DMA1_Channel1_IRQHandler(void){
 
@@ -86,15 +83,40 @@ void ADC1_COMP_IRQHandler(void)
   }
 
 }
-
+#include "ebox_gpio.h"
+extern E_GPIO led;
 void TIM2_IRQHandler(void)
 {
-	uint8_t i;
-	i++;
+  /* Check whether update interrupt is pending */
+  if(LL_TIM_IsActiveFlag_UPDATE(TIM2) == 1)
+  {
+    /* Clear the update interrupt flag*/
+		
+    LL_TIM_ClearFlag_UPDATE(TIM2);
+		led.toggle();
 
-	LL_TIM_ClearFlag_UPDATE(TIM2);
-	i=i;
+//	irq_handler(tim_irq_ids[0]);
+  }
+  
+  /* TIM2 update interrupt processing */
+
 }
+
+void TIM6_DAC_IRQHandler(void)
+{
+	LL_TIM_ClearFlag_UPDATE(TIM6);
+	led.toggle();
+}
+
+//void TIM2_IRQHandler(void)
+//{
+//	uint8_t i;
+//	
+//	LL_TIM_ClearFlag_UPDATE(TIM2);
+//	i=i;
+//}
+extern fun_noPara_t irq_handler;
+
 void TIM3_IRQHandler(void)
 {
 //	if (LL_TIM_IsActiveFlag_UPDATE(TIM3))
@@ -124,6 +146,7 @@ void TIM3_IRQHandler(void)
 //		LL_TIM_ClearFlag_CC4(TIM3);
 //	}
 }
+
 
 /**
   * @brief   This function handles NMI exception.

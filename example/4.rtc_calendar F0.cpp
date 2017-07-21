@@ -51,7 +51,7 @@ static void PrintfLogo(void)
 	usart.printf("* 发布日期   : %s\r\n", EXAMPLE_DATE);	/* 打印例程日期 */
 
 	/* 打印ST固件库版本，这3个定义宏在stm32f0xx.h文件中 */
-	usart.printf("* CMSIS版本 : V%d.%d.%d (STM32 HAL lib)\r\n", __STM32F0_DEVICE_VERSION_MAIN,
+	usart.printf("* CMSIS版本  : V%d.%d.%d (STM32 HAL lib)\r\n", __STM32F0_DEVICE_VERSION_MAIN,
 			__STM32F0_DEVICE_VERSION_SUB1,__STM32F0_DEVICE_VERSION_SUB2);
 	usart.printf("* EBOX库版本 : %s (ebox)\r\n", EBOX_VERSION);
 			usart.printf("* CPUID = %08X %08X %08X ,flash size = %d KB \n\r"

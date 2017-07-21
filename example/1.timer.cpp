@@ -1,12 +1,8 @@
 /**
   ******************************************************************************
-  * @file    pwm.cpp
-  * @author  shentq
-  * @version V1.2
-  * @date    2016/08/14
+  * @file    example.cpp
+  * @author  cat_li
   * @brief   ebox application example .
-  *	 	2017/7/15	cat_li
-		1	移植到ebox stm32f0平台
   ******************************************************************************
   * @attention
   *
@@ -20,18 +16,17 @@
 
 
 /* Includes ------------------------------------------------------------------*/
-
-
 #include "ebox.h"
 
 /* 定义例程名和例程发布日期 */
-#define EXAMPLE_NAME	"STM32F0 PWM example"
-#define EXAMPLE_DATE	"2017-07-21"
+#define EXAMPLE_NAME	"STM32F0 TIMER example"
+#define EXAMPLE_DATE	"2017-07-20"
 #define DEMO_VER			"1.0"
 
 // 串口，led
 E_UART usart(USART1,PA_9,PA_10);
 E_GPIO led(PA_5);
+
 
 /*
 *********************************************************************************************************
@@ -67,25 +62,30 @@ static void PrintfLogo(void)
 	usart.printf("*************************************************************\n\r");
 }
 
+//E_base time(TIM2);
+E_TIME time(TIM6);
 
-//E_PWM pwm1(TIM3,PA_6);
-//E_PWM pwm2(TIM2,PA_3);
 
 void setup()
 {
     ebox_init();
+	led.mode(OUTPUT_PP);
     usart.begin(115200);
-		PrintfLogo();
+		
+	time.setFrequency(48000);
+	time.start();
 }
 
 int main(void)
 {
-    setup();
-
-    while(1)
-    {
-
-    }
+	uint32_t frq = 1;
+	setup();
+	PrintfLogo();
+	while (1)
+	{
+//				time.setFrequency(frq++);
+//				delay_ms(1000);
+	}
 
 }
 

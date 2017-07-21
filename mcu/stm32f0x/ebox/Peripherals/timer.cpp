@@ -117,7 +117,7 @@ void Timer::start(void)
 {
 	/* Enable counter */
     LL_TIM_EnableCounter(_TIMx);  
-		LL_TIM_GenerateEvent_UPDATE(_TIMx);
+	LL_TIM_GenerateEvent_UPDATE(_TIMx);
 }
 
 void Timer::stop(void)
