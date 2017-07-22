@@ -28,25 +28,9 @@
 // 函数指针,指向LL_TIM_OC_SetCompareCH4(TIM_TypeDef *TIMx, uint32_t CompareValue) 函数
 typedef void (*pfun)(TIM_TypeDef *,uint32_t);
 
-//class E_TIMBase1{
-//public:
-//	E_TIMBase1(TIM_TypeDef *TIMx);
-
-//	void calculate(uint32_t frq);
-//	void init(uint16_t _period, uint16_t _prescaler);
-
-//	uint32_t GetSourceClock(void);
-
-//	TIM_TypeDef  *timx;
-//	uint32_t 	 period;
-//	uint32_t	 prescaler;
-//};
-
-
-
 
 class E_base{
-	public:
+public:
 	E_base(TIM_TypeDef *TIMx);
 	void calculate(uint32_t frq);
 	void init(uint16_t period, uint16_t prescaler);
@@ -55,8 +39,12 @@ class E_base{
 	uint32_t GetSourceClock(void);
 protected:	
 	TIM_TypeDef  *_timx;		// 通道
+	uint8_t		 _tIndex;		// TIM索引
 	uint32_t 	 _period;		// 周期
 	uint32_t	 _prescaler;	// 分频
+
+	void _start();
+
 };
 
 class E_TIME:E_base{
@@ -75,6 +63,54 @@ public:
 //	}
 private:
 	FunctionPointer _pirq;
+	void _setMode(void);
+};
+
+class E_PWM:E_base{
+public:
+	E_PWM(TIM_TypeDef *TIMx,E_PinID id):E_base(TIMx){
+		uint8_t _index;
+		E_PinBase *_pin;
+			_pin = new E_PinBase(id);
+	_index = getIndex(id,TIM_MAP);
+	_pin->mode(TIM_MAP[_index]._pin_date,TIM_MAP[_index]._pin_af);
+	_timx = TIMx;
+
+	switch (TIM_MAP[_index]._periph_base)
+	{
+	case TIMxCH1:
+		_channel = LL_TIM_CHANNEL_CH1;
+		_OCsetCompare = &LL_TIM_OC_SetCompareCH1;
+		break;
+	case TIMxCH2:
+		_channel = LL_TIM_CHANNEL_CH2;
+		_OCsetCompare = &LL_TIM_OC_SetCompareCH2;
+		break;
+	case TIMxCH3:
+		_channel = LL_TIM_CHANNEL_CH3;
+		_OCsetCompare = &LL_TIM_OC_SetCompareCH3;
+		break;
+	case TIMxCH4:
+		_channel = LL_TIM_CHANNEL_CH4;
+		_OCsetCompare = &LL_TIM_OC_SetCompareCH4;
+		break;
+	}
+	}
+	void begin(uint32_t frq,uint16_t duty);
+	
+	void SetPorlicy(uint8_t porlicy);
+	void SetFrequency(uint32_t frq);
+	void SetDutyCycle(uint16_t duty);
+	
+	uint32_t GetMaxFrequency(void);
+private:
+	uint32_t _channel;
+	uint16_t _duty;		// 占空比
+	uint8_t	 _accuracy; // 精度	
+
+	pfun  _OCsetCompare;
+	
+	void _setMode(void);
 };
 
 
@@ -103,13 +139,7 @@ private:
 //};
 
 
-//class E_TIMER:E_TIMBase{
-//	E_TIMER(TIM_TypeDef *TIMx):E_TIMBase(TIMx){};
-//
-//		void start(void);
-//		void stop(void);
-//		void begin(uint16_t frq);
-//};
+
 
 //class E_CAPTURE:E_TIMBase{
 //	E_CAPTURE(PIN_ID_T pin);
@@ -123,24 +153,6 @@ private:
 //
 //	private:
 //		uint32_t channel;
-//};
-
-//class E_PWM:E_TIMBase{
-//public:
-//	E_PWM(TIM_TypeDef *TIMx,E_PinID pin):E_TIMBase(TIMx,pin){
-//	}
-//	void begin(uint32_t frq,uint16_t duty);
-//	
-//	void SetPorlicy(uint8_t porlicy);
-//	void SetFrequency(uint32_t frq);
-//	void SetDutyCycle(uint16_t duty);
-//	
-//	uint32_t GetMaxFrequency(void);
-
-//private:
-//	uint16_t _period;	// 周期
-//	uint16_t _duty;		// 占空比
-//	uint8_t	 _accuracy; // 精度	
 //};
 
 #endif

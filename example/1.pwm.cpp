@@ -66,25 +66,36 @@ static void PrintfLogo(void)
 	usart.printf("* \r\n");	/* 打印一行空格 */
 	usart.printf("*************************************************************\n\r");
 }
+#define TIM2_1	TIM2,PA_5
+#define TIM3_1	TIM3,PA_6
 
-
-//E_PWM pwm1(TIM3,PA_6);
+E_PWM pwm1(TIM3_1);
 //E_PWM pwm2(TIM2,PA_3);
 
 void setup()
 {
     ebox_init();
+		led.mode(OUTPUT_PP);
     usart.begin(115200);
 		PrintfLogo();
 }
 
 int main(void)
 {
+		uint16_t i;
     setup();
+	
+		pwm1.begin(480,500);
+		delay_ms(5000);
 
     while(1)
     {
-
+				for(i=0;i<1000;){
+					pwm1.SetDutyCycle(i);
+					i=i+10;
+					delay_ms(10);
+				}
+				pwm1.SetPorlicy(0);				
     }
 
 }
