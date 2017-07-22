@@ -63,7 +63,10 @@
 
 extern "C" {
 	
-
+__IO uint16_t t1_overflow_times = 0;
+__IO uint16_t t2_overflow_times = 0;
+__IO uint16_t t3_overflow_times = 0;
+__IO uint16_t t4_overflow_times = 0;
 
 void DMA1_Channel1_IRQHandler(void){
 
@@ -147,6 +150,14 @@ void TIM3_IRQHandler(void)
 //	}
 }
 
+void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
+	if (LL_TIM_IsActiveFlag_UPDATE(TIM1))
+	{
+		t1_overflow_times++;
+		//tim_irq_callback(TIM3_IT_Update);
+		LL_TIM_ClearFlag_UPDATE(TIM1);
+	}	
+}
 
 /**
   * @brief   This function handles NMI exception.

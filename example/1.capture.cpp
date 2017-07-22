@@ -25,13 +25,15 @@
 #include "ebox.h"
 
 /* 定义例程名和例程发布日期 */
-#define EXAMPLE_NAME	"STM32F0 PWM example"
-#define EXAMPLE_DATE	"2017-07-21"
+#define EXAMPLE_NAME	"STM32F0 CAPTURE example"
+#define EXAMPLE_DATE	"2017-07-22"
 #define DEMO_VER			"1.0"
 
 // 串口，led
 E_UART usart(USART1,PA_9,PA_10);
 E_GPIO led(PA_5);
+
+
 
 /*
 *********************************************************************************************************
@@ -68,36 +70,39 @@ static void PrintfLogo(void)
 }
 #define TIM2_1	TIM2,PA_5
 #define TIM3_1	TIM3,PA_6
+#define TIM1_1	TIM1,PA_8
 
-//E_PWM pwm1(TIM3_1);
 E_PWM pwm1(TIM2_1);
+E_CAPTURE cap(TIM1_1);
 //E_PWM pwm2(TIM2,PA_3);
 
 void setup()
 {
-    ebox_init();
-		//led.mode(OUTPUT_PP);
-    usart.begin(115200);
-		PrintfLogo();
+	ebox_init();
+//	led.mode(OUTPUT_PP);
+	usart.begin(115200);
+	PrintfLogo();
 }
 
 int main(void)
 {
-		uint16_t i;
-    setup();
-	
-		pwm1.begin(480,500);
-		delay_ms(5000);
+	uint16_t i;
+	setup();
 
-    while(1)
-    {
-				for(i=0;i<1000;){
-					pwm1.SetDutyCycle(i);
-					i=i+10;
-					delay_ms(10);
-				}
-				pwm1.SetPorlicy(0);				
-    }
+	pwm1.begin(20,100);
+	delay_ms(5000);
+
+	cap.begin();
+
+	while (1)
+	{
+		if(cap.available()){
+		usart.printf("capture frq is %.2f Hz \r\n",cap.get_wave_frq());
+		usart.printf("capture period is %.2f us \r\n",cap.get_wave_peroid());
+		usart.printf("high_duty = %0.2f%%\r\n", cap.get_wave_high_duty());
+		usart.printf("low duty  = %0.2f%%\r\n\r\n", cap.get_wave_low_duty());}
+		delay_ms(1000);
+	}
 
 }
 

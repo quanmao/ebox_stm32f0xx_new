@@ -201,9 +201,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>145</LineNumber>
+          <LineNumber>148</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134225242</Address>
+          <Address>134225792</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -212,7 +212,23 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/Peripherals/ebox_tim.cpp\145</Expression>
+          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/Peripherals/ebox_tim.cpp\148</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>502</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134221338</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/Peripherals/ebox_tim.cpp\502</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -270,6 +286,12 @@
       <Lin2Executable></Lin2Executable>
       <Lin2ConfigFile></Lin2ConfigFile>
       <bLin2Auto>0</bLin2Auto>
+      <SystemViewers>
+        <Entry>
+          <Name>System Viewer\TIM1</Name>
+          <WinId>35905</WinId>
+        </Entry>
+      </SystemViewers>
     </TargetOption>
   </Target>
 
@@ -1552,6 +1574,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\example\1.timer.cpp</PathWithFileName>
       <FilenameWithoutPath>1.timer.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>102</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\example\1.capture.cpp</PathWithFileName>
+      <FilenameWithoutPath>1.capture.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

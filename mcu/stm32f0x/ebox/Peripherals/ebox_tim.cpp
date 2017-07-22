@@ -21,6 +21,9 @@
 #include "stm32f0xx_ll_rcc.h"
 #include "ebox_debug.h"
 
+/* Measured frequency */
+__IO uint32_t uwMeasuredFrequency = 0;
+
 #define tim_irq_handler fun_onePara_t
 #define TIM_IRQ_ID_NUM 5
 
@@ -112,18 +115,8 @@ __INLINE uint32_t GetClock(void){
 //	return GetClock();
 //}
 
-/**
- *@name     begin(uint32_t frq,uint16_t duty)
- *@brief    启动PWM输出
- *@param    frq  要输出的频率，单位hz. 0-最大频率。
- *		  duty 占空比 0-1000
- *@retval   None
-*/
-//void E_PWM::begin(uint32_t frq,uint16_t duty){
-//	SetPorlicy(1);
-//	SetFrequency(frq);
-//	SetDutyCycle(duty);
-//}
+
+
 
 
 
@@ -139,18 +132,26 @@ E_base::E_base(TIM_TypeDef *TIMx){
 	_timx = TIMx;
 }
 
-void E_base::init(uint16_t period, uint16_t prescaler){
+void E_base::init(){
 	//uint8_t _index = 0;
 	/* Enable the timer peripheral clock */
 	_tIndex = getPeriphIndex1((uint32_t)_timx,TIM_INFO);
 	TIM_INFO[_tIndex]._EnableClock(TIM_INFO[_tIndex]._rcc);
 
-//	tim_irq_init(0,(&E_base::_irq_handler),this);
+	//	tim_irq_init(0,(&E_base::_irq_handler),this);
 	/* Set counter mode */
 	/* Reset value is LL_TIM_COUNTERMODE_UP */
-	LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
+	//LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
+}
+
+void E_base::_EnInterrupt(){
+	NVIC_SetPriority(TIM_INFO[_tIndex]._irq, 0);
+	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
+}
+
+void E_base::_setPerPsc(void){
 	/* Set the pre-scaler value */
-	LL_TIM_SetPrescaler(_timx, _prescaler);
+	LL_TIM_SetPrescaler(_timx, _prescaler-1);
 	/* Set the auto-reload value*/
 	LL_TIM_SetAutoReload(_timx, _period);
 }
@@ -174,12 +175,12 @@ void E_base::calculate(uint32_t frq)
 		period = ii / prescaler / frq;
 		if (0xffff >= period)
 		{
-			DBG("calculate success! period = %d , prescaler = %d  \r\n",period,prescaler-1);
+			DBG("calculate success! period = %d , prescaler = %d  \r\n",period,prescaler);
 			break;
 		}
 	}
 	_period = period;
-	_prescaler = prescaler-1;
+	_prescaler = prescaler;
 }
 
 /**
@@ -199,15 +200,23 @@ void E_base::_start(void){
 }
 
 void E_base::setCountMode(uint32_t CounterMode){
-	LL_TIM_SetCounterMode(_timx, LL_TIM_COUNTERMODE_UP);
+	LL_TIM_SetCounterMode(_timx, CounterMode);
 }
 
+void E_base::_setMode(void){
+	/* Enable the update interrupt */
+	LL_TIM_EnableIT_UPDATE(_timx);
+	/* Configure the NVIC to handle TIM2 update interrupt */
+	NVIC_SetPriority(TIM_INFO[_tIndex]._irq, 0);
+	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
+}
 
 void E_TIME::setFrequency(uint32_t frq){
 	if (frq >= GetClock())//控制频率，保证其有1%精度
 		frq = GetClock();
 	calculate(frq);
-	init(1,1);
+	init();
+	_setPerPsc();
 }
 
 void E_TIME::start(void){
@@ -226,83 +235,12 @@ void E_TIME::_setMode(void){
 	/* Configure the NVIC to handle TIM2 update interrupt */
 	NVIC_SetPriority(TIM_INFO[_tIndex]._irq, 0);
 	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
-
 }
 
 uint32_t E_TIME::GetMaxFrequency(void){
 	return GetClock();
 }
 
-//void E_PWM::init(uint16_t period, uint16_t prescaler){
-//	uint8_t _index = 0;
-//	/* Enable the timer peripheral clock */
-//	_index = getPeriphIndex1((uint32_t)_timx,TIM_INFO);
-//	TIM_INFO[_index]._EnableClock(TIM_INFO[_index]._rcc);
-
-//	/***********************************************/
-//	/* Configure the NVIC to handle TIM2 interrupt */
-//	/***********************************************/
-////	NVIC_SetPriority(TIM2_IRQn, 0);
-////	NVIC_EnableIRQ(TIM2_IRQn);
-
-//	/***************************/
-//	/* Time base configuration */
-//	/***************************/
-//	/* Set counter mode */
-//	/* Reset value is LL_TIM_COUNTERMODE_UP */
-//	//LL_TIM_SetCounterMode(TIM2, LL_TIM_COUNTERMODE_UP);
-
-//	/* Set the pre-scaler value */
-//	LL_TIM_SetPrescaler(_timx, prescaler);
-
-//	/* Enable TIM2_ARR register preload. Writing to or reading from the         */
-//	/* auto-reload register accesses the preload register. The content of the   */
-//	/* preload register are transferred into the shadow register at each update */
-//	/* event (UEV).                                                             */
-//	LL_TIM_EnableARRPreload(_timx);
-
-//	/* Set the auto-reload value */
-//	/* TIM2CLK = SystemCoreClock / (APB prescaler & multiplier)               */
-//	//TimOutClock = SystemCoreClock/1;
-//	LL_TIM_SetAutoReload(_timx,period);
-
-//	/*********************************/
-//	/* Output waveform configuration */
-//	/*********************************/
-//	/* Set output mode */
-//	/* Reset value is LL_TIM_OCMODE_FROZEN */
-////	LL_TIM_OC_SetMode(_timx, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_PWM1);
-
-//	/* Set output channel polarity */
-//	/* Reset value is LL_TIM_OCPOLARITY_HIGH */
-//	//LL_TIM_OC_SetPolarity(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_OCPOLARITY_HIGH);
-
-//	/* Set compare value to half of the counter period (50% duty cycle ) */
-////	LL_TIM_OC_SetCompareCH1(_timx, ( (LL_TIM_GetAutoReload(_timx) + 1 ) / 2));
-
-//	/* Enable TIM2_CCR1 register preload. Read/Write operations access the      */
-//	/* preload register. TIM2_CCR1 preload value is loaded in the active        */
-//	/* at each update event.                                                    */
-////	LL_TIM_OC_EnablePreload(_timx, _channel);
-
-//	/**************************/
-//	/* TIM2 interrupts set-up */
-//	/**************************/
-//	/* Enable the capture/compare interrupt for channel 1*/
-////	LL_TIM_EnableIT_CC1(_timx);
-
-//	/**********************************/
-//	/* Start output signal generation */
-//	/**********************************/
-//	/* Enable output channel 1 */
-////	LL_TIM_CC_EnableChannel(_timx, _channel);
-
-//	/* Enable counter */
-////	LL_TIM_EnableCounter(_timx);
-
-////	/* Force update generation */
-////	LL_TIM_GenerateEvent_UPDATE(_timx);
-//}
 void E_PWM::_setMode(void){
 	LL_TIM_EnableARRPreload(_timx);
 	/*********************************/
@@ -310,15 +248,22 @@ void E_PWM::_setMode(void){
 	/*********************************/
 	/* Set output mode */
 	/* Reset value is LL_TIM_OCMODE_FROZEN */
-	LL_TIM_OC_SetMode(_timx, LL_TIM_CHANNEL_CH1, LL_TIM_OCMODE_PWM1);
+	LL_TIM_OC_SetMode(_timx, _channel, LL_TIM_OCMODE_PWM1);
 	LL_TIM_OC_EnablePreload(_timx, _channel);
 	/* Enable output channel 1 */
 	LL_TIM_CC_EnableChannel(_timx, _channel);
 }
 
+/**
+ *@name     begin(uint32_t frq,uint16_t duty)
+ *@brief    启动PWM输出
+ *@param    frq  要输出的频率，单位hz. 0-最大频率。
+ *		  duty 占空比 0-1000
+ *@retval   None
+*/
 void E_PWM::begin(uint32_t frq,uint16_t duty){
-	SetFrequency(frq);
-	//init(_period ,_prescaler);
+	init();
+	SetFrequency(frq);	
 	_setMode();
 	SetDutyCycle(duty);		
 	_start();
@@ -341,7 +286,7 @@ void E_PWM::SetFrequency(uint32_t frq)
 	
 	DBG("max Frequency = %d",GetMaxFrequency());
 	_accuracy ? DBG(" accuracy is 0.01 \r\n"):DBG(" accuracy is 0.001 \r\n");
-	init(_period ,_prescaler);
+	_setPerPsc();
 }
 
 /**
@@ -363,10 +308,10 @@ void E_PWM::SetDutyCycle(uint16_t duty)
 	}
 
 	percent = (_duty/1000.0);
-	DBG("DutyCycle is : %f \r\n",percent);
+	//DBG("DutyCycle is : %f \r\n",percent);
 
 	pulse = (uint16_t) (( percent  * _period ));
-	DBG("pulse is : %d \r\n",pulse);
+	//DBG("pulse is : %d \r\n",pulse);
 
 	_OCsetCompare(_timx, pulse);
 		/* Force update generation 强制更新 */
@@ -382,7 +327,6 @@ void E_PWM::SetDutyCycle(uint16_t duty)
 void E_PWM::SetPorlicy(uint8_t porlicy)
 {
 	LL_TIM_OC_SetPolarity(_timx,_channel,(porlicy == 1)?(LL_TIM_OCPOLARITY_HIGH):(LL_TIM_OCPOLARITY_LOW));
-	//SetDutyCycle(_duty);
 	/* Force update generation 强制更新 */
 	LL_TIM_GenerateEvent_UPDATE(_timx);
 }
@@ -396,4 +340,168 @@ void E_PWM::SetPorlicy(uint8_t porlicy)
 uint32_t E_PWM::GetMaxFrequency(void)
 {
 	return GetClock()/100;
+}
+
+void E_CAPTURE::begin(){
+	_period = 0xffff-1;
+	_prescaler = 1;
+	_timeClock 	= GetClock()/_prescaler;
+	_porlicy = LL_TIM_IC_POLARITY_RISING;
+	
+	init();
+	_setPerPsc();
+	E_base::_setMode();
+	//_EnInterrupt();
+	NVIC_SetPriority(TIM1_CC_IRQn, 0);
+	NVIC_EnableIRQ(TIM1_CC_IRQn);
+	_setMode();
+	_start();
+}
+float E_CAPTURE::get_wave_high_time()
+{
+    _available = false;
+    if(_capture == 0)
+        return  ((_high_capture )*1000000.0/(_timeClock));
+    else
+        return  (_capture*1000000.0/(_timeClock));
+}
+float E_CAPTURE::get_wave_low_time()
+{
+    _available = false;
+    if(_capture == 0)
+        return  ((_low_capture)*1000000.0/(_timeClock));
+    else
+        return  (_capture*1000000.0/(_timeClock));
+}
+
+float E_CAPTURE::get_wave_high_duty()
+{
+    _available = false;
+    if(_capture == 0)
+       return  (_high_capture*100.0/(_high_capture + _low_capture));
+    else
+        return 0;
+}
+float E_CAPTURE::get_wave_low_duty()
+{
+    _available = false;
+    if(_capture == 0)
+        return  (_low_capture*100.0/(_high_capture + _low_capture));
+    else
+        return  0;
+}
+
+bool E_CAPTURE::available(){
+	return _available;
+}
+
+float E_CAPTURE::get_wave_frq()
+{
+    _available = false;
+    if(_capture == 0)
+        return  (_timeClock/((_high_capture + _low_capture)));
+    else
+        return (_timeClock*1.0/_capture);
+}
+
+float E_CAPTURE::get_wave_peroid()
+{
+    _available = false;
+    if(_capture == 0)
+        return  ((_high_capture + _low_capture)*1000000.0/(_timeClock));
+    else
+        return  (_capture/(_timeClock/1000000.0));
+}
+
+void E_CAPTURE::_setMode(){
+	 /************************************/
+  /* Input capture mode configuration */
+  /************************************/
+  /* Select the active input: IC1 = TI1FP1 */
+  LL_TIM_IC_SetActiveInput(_timx, _channel, LL_TIM_ACTIVEINPUT_DIRECTTI);  
+  /* Configure the input filter duration: no filter needed */
+  LL_TIM_IC_SetFilter(_timx, _channel, LL_TIM_IC_FILTER_FDIV1);
+  /* Set input prescaler: prescaler is disabled */
+  LL_TIM_IC_SetPrescaler(_timx, _channel, LL_TIM_ICPSC_DIV1);
+  /* Select the edge of the active transition on the TI1 channel: rising edge */
+  LL_TIM_IC_SetPolarity(_timx, _channel, _porlicy);
+	
+	/**************************/
+  /* TIM1 interrupts set-up */
+  /**************************/
+  /* Enable the capture/compare interrupt for channel 1 */
+  LL_TIM_EnableIT_CC1(_timx);  
+  /***********************/
+  /* Start input capture */
+  /***********************/
+  /* Enable output channel 1 */
+  LL_TIM_CC_EnableChannel(_timx, _channel);  
+}
+
+void E_CAPTURE::simple_event(void){
+	uint32_t    now = 0;
+	now = _ICgetCompare(_timx) + (*_overflow_times) * _period;  //get capture value
+	if (now > _last_value)
+		_capture = now - _last_value;
+	else
+		_capture = 0xffffffff + now - _last_value;
+	_last_value = now;
+	_available = true;
+}
+
+void E_CAPTURE::SetPorlicy(uint8_t porlicy){
+	_porlicy = porlicy;
+	LL_TIM_IC_SetPolarity(_timx,_channel,_period);
+}
+
+void E_CAPTURE::complex_event()
+{
+	uint32_t    capture = 0;
+	uint32_t    now = 0;
+	now = _ICgetCompare( _timx ) + (*_overflow_times) * _period;  //get capture value
+	if (now > _last_value)
+		capture = now - _last_value;
+	else if (now < _last_value)
+		capture = 0xffffffff + now - _last_value;
+	else{
+		_available = false;
+		return ;
+	}
+	_last_value = now;
+
+
+	if (_porlicy == LL_TIM_IC_POLARITY_FALLING)//检测到下降沿，测量高电平时间完成
+	{
+		_high_capture = capture;
+		SetPorlicy(LL_TIM_IC_POLARITY_RISING);
+		//set_polarity_rising();//切换检测上升沿
+	}
+	else
+	{
+		_low_capture = capture;
+		SetPorlicy(LL_TIM_IC_POLARITY_FALLING);
+	}
+	if ((_high_capture & _high_capture) != 0)
+		_available = true;
+
+}
+
+extern E_CAPTURE cap;
+
+
+extern "C" {
+	
+void TIM1_CC_IRQHandler(void)
+{
+  /* Check whether CC1 interrupt is pending */
+  if(LL_TIM_IsActiveFlag_CC1(TIM1) == 1)
+  {
+    /* Clear the update interrupt flag*/
+    LL_TIM_ClearFlag_CC1(TIM1);
+
+    /* TIM1 capture/compare interrupt processing(function defined in main.c) */
+    //cap.simple_event();
+		cap.complex_event();
+  }
+}
 }
