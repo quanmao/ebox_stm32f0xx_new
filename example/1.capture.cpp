@@ -86,24 +86,28 @@ void setup()
 
 int main(void)
 {
-	uint16_t i;
+	uint32_t i;
 	setup();
 
-	pwm1.begin(20,100);
+	pwm1.begin(100,100);
 	delay_ms(5000);
 
 	cap.begin();
 
 	while (1)
 	{
-		if(cap.available()){
-		usart.printf("capture frq is %.2f Hz \r\n",cap.get_wave_frq());
-		usart.printf("capture period is %.2f us \r\n",cap.get_wave_peroid());
-		usart.printf("high_duty = %0.2f%%\r\n", cap.get_wave_high_duty());
-		usart.printf("low duty  = %0.2f%%\r\n\r\n", cap.get_wave_low_duty());}
-		delay_ms(1000);
+		for (i=10000;i<=pwm1.GetMaxFrequency();){
+			if (cap.available()){
+				usart.printf("\r\n capture frq is %.2f Hz \r\n",cap.get_wave_frq());
+				usart.printf("capture period is %.2f us \r\n",cap.get_wave_peroid());
+				usart.printf("high_duty = %0.2f%%\r\n", cap.get_wave_high_duty());
+				usart.printf("low duty  = %0.2f%%\r\n\r\n", cap.get_wave_low_duty());
+				i+=100;
+				pwm1.SetFrequency(i);
+			}
+			delay_ms(5000);			
+		}
 	}
-
 }
 
 

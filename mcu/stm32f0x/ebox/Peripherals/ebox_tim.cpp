@@ -2,8 +2,6 @@
   ******************************************************************************
   * @file    ebox_tim.cpp
   * @author  cat_li
-  * @version V2.0
-  * @date    2016/10/23
   * @brief
   ******************************************************************************
   * @attention
@@ -21,8 +19,6 @@
 #include "stm32f0xx_ll_rcc.h"
 #include "ebox_debug.h"
 
-/* Measured frequency */
-__IO uint32_t uwMeasuredFrequency = 0;
 
 #define tim_irq_handler fun_onePara_t
 #define TIM_IRQ_ID_NUM 5
@@ -111,29 +107,23 @@ __INLINE uint32_t GetClock(void){
  *@param    NONE
  *@retval   当前TIM频率
 */
-//uint32_t E_TIMBase::GetSourceClock(void){
-//	return GetClock();
-//}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+/**
+ *@brief    基类构造函数
+ *@param    NONE
+ *@retval   none
+*/
 E_base::E_base(TIM_TypeDef *TIMx){
 	_timx = TIMx;
 }
 
-void E_base::init(){
-	//uint8_t _index = 0;
+/**
+ *@brief    使能TIM时钟
+ *@param    NONE
+ *@retval   none
+*/
+void E_base::_enableClock(){
 	/* Enable the timer peripheral clock */
 	_tIndex = getPeriphIndex1((uint32_t)_timx,TIM_INFO);
 	TIM_INFO[_tIndex]._EnableClock(TIM_INFO[_tIndex]._rcc);
@@ -149,6 +139,11 @@ void E_base::_EnInterrupt(){
 	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
 }
 
+/**
+ *@brief    设置TIM Prescaler & Period
+ *@param    NONE
+ *@retval   none
+*/
 void E_base::_setPerPsc(void){
 	/* Set the pre-scaler value */
 	LL_TIM_SetPrescaler(_timx, _prescaler-1);
@@ -162,7 +157,7 @@ void E_base::_setPerPsc(void){
  *@param    frq  要输出的频率，单位hz. 0-最大频率。
  *@retval   None
 */
-void E_base::calculate(uint32_t frq)
+void E_base::_calculate(uint32_t frq)
 {
 	uint32_t period  = 0;		// 周期
 	uint32_t prescaler = 1;		// 预分频
@@ -175,7 +170,7 @@ void E_base::calculate(uint32_t frq)
 		period = ii / prescaler / frq;
 		if (0xffff >= period)
 		{
-			DBG("calculate success! period = %d , prescaler = %d  \r\n",period,prescaler);
+			//DBG("calculate success! period = %d , prescaler = %d  \r\n",period,prescaler);
 			break;
 		}
 	}
@@ -188,10 +183,15 @@ void E_base::calculate(uint32_t frq)
  *@param    NONE
  *@retval   当前TIM频率
 */
-uint32_t E_base::GetSourceClock(void){
-	return GetClock();
-}
+// uint32_t E_base::GetSourceClock(void){
+	// return GetClock();
+// }
 
+/**
+ *@brief    启动定时器
+ *@param    NONE
+ *@retval   NONE
+*/
 void E_base::_start(void){
 	/* Enable counter */
 	LL_TIM_EnableCounter(_timx);
@@ -199,10 +199,25 @@ void E_base::_start(void){
 	LL_TIM_GenerateEvent_UPDATE(_timx);
 }
 
-void E_base::setCountMode(uint32_t CounterMode){
+/**
+ *@brief    设置计数模式
+ *@param    uint32_t CounterMode
+ *         @arg @ref LL_TIM_COUNTERMODE_UP
+ *         @arg @ref LL_TIM_COUNTERMODE_DOWN
+ *         @arg @ref LL_TIM_COUNTERMODE_CENTER_UP
+ *         @arg @ref LL_TIM_COUNTERMODE_CENTER_DOWN
+ *         @arg @ref LL_TIM_COUNTERMODE_CENTER_UP_DOWN
+ *@retval   NONE
+*/
+void E_base::_setCountMode(uint32_t CounterMode){
 	LL_TIM_SetCounterMode(_timx, CounterMode);
 }
 
+/**
+ *@brief    设定TIMx工作模式
+ *@param    NONE
+ *@retval   NONE
+*/
 void E_base::_setMode(void){
 	/* Enable the update interrupt */
 	LL_TIM_EnableIT_UPDATE(_timx);
@@ -211,19 +226,36 @@ void E_base::_setMode(void){
 	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
 }
 
+/*********************************  E_TIME  *****************************************/
+
+/**
+ *@brief    设置定时器频率
+ *@param    uint32_t frq  0-TIM时钟频率
+ *@retval   NONE
+*/
 void E_TIME::setFrequency(uint32_t frq){
 	if (frq >= GetClock())//控制频率，保证其有1%精度
 		frq = GetClock();
-	calculate(frq);
-	init();
+	_calculate(frq);
+	_enableClock();
 	_setPerPsc();
 }
 
+/**
+ *@brief    启动定时器
+ *@param    NONE
+ *@retval   NONE
+*/
 void E_TIME::start(void){
 	_setMode();
 	_start();
 }
 
+/**
+ *@brief    关闭定时器
+ *@param    NONE
+ *@retval   NONE
+*/
 void E_TIME::stop(void){
 	LL_TIM_DisableCounter(_timx);
 	
@@ -237,10 +269,23 @@ void E_TIME::_setMode(void){
 	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
 }
 
+/**
+ *@brief    获取定时器最大频率
+ *@param    NONE
+ *@retval   NONE
+*/
 uint32_t E_TIME::GetMaxFrequency(void){
 	return GetClock();
 }
 
+
+/*********************************  E_PWM  ****************************************/
+
+/**
+ *@brief    设置TIM为PWM模式
+ *@param    NONE
+ *@retval   NONE
+*/
 void E_PWM::_setMode(void){
 	LL_TIM_EnableARRPreload(_timx);
 	/*********************************/
@@ -255,23 +300,21 @@ void E_PWM::_setMode(void){
 }
 
 /**
- *@name     begin(uint32_t frq,uint16_t duty)
  *@brief    启动PWM输出
  *@param    frq  要输出的频率，单位hz. 0-最大频率。
- *		  duty 占空比 0-1000
- *@retval   None
+ *		   duty 占空比 0-1000
+ *@retval   NONE
 */
 void E_PWM::begin(uint32_t frq,uint16_t duty){
-	init();
-	SetFrequency(frq);	
+	_enableClock();
 	_setMode();
+	SetFrequency(frq);
 	SetDutyCycle(duty);		
 	_start();
 }
 
 /**
- *@name     void PWM::set_frq(uint32_t frq)
- *@brief    设置频率，最大频率可通过GetMaxFrequency()获得
+ *@brief    设置频率,并同步计算更新占空比;最大频率可通过GetMaxFrequency()获得
  *@param    frq  要输出的频率，单位hz. 0-最大频率。
  *@retval   None
 */
@@ -280,18 +323,18 @@ void E_PWM::SetFrequency(uint32_t frq)
 	if (frq >= GetMaxFrequency())//控制频率，保证其有1%精度
 		frq = GetMaxFrequency();
 
-	calculate(frq);
+	_calculate(frq);
 
 	_accuracy = ((_period >= 100) && (_period < 1000))?1:0;
 	
-	DBG("max Frequency = %d",GetMaxFrequency());
-	_accuracy ? DBG(" accuracy is 0.01 \r\n"):DBG(" accuracy is 0.001 \r\n");
+//	DBG("max Frequency = %d",GetMaxFrequency());
+//	_accuracy ? DBG(" accuracy is 0.01 \r\n"):DBG(" accuracy is 0.001 \r\n");
 	_setPerPsc();
+	SetDutyCycle(_duty);
 }
 
 /**
- *@name     SetDutyCycle(uint16_t duty)
- *@brief    设置PWM占空比.频率小于等于十分之一最大频率是，分辨率为千分之一
+ *@brief    设置PWM占空比.频率小于等于十分之一最大频率时，分辨率为千分之一
  *		   频率在十分之一最大频率和最大频率之间，分辨率为百分之一
  *@param    duty 0-1000 对应0%-100%
  *@retval   none
@@ -319,7 +362,6 @@ void E_PWM::SetDutyCycle(uint16_t duty)
 }
 
 /**
- *@name     void PWM::SetPorlicy(uint8_t flag)
  *@brief    设置极性
  *@param    flag:  1 HIGH  0 LOW
  *@retval   None
@@ -332,7 +374,6 @@ void E_PWM::SetPorlicy(uint8_t porlicy)
 }
 
 /**
- *@name     GetMaxFrequency
  *@brief    获取PWM最大频率
  *@param    none
  *@retval   最大频率
@@ -342,13 +383,20 @@ uint32_t E_PWM::GetMaxFrequency(void)
 	return GetClock()/100;
 }
 
+/*********************************  E_CAPTURE  ****************************************/
+
+/**
+ *@brief    启动捕获
+ *@param    none
+ *@retval   最大频率
+*/
 void E_CAPTURE::begin(){
 	_period = 0xffff-1;
 	_prescaler = 1;
 	_timeClock 	= GetClock()/_prescaler;
 	_porlicy = LL_TIM_IC_POLARITY_RISING;
 	
-	init();
+	_enableClock();
 	_setPerPsc();
 	E_base::_setMode();
 	//_EnInterrupt();
@@ -357,6 +405,12 @@ void E_CAPTURE::begin(){
 	_setMode();
 	_start();
 }
+
+/**
+ *@brief    获取高电平时间
+ *@param    none
+ *@retval   float 单位us
+*/
 float E_CAPTURE::get_wave_high_time()
 {
     _available = false;
@@ -365,6 +419,12 @@ float E_CAPTURE::get_wave_high_time()
     else
         return  (_capture*1000000.0/(_timeClock));
 }
+
+/**
+ *@brief    获取低电平时间
+ *@param    none
+ *@retval   float 单位us
+*/
 float E_CAPTURE::get_wave_low_time()
 {
     _available = false;
@@ -374,14 +434,29 @@ float E_CAPTURE::get_wave_low_time()
         return  (_capture*1000000.0/(_timeClock));
 }
 
+/**
+ *@brief    获取高电平占比
+ *@param    none
+ *@retval   float 0-100
+*/
 float E_CAPTURE::get_wave_high_duty()
 {
-    _available = false;
-    if(_capture == 0)
-       return  (_high_capture*100.0/(_high_capture + _low_capture));
+	    if(_capture == 0){
+			 
+       return (_high_capture*100.0/(_high_capture + _low_capture));
+		}
     else
-        return 0;
+		{
+			
+       return 0;
+		}
 }
+
+/**
+ *@brief    获取低电平占比
+ *@param    none
+ *@retval   float 0-100
+*/
 float E_CAPTURE::get_wave_low_duty()
 {
     _available = false;
@@ -391,10 +466,20 @@ float E_CAPTURE::get_wave_low_duty()
         return  0;
 }
 
+/**
+ *@brief    数据有效
+ *@param    none
+ *@retval   1 捕获结束, 0 正在捕获
+*/
 bool E_CAPTURE::available(){
 	return _available;
 }
 
+/**
+ *@brief    获取波形频率
+ *@param    none
+ *@retval   频率
+*/
 float E_CAPTURE::get_wave_frq()
 {
     _available = false;
@@ -404,6 +489,11 @@ float E_CAPTURE::get_wave_frq()
         return (_timeClock*1.0/_capture);
 }
 
+/**
+ *@brief    获取波形周期
+ *@param    none
+ *@retval   频率
+*/
 float E_CAPTURE::get_wave_peroid()
 {
     _available = false;
@@ -413,9 +503,13 @@ float E_CAPTURE::get_wave_peroid()
         return  (_capture/(_timeClock/1000000.0));
 }
 
+/**
+ *@brief    设置为捕获模式
+ *@param    none
+ *@retval   频率
+*/
 void E_CAPTURE::_setMode(){
-	 /************************************/
-  /* Input capture mode configuration */
+   /* Input capture mode configuration */
   /************************************/
   /* Select the active input: IC1 = TI1FP1 */
   LL_TIM_IC_SetActiveInput(_timx, _channel, LL_TIM_ACTIVEINPUT_DIRECTTI);  
@@ -426,7 +520,7 @@ void E_CAPTURE::_setMode(){
   /* Select the edge of the active transition on the TI1 channel: rising edge */
   LL_TIM_IC_SetPolarity(_timx, _channel, _porlicy);
 	
-	/**************************/
+  /**************************/
   /* TIM1 interrupts set-up */
   /**************************/
   /* Enable the capture/compare interrupt for channel 1 */
@@ -438,6 +532,21 @@ void E_CAPTURE::_setMode(){
   LL_TIM_CC_EnableChannel(_timx, _channel);  
 }
 
+/**
+ *@brief    设置采样极性
+ *@param    none
+ *@retval   频率
+*/
+void E_CAPTURE::SetPorlicy(uint8_t porlicy){
+	_porlicy = porlicy;
+	LL_TIM_IC_SetPolarity(_timx,_channel,_period);
+}
+
+/**
+ *@brief    简单捕获模式,需要在TIM中断里调用，用来计算采样波形参数
+ *@param    none
+ *@retval   频率
+*/
 void E_CAPTURE::simple_event(void){
 	uint32_t    now = 0;
 	now = _ICgetCompare(_timx) + (*_overflow_times) * _period;  //get capture value
@@ -449,16 +558,18 @@ void E_CAPTURE::simple_event(void){
 	_available = true;
 }
 
-void E_CAPTURE::SetPorlicy(uint8_t porlicy){
-	_porlicy = porlicy;
-	LL_TIM_IC_SetPolarity(_timx,_channel,_period);
-}
-
+/**
+ *@brief    复合捕获模式,需要在TIM中断里调用，用来计算采样波形参数
+ *@param    none
+ *@retval   频率
+*/
 void E_CAPTURE::complex_event()
 {
 	uint32_t    capture = 0;
 	uint32_t    now = 0;
+
 	now = _ICgetCompare( _timx ) + (*_overflow_times) * _period;  //get capture value
+
 	if (now > _last_value)
 		capture = now - _last_value;
 	else if (now < _last_value)
@@ -469,21 +580,17 @@ void E_CAPTURE::complex_event()
 	}
 	_last_value = now;
 
-
 	if (_porlicy == LL_TIM_IC_POLARITY_FALLING)//检测到下降沿，测量高电平时间完成
 	{
 		_high_capture = capture;
 		SetPorlicy(LL_TIM_IC_POLARITY_RISING);
-		//set_polarity_rising();//切换检测上升沿
-	}
-	else
-	{
+	} else {
 		_low_capture = capture;
 		SetPorlicy(LL_TIM_IC_POLARITY_FALLING);
 	}
-	if ((_high_capture & _high_capture) != 0)
+	//if ((_high_capture & _low_capture) != 0)
+	if ((_high_capture!= 0) && ( _low_capture !=0))
 		_available = true;
-
 }
 
 extern E_CAPTURE cap;

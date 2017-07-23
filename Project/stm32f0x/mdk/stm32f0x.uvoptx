@@ -201,9 +201,9 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>148</LineNumber>
+          <LineNumber>444</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134225792</Address>
+          <Address>134226266</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -212,23 +212,7 @@
           <BreakIfRCount>1</BreakIfRCount>
           <Filename>..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/Peripherals/ebox_tim.cpp\148</Expression>
-        </Bp>
-        <Bp>
-          <Number>1</Number>
-          <Type>0</Type>
-          <LineNumber>502</LineNumber>
-          <EnabledFlag>1</EnabledFlag>
-          <Address>134221338</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/Peripherals/ebox_tim.cpp\502</Expression>
+          <Expression>\\ebox\../../../mcu/stm32f0x/ebox/Peripherals/ebox_tim.cpp\444</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -585,7 +569,7 @@
 
   <Group>
     <GroupName>libraries_HAL</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
