@@ -279,23 +279,23 @@ uint16_t analogin_read(uint16_t *channel)
     LL_ADC_StartCalibration(ADC1);
     
     /* Poll for ADC effectively calibrated */
-    #if (USE_TIMEOUT == 1)
-    Timeout = ADC_CALIBRATION_TIMEOUT_MS;
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//    Timeout = ADC_CALIBRATION_TIMEOUT_MS;
+//    #endif /* USE_TIMEOUT */
     
     while (LL_ADC_IsCalibrationOnGoing(ADC1) != 0)
     {
-    #if (USE_TIMEOUT == 1)
-      /* Check Systick counter flag to decrement the time-out value */
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
-        if(Timeout-- == 0)
-        {
-        /* Time-out occurred. Set LED to blinking mode */
-        LED_Blinking(LED_BLINK_ERROR);
-        }
-      }
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//      /* Check Systick counter flag to decrement the time-out value */
+//      if (LL_SYSTICK_IsActiveCounterFlag())
+//      {
+//        if(Timeout-- == 0)
+//        {
+//        /* Time-out occurred. Set LED to blinking mode */
+//        LED_Blinking(LED_BLINK_ERROR);
+//        }
+//      }
+//    #endif /* USE_TIMEOUT */
     }
     
 
@@ -304,23 +304,23 @@ uint16_t analogin_read(uint16_t *channel)
     LL_ADC_Enable(ADC1);
     
     /* Poll for ADC ready to convert */
-    #if (USE_TIMEOUT == 1)
-    Timeout = ADC_ENABLE_TIMEOUT_MS;
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//    Timeout = ADC_ENABLE_TIMEOUT_MS;
+//    #endif /* USE_TIMEOUT */
     
     while (LL_ADC_IsActiveFlag_ADRDY(ADC1) == 0)
     {
-    #if (USE_TIMEOUT == 1)
-      /* Check Systick counter flag to decrement the time-out value */
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
-        if(Timeout-- == 0)
-        {
-        /* Time-out occurred. Set LED to blinking mode */
-        LED_Blinking(LED_BLINK_ERROR);
-        }
-      }
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//      /* Check Systick counter flag to decrement the time-out value */
+//      if (LL_SYSTICK_IsActiveCounterFlag())
+//      {
+//        if(Timeout-- == 0)
+//        {
+//        /* Time-out occurred. Set LED to blinking mode */
+//        LED_Blinking(LED_BLINK_ERROR);
+//        }
+//      }
+//    #endif /* USE_TIMEOUT */
     }}
 
 	LL_ADC_REG_SetSequencerChannels(ADC1, *channel);
@@ -586,9 +586,9 @@ void E_AnalogDMA::dmaStart()
 {
   __IO uint32_t wait_loop_index = 0;
   __IO uint32_t backup_setting_adc_dma_transfer = 0;
-  #if (USE_TIMEOUT == 1)
-  uint32_t Timeout = 0; /* Variable used for timeout management */
-  #endif /* USE_TIMEOUT */
+//  #if (USE_TIMEOUT == 1)
+//  uint32_t Timeout = 0; /* Variable used for timeout management */
+//  #endif /* USE_TIMEOUT */
   
   /*## Operation on ADC hierarchical scope: ADC instance #####################*/
   
@@ -618,23 +618,23 @@ void E_AnalogDMA::dmaStart()
     LL_ADC_StartCalibration(ADC1);
     
     /* Poll for ADC effectively calibrated */
-    #if (USE_TIMEOUT == 1)
-    Timeout = ADC_CALIBRATION_TIMEOUT_MS;
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//    Timeout = ADC_CALIBRATION_TIMEOUT_MS;
+//    #endif /* USE_TIMEOUT */
     
     while (LL_ADC_IsCalibrationOnGoing(ADC1) != 0)
     {
-    #if (USE_TIMEOUT == 1)
-      /* Check Systick counter flag to decrement the time-out value */
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
-        if(Timeout-- == 0)
-        {
-        /* Time-out occurred. Set LED to blinking mode */
-        LED_Blinking(LED_BLINK_ERROR);
-        }
-      }
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//      /* Check Systick counter flag to decrement the time-out value */
+//      if (LL_SYSTICK_IsActiveCounterFlag())
+//      {
+//        if(Timeout-- == 0)
+//        {
+//        /* Time-out occurred. Set LED to blinking mode */
+//        LED_Blinking(LED_BLINK_ERROR);
+//        }
+//      }
+//    #endif /* USE_TIMEOUT */
     }
     
     /* Delay between ADC end of calibration and ADC enable.                   */
@@ -653,23 +653,23 @@ void E_AnalogDMA::dmaStart()
     LL_ADC_Enable(ADC1);
     
     /* Poll for ADC ready to convert */
-    #if (USE_TIMEOUT == 1)
-    Timeout = ADC_ENABLE_TIMEOUT_MS;
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//    Timeout = ADC_ENABLE_TIMEOUT_MS;
+//    #endif /* USE_TIMEOUT */
     
     while (LL_ADC_IsActiveFlag_ADRDY(ADC1) == 0)
     {
-    #if (USE_TIMEOUT == 1)
-      /* Check Systick counter flag to decrement the time-out value */
-      if (LL_SYSTICK_IsActiveCounterFlag())
-      {
-        if(Timeout-- == 0)
-        {
-        /* Time-out occurred. Set LED to blinking mode */
-        LED_Blinking(LED_BLINK_ERROR);
-        }
-      }
-    #endif /* USE_TIMEOUT */
+//    #if (USE_TIMEOUT == 1)
+//      /* Check Systick counter flag to decrement the time-out value */
+//      if (LL_SYSTICK_IsActiveCounterFlag())
+//      {
+//        if(Timeout-- == 0)
+//        {
+//        /* Time-out occurred. Set LED to blinking mode */
+//        LED_Blinking(LED_BLINK_ERROR);
+//        }
+//      }
+//    #endif /* USE_TIMEOUT */
     }
     
     /* Note: ADC flag ADRDY is not cleared here to be able to check ADC       */

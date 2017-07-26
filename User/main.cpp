@@ -19,11 +19,14 @@
 ////#include "filter.h"
 //#include "INA219.h"
 
+#define i2c189 		I2C1,PB_8,PB_9
+#define	i2c21314	I2C2,PB_13,PB_14
+
 //E_GPIO PA5(PA_5);
 E_GPIO led(PA_5);
-E_I2C ic(I2C1,PB_8,PB_9);
+E_I2C ic(i2c21314);
 //INA219 ina219(&ic,0x80);
-LiquidCrystal_I2C lcd1(&ic,0x7e,16,2);
+LiquidCrystal_I2C lcd1(&ic,0x4e,16,2);
 E_UART usart(USART1,PA_9,PA_10);
 
 //void rxirq(void){
@@ -49,7 +52,8 @@ int main(){
 		lcd1.cursor();
 	  lcd1.blink();
 		lcd1.begin(16,2);
-		lcd1.scrollDisplayRight();
+		while(1){}
+//		lcd1.scrollDisplayRight();
 //	
 //		//uint8_t i;
 //		while(1){
@@ -60,10 +64,10 @@ int main(){
 //			//usart.print("test \r\n");
 ////			lcd1.clear();
 ////			v = ina219.getBusVoltage_V();
-////			lcd1.setCursor(0,0);
-////			lcd1.print("Voltage: ");
-////			lcd1.print(v);
-////			lcd1.print(" V");
+//			lcd1.setCursor(0,0);
+//			lcd1.print("Voltage: ");
+//			lcd1.print(v);
+//			lcd1.print(" V");
 ////			
 ////			usart.print("∏∫‘ÿµÁ—π£∫");
 ////			usart.print(v);

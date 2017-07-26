@@ -253,7 +253,7 @@ void LiquidCrystal_I2C::write4bits(uint8_t value) {
 }
 
 void LiquidCrystal_I2C::expanderWrite(uint8_t _data){
-		_i2c->writeChar(_Addr,(int)(_data) | _backlightval);
+		_i2c->write(_Addr,(int)(_data) | _backlightval);
 //	Wire.beginTransmission(_Addr);
 //	Wire.write((int)(_data) | _backlightval);
 //	Wire.endTransmission();   

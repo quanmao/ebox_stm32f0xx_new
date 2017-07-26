@@ -62,7 +62,8 @@ static void PrintfLogo(void)
 }
 
 #define IC1  I2C1,PB_8,PB_9
-E_I2C i2c(IC1);
+#define	IC21314	I2C2,PB_13,PB_14
+E_I2C i2c(IC21314);
 
 void setup()
 {
@@ -76,6 +77,9 @@ int main(void)
 {
 	uint8_t add = 0;
 	setup();
+	
+	
+	i2c.write(0x4e,0x00);
 
 	usart.printf("I2C address scanner, Scaning.......\r\n");
 	while (1)
@@ -87,6 +91,7 @@ int main(void)
 			if (i2c.waitAck(add,200)==E_OK)
 			{
 				usart.printf("success! \r\n");
+				i2c.write(add,0x08);
 				delay_ms(6000);
 				break;
 				
