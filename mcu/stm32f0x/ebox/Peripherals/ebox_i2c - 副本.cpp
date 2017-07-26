@@ -1,7 +1,9 @@
 /**
   ******************************************************************************
-  * @file    ebox_i2c.cpp
+  * @file    ebox_i2c.h
   * @author  cat_li
+  * @version V2.0
+  * @date    2016/11/15
   * @brief   仅工作在主模式
 		1  2017/5/30  移除E_PinBase的构造函数，使用PIN_ID
 					增加超时，防止程序死掉。
@@ -34,7 +36,7 @@
  *          sda_pin:  数据Pin
  *@retval   None
 */
-E_I2C::E_I2C(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout)
+E_I2c::E_I2c(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout)
 {
 	E_PinBase _scl(scl),_sda(sda);
 
@@ -44,7 +46,7 @@ E_I2C::E_I2C(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout)
 	_sda.mode(I2C_MAP[_index]._pin_date,I2C_MAP[_index]._pin_af);
 
 	_index = getPeriphIndex((uint32_t)I2Cx,I2C_INFO);
-	_busy = 0;
+	busy = 0;
 	_i2cx = I2Cx;
 	_timeout = timeout;
 }
@@ -55,7 +57,7 @@ E_I2C::E_I2C(I2C_TypeDef *I2Cx,E_PinID scl,E_PinID sda,uint16_t timeout)
  *@param    speed:  速率 10,100,400 分别代表10k，100k，400k
  *@retval   None
 */
-void  E_I2C::begin(uint16_t speed)
+void  E_I2c::begin(uint16_t speed)
 {
 	switch (cpu.clock.pclk1/1000000){
 	case 16:
@@ -101,7 +103,7 @@ void  E_I2C::begin(uint16_t speed)
 	config();
 }
 
-void E_I2C::config()
+void E_I2c::config()
 {
 	// 使能I2C时钟
 	LL_APB1_GRP1_EnableClock(I2C_INFO[_index]._rcc);
@@ -113,7 +115,7 @@ void E_I2C::config()
 	LL_I2C_Enable(_i2cx);
 }
 
-uint32_t E_I2C::read_config()
+uint32_t E_I2c::read_config()
 {
 	return _timing;
 }
@@ -125,7 +127,7 @@ uint32_t E_I2C::read_config()
  *          uint8_t data:  要写入的数据
  *@retval   状态 E_OK 成功； E_TIMEOUT 超时
 */
-int8_t E_I2C::writeChar(uint8_t slave_address,uint8_t data)
+int8_t E_I2c::writeChar(uint8_t slave_address,uint8_t data)
 {
 //	uint16_t time = _timeout;
 	// 写入地址寄存器和数据
@@ -155,7 +157,7 @@ int8_t E_I2C::writeChar(uint8_t slave_address,uint8_t data)
  *          uint16_t num_to_write  要写入的数据长度
  *@retval   状态 E_OK 成功； E_TIMEOUT 超时
 */
-int8_t E_I2C::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_write)
+int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_write)
 {
 //	uint16_t time = _timeout;
 	if (num_to_write >255){
@@ -238,7 +240,7 @@ int8_t E_I2C::writeBuf(uint8_t slave_address, uint8_t *data, uint16_t num_to_wri
  *          uint16_t num_to_write  要写入的数据长度
  *@retval   状态 E_OK 成功； E_TIMEOUT 超时
 */
-int8_t E_I2C::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data, uint16_t num_to_write)
+int8_t E_I2c::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data, uint16_t num_to_write)
 {
 //	uint16_t time = _timeout;
 	// 发送地址寄存器
@@ -321,9 +323,9 @@ int8_t E_I2C::writeBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
  *          uint16_t num_to_write  要读取的数据长度
  *@retval   状态 E_OK 成功； E_TIMEOUT 超时
 */
-E_STATE E_I2C::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read,uint16_t timeout_us)
+int8_t E_I2c::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data,uint16_t num_to_read)
 {
-	uint64_t end = GetEndTime(timeout_us);
+//	uint16_t time = _timeout;
 	// 发送地址寄存器
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,1,LL_I2C_MODE_SOFTEND,LL_I2C_GENERATE_START_WRITE);
 	while (!LL_I2C_IsActiveFlag_TC(_i2cx))
@@ -332,24 +334,24 @@ E_STATE E_I2C::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
 		{
 			LL_I2C_TransmitData8(_i2cx,reg_address);
 		}
-		if (IsTimeOut(end))
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	// 发送读指令，从当前地址开始读取数据
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_read,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
-	end = GetEndTime(timeout_us);
+//	time = _timeout;
 	while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
 	{
 		if (LL_I2C_IsActiveFlag_RXNE(_i2cx))
 		{
 			*data++ = LL_I2C_ReceiveData8(_i2cx);
 		}
-		if (IsTimeOut(end))
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	LL_I2C_ClearFlag_STOP(_i2cx);
 	return E_OK;
@@ -363,9 +365,9 @@ E_STATE E_I2C::readBuf(uint8_t slave_address, uint8_t reg_address, uint8_t *data
  *          uint16_t num_to_write  要读取的数据长度
  *@retval   状态 E_OK 成功； E_TIMEOUT 超时
 */
-E_STATE E_I2C::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read,uint16_t timeout_us)
+int8_t E_I2c::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read)
 {
-	uint64_t end = GetEndTime(timeout_us);
+//	uint16_t time = _timeout;
 	// 发送读指令，从当前地址开始读取数据
 	LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,num_to_read,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_READ);
 	while (!LL_I2C_IsActiveFlag_STOP(_i2cx))
@@ -374,56 +376,60 @@ E_STATE E_I2C::readBuf(uint8_t slave_address,uint8_t *data, uint16_t num_to_read
 		{
 			*data++ = LL_I2C_ReceiveData8(_i2cx);
 		}
-		if (IsTimeOut(end))
-		{
-			return E_TIMEOUT;
-		}
+//		if ((time--) == 0)
+//		{
+//			return E_TIMEOUT;
+//		}
 	}
 	LL_I2C_ClearFlag_STOP(_i2cx);
 	return E_OK;
 }
 
-
 /**
- *@brief    等待设备响应。向指定设备发送start指令，如果设备忙，则返回NACK,否则返回ACK,主设备发送stop指令
+ *@name     wait_dev_busy(uint8_t slave_address)
+ *@brief    等待设备空闲。向指定设备发送start指令，如果设备忙，则返回NACK,否则返回ACK,主设备发送stop指令
  *@param    slave_address:  设备地址
- *@retval   E_STATE: E_OK,E_TIMEOUT
+ *@retval   None
 */
-E_STATE E_I2C::waitAck(uint8_t s_addr,uint16_t timeout_us){
+int8_t E_I2c::wait_dev_busy(uint8_t slave_address)
+{
+	uint8_t tryg = 0;
+	uint8_t i = 255;
 
-	uint64_t end = GetEndTime(timeout_us);
 	do
 	{
 		// clear STOP & NACK flag
 		SET_BIT(_i2cx->ICR,LL_I2C_ICR_NACKCF | LL_I2C_ICR_STOPCF);
 
-		LL_I2C_HandleTransfer(_i2cx,s_addr,LL_I2C_ADDRESSING_MODE_7BIT,0,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
-		delay_us(100);
-		if (IsTimeOut(end))
+		LL_I2C_HandleTransfer(_i2cx,slave_address,LL_I2C_ADDRESSING_MODE_7BIT,0,LL_I2C_MODE_AUTOEND,LL_I2C_GENERATE_START_WRITE);
+
+		while (i--);
+
+		if (tryg++ == 254)
 		{
-			return E_TIMEOUT;
+			return 1;
 		}
 	}while (LL_I2C_IsActiveFlag_NACK(_i2cx) == 1); //如果无响应，则继续等待
 
 	LL_I2C_ClearFlag_STOP(_i2cx);
 
-	return E_OK;
+	return 0;
 }
 
-int8_t E_I2C::take_i2c_right(uint32_t timing)
+int8_t E_I2c::take_i2c_right(uint32_t timing)
 {
-	while (_busy == 1)
+	while (busy == 1)
 	{
 		delay_ms(1);
 	}
 	_timing = timing;
 	config();
-	_busy = 1;
+	busy = 1;
 	return 0;
 }
 
-int8_t E_I2C::release_i2c_right(void)
+int8_t E_I2c::release_i2c_right(void)
 {
-	_busy = 0;
+	busy = 0;
 	return 0;
 }

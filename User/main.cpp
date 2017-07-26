@@ -12,30 +12,31 @@
 // */
 
 
-//#include "ebox.h"
-//#include <stdio.h>
-////#include "LiquidCrystal_I2C.h"
+#include "ebox.h"
+#include <stdio.h>
+#include "LiquidCrystal_I2C.h"
 ////#include "driver_led.h"
 ////#include "filter.h"
 //#include "INA219.h"
 
 //E_GPIO PA5(PA_5);
-//E_I2c ic(I2C1,PB_8,PB_9);
+E_GPIO led(PA_5);
+E_I2C ic(I2C1,PB_8,PB_9);
 //INA219 ina219(&ic,0x80);
-////LiquidCrystal_I2C lcd1(&ic,0x7e,16,2);
-//E_UART usart(USART1,PA_9,PA_10);
+LiquidCrystal_I2C lcd1(&ic,0x7e,16,2);
+E_UART usart(USART1,PA_9,PA_10);
 
 //void rxirq(void){
 //	PA5 = 1;
 //}
 
-//int main(){
+int main(){
 //	float v;
 //	
-//	  ebox_init();
+	  ebox_init();
 //	  usart.begin(115200);
 //	  PA5.mode(OUTPUT_PP);
-////		ic.begin(100);
+		ic.begin(100);
 ////		ina219.begin();
 ////		ina219.autoCalibration(16,400,100);
 ////		usart.attach(&PA5,&E_GPIO::reset,TxIrq);
@@ -43,12 +44,12 @@
 ////		usart.enable_irq(TxIrq);
 ////		usart.enable_irq(RxIrq);
 //	
-////		lcd1.init();
-////		lcd1.backlight();
-////		lcd1.cursor();
-////	  lcd1.blink();
-////		lcd1.begin(16,2);
-////		lcd1.scrollDisplayRight();
+		lcd1.init();
+		lcd1.backlight();
+		lcd1.cursor();
+	  lcd1.blink();
+		lcd1.begin(16,2);
+		lcd1.scrollDisplayRight();
 //	
 //		//uint8_t i;
 //		while(1){
@@ -96,7 +97,7 @@
 //			//PA5.toggle();
 //		}
 //		
-//}
+}
 
 
 

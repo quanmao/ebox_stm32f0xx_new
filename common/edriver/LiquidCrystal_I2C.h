@@ -57,7 +57,7 @@
 class LiquidCrystal_I2C {
 public:
   LiquidCrystal_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
-	LiquidCrystal_I2C(E_I2c *i2c, uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
+	LiquidCrystal_I2C(E_I2C *i2c, uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
   void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS );
   void clear();
   void home();
@@ -124,7 +124,7 @@ private:
   uint8_t _cols;
   uint8_t _rows;
   uint8_t _backlightval;
-	E_I2c *_i2c;
+	E_I2C *_i2c;
 };
 
 #endif

@@ -722,6 +722,7 @@
             <File RelativePath="..\..\..\example\1.timer.cpp" FileType="3" Output="1.timer.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\example\mo ban.cpp" FileType="3" Output="mo ban.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\example\1.capture.cpp" FileType="3" Output="1.capture.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\5.I2C search add.cpp" FileType="3" Output="5.I2C search add.o" ro="0" bss="0" rw="0" />
         </Filter>
     </Files>
 </TKStudioProject>
