@@ -141,23 +141,6 @@ typedef struct{
 	uint8_t  alternate;
 }E_PIN_FUN_T;
 
-#define	PWM_3_1				PB4, TIM3_BASE, LL_TIM_CHANNEL_CH1,LL_GPIO_AF_1
-#define PIN_FUN_NC		(uint32_t)NC,NC,NC,(uint8_t)NC
-
-//const E_PIN_FUN_T PWM_MAP[] ={
-//		PWM_3_1,
-//		PIN_FUN_NC
-//};
-
-//const E_PIN_FUN_T E_UART_Tx[] ={
-//		PA9,USART1_BASE,0,LL_GPIO_AF_1,
-//		(uint32_t)NC,NC,(uint8_t)NC
-//};
-
-//const E_PIN_FUN_T E_UART_Rx[] ={
-//		PA10,USART1_BASE,0,LL_GPIO_AF_1,
-//		(uint32_t)NC,NC,(uint8_t)NC
-//};
 
 /**
  *@brief  外设相关
@@ -252,7 +235,7 @@ typedef struct{
 	E_PinID		_pin_id;		//pin_id
 	E_PinMode	_pin_date;		//pin 参数， mode，outputtyper,updown
 	uint8_t		_pin_af;		//af功能
-	uint32_t	_periph_base;	//外设名，用基址标识
+	uint32_t	_periph_OR_ch;	//外设名或通道号
 }AF_FUN_S;
 
 // 中断索引信息,用于中断初始化
@@ -277,6 +260,30 @@ typedef struct{
 	IRQn_Type	_irq;
 	IrqIndex_t 	_irqIndex;
 }Periph_SS;
+
+#include "stm32f0xx_ll_adc.h"
+static const AF_FUN_S ADC_MAP[] = {
+	PA_0,AIN,0,LL_ADC_CHANNEL_0,
+	PA_1,AIN,0,LL_ADC_CHANNEL_1,
+	PA_2,AIN,0,LL_ADC_CHANNEL_2,
+	PA_3,AIN,0,LL_ADC_CHANNEL_3,
+	PA_4,AIN,0,LL_ADC_CHANNEL_4,
+	PA_5,AIN,0,LL_ADC_CHANNEL_5,
+	PA_6,AIN,0,LL_ADC_CHANNEL_6,
+	PA_7,AIN,0,LL_ADC_CHANNEL_7,
+	
+	PB_0,AIN,0,LL_ADC_CHANNEL_8,
+	PB_1,AIN,0,LL_ADC_CHANNEL_9,
+	
+	PC_0,AIN,0,LL_ADC_CHANNEL_10,
+	PC_1,AIN,0,LL_ADC_CHANNEL_11,
+	PC_2,AIN,0,LL_ADC_CHANNEL_12,
+	PC_3,AIN,0,LL_ADC_CHANNEL_13,
+	PC_4,AIN,0,LL_ADC_CHANNEL_14,
+	PC_5,AIN,0,LL_ADC_CHANNEL_15,
+	
+	P_NC
+};
 
 #define TIMxCH1 0x01
 #define TIMxCH2 0x02

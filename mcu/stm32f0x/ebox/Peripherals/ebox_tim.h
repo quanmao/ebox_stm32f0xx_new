@@ -109,7 +109,7 @@ public:
 		_timx = TIMx;
 		
 
-		switch (TIM_MAP[_index]._periph_base)
+		switch (TIM_MAP[_index]._periph_OR_ch)
 		{
 		case TIMxCH1:
 			_channel = LL_TIM_CHANNEL_CH1;
@@ -166,7 +166,7 @@ class E_CAPTURE:E_base{
 		_last_value 		= 0;
 		
 
-		switch (TIM_MAP[_index]._periph_base)
+		switch (TIM_MAP[_index]._periph_OR_ch)
 		{
 		case TIMxCH1:
 			_channel = LL_TIM_CHANNEL_CH1;

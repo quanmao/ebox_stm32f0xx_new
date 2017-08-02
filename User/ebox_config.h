@@ -37,6 +37,8 @@
 
 //是否使用超时,1 使用  0 不使用
 #define USE_TIMEOUT	1
+//是否使用内部参考电压 1 使用, 0 不使用
+#define USE_INTERVREF	0
 
 
 #endif

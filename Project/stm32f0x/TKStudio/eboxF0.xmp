@@ -177,6 +177,7 @@
             </Filter>
             <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox.h" FileType="4" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox_define.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\User\ebox_config.h" FileType="4" ro="0" bss="0" rw="0" />
         </Filter>
         <Filter Name="File Group">
             <Filter Name="Device">
