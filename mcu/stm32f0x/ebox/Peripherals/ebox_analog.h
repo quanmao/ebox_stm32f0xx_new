@@ -5,6 +5,9 @@
   * @brief   
 	*		2017/7/31	 LQM
 			1	单通道ADC转换模式
+	*		2017/8/2		 LQM
+			1	单通道连续采样
+			2	多通道单次采样,连续采样
 	* 已知bug
 			1 内部参考电压第一次读取正确，之后每次读取需要间隔800ms，才能保证参考电压正确
   ******************************************************************************
@@ -67,38 +70,22 @@ private:
 };
 
 
-class E_AnalogDMA{
-	public:
-	  E_AnalogDMA(E_PinBase *pin){
-		pin->mode(AIN,40);
-		channel |= get_channel(pin->_id);
-		channelNum = 1;
-//		ADC1_init();
-	};
-		
-		E_AnalogDMA(E_PinBase *pin,uint8_t deep){
-		pin->mode(AIN,40);
-		channel |= get_channel(pin->_id);
-		channelNum = 1;
-		_deep = deep;
-//		ADC1_init();
-	};
-		
-	
-	void add(E_PinBase *pin){
-		channel |= get_channel(pin->_id);
-		channelNum ++;
-	}
-	
+class E_AdcDMA{
+public:
+	E_AdcDMA(E_PinID id);
+	E_AdcDMA(E_PinID id,uint8_t deep);
+	E_AdcDMA(uint32_t channel,uint8_t chNum,uint8_t deep);
+
+	void addChannel(E_PinID id);
+
 	void dmaConfig();
 	void dmaStart();
-	
-	volatile uint16_t buffer[4];
-	private:
-	uint32_t channel;	
-	uint8_t _deep;
-	static uint8_t  channelNum;
 
+	volatile uint16_t buffer[4];
+private:
+	uint32_t _channel;
+	uint8_t  _deep;
+	static uint8_t  _channelNum;
 };
 
 #endif

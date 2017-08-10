@@ -1052,7 +1052,7 @@
 
   <Group>
     <GroupName>ebox</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1565,6 +1565,18 @@
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\example\5.I2C search add.cpp</PathWithFileName>
       <FilenameWithoutPath>5.I2C search add.cpp</FilenameWithoutPath>
+      <RteFlg>0</RteFlg>
+      <bShared>0</bShared>
+    </File>
+    <File>
+      <GroupNumber>9</GroupNumber>
+      <FileNumber>104</FileNumber>
+      <FileType>8</FileType>
+      <tvExp>0</tvExp>
+      <tvExpOptDlg>0</tvExpOptDlg>
+      <bDave2>0</bDave2>
+      <PathWithFileName>..\..\..\example\3.analogDMA.cpp</PathWithFileName>
+      <FilenameWithoutPath>3.analogDMA.cpp</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
