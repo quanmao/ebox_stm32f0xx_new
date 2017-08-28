@@ -113,50 +113,19 @@ uint16_t E_ADC::read(void)
 		/* Run ADC self calibration */
 		LL_ADC_StartCalibration(ADC1);
 
-		/* Poll for ADC effectively calibrated */
-//    #if (USE_TIMEOUT == 1)
-//    Timeout = ADC_CALIBRATION_TIMEOUT_MS;
-//    #endif /* USE_TIMEOUT */
-
 		while (LL_ADC_IsCalibrationOnGoing(ADC1) != 0)
 		{
-//    #if (USE_TIMEOUT == 1)
-//      /* Check Systick counter flag to decrement the time-out value */
-//      if (LL_SYSTICK_IsActiveCounterFlag())
-//      {
-//        if(Timeout-- == 0)
-//        {
-//        /* Time-out occurred. Set LED to blinking mode */
-//        LED_Blinking(LED_BLINK_ERROR);
-//        }
-//      }
-//    #endif /* USE_TIMEOUT */
+
 		}
-
-
 
 		/* Enable ADC */
 		LL_ADC_Enable(ADC1);
 
-		/* Poll for ADC ready to convert */
-//    #if (USE_TIMEOUT == 1)
-//    Timeout = ADC_ENABLE_TIMEOUT_MS;
-//    #endif /* USE_TIMEOUT */
-
 		while (LL_ADC_IsActiveFlag_ADRDY(ADC1) == 0)
 		{
-//    #if (USE_TIMEOUT == 1)
-//      /* Check Systick counter flag to decrement the time-out value */
-//      if (LL_SYSTICK_IsActiveCounterFlag())
-//      {
-//        if(Timeout-- == 0)
-//        {
-//        /* Time-out occurred. Set LED to blinking mode */
-//        LED_Blinking(LED_BLINK_ERROR);
-//        }
-//      }
-//    #endif /* USE_TIMEOUT */
-		}}
+
+		}
+	}
 
 	LL_ADC_REG_SetSequencerChannels(ADC1, _channel);
 	LL_ADC_REG_StartConversion(ADC1);
@@ -217,6 +186,11 @@ E_ADC::E_ADC(E_PinID id,uint16_t refVoltage){
 	ADC1_init();
 }
 
+/**
+ *@brief    构造函数
+ *@param    ADC_CH ch  内部通道 temperature_ch & bettery_ch
+ *@retval   none
+*/
 E_ADC::E_ADC(ADC_CH ch){
 	switch ((uint8_t)ch){
 	case 0:
@@ -236,22 +210,29 @@ void E_ADC::setRefVoltage(uint16_t refVoltage){
 	_refVoltage = refVoltage;
 }
 
+/**
+ *@brief    设置内部通道
+ *@param    none
+ *@retval   
+*/
 void E_ADC::_setInterChannel(void){
-	  if(__LL_ADC_IS_ENABLED_ALL_COMMON_INSTANCE() == 0)
-  {
-	//LL_ADC_SetCommonClock(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_CLOCK_ASYNC_DIV1);    
-    /* Set ADC measurement path to internal channels */
+	if (__LL_ADC_IS_ENABLED_ALL_COMMON_INSTANCE() == 0)
+	{
 #if USE_INTERVREF
 		_interChannel |= LL_ADC_PATH_INTERNAL_VREFINT;
-	//LL_ADC_SetCommonPathInternalCh(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_PATH_INTERNAL_VREFINT);
 #endif
-	 LL_ADC_SetCommonPathInternalCh(__LL_ADC_COMMON_INSTANCE(ADC1),_interChannel);         
-  }
+		LL_ADC_SetCommonPathInternalCh(__LL_ADC_COMMON_INSTANCE(ADC1),_interChannel);
+	}
 }
 
 
 uint8_t E_AdcDMA::_channelNum = 0;
 
+/**
+ *@brief    构造函数
+ *@param    E_PinID id   pin_id
+ *@retval   none
+*/
 E_AdcDMA::E_AdcDMA(E_PinID id){
 	uint8_t index;
 	index = getIndex(id,ADC_MAP);
@@ -259,14 +240,25 @@ E_AdcDMA::E_AdcDMA(E_PinID id){
 	_channelNum = 1;
 }
 
-E_AdcDMA::E_AdcDMA(E_PinID id,uint8_t deep){
-	uint8_t index;
-	index = getIndex(id,ADC_MAP);
-	_channel = ADC_MAP[index]._periph_OR_ch;
-	_channelNum = 1;
+/**
+ *@brief    构造函数
+ *@param    uint32_t channel  通道  LL_ADC_CHANNEL_0 ... ll_adc_channel_15 
+ *		   uint8_t chNum     通道数，需要和前面的保持一致
+ *		   uint8_t deep      采样深度 0 连续采样  其它 非连续采样，采样指定次数后停止
+ *@retval   none
+*/
+E_AdcDMA::E_AdcDMA(uint8_t chNum,uint8_t deep){
+	_channelNum = chNum;
 	_deep = deep;
 }
 
+/**
+ *@brief    构造函数
+ *@param    uint32_t channel  通道  LL_ADC_CHANNEL_0 ... ll_adc_channel_15 
+ *		   uint8_t chNum     通道数，需要和前面的保持一致
+ *		   uint8_t deep      采样深度 0 连续采样  其它 非连续采样，采样指定次数后停止
+ *@retval   none
+*/
 E_AdcDMA::E_AdcDMA(uint32_t channel,uint8_t chNum,uint8_t deep){
 	_channel = channel;
 	_channelNum = chNum;
@@ -283,18 +275,12 @@ void E_AdcDMA::addChannel(E_PinID id){
 
 void E_AdcDMA::dmaConfig()
 {
+	if (r_buffer != NULL)
+	{
+		free(r_buffer);
+	}
 	/* Enable ADC clock (core clock) */
 	LL_APB1_GRP2_EnableClock(LL_APB1_GRP2_PERIPH_ADC1);
-
-	if (__LL_ADC_IS_ENABLED_ALL_COMMON_INSTANCE() == 0)
-	{
-		/* Set ADC clock (conversion clock) common to several ADC instances */
-		// LL_ADC_SetCommonClock(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_CLOCK_ASYNC_DIV1);
-
-		/* Set ADC measurement path to internal channels */
-		// LL_ADC_SetCommonPathInternalCh(__LL_ADC_COMMON_INSTANCE(ADC1), LL_ADC_PATH_INTERNAL_NONE);
-	}
-
 
 	/*## Configuration of ADC hierarchical scope: ADC instance #################*/
 	if (LL_ADC_IsEnabled(ADC1) == 0)
@@ -314,7 +300,7 @@ void E_AdcDMA::dmaConfig()
 		/* Set ADC channels sampling time */
 		LL_ADC_SetSamplingTimeCommonChannels(ADC1, LL_ADC_SAMPLINGTIME_41CYCLES_5);
 	}
-
+	// 设置转换规则
 	if ((LL_ADC_IsEnabled(ADC1) == 0)||(LL_ADC_REG_IsConversionOngoing(ADC1) == 0)   )
 	{
 		/* Set ADC group regular trigger source */
@@ -340,12 +326,23 @@ void E_AdcDMA::dmaConfig()
 	/* Set ADC oversampling parameters */
 	// LL_ADC_ConfigOverSamplingRatioShift(ADC1, LL_ADC_OVS_RATIO_2, LL_ADC_OVS_SHIFT_NONE);
 
-
-	/*## Configuration of ADC interruptions ####################################*/
-	/* Enable interruption ADC group regular overrun */
-	//  LL_ADC_EnableIT_OVR(ADC1);
 	/* Enable the peripheral clock of DMA */
 	LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA1);
+	
+	if (_deep == 0){
+		r_buffer = (uint16_t*)malloc(_channelNum);
+		/* Set DMA transfer size */
+		LL_DMA_SetDataLength(DMA1,
+		                     LL_DMA_CHANNEL_1,
+		                     _channelNum);
+		LL_ADC_REG_SetDMATransfer(ADC1, LL_ADC_REG_DMA_TRANSFER_UNLIMITED);
+	}else{
+		r_buffer = (uint16_t*)malloc(_channelNum*_deep);
+		LL_DMA_SetDataLength(DMA1,
+		                     LL_DMA_CHANNEL_1,
+		                     _channelNum*_deep);
+		LL_ADC_REG_SetDMATransfer(ADC1, LL_ADC_REG_DMA_TRANSFER_LIMITED);
+	}
 
 	/* Configure the DMA transfer */
 	/*  - DMA transfer in circular mode to match with ADC configuration:        */
@@ -370,20 +367,9 @@ void E_AdcDMA::dmaConfig()
 	LL_DMA_ConfigAddresses(DMA1,
 	                       LL_DMA_CHANNEL_1,
 	                       LL_ADC_DMA_GetRegAddr(ADC1, LL_ADC_DMA_REG_REGULAR_DATA),
-	                       (uint32_t)&buffer,
+	                       (uint32_t)r_buffer,
 	                       LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-	if (_deep == 0){
-		/* Set DMA transfer size */
-		LL_DMA_SetDataLength(DMA1,
-		                     LL_DMA_CHANNEL_1,
-		                     _channelNum);
-		LL_ADC_REG_SetDMATransfer(ADC1, LL_ADC_REG_DMA_TRANSFER_UNLIMITED);
-	}else{
-		LL_DMA_SetDataLength(DMA1,
-		                     LL_DMA_CHANNEL_1,
-		                     _channelNum*_deep);
-		LL_ADC_REG_SetDMATransfer(ADC1, LL_ADC_REG_DMA_TRANSFER_LIMITED);
-	}
+
 /* Configure NVIC to enable DMA interruptions */
 //  NVIC_SetPriority(DMA1_Channel1_IRQn, 1); /* DMA IRQ lower priority than ADC IRQ */
 //  NVIC_EnableIRQ(DMA1_Channel1_IRQn);
@@ -401,10 +387,14 @@ void E_AdcDMA::dmaConfig()
 	LL_DMA_EnableChannel(DMA1, LL_DMA_CHANNEL_1);
 }
 
+/**
+ *@brief    启动DMA采样
+ *@param    none
+ *@retval   none
+*/
 void E_AdcDMA::dmaStart()
 {
-	__IO uint32_t wait_loop_index = 0;
-	__IO uint32_t backup_setting_adc_dma_transfer = 0;
+	__IO uint32_t backup_setting_adc_dma_transfer = 0;  // 保存DMA设置
 
 	if (LL_ADC_IsEnabled(ADC1) == 0)
 	{
@@ -431,7 +421,19 @@ void E_AdcDMA::dmaStart()
 
 		if ((LL_ADC_IsEnabled(ADC1) == 1)&&(LL_ADC_IsDisableOngoing(ADC1) == 0)&&(LL_ADC_REG_IsConversionOngoing(ADC1) == 0))
 		{
-			LL_ADC_REG_StartConversion(ADC1);
+			//LL_ADC_REG_StartConversion(ADC1);
+			update();
 		}
 	}
+}
+
+/**
+ *@brief    更新数据，仅在非连续转换情况下调用
+ *@param    none
+ *@retval   none
+*/
+void E_AdcDMA::update(void){
+	// 启动ADC,并等待结束
+	LL_ADC_REG_StartConversion(ADC1);
+	while (!LL_DMA_IsActiveFlag_TC1(DMA1));
 }

@@ -13,14 +13,6 @@
   * <h2><center>&copy; Copyright 2015 shentq. All Rights Reserved.</center></h2>
   ******************************************************************************
   */
-/**
- * -LQM (2017/7/12)
- *     注意：此部分和F1系列不通用，提供了2中ADC模式，一种是单通单次采集，不适用DMA
- *  一种连续采集（指定采样次数，单通道或多通道） 
- *  单通道单次采集,参考电压定义在ebox_analog.h中 VDDA_APPLI 
- *    1  声明对象   E_Analog adc1(new E_PinBase(PA_0));
- *    2  提供read()和getVoltage()方法
- */
 
 #include "ebox.h"
 
@@ -67,7 +59,7 @@ static void PrintfLogo(void)
 	usart.printf("*************************************************************\n\r");
 }
 
-E_AdcDMA adcs(PA_0);
+E_AdcDMA adcs(2);
 
 
 // E_AnalogDMA adcs(new E_PinBase(PA_0));
@@ -77,7 +69,8 @@ void setup()
     ebox_init();
     usart.begin(115200);
 		PrintfLogo();
-		adcs.addChannel(PA_1);
+		adcs.addChannel(PA_0);
+		adcs.addChannel(PA_2);
 		adcs.dmaConfig();
 		
 }
@@ -88,9 +81,9 @@ int main(void)
 	adcs.dmaStart();
     while(1)
     {
-		//	adcs.dmaStart();
-		usart.printf("ch1 = %d mv | ",3317*adcs.buffer[0]/4095);
-		usart.printf("ch2 = %d mv \r\n",3317*adcs.buffer[1]/4095);
+		adcs.update();
+		usart.printf("ch1 = %d mv | ",3317*adcs.r_buffer[0]/4095);
+		usart.printf("ch2 = %d mv \r\n",3317*adcs.r_buffer[1]/4095);
     delay_ms(2000);
 		 }
 }

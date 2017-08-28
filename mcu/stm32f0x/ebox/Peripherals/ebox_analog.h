@@ -8,6 +8,8 @@
 	*		2017/8/2		 LQM
 			1	单通道连续采样
 			2	多通道单次采样,连续采样
+			2017/8/28
+			1	多通道模式，通过指定采样深度，决定连续采样和指定次数采样
 	* 已知bug
 			1 内部参考电压第一次读取正确，之后每次读取需要间隔800ms，才能保证参考电压正确
   ******************************************************************************
@@ -48,9 +50,9 @@ extern uint16_t analog_read_temperature(void);
 
 typedef enum 
 {
-	ADC_TEMP = 0, 
+	temperature_ch = 0, 
 #if defined(ADC_CCR_VBATEN)
-	ADC_BAT
+	battery_ch
 #endif
 }ADC_CH;
 
@@ -73,15 +75,16 @@ private:
 class E_AdcDMA{
 public:
 	E_AdcDMA(E_PinID id);
-	E_AdcDMA(E_PinID id,uint8_t deep);
-	E_AdcDMA(uint32_t channel,uint8_t chNum,uint8_t deep);
+	E_AdcDMA(uint8_t chNum,uint8_t deep = 0);
+	E_AdcDMA(uint32_t channel,uint8_t chNum,uint8_t deep = 0);
 
 	void addChannel(E_PinID id);
 
 	void dmaConfig();
 	void dmaStart();
+	void update();
 
-	volatile uint16_t buffer[4];
+	uint16_t *r_buffer;		// 转换结果
 private:
 	uint32_t _channel;
 	uint8_t  _deep;
