@@ -89,10 +89,12 @@ int main(void)
 	uint32_t i;
 	setup();
 
-	pwm1.begin(100,100);
+	pwm1.begin(1000,100);
 	delay_ms(5000);
-
+	
+	cap.attach(&cap,&E_CAPTURE::simple_event);
 	cap.begin();
+	
 
 	while (1)
 	{

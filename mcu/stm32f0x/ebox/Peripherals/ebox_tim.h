@@ -6,8 +6,12 @@
   *		2017/7/15 cat_li
 		1	E_PWM 基本完成，TIM3验证OK
   *		2017/7/23 cat_li
-		1 	E_TIME,PWM,CAPTRUE基本完成
-		2		添加注释，修复capture偶然出现占空比为0的bug
+		1 E_TIME,PWM,CAPTRUE基本完成
+		2	添加注释，修复capture偶然出现占空比为0的bug
+  *		2017/9/7 
+		1 E_TIME 实现对象成员绑定
+	*		2017/9/10
+		1	E_CAPTURE 对象成员绑定，函数绑定
   ******************************************************************************
   * @attention
   *
@@ -55,13 +59,15 @@
 typedef void (*pfun)(TIM_TypeDef *,uint32_t);
 typedef uint32_t (*pGetFun)(TIM_TypeDef *);
 
+// 中断绑定函数指针
+typedef void (*tim_irq_handler)(uint32_t id);
+
 
 class E_base{
 public:
 	E_base(TIM_TypeDef *TIMx);
-	//void calculate(uint32_t frq);
 	
-	void setCountMode(uint32_t CounterMode);
+//	void setCountMode(uint32_t CounterMode);
 	
 //	uint32_t GetSourceClock(void);
 protected:	
@@ -82,20 +88,24 @@ protected:
 class E_TIME:E_base{
 public:
 	E_TIME(TIM_TypeDef *TIMx):E_base(TIMx){};
+	void setMicrosecond(uint32_t us);
 	void setFrequency(uint32_t frq);
 	void start();
 	void stop();
 	
 	uint32_t GetMaxFrequency(void);
 		
-//	void attach(void (*fptr)(void));	
-//	template<typename T>
-//	void attach(T* tptr, void (T::*mptr)(void)){
-//			_pirq.attach(tptr, mptr);
-//	}
+	void attach(void (*fptr)(void)){
+		_pirq.attach(fptr);
+	}
+	template<typename T>
+	void attach(T* tptr, void (T::*mptr)(void)){
+			_pirq.attach(tptr, mptr);
+	}
 private:
 	FunctionPointer _pirq;
 	void _setMode(void);
+	static void _irq_handler(uint32_t id);
 };
 
 class E_PWM:E_base{
@@ -153,7 +163,7 @@ extern uint16_t t3_overflow_times ;
 extern uint16_t t4_overflow_times ;
 
 class E_CAPTURE:E_base{
-	public:
+public:
 	E_CAPTURE(TIM_TypeDef *TIMx,E_PinID id):E_base(TIMx){
 		uint8_t _index;
 		E_PinBase *_pin;
@@ -161,10 +171,10 @@ class E_CAPTURE:E_base{
 		_index = getIndex(id,TIM_MAP);
 		_pin->mode(TIM_MAP[_index]._pin_date,TIM_MAP[_index]._pin_af);
 		_timx = TIMx;
-		
+
 		_overflow_times = &t1_overflow_times;
 		_last_value 		= 0;
-		
+
 
 		switch (TIM_MAP[_index]._periph_OR_ch)
 		{
@@ -186,17 +196,17 @@ class E_CAPTURE:E_base{
 			break;
 		}
 	}
-	
-	
+
+
 
 	void SetPorlicy(uint8_t porlicy);
 	void begin();
-	
+
 	void        set_count(uint16_t count);
 	void        set_polarity_falling();
 	void        set_polarity_rising();
-	
-	
+
+
 	//波形的基本的测量工具
 	void        complex_event();//适用于要求测量占空比的情况，但是最短脉宽不能低于4us****
 	void        simple_event();//适用于所有情况，执行效率高，最高可测180K,但是不能测量占空比
@@ -211,24 +221,35 @@ class E_CAPTURE:E_base{
 	uint32_t GetDetectMaxFrq(void);
 	uint32_t GetDetectMinFrq(void);
 
+	void attach(void (*fptr)(void)){
+		_pirq.attach(fptr);
+	}
+	template<typename T>
+	void attach(T* tptr, void (T::*mptr)(void)){
+		_pirq.attach(tptr, mptr);
+	}
+
 private:
 	uint32_t _channel;
 	uint16_t _duty;		// 占空比
 	uint8_t	 _accuracy; // 精度
 	__IO uint8_t	 _porlicy;	// 极性
-	
+
 	uint16_t   *_overflow_times;
 	__IO uint32_t   _last_value;
 	__IO uint32_t   _capture;	//捕获值
 	__IO bool	   _available;
 	__IO uint32_t   _high_capture;	//高电平捕获
 	__IO uint32_t   _low_capture;	//低电平捕获
-	
+
 	uint32_t   _timeClock;
-	
+
 	pGetFun  _ICgetCompare;
 
 	void _setMode(void);
+
+	FunctionPointer _pirq;
+	static void _irq_handler(uint32_t id);
 };
 
 #endif

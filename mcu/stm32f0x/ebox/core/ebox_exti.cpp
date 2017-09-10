@@ -38,7 +38,7 @@ const uint32_t EXTISorce_MAP[]={
 	LL_SYSCFG_EXTI_LINE12,LL_SYSCFG_EXTI_LINE13,LL_SYSCFG_EXTI_LINE14,LL_SYSCFG_EXTI_LINE15
 };
 
-
+// uint32_t pObj 类对象 ,uint8_t line 外部中断线
 typedef void (*exti_irq_handler)(uint32_t pObj,uint8_t line);
 
 static exti_irq_handler  exti_handler;   // 声明函数指针变量，指向类的静态成员

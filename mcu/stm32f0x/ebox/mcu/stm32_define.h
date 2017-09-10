@@ -141,96 +141,6 @@ typedef struct{
 	uint8_t  alternate;
 }E_PIN_FUN_T;
 
-
-/**
- *@brief  外设相关
- *
- ********************************************************************************/
-//typedef struct{
-//	uint32_t name;
-//	uint32_t rcc;
-//	uint8_t	 irq;
-//}Periph_T;
-
-
-//__STATIC_INLINE uint8_t PeriphIndex(uint32_t Periphx,const Periph_T *emap)
-//{
-//	uint8_t i = 0;
-//	while (!((emap+i)->name == Periphx ))
-//	{
-//		if ((emap+i)->name == (uint16_t)NC){
-//			return (uint8_t)NC;
-//		}
-//		i++;
-//	}
-//	return i;
-//}
-
-//__STATIC_INLINE uint8_t PinIndex(uint16_t pin,const E_PIN_FUN_T *emap)
-//{
-//	uint8_t i = 0;
-//	while (!((emap+i)->id == pin ))
-//	{
-//		if ((emap+i)->id == (uint16_t)NC){
-//			return (uint8_t)NC;
-//		}
-//		i++;
-//	}
-//	return i;
-//}
-
-//__STATIC_INLINE uint8_t PinAlternate(uint16_t pin,const E_PIN_FUN_T *emap)
-//{
-//	while (!((emap->id == pin)))
-//	{
-//		if (emap->id == (uint16_t)NC){
-//			return (uint8_t)NC;
-//		}
-//		emap++;
-//	}
-//	return emap->alternate;
-//}
-
-//__STATIC_INLINE uint32_t PinCH(uint16_t pin,const E_PIN_FUN_T *emap)
-//{
-//	while (!((emap->id == pin)))
-//	{
-//		if (emap->id == (uint16_t)NC){
-//			return (uint8_t)NC;
-//		}
-//		emap++;
-//	}
-//	return emap->channel;
-//}
-
-
-//#define TIM_2 			TIM2_BASE,LL_APB1_GRP1_PERIPH_TIM2,TIM2_IRQn
-//#define TIM_3 			TIM3_BASE,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn
-//#define TIM_6			TIM6_BASE,LL_APB1_GRP1_PERIPH_TIM6,TIM6_IRQn
-//#define USART_1			USART1_BASE,LL_APB1_GRP2_PERIPH_USART1,USART1_IRQn
-//#define	Periph_NC 	(uint32_t)NC
-
-//const Periph_T Usart_MAP[] = {
-//	USART_1,
-//	Periph_NC
-//};
-
-//const Periph_T Periph_MAP[] = {
-//	TIM_2,
-//	TIM_3,
-//	TIM_6,
-//	Periph_NC
-//};
-
-///**
-//  * 结构体，保存Pin_id,以及对应的外设，af信息
-//  */
-//typedef struct{
-//	uint8_t 	pin_id;
-//	uint8_t		pin_af;
-//	uint32_t 	Periph;
-//}Periph_Com_T;
-
 typedef struct{
 	E_PinID		_pin_id;		//pin_id
 	E_PinMode	_pin_date;		//pin 参数， mode，outputtyper,updown
@@ -242,7 +152,7 @@ typedef struct{
 typedef enum{
 	Irq1 = 0,
 	Irq2,
-	Irq3
+	Irq3,
 }IrqIndex_t;
 
 // 外设信息：外设基地址，时钟，中断，中断索引（中断索引需要与外设号对应，比如uart1对应irq1,i2c2对应irq2）
@@ -307,8 +217,8 @@ static const AF_FUN_S TIM_MAP[] ={
 
 static const Periph_SS TIM_INFO[]={
 	TIM1_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_TIM1,TIM1_BRK_UP_TRG_COM_IRQn,Irq1,
-	TIM3_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn,Irq1,
-	TIM2_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM2,TIM2_IRQn,Irq1,
+	TIM3_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn,Irq3,
+	TIM2_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM2,TIM2_IRQn,Irq2,
 	TIM6_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM6,TIM6_IRQn,Irq1,
 	NC
 };

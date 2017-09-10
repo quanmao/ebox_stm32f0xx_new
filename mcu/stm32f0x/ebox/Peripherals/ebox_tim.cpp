@@ -20,17 +20,16 @@
 #include "ebox_debug.h"
 
 
-#define tim_irq_handler fun_onePara_t
+
 #define TIM_IRQ_ID_NUM 5
 
-static tim_irq_handler *irq_handler;
-static uint32_t tim_irq_ids[TIM_IRQ_ID_NUM];
+static tim_irq_handler irq_handler;	   			// 声明函数指针变量，指向类的静态成员
+static uint32_t tim_irq_ids[TIM_IRQ_ID_NUM];	// 保存对象地址，供静态成员识别对象，并访问对象的普通成员
 
-int tim_irq_init(uint8_t index,tim_irq_handler *handler,uint32_t id)
+void tim_irq_init(uint8_t index,tim_irq_handler handler,uint32_t id)
 {
 	tim_irq_ids[index] = id;
 	irq_handler =  handler;
-	return 0;
 }
 
 /**
@@ -227,6 +226,15 @@ void E_base::_setMode(void){
 }
 
 /*********************************  E_TIME  *****************************************/
+/**
+ *@brief    设置定时器时间
+ *@param    uint32_t us  0-TIM时钟频率
+ *@retval   NONE
+*/
+void E_TIME::setMicrosecond(uint32_t us){
+	uint32_t frq = 1000000/us;
+	setFrequency(frq);
+}
 
 /**
  *@brief    设置定时器频率
@@ -239,6 +247,7 @@ void E_TIME::setFrequency(uint32_t frq){
 	_calculate(frq);
 	_enableClock();
 	_setPerPsc();
+	tim_irq_init(TIM_INFO[_tIndex]._irqIndex,(&E_TIME::_irq_handler),(uint32_t)this);
 }
 
 /**
@@ -276,6 +285,11 @@ void E_TIME::_setMode(void){
 */
 uint32_t E_TIME::GetMaxFrequency(void){
 	return GetClock();
+}
+
+void E_TIME::_irq_handler(uint32_t id){
+	E_TIME *hander = (E_TIME*)id;
+	hander->_pirq.call();
 }
 
 
@@ -402,6 +416,8 @@ void E_CAPTURE::begin(){
 	//_EnInterrupt();
 	NVIC_SetPriority(TIM1_CC_IRQn, 0);
 	NVIC_EnableIRQ(TIM1_CC_IRQn);
+	
+	tim_irq_init(TIM_INFO[_tIndex]._irqIndex,(&E_CAPTURE::_irq_handler),(uint32_t)this);
 	_setMode();
 	_start();
 }
@@ -593,22 +609,42 @@ void E_CAPTURE::complex_event()
 		_available = true;
 }
 
-extern E_CAPTURE cap;
+/**
+ *@brief    静态成员函数，在中断中调用，解析执行相关回调函数
+ *@param    uint32_t id 对象地址，用来识别对象；
+ *@retval   NONE
+*/
+void E_CAPTURE::_irq_handler(uint32_t id){
+	E_CAPTURE *hander = (E_CAPTURE*)id;
+	hander->_pirq.call();
+}
 
 
 extern "C" {
-	
-void TIM1_CC_IRQHandler(void)
-{
-  /* Check whether CC1 interrupt is pending */
-  if(LL_TIM_IsActiveFlag_CC1(TIM1) == 1)
-  {
-    /* Clear the update interrupt flag*/
-    LL_TIM_ClearFlag_CC1(TIM1);
 
-    /* TIM1 capture/compare interrupt processing(function defined in main.c) */
-    //cap.simple_event();
-		cap.complex_event();
-  }
-}
+	void TIM1_CC_IRQHandler(void)
+	{
+		/* Check whether CC1 interrupt is pending */
+		if (LL_TIM_IsActiveFlag_CC1(TIM1) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_CC1(TIM1);
+			/* TIM1 capture/compare interrupt processing(function defined in main.c) */
+			irq_handler(tim_irq_ids[Irq1]);
+		}
+	}
+
+	void TIM2_IRQHandler(void)
+	{
+		/* Check whether update interrupt is pending */
+		if (LL_TIM_IsActiveFlag_UPDATE(TIM2) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_UPDATE(TIM2);
+			irq_handler(tim_irq_ids[Irq2]);
+		}
+
+		/* TIM2 update interrupt processing */
+
+	}
 }

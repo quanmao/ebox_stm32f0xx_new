@@ -3,6 +3,8 @@
   * @file    example.cpp
   * @author  cat_li
   * @brief   ebox application example .
+	*		2017/9/7 	增加对象成员绑定
+	*		2017/9/10	增加函数绑定
   ******************************************************************************
   * @attention
   *
@@ -65,6 +67,18 @@ static void PrintfLogo(void)
 //E_base time(TIM2);
 E_TIME time(TIM6);
 
+class ld{
+	public:
+		void tet(void){
+		led.toggle();
+	}	
+};
+
+ld test;
+
+void tset(){
+	led.toggle();
+}
 
 void setup()
 {
@@ -72,13 +86,15 @@ void setup()
 	led.mode(OUTPUT_PP);
     usart.begin(115200);
 		
-	time.setFrequency(48000);
+	//time.setFrequency(10);
+	time.setMicrosecond(500000);
+	//time.attach(&test,&ld::tet);
+	time.attach(&tset);
 	time.start();
 }
 
 int main(void)
 {
-	uint32_t frq = 1;
 	setup();
 	PrintfLogo();
 	while (1)

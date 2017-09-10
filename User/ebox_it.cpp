@@ -39,7 +39,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ebox_core.h"
-#include "timer_it.h"
+//#include "timer_it.h"
 #include "stm32f0xx_ll_tim.h"
 #include "stm32f0xx_ll_adc.h"
 
@@ -88,22 +88,22 @@ void ADC1_COMP_IRQHandler(void)
 }
 #include "ebox_gpio.h"
 extern E_GPIO led;
-void TIM2_IRQHandler(void)
-{
-  /* Check whether update interrupt is pending */
-  if(LL_TIM_IsActiveFlag_UPDATE(TIM2) == 1)
-  {
-    /* Clear the update interrupt flag*/
-		
-    LL_TIM_ClearFlag_UPDATE(TIM2);
-		led.toggle();
+//void TIM2_IRQHandler(void)
+//{
+//  /* Check whether update interrupt is pending */
+//  if(LL_TIM_IsActiveFlag_UPDATE(TIM2) == 1)
+//  {
+//    /* Clear the update interrupt flag*/
+//		
+//    LL_TIM_ClearFlag_UPDATE(TIM2);
+//		led.toggle();
 
-//	irq_handler(tim_irq_ids[0]);
-  }
-  
-  /* TIM2 update interrupt processing */
+////	irq_handler(tim_irq_ids[0]);
+//  }
+//  
+//  /* TIM2 update interrupt processing */
 
-}
+//}
 
 void TIM6_DAC_IRQHandler(void)
 {
@@ -153,9 +153,9 @@ void TIM3_IRQHandler(void)
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
 	if (LL_TIM_IsActiveFlag_UPDATE(TIM1))
 	{
-		t1_overflow_times++;
-		//tim_irq_callback(TIM3_IT_Update);
 		LL_TIM_ClearFlag_UPDATE(TIM1);
+		t1_overflow_times++;
+		//tim_irq_callback(TIM3_IT_Update);		
 	}	
 }
 
