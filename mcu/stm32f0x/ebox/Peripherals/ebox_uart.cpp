@@ -63,9 +63,11 @@ void begin(uint32_t speed,uint8_t data_bit, uint8_t parity, float stop_bit,uint8
 	uint32_t data,par,stop;
 	switch (data_bit)
 	{
+#if !defined(STM32F030x6)
 	case 7:
 		data = LL_USART_DATAWIDTH_7B;
 		break;
+#endif
 	case 8:
 		data = LL_USART_DATAWIDTH_8B;
 		break;
@@ -91,13 +93,20 @@ void begin(uint32_t speed,uint8_t data_bit, uint8_t parity, float stop_bit,uint8
 		par = LL_USART_PARITY_NONE;
 		break;
 	}
+#if !defined(STM32F030x6)
 	if (stop_bit == 0.5)
 		stop = LL_USART_STOPBITS_0_5;
-	else if (stop_bit == 1)
+	else 
+#endif
+			 if (stop_bit == 1)
 		stop = LL_USART_STOPBITS_1;
-	else if (stop_bit == 1.5)
+	else 
+#if !defined(STM32F030x6)
+		if (stop_bit == 1.5)
 		stop = LL_USART_STOPBITS_1_5;
-	else if (stop_bit == 2)
+	else 
+#endif		
+		if (stop_bit == 2)
 		stop = LL_USART_STOPBITS_2;
 	else
 		stop = LL_USART_STOPBITS_1;

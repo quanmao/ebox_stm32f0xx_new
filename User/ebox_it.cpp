@@ -86,8 +86,8 @@ void ADC1_COMP_IRQHandler(void)
   }
 
 }
-#include "ebox_gpio.h"
-extern E_GPIO led;
+//#include "ebox_gpio.h"
+//extern E_GPIO led;
 //void TIM2_IRQHandler(void)
 //{
 //  /* Check whether update interrupt is pending */
@@ -104,12 +104,13 @@ extern E_GPIO led;
 //  /* TIM2 update interrupt processing */
 
 //}
-
+#if !defined(STM32F030x6)
 void TIM6_DAC_IRQHandler(void)
 {
 	LL_TIM_ClearFlag_UPDATE(TIM6);
-	led.toggle();
+//	led.toggle();
 }
+#endif
 
 //void TIM2_IRQHandler(void)
 //{

@@ -24,7 +24,8 @@
 #define DEMO_VER			"1.0"
 
 // ´®¿Ú£¬led
-E_UART usart(USART1,PA_9,PA_10);
+//E_UART usart(USART1,PA_9,PA_10);
+E_UART usart(USART1,PA_2,PA_3);
 E_GPIO led(PA_5);
 
 /*
@@ -61,9 +62,10 @@ static void PrintfLogo(void)
 	usart.printf("*************************************************************\n\r");
 }
 
-#define IC1  I2C1,PB_8,PB_9
-#define	IC21314	I2C2,PB_13,PB_14
-E_I2C i2c(IC21314);
+//#define IC1  I2C1,PB_8,PB_9
+#define IC1  I2C1,I2C1_SCL,I2C1_SDA
+//#define	IC21314	I2C2,PB_13,PB_14
+E_I2C i2c(IC1);
 
 void setup()
 {

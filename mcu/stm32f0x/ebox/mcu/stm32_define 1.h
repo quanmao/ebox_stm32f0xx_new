@@ -55,10 +55,9 @@
 #define STM_MODE_EVT_RISING_FALLING (11)
 #define STM_MODE_IT_EVT_RESET       (12)
 
-/* structure --------------------------------------------------------------- */
-
 /**
- * @brief  GPIO mode相关参数定义
+ * @brief  GPIO mode相关参数定义，注意:E_PinMode(@enum)里的顺序必须和E_PinMode_MAP[]
+ * 保持一致;通过E_PinMode_MAP[OUTPUT_OD].mode方式访问
  ********************************************************************************/
 typedef enum
 {
@@ -86,57 +85,195 @@ typedef enum
 }E_PinMode;///<gpio的模式
 
 /**
-  * @brief  GPIO枚举，利用Pin_ID将端口和pin合并，方便使用。
-  * 保持一致
+ *@brief  外设相关
+ *
  ********************************************************************************/
-typedef enum{
-	E_PORTA = 0x00,
-	E_PORTB = 0x10,
-	E_PORTC = 0x20,
-	E_PORTD = 0x30,
-	E_PORTE = 0x40,
-	E_PORTF = 0x50
-}E_Port;
-
-typedef enum{
-	PA_0 = E_PORTA|0, PA_1,PA_2,PA_3,PA_4,PA_5,PA_6,PA_7,PA_8,PA_9,PA_10,PA_11,PA_12,PA_13,PA_14,PA_15,
-	PB_0 = E_PORTB|0, PB_1,PB_2,PB_3,PB_4,PB_5,PB_6,PB_7,PB_8,PB_9,PB_10,PB_11,PB_12,PB_13,PB_14,PB_15,
-	PC_0 = E_PORTC|0, PC_1,PC_2,PC_3,PC_4,PC_5,PC_6,PC_7,PC_8,PC_9,PC_10,PC_11,PC_12,PC_13,PC_14,PC_15,
-	PD_0 = E_PORTD|0, PD_1,PD_2,PD_3,PD_4,PD_5,PD_6,PD_7,PD_8,PD_9,PD_10,PD_11,PD_12,PD_13,PD_14,PD_15,
-	PE_0 = E_PORTE|0, PE_1,PE_2,PE_3,PE_4,PE_5,PE_6,PE_7,PE_8,PE_9,PE_10,PE_11,PE_12,PE_13,PE_14,PE_15,
-	PF_0 = E_PORTF|0, PF_1,PF_2,PF_3,PF_4,PF_5,PF_6,PF_7,PF_8,PF_9,PF_10,PF_11,PF_12,PF_13,PF_14,PF_15,
-	P_NC = (int)0xff
-}E_PinID;
+typedef struct{
+	uint32_t id;
+	uint32_t periph;
+	uint32_t channel;
+	uint8_t  alternate;
+}E_PIN_FUN_T;
 
 typedef struct{
-	E_PinID		_pin_id;		//pin_id
-	E_PinMode	_pin_date;	//pin 参数， mode，outputtyper,updown
+	uint8_t		_pin_id;		//pin_id
+	E_PinMode	_pin_date;		//pin 参数， mode，outputtyper,updown
 	uint8_t		_pin_af;		//af功能
 	uint32_t	_periph_OR_ch;	//外设名或通道号
 }AF_FUN_S;
 
-// 中断索引信息,用于中断初始化
-typedef enum{
-	Irq1 = 0,
-	Irq2,
-	Irq3,
-}IrqIndex_t;
+//#define STM32F030x6
 
-// 外设信息：外设基地址，时钟，中断，中断索引（中断索引需要与外设号对应，比如uart1对应irq1,i2c2对应irq2）
-typedef struct{
-	uint32_t 	_periph_base;
-	uint32_t 	_rcc;
-	IRQn_Type	_irq;
-	IrqIndex_t 	_irqIndex;
-}Periph_S;
+#if defined (STM32F030x6)
+#include "stm32f030_define.h"
+#endif
+#include "stm32f030_define.h"
+/**
+ *@brief    根据Pin_id获取对应外设索引
+ *@param    Periph 外设基地址，类似 USART1_BASE  *emap 保存外设信息的数组
+ *@retval   对应外设在数组中的索引；0xff 外设信息不存在
+*/
+__STATIC_INLINE uint8_t getPeriphIndex(uint32_t periph_base,const Periph_S *emap)
+{
+	uint8_t i = 0;
+	while (!((emap+i)->_periph_base  == periph_base ))
+	{
+		if ((emap+i)->_periph_base == NC){
+			return (uint8_t)NC;
+		}
+		i++;
+	}
+	return i;
+}
 
-typedef struct{
-	uint32_t 	_base;
-	fun_onePara_t	_EnableClock;
-	uint32_t 	_rcc;
-	IRQn_Type	_irq;
-	IrqIndex_t 	_irqIndex;
-}Periph_SS;
+__STATIC_INLINE uint8_t getPeriphIndex1(uint32_t periph_base,const Periph_SS *emap)
+{
+	uint8_t i = 0;
+	while (!((emap+i)->_base  == periph_base ))
+	{
+		if ((emap+i)->_base == NC){
+			return (uint8_t)NC;
+		}
+		i++;
+	}
+	return i;
+}
+
+/**
+ *@brief    根据Pin_id获取对应外设索引
+ *@param    val：1：输出高电平；0：输出低电平
+ *@retval   NONE
+*/
+__STATIC_INLINE uint8_t getIndex(E_PinID pin_id,const AF_FUN_S *emap)
+{
+	uint8_t i = 0;
+	while (!((emap+i)->_pin_id  == pin_id ))
+	{
+		if ((E_PinID)(emap+i)->_pin_id == P_NC){
+			return (uint8_t)NC;
+		}
+		i++;
+	}
+	return i;
+}
+
+
+
+/* structure --------------------------------------------------------------- */
+
+///**
+//  * @brief  GPIO枚举，利用Pin_ID将端口和pin合并，方便使用。
+//  * 保持一致
+// ********************************************************************************/
+//typedef enum{
+//	E_PORTA = 0x00,
+//	E_PORTB = 0x10,
+//	E_PORTC = 0x20,
+//	E_PORTD = 0x30,
+//	E_PORTE = 0x40,
+//	E_PORTF = 0x50
+//}E_Port;
+
+//typedef enum{
+//	PA_0 = E_PORTA|0, PA_1,PA_2,PA_3,PA_4,PA_5,PA_6,PA_7,PA_8,PA_9,PA_10,PA_11,PA_12,PA_13,PA_14,PA_15,
+//	PB_0 = E_PORTB|0, PB_1,PB_2,PB_3,PB_4,PB_5,PB_6,PB_7,PB_8,PB_9,PB_10,PB_11,PB_12,PB_13,PB_14,PB_15,
+//	PC_0 = E_PORTC|0, PC_1,PC_2,PC_3,PC_4,PC_5,PC_6,PC_7,PC_8,PC_9,PC_10,PC_11,PC_12,PC_13,PC_14,PC_15,
+//	PD_0 = E_PORTD|0, PD_1,PD_2,PD_3,PD_4,PD_5,PD_6,PD_7,PD_8,PD_9,PD_10,PD_11,PD_12,PD_13,PD_14,PD_15,
+//	PE_0 = E_PORTE|0, PE_1,PE_2,PE_3,PE_4,PE_5,PE_6,PE_7,PE_8,PE_9,PE_10,PE_11,PE_12,PE_13,PE_14,PE_15,
+//	PF_0 = E_PORTF|0, PF_1,PF_2,PF_3,PF_4,PF_5,PF_6,PF_7,PF_8,PF_9,PF_10,PF_11,PF_12,PF_13,PF_14,PF_15,
+//	P_NC = (int)0xffffffff
+//}E_PinID;
+
+//	
+///**
+// * @brief  GPIO mode相关参数定义，注意:E_PinMode(@enum)里的顺序必须和E_PinMode_MAP[]
+// * 保持一致;通过E_PinMode_MAP[OUTPUT_OD].mode方式访问
+// ********************************************************************************/
+//typedef enum
+//{
+//	OUTPUT_PP  		= PIN_DATA(MODE_OUTPUT,OTYPER_PP,PULLNO),
+//	OUTPUT_PP_PD 	= PIN_DATA(MODE_OUTPUT,OTYPER_PP,PULLDOWN),
+//	OUTPUT_PP_PU    = PIN_DATA(MODE_OUTPUT,OTYPER_PP,PULLUP),
+
+//	OUTPUT_OD       = PIN_DATA(MODE_OUTPUT,OTYPER_OD,PULLNO),
+//	OUTPUT_OD_PD    = PIN_DATA(MODE_OUTPUT,OTYPER_OD,PULLDOWN),
+//	OUTPUT_OD_PU    = PIN_DATA(MODE_OUTPUT,OTYPER_OD,PULLUP),
+
+//	AIN             = PIN_DATA(MODE_ANALOG,OTYPER_PP,PULLNO),
+
+//	INPUT           = PIN_DATA(MODE_INPUT,OTYPER_PP,PULLNO),
+//	INPUT_PD        = PIN_DATA(MODE_INPUT,OTYPER_PP,PULLDOWN),
+//	INPUT_PU        = PIN_DATA(MODE_INPUT,OTYPER_PP,PULLUP),
+
+//	AF_OD           = PIN_DATA(MODE_AF,OTYPER_OD,PULLNO),  //10
+//	AF_OD_PD        = PIN_DATA(MODE_AF,OTYPER_OD,PULLDOWN),
+//	AF_OD_PU        = PIN_DATA(MODE_AF,OTYPER_OD,PULLUP),
+
+//	AF_PP           = PIN_DATA(MODE_AF,OTYPER_PP,PULLNO),  //11
+//	AF_PP_PD        = PIN_DATA(MODE_AF,OTYPER_PP,PULLDOWN),
+//	AF_PP_PU        = PIN_DATA(MODE_AF,OTYPER_PP,PULLUP),
+//}E_PinMode;///<gpio的模式
+
+///**
+// *@brief  GPIO PORT相关
+// *
+// ********************************************************************************/
+//typedef struct{
+//	GPIO_TypeDef* port;
+//	uint32_t Periphs;
+//}E_PORT_T;
+
+//#define EGPIOA {GPIOA,LL_AHB1_GRP1_PERIPH_GPIOA}
+//#define EGPIOB {GPIOB,LL_AHB1_GRP1_PERIPH_GPIOB}
+//#define EGPIOC {GPIOC,LL_AHB1_GRP1_PERIPH_GPIOC}
+
+//const E_PORT_T E_PORT_MAP[] =
+//{
+//	EGPIOA,
+//	EGPIOB,
+//	EGPIOC
+//};
+
+///**
+// *@brief  外设相关
+// *
+// ********************************************************************************/
+//typedef struct{
+//	uint32_t id;
+//	uint32_t periph;
+//	uint32_t channel;
+//	uint8_t  alternate;
+//}E_PIN_FUN_T;
+
+//typedef struct{
+//	E_PinID		_pin_id;		//pin_id
+//	E_PinMode	_pin_date;		//pin 参数， mode，outputtyper,updown
+//	uint8_t		_pin_af;		//af功能
+//	uint32_t	_periph_OR_ch;	//外设名或通道号
+//}AF_FUN_S;
+
+//// 中断索引信息,用于中断初始化
+//typedef enum{
+//	Irq1 = 0,
+//	Irq2,
+//	Irq3,
+//}IrqIndex_t;
+
+//// 外设信息：外设基地址，时钟，中断，中断索引（中断索引需要与外设号对应，比如uart1对应irq1,i2c2对应irq2）
+//typedef struct{
+//	uint32_t 	_periph_base;
+//	uint32_t 	_rcc;
+//	IRQn_Type	_irq;
+//	IrqIndex_t 	_irqIndex;
+//}Periph_S;
+
+//typedef struct{
+//	uint32_t 	_base;
+//	fun_onePara_t	_EnableClock;
+//	uint32_t 	_rcc;
+//	IRQn_Type	_irq;
+//	IrqIndex_t 	_irqIndex;
+//}Periph_SS;
 
 //#include "stm32f0xx_ll_adc.h"
 //static const AF_FUN_S ADC_MAP[] = {
@@ -232,57 +369,5 @@ typedef struct{
 //	I2C2_BASE,LL_APB1_GRP1_PERIPH_I2C2,I2C2_IRQn,Irq2,
 //	NC
 //};
-
-
-/**
- *@brief    根据Pin_id获取对应外设索引
- *@param    Periph 外设基地址，类似 USART1_BASE  *emap 保存外设信息的数组
- *@retval   对应外设在数组中的索引；0xff 外设信息不存在
-*/
-__STATIC_INLINE uint8_t getPeriphIndex(uint32_t periph_base,const Periph_S *emap)
-{
-	uint8_t i = 0;
-	while (!((emap+i)->_periph_base  == periph_base ))
-	{
-		if ((emap+i)->_periph_base == NC){
-			return (uint8_t)NC;
-		}
-		i++;
-	}
-	return i;
-}
-
-__STATIC_INLINE uint8_t getPeriphIndex1(uint32_t periph_base,const Periph_SS *emap)
-{
-	uint8_t i = 0;
-	while (!((emap+i)->_base  == periph_base ))
-	{
-		if ((emap+i)->_base == NC){
-			return (uint8_t)NC;
-		}
-		i++;
-	}
-	return i;
-}
-
-/**
- *@brief    根据Pin_id获取对应外设索引
- *@param    val：1：输出高电平；0：输出低电平
- *@retval   NONE
-*/
-__STATIC_INLINE uint8_t getIndex(E_PinID pin_id,const AF_FUN_S *emap)
-{
-	uint8_t i = 0;
-	while (!((emap+i)->_pin_id  == pin_id ))
-	{
-		if ((emap+i)->_pin_id == P_NC){
-			return (uint8_t)NC;
-		}
-		i++;
-	}
-	return i;
-}
-
-
 
 #endif

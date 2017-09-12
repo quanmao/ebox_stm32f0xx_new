@@ -24,7 +24,8 @@
 #define DEMO_VER			"1.0"
 
 E_GPIO PA5(PA_5);
-E_UART usart(USART1,PA_9,PA_10);
+//E_UART usart(USART1,PA_9,PA_10);
+E_UART usart(USART1,PA_2,PA_3);
 
 /*
 *********************************************************************************************************
@@ -86,7 +87,8 @@ int main(void)
     {
         usart.printf("hello World !\r\n");
         usart.printf("stm32f0 usart print %d \r\n");
-        delay_ms(1000);
+				//PA5.toggle();
+        delay_ms(5000);
     }
 }
 

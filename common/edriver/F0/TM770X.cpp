@@ -10,6 +10,7 @@
 		NO.3-	 2017/7/8 	移植到ebox stm32f0版本		
 ******************************************************************************/
 #include "TM770X.h"
+#include "ebox_debug.h"
 
 /* 设置寄存器bit定义 8位 MD1,MD0,G2,G1,G0,BU,BUF,FSYNC  默认0x01 */
 enum
@@ -94,7 +95,7 @@ void TM770X::sapmlingRate(rate5_t rate,clock_T clk){
  *@param    NONE
  *@retval   NONE
 */
-extern E_UART usart;
+
 void TM770X::_readReg()
 {
 ////	usart.print("/***************************/");
@@ -240,7 +241,7 @@ void TM770X::_waitDRDY(uint32_t tOut){
 		_syncclock();
 		calibself(CH_1);
 		calibself(CH_2);
-//		uart1.printf("超时复位 ***********\n");
+		DBG("超时复位 ***********\n");
 	}
 }
 

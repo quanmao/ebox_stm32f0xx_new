@@ -58,7 +58,32 @@
 /* structure --------------------------------------------------------------- */
 
 /**
- * @brief  GPIO mode相关参数定义
+  * @brief  GPIO枚举，利用Pin_ID将端口和pin合并，方便使用。
+  * 保持一致
+ ********************************************************************************/
+typedef enum{
+	E_PORTA = 0x00,
+	E_PORTB = 0x10,
+	E_PORTC = 0x20,
+	E_PORTD = 0x30,
+	E_PORTE = 0x40,
+	E_PORTF = 0x50
+}E_Port;
+
+typedef enum{
+	PA_0 = E_PORTA|0, PA_1,PA_2,PA_3,PA_4,PA_5,PA_6,PA_7,PA_8,PA_9,PA_10,PA_11,PA_12,PA_13,PA_14,PA_15,
+	PB_0 = E_PORTB|0, PB_1,PB_2,PB_3,PB_4,PB_5,PB_6,PB_7,PB_8,PB_9,PB_10,PB_11,PB_12,PB_13,PB_14,PB_15,
+	PC_0 = E_PORTC|0, PC_1,PC_2,PC_3,PC_4,PC_5,PC_6,PC_7,PC_8,PC_9,PC_10,PC_11,PC_12,PC_13,PC_14,PC_15,
+	PD_0 = E_PORTD|0, PD_1,PD_2,PD_3,PD_4,PD_5,PD_6,PD_7,PD_8,PD_9,PD_10,PD_11,PD_12,PD_13,PD_14,PD_15,
+	PE_0 = E_PORTE|0, PE_1,PE_2,PE_3,PE_4,PE_5,PE_6,PE_7,PE_8,PE_9,PE_10,PE_11,PE_12,PE_13,PE_14,PE_15,
+	PF_0 = E_PORTF|0, PF_1,PF_2,PF_3,PF_4,PF_5,PF_6,PF_7,PF_8,PF_9,PF_10,PF_11,PF_12,PF_13,PF_14,PF_15,
+	P_NC = (int)0xffffffff
+}E_PinID;
+
+	
+/**
+ * @brief  GPIO mode相关参数定义，注意:E_PinMode(@enum)里的顺序必须和E_PinMode_MAP[]
+ * 保持一致;通过E_PinMode_MAP[OUTPUT_OD].mode方式访问
  ********************************************************************************/
 typedef enum
 {
@@ -86,31 +111,39 @@ typedef enum
 }E_PinMode;///<gpio的模式
 
 /**
-  * @brief  GPIO枚举，利用Pin_ID将端口和pin合并，方便使用。
-  * 保持一致
+ *@brief  GPIO PORT相关
+ *
  ********************************************************************************/
-typedef enum{
-	E_PORTA = 0x00,
-	E_PORTB = 0x10,
-	E_PORTC = 0x20,
-	E_PORTD = 0x30,
-	E_PORTE = 0x40,
-	E_PORTF = 0x50
-}E_Port;
+typedef struct{
+	GPIO_TypeDef* port;
+	uint32_t Periphs;
+}E_PORT_T;
 
-typedef enum{
-	PA_0 = E_PORTA|0, PA_1,PA_2,PA_3,PA_4,PA_5,PA_6,PA_7,PA_8,PA_9,PA_10,PA_11,PA_12,PA_13,PA_14,PA_15,
-	PB_0 = E_PORTB|0, PB_1,PB_2,PB_3,PB_4,PB_5,PB_6,PB_7,PB_8,PB_9,PB_10,PB_11,PB_12,PB_13,PB_14,PB_15,
-	PC_0 = E_PORTC|0, PC_1,PC_2,PC_3,PC_4,PC_5,PC_6,PC_7,PC_8,PC_9,PC_10,PC_11,PC_12,PC_13,PC_14,PC_15,
-	PD_0 = E_PORTD|0, PD_1,PD_2,PD_3,PD_4,PD_5,PD_6,PD_7,PD_8,PD_9,PD_10,PD_11,PD_12,PD_13,PD_14,PD_15,
-	PE_0 = E_PORTE|0, PE_1,PE_2,PE_3,PE_4,PE_5,PE_6,PE_7,PE_8,PE_9,PE_10,PE_11,PE_12,PE_13,PE_14,PE_15,
-	PF_0 = E_PORTF|0, PF_1,PF_2,PF_3,PF_4,PF_5,PF_6,PF_7,PF_8,PF_9,PF_10,PF_11,PF_12,PF_13,PF_14,PF_15,
-	P_NC = (int)0xff
-}E_PinID;
+#define EGPIOA {GPIOA,LL_AHB1_GRP1_PERIPH_GPIOA}
+#define EGPIOB {GPIOB,LL_AHB1_GRP1_PERIPH_GPIOB}
+#define EGPIOC {GPIOC,LL_AHB1_GRP1_PERIPH_GPIOC}
+
+const E_PORT_T E_PORT_MAP[] =
+{
+	EGPIOA,
+	EGPIOB,
+	EGPIOC
+};
+
+/**
+ *@brief  外设相关
+ *
+ ********************************************************************************/
+typedef struct{
+	uint32_t id;
+	uint32_t periph;
+	uint32_t channel;
+	uint8_t  alternate;
+}E_PIN_FUN_T;
 
 typedef struct{
 	E_PinID		_pin_id;		//pin_id
-	E_PinMode	_pin_date;	//pin 参数， mode，outputtyper,updown
+	E_PinMode	_pin_date;		//pin 参数， mode，outputtyper,updown
 	uint8_t		_pin_af;		//af功能
 	uint32_t	_periph_OR_ch;	//外设名或通道号
 }AF_FUN_S;
@@ -138,100 +171,100 @@ typedef struct{
 	IrqIndex_t 	_irqIndex;
 }Periph_SS;
 
-//#include "stm32f0xx_ll_adc.h"
-//static const AF_FUN_S ADC_MAP[] = {
-//	PA_0,AIN,0,LL_ADC_CHANNEL_0,
-//	PA_1,AIN,0,LL_ADC_CHANNEL_1,
-//	PA_2,AIN,0,LL_ADC_CHANNEL_2,
-//	PA_3,AIN,0,LL_ADC_CHANNEL_3,
-//	PA_4,AIN,0,LL_ADC_CHANNEL_4,
-//	PA_5,AIN,0,LL_ADC_CHANNEL_5,
-//	PA_6,AIN,0,LL_ADC_CHANNEL_6,
-//	PA_7,AIN,0,LL_ADC_CHANNEL_7,
-//	
-//	PB_0,AIN,0,LL_ADC_CHANNEL_8,
-//	PB_1,AIN,0,LL_ADC_CHANNEL_9,
-//	
-//	PC_0,AIN,0,LL_ADC_CHANNEL_10,
-//	PC_1,AIN,0,LL_ADC_CHANNEL_11,
-//	PC_2,AIN,0,LL_ADC_CHANNEL_12,
-//	PC_3,AIN,0,LL_ADC_CHANNEL_13,
-//	PC_4,AIN,0,LL_ADC_CHANNEL_14,
-//	PC_5,AIN,0,LL_ADC_CHANNEL_15,
-//	
-//	P_NC
-//};
+#include "stm32f0xx_ll_adc.h"
+static const AF_FUN_S ADC_MAP[] = {
+	PA_0,AIN,0,LL_ADC_CHANNEL_0,
+	PA_1,AIN,0,LL_ADC_CHANNEL_1,
+	PA_2,AIN,0,LL_ADC_CHANNEL_2,
+	PA_3,AIN,0,LL_ADC_CHANNEL_3,
+	PA_4,AIN,0,LL_ADC_CHANNEL_4,
+	PA_5,AIN,0,LL_ADC_CHANNEL_5,
+	PA_6,AIN,0,LL_ADC_CHANNEL_6,
+	PA_7,AIN,0,LL_ADC_CHANNEL_7,
+	
+	PB_0,AIN,0,LL_ADC_CHANNEL_8,
+	PB_1,AIN,0,LL_ADC_CHANNEL_9,
+	
+	PC_0,AIN,0,LL_ADC_CHANNEL_10,
+	PC_1,AIN,0,LL_ADC_CHANNEL_11,
+	PC_2,AIN,0,LL_ADC_CHANNEL_12,
+	PC_3,AIN,0,LL_ADC_CHANNEL_13,
+	PC_4,AIN,0,LL_ADC_CHANNEL_14,
+	PC_5,AIN,0,LL_ADC_CHANNEL_15,
+	
+	P_NC
+};
 
-//#define TIMxCH1 0x01
-//#define TIMxCH2 0x02
-//#define TIMxCH3 0x03
-//#define TIMxCH4 0x04
+#define TIMxCH1 0x01
+#define TIMxCH2 0x02
+#define TIMxCH3 0x03
+#define TIMxCH4 0x04
 
-//static const AF_FUN_S TIM_MAP[] ={
-//	// TIM3,CH1,CH2
-//	PA_6,AF_PP,LL_GPIO_AF_1,TIMxCH1,
-//	PA_7,AF_PP,LL_GPIO_AF_1,TIMxCH2,
-//	// TIM2,CH2,CH3,CH4
-//	PA_5,AF_PP,LL_GPIO_AF_2,TIMxCH1,
-//	PA_0,AF_PP,LL_GPIO_AF_2,TIMxCH1,
-//	PA_1,AF_PP,LL_GPIO_AF_2,TIMxCH2,
-//	PA_2,AF_PP,LL_GPIO_AF_2,TIMxCH3,
-//	PA_3,AF_PP,LL_GPIO_AF_2,TIMxCH4,
-//	// TIM1,CH1
-//	PA_8,AF_PP,LL_GPIO_AF_2,TIMxCH1,
-//	P_NC
-//};
+static const AF_FUN_S TIM_MAP[] ={
+	// TIM3,CH1,CH2
+	PA_6,AF_PP,LL_GPIO_AF_1,TIMxCH1,
+	PA_7,AF_PP,LL_GPIO_AF_1,TIMxCH2,
+	// TIM2,CH2,CH3,CH4
+	PA_5,AF_PP,LL_GPIO_AF_2,TIMxCH1,
+	PA_0,AF_PP,LL_GPIO_AF_2,TIMxCH1,
+	PA_1,AF_PP,LL_GPIO_AF_2,TIMxCH2,
+	PA_2,AF_PP,LL_GPIO_AF_2,TIMxCH3,
+	PA_3,AF_PP,LL_GPIO_AF_2,TIMxCH4,
+	// TIM1,CH1
+	PA_8,AF_PP,LL_GPIO_AF_2,TIMxCH1,
+	P_NC
+};
 
-//static const Periph_SS TIM_INFO[]={
-//	TIM1_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_TIM1,TIM1_BRK_UP_TRG_COM_IRQn,Irq1,
-//	TIM3_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn,Irq3,
-//	TIM2_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM2,TIM2_IRQn,Irq2,
-//	TIM6_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM6,TIM6_IRQn,Irq1,
-//	NC
-//};
+static const Periph_SS TIM_INFO[]={
+	TIM1_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_TIM1,TIM1_BRK_UP_TRG_COM_IRQn,Irq1,
+	TIM3_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn,Irq3,
+	TIM2_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM2,TIM2_IRQn,Irq2,
+	TIM6_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM6,TIM6_IRQn,Irq1,
+	NC
+};
 
-//static const AF_FUN_S SPI_MAP[] = {
-//	PA_5,AF_PP_PU,0,SPI1_BASE,
-//	PA_6,AF_PP_PU,0,SPI1_BASE,
-//	PA_7,AF_PP_PU,0,SPI1_BASE,
-//	P_NC
-//};
-//		
-//static const Periph_S SPI_INFO[] = {
-//	SPI1_BASE,LL_APB1_GRP2_PERIPH_SPI1,USART1_IRQn,Irq1,
-//	NC
-//};
-//	
-//static const AF_FUN_S UART_MAP[] ={
-//	PA_9,AF_PP_PU,LL_GPIO_AF_1,USART1_BASE,
-//	PA_10,AF_PP_PU,LL_GPIO_AF_1,USART1_BASE,
-//	P_NC
-//};
+static const AF_FUN_S SPI_MAP[] = {
+	PA_5,AF_PP_PU,0,SPI1_BASE,
+	PA_6,AF_PP_PU,0,SPI1_BASE,
+	PA_7,AF_PP_PU,0,SPI1_BASE,
+	P_NC
+};
+		
+static const Periph_S SPI_INFO[] = {
+	SPI1_BASE,LL_APB1_GRP2_PERIPH_SPI1,USART1_IRQn,Irq1,
+	NC
+};
+	
+static const AF_FUN_S UART_MAP[] ={
+	PA_9,AF_PP_PU,LL_GPIO_AF_1,USART1_BASE,
+	PA_10,AF_PP_PU,LL_GPIO_AF_1,USART1_BASE,
+	P_NC
+};
 
-//static const Periph_S UART_INFO[] = {
-//	USART1_BASE,LL_APB1_GRP2_PERIPH_USART1,USART1_IRQn,Irq1,
-//	NC
-//};
-//	
-//static const AF_FUN_S I2C_MAP[]={
-//	// i2c1
-//	PB_6,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
-//	PB_7,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
-//	PB_8,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
-//	PB_9,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
-//	// i2c2
-//	PB_10,AF_PP_PU,LL_GPIO_AF_1,I2C2_BASE,
-//	PB_11,AF_PP_PU,LL_GPIO_AF_1,I2C2_BASE,
-//	PB_13,AF_PP_PU,LL_GPIO_AF_5,I2C2_BASE,
-//	PB_14,AF_PP_PU,LL_GPIO_AF_5,I2C2_BASE,
-//	P_NC
-//};
+static const Periph_S UART_INFO[] = {
+	USART1_BASE,LL_APB1_GRP2_PERIPH_USART1,USART1_IRQn,Irq1,
+	NC
+};
+	
+static const AF_FUN_S I2C_MAP[]={
+	// i2c1
+	PB_6,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_7,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_8,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	PB_9,AF_PP_PU,LL_GPIO_AF_1,I2C1_BASE,
+	// i2c2
+	PB_10,AF_PP_PU,LL_GPIO_AF_1,I2C2_BASE,
+	PB_11,AF_PP_PU,LL_GPIO_AF_1,I2C2_BASE,
+	PB_13,AF_PP_PU,LL_GPIO_AF_5,I2C2_BASE,
+	PB_14,AF_PP_PU,LL_GPIO_AF_5,I2C2_BASE,
+	P_NC
+};
 
-//static const Periph_S I2C_INFO[] ={
-//	I2C1_BASE,LL_APB1_GRP1_PERIPH_I2C1,I2C1_IRQn,Irq1,
-//	I2C2_BASE,LL_APB1_GRP1_PERIPH_I2C2,I2C2_IRQn,Irq2,
-//	NC
-//};
+static const Periph_S I2C_INFO[] ={
+	I2C1_BASE,LL_APB1_GRP1_PERIPH_I2C1,I2C1_IRQn,Irq1,
+	I2C2_BASE,LL_APB1_GRP1_PERIPH_I2C2,I2C2_IRQn,Irq2,
+	NC
+};
 
 
 /**

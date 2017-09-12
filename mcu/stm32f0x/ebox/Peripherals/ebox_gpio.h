@@ -23,7 +23,7 @@
 #ifndef __EBOX_GPIO_H_
 #define __EBOX_GPIO_H_
 
-#include "stm32_define.h"
+#include "target_mcu.h"
 
 /**
   *@brief ebox gpio接口基类，仅在使用af功能时创建。不具备读写功能
@@ -143,7 +143,5 @@ public:
 
 private:
     E_GPIO *_pins[16];
-//    uint32_t _mask;
-
 };
 #endif

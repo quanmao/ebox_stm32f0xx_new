@@ -198,8 +198,10 @@ E_ADC::E_ADC(ADC_CH ch){
 		_interChannel |= LL_ADC_PATH_INTERNAL_TEMPSENSOR;
 		break;
 	case 1:
+#if !defined(STM32F030x6)
 		_channel = LL_ADC_CHANNEL_VBAT;
 		_interChannel |= LL_ADC_PATH_INTERNAL_VBAT;
+#endif
 	 	break;
 	}
 	_setInterChannel();

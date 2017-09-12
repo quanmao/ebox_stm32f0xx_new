@@ -633,7 +633,7 @@ extern "C" {
 			irq_handler(tim_irq_ids[Irq1]);
 		}
 	}
-
+#if !defined(STM32F030x6)
 	void TIM2_IRQHandler(void)
 	{
 		/* Check whether update interrupt is pending */
@@ -643,8 +643,7 @@ extern "C" {
 			LL_TIM_ClearFlag_UPDATE(TIM2);
 			irq_handler(tim_irq_ids[Irq2]);
 		}
-
 		/* TIM2 update interrupt processing */
-
 	}
+#endif
 }
