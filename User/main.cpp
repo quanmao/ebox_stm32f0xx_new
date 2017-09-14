@@ -15,92 +15,69 @@
 #include "ebox.h"
 #include <stdio.h>
 #include "LiquidCrystal_I2C.h"
-////#include "driver_led.h"
-////#include "filter.h"
-//#include "INA219.h"
+#include "INA219.h"
+#include "ebox_debug.h"
 
-#define i2c189 		I2C1,PB_8,PB_9
-#define	i2c21314	I2C2,PB_13,PB_14
+#define IC1  I2C1,I2C1_SCL,I2C1_SDA
 
-//E_GPIO PA5(PA_5);
+
+E_GPIO PA5(PA_5);
 E_GPIO led(PA_5);
-E_I2C ic(i2c21314);
-//INA219 ina219(&ic,0x80);
+E_I2C ic(IC1);
+INA219 ina219(&ic,0x80);
 LiquidCrystal_I2C lcd1(&ic,0x4e,16,2);
-E_UART usart(USART1,PA_9,PA_10);
-
-//void rxirq(void){
-//	PA5 = 1;
-//}
+E_UART usart(USART1,PA_2,PA_3);
 
 int main(){
-//	float v;
+	float bv;
+	int32_t current,p;
 //	
 	  ebox_init();
-//	  usart.begin(115200);
-//	  PA5.mode(OUTPUT_PP);
+	  usart.begin(115200);
+	  PA5.mode(OUTPUT_PP);
 		ic.begin(100);
-////		ina219.begin();
-////		ina219.autoCalibration(16,400,100);
-////		usart.attach(&PA5,&E_GPIO::reset,TxIrq);
-////		usart.attach(&rxirq,RxIrq);
-////		usart.enable_irq(TxIrq);
-////		usart.enable_irq(RxIrq);
-//	
+		ina219.begin();
+		ina219.autoCalibration(16,100,100);
+	
 		lcd1.init();
 		lcd1.backlight();
-		lcd1.cursor();
-	  lcd1.blink();
-		lcd1.begin(16,2);
-		while(1){}
-//		lcd1.scrollDisplayRight();
-//	
-//		//uint8_t i;
-//		while(1){
-//			DBG("调试\r\n");
-//			usart.printf("test\r\n");
-//			usart.printf("wo shi chao chang ce shi, zong gong 39\r\n");
-//			delay_ms(1000);
-//			//usart.print("test \r\n");
-////			lcd1.clear();
-////			v = ina219.getBusVoltage_V();
-//			lcd1.setCursor(0,0);
-//			lcd1.print("Voltage: ");
-//			lcd1.print(v);
-//			lcd1.print(" V");
-////			
-////			usart.print("负载电压：");
-////			usart.print(v);
-////			usart.println();
 
-////			while(ina219.getState()!=VALID){
-////			usart.print("转换失败：\r\n");
-////				delay_ms(1000);
-////			}
-////			v = ina219.getShuntVoltage_uV();
-////			usart.print("分流电压：");
-////			usart.print((uint16_t)v);
-////			usart.print("uV");
-////			usart.println();
-//////			printf("分流电压：%d uV \r\n",(int16_t)v);
-//////			
-////			v = ina219.getCurrent_uA();
-////			lcd1.setCursor(0,1);
-////			lcd1.print("Current: ");
-////			lcd1.print((int16_t)v/1000);			
-////			lcd1.print(" mA");
-////			usart.print("负载电流：");
-////			usart.print((uint16_t)(v/1000));
-////				usart.print("ma");
-////			usart.println();
-//////			printf("负载电流：%d ua \r\n",(int16_t)v);
-//////			v = ina219.getPower_uw();
-//////			printf("负载功率：%d uw \r\n",(int16_t)v);
-////			delay_ms(2000);
-//			//PA5.toggle();
-//			//PA5.toggle();
-//		}
-//		
+		lcd1.begin(16,2);
+
+		while(1){
+			delay_ms(2000);
+
+			bv = ina219.getBusVoltage_V();
+
+			while(ina219.getState()!=VALID){
+			usart.printf("转换失败：\r\n");
+				delay_ms(1000);
+			}
+//			x = ina219.getShuntVoltage_uV();
+//			usart.printf("分流电压：%.2f mV | ",(float)x/1000);
+////			
+			current = ina219.getCurrent_uA();			
+			p = ina219.getPower_uw();
+			
+			lcd1.clear();
+			lcd1.setCursor(0,0);
+			lcd1.print("V:");
+			lcd1.print(bv);
+			lcd1.print("V");
+			usart.printf("负载电压：%.2f V | ",bv);
+			
+			lcd1.setCursor(8,0);
+			lcd1.print("I:");
+			lcd1.print((float)current/1000);			
+			lcd1.print("mA");
+			usart.printf("负载电流：%.2f ma | ",(float)current/1000);
+			
+			lcd1.setCursor(0,1);
+			lcd1.print("Power:");
+			lcd1.print((float)p/1000);			
+			lcd1.print("mW");
+			usart.printf("负载功率：%.2f mw \r\n",(float)p/1000);
+		}		
 }
 
 

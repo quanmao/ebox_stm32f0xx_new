@@ -1,4 +1,6 @@
 //YWROBOT
+// 2017/9/13  add print API
+
 #ifndef LiquidCrystal_I2C_h
 #define LiquidCrystal_I2C_h
 
@@ -7,6 +9,7 @@
 #include "ebox_gpio.h"
 #include "ebox_core.h"
 #include "ebox_i2c.h"
+#include "print.h"
 
 // commands
 #define LCD_CLEARDISPLAY 0x01
@@ -54,12 +57,12 @@
 #define Rw 0x02//B00000010  // Read/Write bit
 #define Rs 0x01//B00000001  // Register select bit
 
-class LiquidCrystal_I2C {
+class LiquidCrystal_I2C:public Print {
 public:
   LiquidCrystal_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
 	LiquidCrystal_I2C(E_I2C *i2c, uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
   void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS );
-  void clear();
+  void clear();		//
   void home();
   void noDisplay();
   void display();
@@ -84,7 +87,9 @@ public:
 #if defined(ARDUINO) && ARDUINO >= 100
   virtual size_t write(uint8_t);
 #else
-  virtual void write(uint8_t);
+  //virtual void write(uint8_t);
+	virtual size_t  write(uint8_t c);
+	using   Print::write;
 #endif
   void command(uint8_t);
   void init();

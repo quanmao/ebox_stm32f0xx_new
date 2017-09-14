@@ -13,9 +13,14 @@
 
 //#include "Arduino.h"
 
-inline void LiquidCrystal_I2C::write(uint8_t value) {
-	send(value, Rs);
-	//return 0;
+//inline void LiquidCrystal_I2C::write(uint8_t value) {
+//	send(value, Rs);
+//	//return 0;
+//}
+
+size_t LiquidCrystal_I2C::write(uint8_t c){
+	send(c, Rs);
+	return 1;
 }
 
 //#include "Wire.h"
@@ -301,7 +306,7 @@ void LiquidCrystal_I2C::setBacklight(uint8_t new_val){
 void LiquidCrystal_I2C::printstr(const char c[]){
 	//This function is not identical to the function used for "real" I2C displays
 	//it's here so the user sketch doesn't have to be changed 
-//	print(c);
+	//print(c);
 }
 
 
