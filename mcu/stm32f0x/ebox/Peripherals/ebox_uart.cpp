@@ -182,40 +182,40 @@ uint8_t E_UART::write(const char *buffer, int size){
  *@param    fmt：请百度printf函数
  *@retval   none
 */
-void E_UART::printf(const char *fmt, ...)
-{
-	int  size1 = 0;
-	uint8_t  size2 = BUF_BLOCK;
+//void E_UART::printf(const char *fmt, ...)
+//{
+//	int  size1 = 0;
+//	uint8_t  size2 = BUF_BLOCK;
 
-//    wait_busy();
-	if (_buf != NULL)
-		free(_buf);
-//       ebox_free(_buf);
+////    wait_busy();
+//	if (_buf != NULL)
+//		free(_buf);
+////       ebox_free(_buf);
 
-//    set_busy();
+////    set_busy();
 
-	va_list va_params;
-	va_start(va_params, fmt);
+//	va_list va_params;
+//	va_start(va_params, fmt);
 
-	do{
-		//分配内存
-		_buf = (char *)malloc(size2);
-		if (_buf == NULL)
-			return ;
-		//格式化到缓冲区
-		size1 = vsnprintf(_buf,size2, fmt, va_params);
-		//如果内存不够，重新申请更大的内存空间
-		if (size1 == -1  || size1 > size2)
-		{
-			size2+=BUF_BLOCK;
-			size1 = -1;
-			free(_buf);			
-		}
-	}while (size1 == -1);
+//	do{
+//		//分配内存
+//		_buf = (char *)malloc(size2);
+//		if (_buf == NULL)
+//			return ;
+//		//格式化到缓冲区
+//		size1 = vsnprintf(_buf,size2, fmt, va_params);
+//		//如果内存不够，重新申请更大的内存空间
+//		if (size1 == -1  || size1 > size2)
+//		{
+//			size2+=BUF_BLOCK;
+//			size1 = -1;
+//			free(_buf);			
+//		}
+//	}while (size1 == -1);
 
-	va_end(va_params);
-	write(_buf, size1);
-}
+//	va_end(va_params);
+//	write(_buf, size1);
+//}
 
 /**
  *@name     uint16_t USART::read()

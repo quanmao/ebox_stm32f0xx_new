@@ -9,6 +9,7 @@
 	2  2017/5/30	完善uart接口
 	3	 2017/7/12	添加printf输出
 		已知问题，没有进行忙检测
+	4	 2017/9/17  移除本模块内printf实现，改为继承的方式
   ******************************************************************************
   * @attention
   *
@@ -29,6 +30,7 @@
 #include "stdlib.h"
 #include "ebox_gpio.h"
 #include "ebox_Template.h"
+#include "printf.h"
 
 #define UART_NUM (2)
 
@@ -41,7 +43,7 @@ enum IrqType {
 typedef void (*uart_irq_handler)(uint32_t id, IrqType type);
 
 
-class E_UART{
+class E_UART:public Printf{
 public:
 
 	E_UART(USART_TypeDef *UARTx,E_PinID PinTx,E_PinID PinRx);
@@ -54,13 +56,15 @@ public:
 	void disable_irq(IrqType type);
 
 	//write method
-	uint8_t  write(uint8_t c);
-	uint8_t  write(const char *buffer, int size);
+	virtual uint8_t  write(uint8_t c);
+	virtual uint8_t  write(const char *buffer, int size);
+
+	using 	Printf::write;
 
 	//read method
 	uint16_t read();
 	
-	void   printf(const char *fmt, ...);
+//	void   printf(const char *fmt, ...);
 	void   wait_busy();
 	void   set_busy();
 	/**
@@ -90,7 +94,7 @@ private:
 	E_PinBase *Rx;
 	E_PinBase *Tx;
 	
-	char   *_buf;
+//	char   *_buf;
 
 	static void _irq_handler(uint32_t id, IrqType irq_type);
 protected:

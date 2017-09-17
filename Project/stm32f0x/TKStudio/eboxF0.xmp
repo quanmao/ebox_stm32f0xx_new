@@ -709,6 +709,7 @@
             <File RelativePath="..\..\..\common\util\util.h" FileType="4" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\common\util\WString.cpp" FileType="3" Output="WString.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\common\util\WString.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\printf.cpp" FileType="3" Output="printf.o" ro="0" bss="0" rw="0" />
         </Filter>
         <Filter Name="example">
             <File RelativePath="..\..\..\example\1.exti.cpp" FileType="3" Output="1.exti.o" ro="0" bss="0" rw="0" />

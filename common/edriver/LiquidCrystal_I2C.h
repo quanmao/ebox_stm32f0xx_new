@@ -10,6 +10,7 @@
 #include "ebox_core.h"
 #include "ebox_i2c.h"
 #include "print.h"
+#include "printf.h"
 
 // commands
 #define LCD_CLEARDISPLAY 0x01
@@ -57,7 +58,7 @@
 #define Rw 0x02//B00000010  // Read/Write bit
 #define Rs 0x01//B00000001  // Register select bit
 
-class LiquidCrystal_I2C:public Print {
+class LiquidCrystal_I2C:public Printf{
 public:
   LiquidCrystal_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
 	LiquidCrystal_I2C(E_I2C *i2c, uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
@@ -88,8 +89,9 @@ public:
   virtual size_t write(uint8_t);
 #else
   //virtual void write(uint8_t);
-	virtual size_t  write(uint8_t c);
-	using   Print::write;
+	virtual uint8_t  write(uint8_t);
+	//using   Print::write;
+	using 	Printf::write;
 #endif
   void command(uint8_t);
   void init();

@@ -45,10 +45,7 @@ int main(){
 
 		lcd1.begin(16,2);
 
-		while(1){
-			delay_ms(2000);
-
-			
+		while(1){			
 			bv = ina219.getBusVoltage_V();
 			while(ina219.getState()!=VALID){
 			usart.printf("转换失败：\r\n");
@@ -61,24 +58,28 @@ int main(){
 			current = ina219.getCurrent_uA();			
 			p = ina219.getPower_uw();
 			
-			lcd1.clear();
+//			lcd1.clear();
 			lcd1.setCursor(0,0);
-			lcd1.print("V:");
-			lcd1.print(bv);
-			lcd1.print("V");
+//			lcd1.print("V:");
+//			lcd1.print(bv);
+//			lcd1.print("V");
+			lcd1.printf("V:%.2fV ",bv);
 			usart.printf("负载电压：%.2f V | ",bv);
 			
-			lcd1.setCursor(8,0);
-			lcd1.print("I:");
-			lcd1.print((float)current/1000);			
-			lcd1.print("mA");
+//			lcd1.setCursor(8,0);
+//			lcd1.print("I:");
+//			lcd1.print((float)current/1000);			
+//			lcd1.print("mA");
+			lcd1.printf("I:%.1fmA",(float)current/1000);
 			usart.printf("负载电流：%.2f ma | ",(float)current/1000);
 			
 			lcd1.setCursor(0,1);
-			lcd1.print("Power:");
-			lcd1.print((float)p/1000,1);			
-			lcd1.print("mW");
+//			lcd1.print("Power:");
+//			lcd1.print((float)p/1000,1);			
+//			lcd1.print("mW");
+			lcd1.printf("Power:%.2f mW",(float)p/1000);
 			usart.printf("负载功率：%.2f mw RAW:%d \r\n",(float)p/1000,p);
+			delay_ms(2000);
 		}		
 }
 

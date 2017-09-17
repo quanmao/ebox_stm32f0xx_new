@@ -18,7 +18,7 @@
 //	//return 0;
 //}
 
-size_t LiquidCrystal_I2C::write(uint8_t c){
+uint8_t LiquidCrystal_I2C::write(uint8_t c){
 	send(c, Rs);
 	return 1;
 }
