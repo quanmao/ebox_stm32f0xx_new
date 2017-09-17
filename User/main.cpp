@@ -30,7 +30,8 @@ E_UART usart(USART1,PA_2,PA_3);
 
 int main(){
 	float bv;
-	int32_t current,p;
+	int32_t current;
+	uint32_t p;
 //	
 	  ebox_init();
 	  usart.begin(115200);
@@ -47,15 +48,16 @@ int main(){
 		while(1){
 			delay_ms(2000);
 
+			
 			bv = ina219.getBusVoltage_V();
-
 			while(ina219.getState()!=VALID){
 			usart.printf("转换失败：\r\n");
 				delay_ms(1000);
 			}
 //			x = ina219.getShuntVoltage_uV();
 //			usart.printf("分流电压：%.2f mV | ",(float)x/1000);
-////			
+////	
+			
 			current = ina219.getCurrent_uA();			
 			p = ina219.getPower_uw();
 			
@@ -74,9 +76,9 @@ int main(){
 			
 			lcd1.setCursor(0,1);
 			lcd1.print("Power:");
-			lcd1.print((float)p/1000);			
+			lcd1.print((float)p/1000,1);			
 			lcd1.print("mW");
-			usart.printf("负载功率：%.2f mw \r\n",(float)p/1000);
+			usart.printf("负载功率：%.2f mw RAW:%d \r\n",(float)p/1000,p);
 		}		
 }
 
