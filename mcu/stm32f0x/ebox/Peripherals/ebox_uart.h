@@ -31,6 +31,7 @@
 #include "ebox_gpio.h"
 #include "ebox_Template.h"
 #include "printf.h"
+#include "ebox_config.h"
 
 #define UART_NUM (2)
 
@@ -42,8 +43,11 @@ enum IrqType {
 
 typedef void (*uart_irq_handler)(uint32_t id, IrqType type);
 
-
+#if USE_PRINTF
 class E_UART:public Printf{
+#else
+class E_UART{
+#endif
 public:
 
 	E_UART(USART_TypeDef *UARTx,E_PinID PinTx,E_PinID PinRx);
@@ -59,7 +63,9 @@ public:
 	virtual uint8_t  write(uint8_t c);
 	virtual uint8_t  write(const char *buffer, int size);
 
+#if USE_PRINTF
 	using 	Printf::write;
+#endif
 
 	//read method
 	uint16_t read();
@@ -93,8 +99,6 @@ private:
 	USART_TypeDef *UARTx;
 	E_PinBase *Rx;
 	E_PinBase *Tx;
-	
-//	char   *_buf;
 
 	static void _irq_handler(uint32_t id, IrqType irq_type);
 protected:

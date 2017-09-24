@@ -9,7 +9,7 @@ void ebox_free(void *ptr)
    memFree(ptr,SRAM_IN - 1);
    ptr = NULL;
 }
-size_t ebox_get_free()
+size_t ebox_get_free(void)
 {
     return memGetFreeHeapSize(SRAM_IN - 1);
 }

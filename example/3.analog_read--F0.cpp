@@ -68,8 +68,10 @@ static void PrintfLogo(void)
 }
 
 E_ADC adc1(PA_0);
-E_ADC tem(ADC_TEMP);
-E_ADC vbat(ADC_BAT);
+E_ADC tem(temperature_ch);
+#if defined(ADC_CCR_VBATEN)
+E_ADC vbat(battery_ch);
+#endif
 E_ADC ad2(PA_1,3317);
 
 
@@ -89,8 +91,10 @@ int main(void)
     {
 		usart.printf("ch1 = %d ",adc1.getVoltage());
 		delay_ms(800);
+#if defined(ADC_CCR_VBATEN)
 		usart.printf("ch1 = %d ",vbat.getVoltage()*2);
 		delay_ms(800);
+#endif
 		usart.printf("ch2 = %f \r\n",tem.getTemperature());
     delay_ms(2000);
 		 }

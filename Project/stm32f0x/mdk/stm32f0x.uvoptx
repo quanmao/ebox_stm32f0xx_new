@@ -489,7 +489,7 @@
 
   <Group>
     <GroupName>libraries_LL</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1205,7 +1205,7 @@
       <GroupNumber>6</GroupNumber>
       <FileNumber>75</FileNumber>
       <FileType>8</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\user\main.cpp</PathWithFileName>
@@ -1357,7 +1357,7 @@
 
   <Group>
     <GroupName>eDrive</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1365,7 +1365,7 @@
       <GroupNumber>8</GroupNumber>
       <FileNumber>87</FileNumber>
       <FileType>8</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\..\..\common\edriver\LiquidCrystal_I2C.cpp</PathWithFileName>
@@ -1425,7 +1425,7 @@
 
   <Group>
     <GroupName>example</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

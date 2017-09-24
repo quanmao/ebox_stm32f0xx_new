@@ -58,7 +58,11 @@
 #define Rw 0x02//B00000010  // Read/Write bit
 #define Rs 0x01//B00000001  // Register select bit
 
+#if USE_PRINTF
 class LiquidCrystal_I2C:public Printf{
+#else
+class LiquidCrystal_I2C{
+#endif
 public:
   LiquidCrystal_I2C(uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
 	LiquidCrystal_I2C(E_I2C *i2c, uint8_t lcd_Addr,uint8_t lcd_cols,uint8_t lcd_rows);
@@ -91,7 +95,9 @@ public:
   //virtual void write(uint8_t);
 	virtual uint8_t  write(uint8_t);
 	//using   Print::write;
+	#if USE_PRINTF
 	using 	Printf::write;
+	#endif
 #endif
   void command(uint8_t);
   void init();

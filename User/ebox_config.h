@@ -21,8 +21,14 @@
 #ifndef __EBOX_CONFIG_H
 #define __EBOX_CONFIG_H
 
+//是否使用printf功能,该功能占用存储空间较多，目前确认的使用该功能的包括uart和1602
+#define USE_PRINTF	0
+
+#if USE_PRINTF
 //是否使用DEBUG,需要在ebox_debug.h文件中定义输出设备 1 使用  0 不使用
-#define EBOX_DEBUG  1
+#define EBOX_DEBUG  0
+#endif
+
 
 /*内存块大小，动态分配内存时增量,过小容易导致多次才能分配成功，过大浪费内存。最大不能
  *超过启动文件 starup_stm32fxxxx.s 中的 Heap_Size
