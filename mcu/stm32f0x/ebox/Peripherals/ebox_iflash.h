@@ -18,7 +18,7 @@
 
 #ifndef   __EBOX_IFLASH_H__
 #define   __EBOX_IFLASH_H__
-#include "common.h"
+#include "ebox_core.h"
 #include "stm32f0xx_hal_flash_ex.h"
 
 #ifdef __cplusplus

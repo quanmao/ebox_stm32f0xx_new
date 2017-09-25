@@ -19,7 +19,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "ebox_i2c.h"
+
 #include "ebox_core.h"
+#include "ebox_gpio.h"
 #include "stm32f0xx_ll_rcc.h"
 
 /**

@@ -21,7 +21,8 @@
   */
 
 #include "ebox_gpio.h"
-#include "stm32f0xx_ll_bus.h"
+#include "stm32_assert_template.h"
+//#include "stm32f0xx_ll_bus.h"
 
 
 /**
@@ -365,7 +366,7 @@ void E_BUS::resetAll(void){
  *@param    NONE
  *@retval   NONE
 */
-#include "stm32_assert_template.h"
+
 E_GPIO & E_BUS::operator[] (uint16_t index){
 	assert_param(index >= 0 && index <= 16);
 	assert_param(_pins[index]);

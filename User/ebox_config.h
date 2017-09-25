@@ -22,7 +22,7 @@
 #define __EBOX_CONFIG_H
 
 //是否使用printf功能,该功能占用存储空间较多，目前确认的使用该功能的包括uart和1602
-#define USE_PRINTF	0
+#define USE_PRINTF	1
 
 #if USE_PRINTF
 //是否使用DEBUG,需要在ebox_debug.h文件中定义输出设备 1 使用  0 不使用

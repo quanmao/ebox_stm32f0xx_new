@@ -20,7 +20,7 @@
 
 #ifndef __EBOX_WDG_H_
 #define __EBOX_WDG_H_
-#include "common.h"
+#include "ebox_core.h"
 #include "stm32f0xx_ll_iwdg.h"
 
 

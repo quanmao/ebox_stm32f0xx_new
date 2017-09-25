@@ -4,7 +4,7 @@
   * @author  cat_li
   * @version V2.0
   * @date    2016/10/21
-  * @brief   
+  * @brief   ebox基础定义文件，ebox所有模块均需调用该头文件
 	  2017/7/18  cat_li
 	  1 可能存在的风险，GetEndTime,WaitTimeOut未考虑millis_seconds溢出问题
   ******************************************************************************
@@ -23,8 +23,10 @@
 #ifndef __EBOX_DEFINE_H
 #define __EBOX_DEFINE_H
 
-#include "ebox_config.h"
-#include "stdint.h"
+// 标准库组件	
+#include "stdio.h"		// 标准输入输出
+#include "stdlib.h"		// 标准库 size_t,rand,srand,malloc.....
+#include "stdint.h"		// 数据类型相关
 
 #define EBOX_VERSION "STM32F0-2.0"
 

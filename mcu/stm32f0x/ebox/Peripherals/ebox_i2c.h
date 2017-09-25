@@ -23,9 +23,8 @@
 #ifndef __EBOX_I2C_H_
 #define __EBOX_I2C_H_
 
-#include "stm32_define.h"
+#include "target_mcu.h"
 #include "ebox_config.h"
-#include "ebox_gpio.h"
 #include "stm32f0xx_ll_i2c.h"
 
 #ifdef	USE_TIMEOUT

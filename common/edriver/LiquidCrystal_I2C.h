@@ -4,7 +4,7 @@
 #ifndef LiquidCrystal_I2C_h
 #define LiquidCrystal_I2C_h
 
-#include "stm32_define.h"
+#include "target_mcu.h"
 #include "ebox_define.h"
 #include "ebox_gpio.h"
 #include "ebox_core.h"

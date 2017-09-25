@@ -19,9 +19,6 @@
   ******************************************************************************
   */
 #include "ebox_uart.h"
-#include "ebox_config.h"
-#include "stm32f0xx_ll_usart.h"
-#include <stdio.h>
 
 static uint32_t serial_irq_ids[UART_NUM];  // 保存对象地址，供静态成员识别对象，并访问对象的普通成员
 static uart_irq_handler irq_handler;	   // 声明函数指针变量，指向类的静态成员

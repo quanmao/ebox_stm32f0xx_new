@@ -20,6 +20,7 @@
   */
 
 #include "ebox_spi.h"
+#include "ebox_gpio.h"
 
 E_SPI::E_SPI(SPI_TypeDef *SPIx, E_PinID sck, E_PinID miso, E_PinID mosi){
 	E_PinBase _sck(sck),_miso(miso),_mosi(mosi);

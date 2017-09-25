@@ -26,10 +26,11 @@
 #ifndef __EBOX_ANALOG_H_
 #define __EBOX_ANALOG_H_
 
-#include "stm32_define.h"
+#include "target_mcu.h"
 #include "ebox_config.h"
-#include "ebox_define.h"
-#include "ebox_gpio.h"
+//#include "ebox_core.h"
+//#include "ebox_define.h"
+//#include "ebox_gpio.h"
 #include "stm32f0xx_ll_adc.h"
 #include "stm32f0xx_ll_dma.h"
 

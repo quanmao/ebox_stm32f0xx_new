@@ -49,9 +49,7 @@
     stm32在72M主频下，最高可测160Khz的信号。如果再大，将无法测量。
 */
 
-
-#include "ebox_define.h"
-#include "stm32_define.h"
+#include "target_mcu.h"
 #include "ebox_gpio.h"
 #include "ebox_Template.h"
 

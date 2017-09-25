@@ -11,11 +11,11 @@
 #ifndef __STM32F030_DEFINE_H_
 #define __STM32F030_DEFINE_H_
 
-#include "stm32f0xx.h"
+//#include "stm32f0xx.h"
 #include "stm32f0xx_ll_bus.h"
 #include "stm32f0xx_ll_gpio.h"
 #include "stm32f0xx_ll_tim.h"
-#include "ebox_define.h"
+//#include "ebox_define.h"
 
 #include "stm32_define.h"
 

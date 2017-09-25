@@ -18,8 +18,10 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "common.h"
-#include "stdio.h"
+#include "ebox_core.h"
+#include "stm32f0xx_ll_rcc.h"
+#include "stm32f0xx_ll_utils.h"
+
 #define systick_no_interrupt()  SysTick->CTRL &=0xfffffffd
 #define systick_interrupt()     SysTick->CTRL |=0x0002
 
@@ -230,6 +232,9 @@ extern "C" {
 #ifdef __cplusplus
 }
 
+
+#include "stm32f0xx_ll_cortex.h"
+#include "stm32f0xx_ll_pwr.h"
 
 void eBox::sleep(void){
     LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_PWR);

@@ -22,7 +22,7 @@
 #define __COMMON_H
 
 
-#include "ebox_core.h" 
+ 
 
 //#include "gpio.h"
 //#include "analog.h"

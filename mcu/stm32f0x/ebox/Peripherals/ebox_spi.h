@@ -22,9 +22,8 @@
 #ifndef __EBOX_SPI_H_
 #define __EBOX_SPI_H_
 
-#include "stm32_define.h"
+#include "target_mcu.h"
 #include "ebox_define.h"
-#include "ebox_gpio.h"
 #include "stm32f0xx_ll_spi.h"
 
 //spi相关公共宏和声明//////////////////////////////////

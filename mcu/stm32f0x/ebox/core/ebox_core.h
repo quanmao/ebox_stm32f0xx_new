@@ -30,14 +30,9 @@ extern "C" {
 // ebox 组件
 #include "ebox_define.h"
 #include "ebox_config.h"
+
 // 目标cpu组件
-#include "stm32f0xx.h"
-#include "stm32f0xx_ll_rcc.h"
-#include "stm32f0xx_ll_utils.h"
-#include "stm32f0xx_ll_cortex.h"
-#include "stm32f0xx_ll_pwr.h"
-#include "stm32f0xx_ll_bus.h"
-#include "stm32f0xx_ll_rtc.h"
+#include "target_mcu.h"
 	
 
 	
