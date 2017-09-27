@@ -24,13 +24,12 @@
 #ifndef __EBOX_UART_H_
 #define __EBOX_UART_H_
 
-
 #include "stm32f0xx_ll_usart.h"
 #include "ebox_define.h"
 #include "ebox_gpio.h"
 #include "ebox_Template.h"
 #include "printf.h"
-
+#include "ebox_config.h"
 
 #define UART_NUM (2)
 

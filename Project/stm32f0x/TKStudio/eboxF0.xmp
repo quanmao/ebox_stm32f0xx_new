@@ -13,136 +13,6 @@
         </Configuration>
     </Configurations>
     <Files>
-        <Filter Name="HAL">
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_adc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_adc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_can.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_cec.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_comp.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_conf_template.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_cortex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_crc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_crc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dac.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dac_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_def.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dma.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dma_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_flash.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_flash_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_gpio.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_gpio_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2c.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2c_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2s.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_irda.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_irda_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_iwdg.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pcd.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pcd_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pwr.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pwr_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rcc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rcc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rtc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rtc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smartcard.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smartcard_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smbus.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_spi.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_spi_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tim.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tim_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tsc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_uart.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_uart_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_usart.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_usart_ex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_wwdg.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_adc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_bus.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_comp.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_cortex.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_crc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_crs.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_dac.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_dma.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_exti.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_gpio.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_i2c.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_iwdg.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_pwr.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_rcc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_rtc.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_spi.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_system.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_tim.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_usart.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_utils.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_wwdg.h" FileType="4" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32_assert_template.h" FileType="4" ro="0" bss="0" rw="0" />
-            <Filter Name="Legacy">
-                <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\Legacy\stm32_hal_legacy.h" FileType="4" ro="0" bss="0" rw="0" />
-            </Filter>
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c" FileType="1" Output="stm32f0xx_hal.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc.c" FileType="1" Output="stm32f0xx_hal_adc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc_ex.c" FileType="1" Output="stm32f0xx_hal_adc_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_can.c" FileType="1" Output="stm32f0xx_hal_can.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cec.c" FileType="1" Output="stm32f0xx_hal_cec.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_comp.c" FileType="1" Output="stm32f0xx_hal_comp.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cortex.c" FileType="1" Output="stm32f0xx_hal_cortex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_crc.c" FileType="1" Output="stm32f0xx_hal_crc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_crc_ex.c" FileType="1" Output="stm32f0xx_hal_crc_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dac.c" FileType="1" Output="stm32f0xx_hal_dac.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dac_ex.c" FileType="1" Output="stm32f0xx_hal_dac_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dma.c" FileType="1" Output="stm32f0xx_hal_dma.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash.c" FileType="1" Output="stm32f0xx_hal_flash.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash_ex.c" FileType="1" Output="stm32f0xx_hal_flash_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_gpio.c" FileType="1" Output="stm32f0xx_hal_gpio.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c.c" FileType="1" Output="stm32f0xx_hal_i2c.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c_ex.c" FileType="1" Output="stm32f0xx_hal_i2c_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2s.c" FileType="1" Output="stm32f0xx_hal_i2s.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_irda.c" FileType="1" Output="stm32f0xx_hal_irda.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_iwdg.c" FileType="1" Output="stm32f0xx_hal_iwdg.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_msp_template.c" FileType="1" Output="stm32f0xx_hal_msp_template.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd.c" FileType="1" Output="stm32f0xx_hal_pcd.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd_ex.c" FileType="1" Output="stm32f0xx_hal_pcd_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr.c" FileType="1" Output="stm32f0xx_hal_pwr.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr_ex.c" FileType="1" Output="stm32f0xx_hal_pwr_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc.c" FileType="1" Output="stm32f0xx_hal_rcc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc_ex.c" FileType="1" Output="stm32f0xx_hal_rcc_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc.c" FileType="1" Output="stm32f0xx_hal_rtc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc_ex.c" FileType="1" Output="stm32f0xx_hal_rtc_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smartcard.c" FileType="1" Output="stm32f0xx_hal_smartcard.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smartcard_ex.c" FileType="1" Output="stm32f0xx_hal_smartcard_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smbus.c" FileType="1" Output="stm32f0xx_hal_smbus.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi.c" FileType="1" Output="stm32f0xx_hal_spi.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi_ex.c" FileType="1" Output="stm32f0xx_hal_spi_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim.c" FileType="1" Output="stm32f0xx_hal_tim.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim_ex.c" FileType="1" Output="stm32f0xx_hal_tim_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tsc.c" FileType="1" Output="stm32f0xx_hal_tsc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart.c" FileType="1" Output="stm32f0xx_hal_uart.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart_ex.c" FileType="1" Output="stm32f0xx_hal_uart_ex.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_usart.c" FileType="1" Output="stm32f0xx_hal_usart.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_wwdg.c" FileType="1" Output="stm32f0xx_hal_wwdg.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_adc.c" FileType="1" Output="stm32f0xx_ll_adc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_comp.c" FileType="1" Output="stm32f0xx_ll_comp.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crc.c" FileType="1" Output="stm32f0xx_ll_crc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crs.c" FileType="1" Output="stm32f0xx_ll_crs.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dac.c" FileType="1" Output="stm32f0xx_ll_dac.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dma.c" FileType="1" Output="stm32f0xx_ll_dma.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_exti.c" FileType="1" Output="stm32f0xx_ll_exti.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_gpio.c" FileType="1" Output="stm32f0xx_ll_gpio.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_i2c.c" FileType="1" Output="stm32f0xx_ll_i2c.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_pwr.c" FileType="1" Output="stm32f0xx_ll_pwr.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c" FileType="1" Output="stm32f0xx_ll_rcc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rtc.c" FileType="1" Output="stm32f0xx_ll_rtc.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_spi.c" FileType="1" Output="stm32f0xx_ll_spi.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_tim.c" FileType="1" Output="stm32f0xx_ll_tim.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_usart.c" FileType="1" Output="stm32f0xx_ll_usart.o" ro="0" bss="0" rw="0" />
-            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_utils.c" FileType="1" Output="stm32f0xx_ll_utils.o" ro="0" bss="0" rw="0" />
-        </Filter>
         <Filter Name="USER">
             <File RelativePath="..\..\..\User\ebox_it.cpp" FileType="3" Output="ebox_it.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\User\main.cpp" FileType="3" Output="main.o" ro="0" bss="0" rw="0" />
@@ -160,7 +30,6 @@
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_gpio.cpp" FileType="3" Output="ebox_gpio.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_tim.cpp" FileType="3" Output="ebox_tim.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_uart.cpp" FileType="3" Output="ebox_uart.o" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\in_capture.cpp" FileType="3" Output="in_capture.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softi2c.cpp" FileType="3" Output="softi2c.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\softspi.cpp" FileType="3" Output="softspi.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\Peripherals\ebox_spi.cpp" FileType="3" Output="ebox_spi.o" ro="0" bss="0" rw="0" />
@@ -172,6 +41,7 @@
             </Filter>
             <Filter Name="cpu">
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32_define.h" FileType="4" ro="0" bss="0" rw="0" />
+                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\mcu\stm32f030_define.h" FileType="4" ro="0" bss="0" rw="0" />
             </Filter>
             <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox.h" FileType="4" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\mcu\stm32f0x\ebox\ebox_define.h" FileType="4" ro="0" bss="0" rw="0" />
@@ -723,6 +593,136 @@
             <File RelativePath="..\..\..\example\mo ban.cpp" FileType="3" Output="mo ban.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\example\1.capture.cpp" FileType="3" Output="1.capture.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\example\5.I2C search add.cpp" FileType="3" Output="5.I2C search add.o" ro="0" bss="0" rw="0" />
+        </Filter>
+        <Filter Name="HAL">
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c" FileType="1" Output="stm32f0xx_hal.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc.c" FileType="1" Output="stm32f0xx_hal_adc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_adc_ex.c" FileType="1" Output="stm32f0xx_hal_adc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_can.c" FileType="1" Output="stm32f0xx_hal_can.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cec.c" FileType="1" Output="stm32f0xx_hal_cec.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_comp.c" FileType="1" Output="stm32f0xx_hal_comp.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_cortex.c" FileType="1" Output="stm32f0xx_hal_cortex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_crc.c" FileType="1" Output="stm32f0xx_hal_crc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_crc_ex.c" FileType="1" Output="stm32f0xx_hal_crc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dac.c" FileType="1" Output="stm32f0xx_hal_dac.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dac_ex.c" FileType="1" Output="stm32f0xx_hal_dac_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_dma.c" FileType="1" Output="stm32f0xx_hal_dma.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash.c" FileType="1" Output="stm32f0xx_hal_flash.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_flash_ex.c" FileType="1" Output="stm32f0xx_hal_flash_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_gpio.c" FileType="1" Output="stm32f0xx_hal_gpio.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c.c" FileType="1" Output="stm32f0xx_hal_i2c.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2c_ex.c" FileType="1" Output="stm32f0xx_hal_i2c_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_i2s.c" FileType="1" Output="stm32f0xx_hal_i2s.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_irda.c" FileType="1" Output="stm32f0xx_hal_irda.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_iwdg.c" FileType="1" Output="stm32f0xx_hal_iwdg.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_msp_template.c" FileType="1" Output="stm32f0xx_hal_msp_template.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd.c" FileType="1" Output="stm32f0xx_hal_pcd.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pcd_ex.c" FileType="1" Output="stm32f0xx_hal_pcd_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr.c" FileType="1" Output="stm32f0xx_hal_pwr.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_pwr_ex.c" FileType="1" Output="stm32f0xx_hal_pwr_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc.c" FileType="1" Output="stm32f0xx_hal_rcc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rcc_ex.c" FileType="1" Output="stm32f0xx_hal_rcc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc.c" FileType="1" Output="stm32f0xx_hal_rtc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_rtc_ex.c" FileType="1" Output="stm32f0xx_hal_rtc_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smartcard.c" FileType="1" Output="stm32f0xx_hal_smartcard.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smartcard_ex.c" FileType="1" Output="stm32f0xx_hal_smartcard_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_smbus.c" FileType="1" Output="stm32f0xx_hal_smbus.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi.c" FileType="1" Output="stm32f0xx_hal_spi.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_spi_ex.c" FileType="1" Output="stm32f0xx_hal_spi_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim.c" FileType="1" Output="stm32f0xx_hal_tim.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tim_ex.c" FileType="1" Output="stm32f0xx_hal_tim_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_timebase_rtc_alarm_template.c" FileType="1" Output="stm32f0xx_hal_timebase_rtc_alarm_template.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_timebase_rtc_wakeup_template.c" FileType="1" Output="stm32f0xx_hal_timebase_rtc_wakeup_template.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_timebase_tim_template.c" FileType="1" Output="stm32f0xx_hal_timebase_tim_template.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_tsc.c" FileType="1" Output="stm32f0xx_hal_tsc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart.c" FileType="1" Output="stm32f0xx_hal_uart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_uart_ex.c" FileType="1" Output="stm32f0xx_hal_uart_ex.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_usart.c" FileType="1" Output="stm32f0xx_hal_usart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal_wwdg.c" FileType="1" Output="stm32f0xx_hal_wwdg.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_adc.c" FileType="1" Output="stm32f0xx_ll_adc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_comp.c" FileType="1" Output="stm32f0xx_ll_comp.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crc.c" FileType="1" Output="stm32f0xx_ll_crc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_crs.c" FileType="1" Output="stm32f0xx_ll_crs.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dac.c" FileType="1" Output="stm32f0xx_ll_dac.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_dma.c" FileType="1" Output="stm32f0xx_ll_dma.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_exti.c" FileType="1" Output="stm32f0xx_ll_exti.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_gpio.c" FileType="1" Output="stm32f0xx_ll_gpio.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_i2c.c" FileType="1" Output="stm32f0xx_ll_i2c.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_pwr.c" FileType="1" Output="stm32f0xx_ll_pwr.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rcc.c" FileType="1" Output="stm32f0xx_ll_rcc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_rtc.c" FileType="1" Output="stm32f0xx_ll_rtc.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_spi.c" FileType="1" Output="stm32f0xx_ll_spi.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_tim.c" FileType="1" Output="stm32f0xx_ll_tim.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_usart.c" FileType="1" Output="stm32f0xx_ll_usart.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_ll_utils.c" FileType="1" Output="stm32f0xx_ll_utils.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32_assert_template.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_adc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_adc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_can.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_cec.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_comp.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_conf_template.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_cortex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_crc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_crc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dac.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dac_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_def.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dma.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_dma_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_flash.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_flash_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_gpio.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_gpio_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2c.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2c_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_i2s.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_irda.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_irda_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_iwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pcd.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pcd_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pwr.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_pwr_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rcc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rcc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rtc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_rtc_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smartcard.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smartcard_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_smbus.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_spi.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_spi_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tim.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tim_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_tsc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_uart.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_uart_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_usart.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_usart_ex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_hal_wwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_adc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_bus.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_comp.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_cortex.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_crc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_crs.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_dac.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_dma.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_exti.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_gpio.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_i2c.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_iwdg.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_pwr.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_rcc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_rtc.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_spi.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_system.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_tim.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_usart.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_utils.h" FileType="4" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc\stm32f0xx_ll_wwdg.h" FileType="4" ro="0" bss="0" rw="0" />
         </Filter>
     </Files>
 </TKStudioProject>

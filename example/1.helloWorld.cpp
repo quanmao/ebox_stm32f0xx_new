@@ -87,7 +87,7 @@ int main(void)
     {
         usart.printf("hello World !\r\n");
         usart.printf("stm32f0 usart print %d \r\n");
-				//PA5.toggle();
+				PA5.toggle();
         delay_ms(5000);
     }
 }

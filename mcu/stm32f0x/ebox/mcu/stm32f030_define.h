@@ -3,9 +3,10 @@
 编 写 人： cat_li
 编写时间： 2017年9月11日
 接口说明： stm32f030x4外设定义(tssop20).
-	1个spi,i2c,usart,adc(12ch),15gpios,5tim(4general,1advance)4kRAM,16kFLASH
+	1个spi,i2c,usart,adc(11ch),15gpios,5tim(4general(3,14,16,17),1advance(1)4kRAM,16kFLASH
 修改日志：　　
 	NO.1-  初始版本
+				2017/9/25	添加TIM14,16,17资源信息
 ******************************************************************************/
 
 #ifndef __STM32F030_DEFINE_H_
@@ -25,6 +26,16 @@
 #define SPI_SCK		PA_5
 #define SPI_MISO	PA_6
 #define SPI_MOSI	PA_7
+
+#define TIM3CH1		TIM3,PA_6
+#define	TIM3CH2		TIM3,PA_7
+#define TIM3CH4		TIM3,PB_1
+#define	TIM14CH1	TIM14,PA_4
+#define	TIM16CH1	TIM16,PA_6
+#define	TIM17CH1	TIM17,PA_7
+#define TIM1CH2		TIM1,PA_9
+#define TIM1CH3		TIM1,PA_10
+
 
 #include "stm32f0xx_ll_adc.h"
 
@@ -49,28 +60,30 @@ static const AF_FUN_S ADC_MAP[] = {
 #define TIMxCH4 0x04
 
 static const AF_FUN_S TIM_MAP[] ={
-	// TIM3,CH1,CH2
-	PA_6,AF_PP,LL_GPIO_AF_1,TIMxCH1,
-	PA_7,AF_PP,LL_GPIO_AF_1,TIMxCH2,
-	// TIM2,CH2,CH3,CH4
-	PA_5,AF_PP,LL_GPIO_AF_2,TIMxCH1,
-	PA_0,AF_PP,LL_GPIO_AF_2,TIMxCH1,
-	PA_1,AF_PP,LL_GPIO_AF_2,TIMxCH2,
-	PA_2,AF_PP,LL_GPIO_AF_2,TIMxCH3,
-	PA_3,AF_PP,LL_GPIO_AF_2,TIMxCH4,
-	// TIM1,CH1
-	PA_8,AF_PP,LL_GPIO_AF_2,TIMxCH1,
+	// TIM3,CH1,CH2,CH4
+	PA_6,AF_PP,LL_GPIO_AF_1,TIM3_BASE+TIMxCH1,
+	PA_7,AF_PP,LL_GPIO_AF_1,TIM3_BASE+TIMxCH2,
+	PB_1,AF_PP,LL_GPIO_AF_1,TIM3_BASE+TIMxCH4,
+	// TIM16,CH1
+	PA_6,AF_PP,LL_GPIO_AF_5,TIM16_BASE+TIMxCH1,
+	// TIM17,CH1
+	PA_7,AF_PP,LL_GPIO_AF_5,TIM17_BASE+TIMxCH1,
+	// TIM14,CH1
+	PA_4,AF_PP,LL_GPIO_AF_4,TIM14_BASE+TIMxCH1,
+	// TIM1,CH2,CH3
+	PA_9,AF_PP,LL_GPIO_AF_2,TIM1_BASE+TIMxCH2,
+	PA_10,AF_PP,LL_GPIO_AF_2,TIM1_BASE+TIMxCH3,
 	P_NC
 };
 
 static const Periph_SS TIM_INFO[]={
 	TIM1_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_TIM1,TIM1_BRK_UP_TRG_COM_IRQn,Irq1,
 	TIM3_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM3,TIM3_IRQn,Irq3,
+	TIM14_BASE,LL_APB1_GRP1_EnableClock,LL_APB1_GRP1_PERIPH_TIM14,TIM14_IRQn,Irq3,
+	TIM16_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_TIM16,TIM16_IRQn,Irq3,
+	TIM17_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_TIM17,TIM17_IRQn,Irq3,
 	NC
 };
-#define SPI_SCK		PA_5
-#define SPI_MISO	PA_6
-#define SPI_MOSI	PA_7
 
 static const AF_FUN_S SPI_MAP[] = {
 	PA_5,AF_PP_PU,0,SPI1_BASE,

@@ -187,4 +187,5 @@ __STATIC_INLINE uint8_t getIndex(E_PinID pin_id,const AF_FUN_S *emap)
 	return i;
 }
 
+
 #endif

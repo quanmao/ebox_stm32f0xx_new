@@ -324,7 +324,11 @@ void E_PWM::begin(uint32_t frq,uint16_t duty){
 	_enableClock();
 	_setMode();
 	SetFrequency(frq);
-	SetDutyCycle(duty);		
+	SetDutyCycle(duty);	
+			if (IS_TIM_BREAK_INSTANCE(_timx))
+	{
+		LL_TIM_EnableAllOutputs(_timx);
+	}
 	_start();
 }
 

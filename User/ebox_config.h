@@ -34,7 +34,7 @@
  *超过启动文件 starup_stm32fxxxx.s 中的 Heap_Size
  *printf模块中调用
  */
-#define	BUF_BLOCK		16	//64
+#define	BUF_BLOCK		64	//64
 
 /* flash写入新数据时，是否擦除覆盖当前区块的其它数据; 
  * 0 写入新数据，并保留当前区块其他位置旧数据。 需要占用FLASH_PAGE_SIZE大小的内存作为缓冲区

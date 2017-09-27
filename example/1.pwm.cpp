@@ -29,8 +29,15 @@
 #define EXAMPLE_DATE	"2017-07-21"
 #define DEMO_VER			"1.0"
 
+#if (STM32F030x6)
+#define uart USART1,PA_2,PA_3
+#else
+//#define uart USART1,PA_9,PA_10
+#define uart USART1,PA_2,PA_3
+#endif
+
 // 串口，led
-E_UART usart(USART1,PA_9,PA_10);
+E_UART usart(USART1,PA_2,PA_3);
 E_GPIO led(PA_5);
 
 /*
@@ -66,12 +73,11 @@ static void PrintfLogo(void)
 	usart.printf("* \r\n");	/* 打印一行空格 */
 	usart.printf("*************************************************************\n\r");
 }
-#define TIM2_1	TIM2,PA_5
-#define TIM3_1	TIM3,PA_6
 
-//E_PWM pwm1(TIM3_1);
-E_PWM pwm1(TIM2_1);
-//E_PWM pwm2(TIM2,PA_3);
+
+E_PWM pwm1(TIM3CH1);
+//E_PWM pwm1(TIM2_1);
+E_PWM pwm2(TIM17CH1);
 
 void setup()
 {
@@ -87,6 +93,7 @@ int main(void)
     setup();
 	
 		pwm1.begin(480,500);
+		pwm2.begin(480,500);
 		delay_ms(5000);
 
     while(1)
@@ -94,7 +101,7 @@ int main(void)
 				for(i=0;i<1000;){
 					pwm1.SetDutyCycle(i);
 					i=i+10;
-					delay_ms(10);
+					delay_ms(100);
 				}
 				pwm1.SetPorlicy(0);				
     }

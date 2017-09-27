@@ -12,6 +12,8 @@
 		1 E_TIME 实现对象成员绑定
 	*		2017/9/10
 		1	E_CAPTURE 对象成员绑定，函数绑定
+	*		2017/9/26
+		1	E_PWM TIM1,TIM3,TIM14,TIM16,TIM17验证ok
   ******************************************************************************
   * @attention
   *
@@ -105,19 +107,39 @@ private:
 	void _setMode(void);
 	static void _irq_handler(uint32_t id);
 };
-
+/**
+ *@brief    根据Pin_id获取对应外设索引
+ *@param    val：1：输出高电平；0：输出低电平
+ *@retval   NONE
+*/
+__STATIC_INLINE uint8_t getIndex(E_PinID pin_id,uint32_t periph,const AF_FUN_S *emap)
+{
+	uint8_t i = 0;
+	uint32_t t;
+	while (!((0xffffff00 & (emap+i)->_periph_OR_ch) == periph) || !((emap+i)->_pin_id == pin_id))
+	{
+		if ((emap+i)->_pin_id == P_NC){
+			return (uint8_t)NC;
+		}
+		i++;
+	}
+	return i;
+}
 class E_PWM:E_base{
 public:
 	E_PWM(TIM_TypeDef *TIMx,E_PinID id):E_base(TIMx){
 		uint8_t _index;
+		uint32_t t = (uint32_t)TIMx + 1;
+		t = t+1;
+		t = 0xffffff00 & t;
 		E_PinBase *_pin;
 		_pin = new E_PinBase(id);
-		_index = getIndex(id,TIM_MAP);
+		_index = getIndex(id,t,TIM_MAP);
 		_pin->mode(TIM_MAP[_index]._pin_date,TIM_MAP[_index]._pin_af);
 		_timx = TIMx;
 		
-
-		switch (TIM_MAP[_index]._periph_OR_ch)
+		t = (TIM_MAP[_index]._periph_OR_ch) - (uint32_t)_timx;
+		switch (t)
 		{
 		case TIMxCH1:
 			_channel = LL_TIM_CHANNEL_CH1;
