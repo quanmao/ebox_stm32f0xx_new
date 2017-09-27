@@ -120,6 +120,9 @@ typedef enum{
 	Irq1 = 0,
 	Irq2,
 	Irq3,
+	Irq4,
+	Irq5,
+	Irq6,
 }IrqIndex_t;
 
 // 外设信息：外设基地址，时钟，中断，中断索引（中断索引需要与外设号对应，比如uart1对应irq1,i2c2对应irq2）
@@ -132,10 +135,10 @@ typedef struct{
 
 typedef struct{
 	uint32_t 	_base;
-	fun_onePara_t	_EnableClock;
-	uint32_t 	_rcc;
-	IRQn_Type	_irq;
-	IrqIndex_t 	_irqIndex;
+	fun_onePara_t	_EnableClock;	// 指向时钟使能函数
+	uint32_t 	_rcc;				// 外设时钟
+	IRQn_Type	_irq;				// 外设中断
+	IrqIndex_t 	_irqIndex;			// 中断索引
 }Periph_SS;
 
 /**

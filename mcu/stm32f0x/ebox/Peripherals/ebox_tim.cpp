@@ -135,8 +135,11 @@ void E_base::_enableClock(){
 }
 
 void E_base::_EnInterrupt(){
+	/* Configure the NVIC to TIMx update interrupt */
 	NVIC_SetPriority(TIM_INFO[_tIndex]._irq, 0);
 	NVIC_EnableIRQ(TIM_INFO[_tIndex]._irq);
+	/* Enable the update interrupt */
+	LL_TIM_EnableIT_UPDATE(_timx);
 }
 
 /**
@@ -229,11 +232,16 @@ void E_base::_setMode(void){
 /*********************************  E_TIME  *****************************************/
 /**
  *@brief    设置定时器时间
- *@param    uint32_t us  0-TIM时钟频率
+ *@param    uint32_t us  
  *@retval   NONE
 */
-void E_TIME::setMicrosecond(uint32_t us){
+void E_TIME::setUs(uint32_t us){
 	uint32_t frq = 1000000/us;
+	setFrequency(frq);
+}
+
+void E_TIME::setMs(uint32_t ms){
+	uint32_t frq = 1000/ms;
 	setFrequency(frq);
 }
 
@@ -245,6 +253,7 @@ void E_TIME::setMicrosecond(uint32_t us){
 void E_TIME::setFrequency(uint32_t frq){
 	if (frq >= GetClock())//控制频率，保证其有1%精度
 		frq = GetClock();
+	DBG("frq %d , max frq %d \r\n",frq,GetClock());
 	_calculate(frq);
 	_enableClock();
 	_setPerPsc();
@@ -257,7 +266,8 @@ void E_TIME::setFrequency(uint32_t frq){
  *@retval   NONE
 */
 void E_TIME::start(void){
-	_setMode();
+	//_setMode();
+	_EnInterrupt();
 	_start();
 }
 
@@ -635,10 +645,10 @@ extern "C" {
 			/* Clear the update interrupt flag*/
 			LL_TIM_ClearFlag_CC1(TIM1);
 			/* TIM1 capture/compare interrupt processing(function defined in main.c) */
-			irq_handler(tim_irq_ids[Irq1]);
+			irq_handler(tim_irq_ids[TIM1IQR]);
 		}
 	}
-#if !defined(STM32F030x6)
+#ifdef TIM2
 	void TIM2_IRQHandler(void)
 	{
 		/* Check whether update interrupt is pending */
@@ -649,6 +659,58 @@ extern "C" {
 			irq_handler(tim_irq_ids[Irq2]);
 		}
 		/* TIM2 update interrupt processing */
+	}
+#endif
+	
+#ifdef TIM3
+	void TIM3_IRQHandler(void)
+	{
+		/* Check whether update interrupt is pending */
+		if (LL_TIM_IsActiveFlag_UPDATE(TIM3) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_UPDATE(TIM3);
+			irq_handler(tim_irq_ids[TIM3IQR]);
+		}
+	}
+#endif
+
+#ifdef TIM14
+	void TIM14_IRQHandler(void)
+	{
+		/* Check whether update interrupt is pending */
+		if (LL_TIM_IsActiveFlag_UPDATE(TIM14) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_UPDATE(TIM14);
+			irq_handler(tim_irq_ids[TIM14IQR]);
+		}
+	}
+#endif
+	
+#ifdef TIM16
+	void TIM16_IRQHandler(void)
+	{
+		/* Check whether update interrupt is pending */
+		if (LL_TIM_IsActiveFlag_UPDATE(TIM16) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_UPDATE(TIM16);
+			irq_handler(tim_irq_ids[TIM16IQR]);
+		}
+	}
+#endif
+	
+#ifdef TIM17
+	void TIM17_IRQHandler(void)
+	{
+		/* Check whether update interrupt is pending */
+		if (LL_TIM_IsActiveFlag_UPDATE(TIM17) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_UPDATE(TIM17);
+			irq_handler(tim_irq_ids[TIM17IQR]);
+		}
 	}
 #endif
 }

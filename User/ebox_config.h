@@ -26,7 +26,7 @@
 
 #if USE_PRINTF
 //是否使用DEBUG,需要在ebox_debug.h文件中定义输出设备 1 使用  0 不使用
-#define EBOX_DEBUG  0
+#define EBOX_DEBUG  1
 #endif
 
 

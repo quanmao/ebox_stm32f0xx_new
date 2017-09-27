@@ -121,35 +121,35 @@ void TIM6_DAC_IRQHandler(void)
 //}
 extern fun_noPara_t irq_handler;
 
-void TIM3_IRQHandler(void)
-{
-//	if (LL_TIM_IsActiveFlag_UPDATE(TIM3))
-//	{
-//		t3_overflow_times++;
-//		//tim_irq_callback(TIM3_IT_Update);
-//		LL_TIM_ClearFlag_UPDATE(TIM3);
-//	}
-//	if (LL_TIM_IsActiveFlag_CC1(TIM3) == 1)
-//	{			
-//		LL_TIM_ClearFlag_CC1(TIM3);
-//		tim_irq_callback(TIM3_IT_CC1);
-//	}
-//	if (LL_TIM_IsActiveFlag_CC2(TIM3) == 1)
-//	{
-//		tim_irq_callback(TIM3_IT_CC2);
-//		LL_TIM_ClearFlag_CC2(TIM3);
-//	}
-//	if (LL_TIM_IsActiveFlag_CC3(TIM3) == 1)
-//	{
-//		tim_irq_callback(TIM3_IT_CC3);
-//		LL_TIM_ClearFlag_CC3(TIM3);
-//	}
-//	if (LL_TIM_IsActiveFlag_CC4(TIM3) == 1)
-//	{
-//		tim_irq_callback(TIM3_IT_CC4);
-//		LL_TIM_ClearFlag_CC4(TIM3);
-//	}
-}
+//void TIM3_IRQHandler(void)
+//{
+////	if (LL_TIM_IsActiveFlag_UPDATE(TIM3))
+////	{
+////		t3_overflow_times++;
+////		//tim_irq_callback(TIM3_IT_Update);
+////		LL_TIM_ClearFlag_UPDATE(TIM3);
+////	}
+////	if (LL_TIM_IsActiveFlag_CC1(TIM3) == 1)
+////	{			
+////		LL_TIM_ClearFlag_CC1(TIM3);
+////		tim_irq_callback(TIM3_IT_CC1);
+////	}
+////	if (LL_TIM_IsActiveFlag_CC2(TIM3) == 1)
+////	{
+////		tim_irq_callback(TIM3_IT_CC2);
+////		LL_TIM_ClearFlag_CC2(TIM3);
+////	}
+////	if (LL_TIM_IsActiveFlag_CC3(TIM3) == 1)
+////	{
+////		tim_irq_callback(TIM3_IT_CC3);
+////		LL_TIM_ClearFlag_CC3(TIM3);
+////	}
+////	if (LL_TIM_IsActiveFlag_CC4(TIM3) == 1)
+////	{
+////		tim_irq_callback(TIM3_IT_CC4);
+////		LL_TIM_ClearFlag_CC4(TIM3);
+////	}
+//}
 
 void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
 	if (LL_TIM_IsActiveFlag_UPDATE(TIM1))

@@ -66,10 +66,6 @@ typedef void (*tim_irq_handler)(uint32_t id);
 class E_base{
 public:
 	E_base(TIM_TypeDef *TIMx);
-	
-//	void setCountMode(uint32_t CounterMode);
-	
-//	uint32_t GetSourceClock(void);
 protected:	
 	TIM_TypeDef  *_timx;		// TIM外设
 	uint8_t		 _tIndex;		// TIM索引
@@ -82,13 +78,16 @@ protected:
 	void _start();
 	void _setPerPsc();
 	void _setMode(void);
-	void _EnInterrupt();
+	void _EnInterrupt();		// 使能中断
 };
 
 class E_TIME:E_base{
 public:
 	E_TIME(TIM_TypeDef *TIMx):E_base(TIMx){};
-	void setMicrosecond(uint32_t us);
+	// 设置time周期,us
+	void setUs(uint32_t us);
+	void setMs(uint32_t ms);
+	// 设置time频率,hz
 	void setFrequency(uint32_t frq);
 	void start();
 	void stop();
@@ -115,7 +114,6 @@ private:
 __STATIC_INLINE uint8_t getIndex(E_PinID pin_id,uint32_t periph,const AF_FUN_S *emap)
 {
 	uint8_t i = 0;
-	uint32_t t;
 	while (!((0xffffff00 & (emap+i)->_periph_OR_ch) == periph) || !((emap+i)->_pin_id == pin_id))
 	{
 		if ((emap+i)->_pin_id == P_NC){

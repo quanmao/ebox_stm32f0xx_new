@@ -26,7 +26,8 @@
 #define DEMO_VER			"1.0"
 
 // ´®¿Ú£¬led
-E_UART usart(USART1,PA_9,PA_10);
+//E_UART usart(USART1,PA_9,PA_10);
+E_UART usart(USART1,PA_2,PA_3);
 E_GPIO led(PA_5);
 
 
@@ -65,7 +66,7 @@ static void PrintfLogo(void)
 }
 
 //E_base time(TIM2);
-E_TIME time(TIM6);
+E_TIME time(TIM17);
 
 class ld{
 	public:
@@ -85,9 +86,10 @@ void setup()
     ebox_init();
 	led.mode(OUTPUT_PP);
     usart.begin(115200);
+	PrintfLogo();
 		
 	//time.setFrequency(10);
-	time.setMicrosecond(500000);
+	time.setUs(500000);
 	//time.attach(&test,&ld::tet);
 	time.attach(&tset);
 	time.start();
