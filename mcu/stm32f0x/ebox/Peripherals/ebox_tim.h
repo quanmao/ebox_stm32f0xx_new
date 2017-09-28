@@ -58,6 +58,7 @@
 // 函数指针,指向LL_TIM_OC_SetCompareCH4(TIM_TypeDef *TIMx, uint32_t CompareValue) 函数
 typedef void (*pfun)(TIM_TypeDef *,uint32_t);
 typedef uint32_t (*pGetFun)(TIM_TypeDef *);
+typedef void (*pCCIT)(TIM_TypeDef *);
 
 // 中断绑定函数指针
 typedef void (*tim_irq_handler)(uint32_t id);
@@ -127,9 +128,7 @@ class E_PWM:E_base{
 public:
 	E_PWM(TIM_TypeDef *TIMx,E_PinID id):E_base(TIMx){
 		uint8_t _index;
-		uint32_t t = (uint32_t)TIMx + 1;
-		t = t+1;
-		t = 0xffffff00 & t;
+		uint32_t t = (uint32_t)TIMx;
 		E_PinBase *_pin;
 		_pin = new E_PinBase(id);
 		_index = getIndex(id,t,TIM_MAP);
@@ -180,37 +179,47 @@ extern uint16_t t2_overflow_times ;
 extern uint16_t t3_overflow_times ;
 extern uint16_t t4_overflow_times ;
 
+/**
+  *	1 在不做溢出处理的情况下:最低捕获频率 FRQmin = TIM_CLK/((ARR+1)*(PSC+1)) = 48000000/(65534+1)*1 = 742.43hz
+  *	2 超过138k,因为频繁进入中断，导致cpu卡死，无法处理其他任务
+  */
+
 class E_CAPTURE:E_base{
 public:
 	E_CAPTURE(TIM_TypeDef *TIMx,E_PinID id):E_base(TIMx){
 		uint8_t _index;
+		uint32_t t = (uint32_t)TIMx;
 		E_PinBase *_pin;
 		_pin = new E_PinBase(id);
-		_index = getIndex(id,TIM_MAP);
+		_index = getIndex(id,t,TIM_MAP);
 		_pin->mode(TIM_MAP[_index]._pin_date,TIM_MAP[_index]._pin_af);
 		_timx = TIMx;
 
 		_overflow_times = &t1_overflow_times;
 		_last_value 		= 0;
 
-
-		switch (TIM_MAP[_index]._periph_OR_ch)
+		t = (TIM_MAP[_index]._periph_OR_ch) - (uint32_t)_timx;
+		switch (t)
 		{
 		case TIMxCH1:
 			_channel = LL_TIM_CHANNEL_CH1;
 			_ICgetCompare = &LL_TIM_IC_GetCaptureCH1;
+			_CCEnableIT = &LL_TIM_EnableIT_CC1;
 			break;
 		case TIMxCH2:
 			_channel = LL_TIM_CHANNEL_CH2;
 			_ICgetCompare = &LL_TIM_IC_GetCaptureCH2;
+			_CCEnableIT = &LL_TIM_EnableIT_CC2;
 			break;
 		case TIMxCH3:
 			_channel = LL_TIM_CHANNEL_CH3;
 			_ICgetCompare = &LL_TIM_IC_GetCaptureCH3;
+			_CCEnableIT = &LL_TIM_EnableIT_CC3;
 			break;
 		case TIMxCH4:
 			_channel = LL_TIM_CHANNEL_CH4;
 			_ICgetCompare = &LL_TIM_IC_GetCaptureCH4;
+			_CCEnableIT = &LL_TIM_EnableIT_CC4;
 			break;
 		}
 	}
@@ -248,21 +257,22 @@ public:
 	}
 
 private:
-	uint32_t _channel;
-	uint16_t _duty;		// 占空比
-	uint8_t	 _accuracy; // 精度
-	__IO uint8_t	 _porlicy;	// 极性
+	uint32_t 		_channel;	// 通道
+	uint16_t 		_duty;		// 占空比
+	uint8_t	 		_accuracy; 	// 精度
+	__IO uint8_t	_porlicy;	// 极性
 
-	uint16_t   *_overflow_times;
-	__IO uint32_t   _last_value;
-	__IO uint32_t   _capture;	//捕获值
-	__IO bool	   _available;
+	uint16_t   		*_overflow_times;
+	__IO uint32_t	_last_value;	//最后值
+	__IO uint32_t   _capture;		//捕获值
+	__IO bool	   	_available;		//是否有效
 	__IO uint32_t   _high_capture;	//高电平捕获
 	__IO uint32_t   _low_capture;	//低电平捕获
 
-	uint32_t   _timeClock;
+	uint32_t   _timeClock;			//time时钟
 
-	pGetFun  _ICgetCompare;
+	pGetFun  _ICgetCompare;			//捕获函数
+	pCCIT	 _CCEnableIT;			//使能捕获中断
 
 	void _setMode(void);
 

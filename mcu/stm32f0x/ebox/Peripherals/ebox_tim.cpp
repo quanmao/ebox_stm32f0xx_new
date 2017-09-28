@@ -335,7 +335,7 @@ void E_PWM::begin(uint32_t frq,uint16_t duty){
 	_setMode();
 	SetFrequency(frq);
 	SetDutyCycle(duty);	
-			if (IS_TIM_BREAK_INSTANCE(_timx))
+	if (IS_TIM_BREAK_INSTANCE(_timx))
 	{
 		LL_TIM_EnableAllOutputs(_timx);
 	}
@@ -355,9 +355,6 @@ void E_PWM::SetFrequency(uint32_t frq)
 	_calculate(frq);
 
 	_accuracy = ((_period >= 100) && (_period < 1000))?1:0;
-	
-//	DBG("max Frequency = %d",GetMaxFrequency());
-//	_accuracy ? DBG(" accuracy is 0.01 \r\n"):DBG(" accuracy is 0.001 \r\n");
 	_setPerPsc();
 	SetDutyCycle(_duty);
 }
@@ -420,15 +417,16 @@ uint32_t E_PWM::GetMaxFrequency(void)
  *@retval   最大频率
 */
 void E_CAPTURE::begin(){
-	_period = 0xffff-1;
+	_period = 0xffff;
 	_prescaler = 1;
 	_timeClock 	= GetClock()/_prescaler;
 	_porlicy = LL_TIM_IC_POLARITY_RISING;
 	
 	_enableClock();
 	_setPerPsc();
-	E_base::_setMode();
-	//_EnInterrupt();
+	//E_base::_setMode();
+	_EnInterrupt();
+	
 	NVIC_SetPriority(TIM1_CC_IRQn, 0);
 	NVIC_EnableIRQ(TIM1_CC_IRQn);
 	
@@ -555,7 +553,7 @@ void E_CAPTURE::_setMode(){
   /* TIM1 interrupts set-up */
   /**************************/
   /* Enable the capture/compare interrupt for channel 1 */
-  LL_TIM_EnableIT_CC1(_timx);  
+  LL_TIM_EnableIT_CC2(_timx);  
   /***********************/
   /* Start input capture */
   /***********************/
@@ -580,11 +578,14 @@ void E_CAPTURE::SetPorlicy(uint8_t porlicy){
 */
 void E_CAPTURE::simple_event(void){
 	uint32_t    now = 0;
-	now = _ICgetCompare(_timx) + (*_overflow_times) * _period;  //get capture value
+	now = _ICgetCompare(_timx);// + (*_overflow_times) * _period;  //get capture value
 	if (now > _last_value)
 		_capture = now - _last_value;
 	else
-		_capture = 0xffffffff + now - _last_value;
+		_capture = 0xffff + now - _last_value;
+	//_capture = 0xffffffff + now - _last_value;
+
+	//_capture = _capture + 1;
 	_last_value = now;
 	_available = true;
 }
@@ -647,6 +648,14 @@ extern "C" {
 			/* TIM1 capture/compare interrupt processing(function defined in main.c) */
 			irq_handler(tim_irq_ids[TIM1IQR]);
 		}
+		if (LL_TIM_IsActiveFlag_CC2(TIM1) == 1)
+		{
+			/* Clear the update interrupt flag*/
+			LL_TIM_ClearFlag_CC2(TIM1);
+			/* TIM1 capture/compare interrupt processing(function defined in main.c) */
+			irq_handler(tim_irq_ids[TIM1IQR]);
+		}
+		
 	}
 #ifdef TIM2
 	void TIM2_IRQHandler(void)

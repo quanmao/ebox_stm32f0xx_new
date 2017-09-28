@@ -156,7 +156,6 @@ void TIM1_BRK_UP_TRG_COM_IRQHandler(void){
 	{
 		LL_TIM_ClearFlag_UPDATE(TIM1);
 		t1_overflow_times++;
-		//tim_irq_callback(TIM3_IT_Update);		
 	}	
 }
 
