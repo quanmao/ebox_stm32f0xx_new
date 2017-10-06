@@ -51,7 +51,11 @@ public:
     void mode(E_PinMode mode){
         E_PinBase::mode(mode,0);
     }
-
+	/* 1 set,reset效率最高，IO反转速度500ns
+	 * 2 toggle次之,约690ns
+	 * 3 write差点,800ns
+	 * 4 重载操作最差,类似PA0 = 1 反转约为1.5us。
+	 */
     void 		write(uint8_t val);
     void 		toggle(void);
     void 		set(void);
