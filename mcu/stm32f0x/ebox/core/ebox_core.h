@@ -83,11 +83,11 @@ static void get_chip_info(void);
 }
 
 class eBox{
-	public:
-    eBox(int i){};
-	  void sleep(void);
-		void stop(void);
-		void standby(void);		
+public:
+	eBox(int i){};
+	void sleep(void);
+	void stop(void);
+	void standby(void);
 };
 
 #endif

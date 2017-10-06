@@ -21,6 +21,7 @@
 #include "ebox_core.h"
 #include "stm32f0xx_ll_rcc.h"
 #include "stm32f0xx_ll_utils.h"
+#include "stm32f0xx_ll_cortex.h"
 
 #define systick_no_interrupt()  SysTick->CTRL &=0xfffffffd
 #define systick_interrupt()     SysTick->CTRL |=0x0002
@@ -38,7 +39,9 @@ extern "C" {
     uint16_t _multiple = 1;
     
     __IO uint64_t millis_seconds;//提供一个mills()等效的全局变量。降低cpu调用开销
-    static uint8_t count;
+		static uint8_t micro_para;
+    
+	//static uint8_t count;
 
     void nullFun(void){}
 
@@ -103,8 +106,10 @@ extern "C" {
          * 如果HCLK为8M，则systick最小计数时间为1/8us,
          */
         SysTick_Config(cpu.clock.hclk/1000);//  每隔 1ms产生一次中断
-        count = (uint8_t)(cpu.clock.hclk/1000000);
-        //LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);//systemticks clock；
+				LL_SYSTICK_SetClkSource(LL_SYSTICK_CLKSOURCE_HCLK);//systemticks clock；
+				micro_para = (uint8_t)(cpu.clock.hclk/1000000);//减少micros函数计算量
+
+        
         SystickCallBackRegister(nullFun);
 
 //        //统计cpu计算能力//////////////////
@@ -143,7 +148,8 @@ extern "C" {
          * 最终为 millis_seconds *1000 + ((cpu.clock.hclk/1000 - SysTick->VAL)/(cpu.clock.hclk/1000000)) =
          * (millis_seconds * 1000 + (1000 - (SysTick->VAL / cpu.clock.hclk)*1000000))
          */
-        return  (millis_seconds * 1000 + (1000 - (SysTick->VAL / SysTick->LOAD)*1000));
+        //return  (millis_seconds * 1000 + (1000 - (SysTick->VAL / SysTick->LOAD)*1000));
+				return  (millis_seconds * 1000 + (1000 - (SysTick->VAL / micro_para)));
     }
 
     uint64_t millis( void )
@@ -157,13 +163,13 @@ extern "C" {
         end = micros() + ms * 1000 - 3;
         while (micros() < end);
     }
-
+	// us延时,最小1.5us
     void  delay_us(uint16_t us)
     {
         uint32_t ticks;
         uint32_t told,tnow,tcnt=0;
 
-        ticks = (us-1) *count;             /* 计数周期 */
+        ticks = (us-1) *micro_para;             /* 计数周期 */
         tcnt = 0;
         told = SysTick->VAL;               /* 保存当前计数值 */
 
@@ -175,6 +181,14 @@ extern "C" {
             told = tnow;
         }
     }
+		
+		
+	// 太耗时，在F0上最少需要93us,废弃
+//	void delay_us1(uint64_t us)
+//    {
+//        uint64_t end = micros() + us - 3;
+//        while(micros() < end);
+//    }
 
 //    callback_fun_type systick_cb_table[1] = {0};
 //    __IO uint16_t systick_user_event_per_sec;//真实的值

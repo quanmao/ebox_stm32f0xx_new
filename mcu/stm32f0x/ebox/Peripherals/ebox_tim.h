@@ -70,8 +70,8 @@ public:
 protected:	
 	TIM_TypeDef  *_timx;		// TIM外设
 	uint8_t		 _tIndex;		// TIM索引
-	uint32_t 	 _period;		// 周期
-	uint32_t	 _prescaler;	// 分频
+	uint32_t 	 _period;		// 周期 0-65535
+	uint32_t	 _prescaler;	// TIM预分频值,赋值范围1-65536,程序最终会转为0-65535
 	
 	void _calculate(uint32_t frq);
 	void _setCountMode(uint32_t CounterMode);
@@ -180,7 +180,7 @@ extern uint16_t t3_overflow_times ;
 extern uint16_t t4_overflow_times ;
 
 /**
-  *	1 在不做溢出处理的情况下:最低捕获频率 FRQmin = TIM_CLK/((ARR+1)*(PSC+1)) = 48000000/(65534+1)*1 = 742.43hz
+  *	1 在不做溢出处理的情况下:最低捕获频率 FRQmin = TIM_CLK/((ARR+1)*(PSC+1)) = 48000000/(65535+1)*1 = 732.42hz
   *	2 超过138k,因为频繁进入中断，导致cpu卡死，无法处理其他任务
   */
 
