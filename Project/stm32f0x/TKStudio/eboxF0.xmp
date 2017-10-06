@@ -21,7 +21,6 @@
         <Filter Name="ebox">
             <Filter Name="core">
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_template.h" FileType="4" ro="0" bss="0" rw="0" />
-                <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\common.cpp" FileType="3" Output="common.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_core.cpp" FileType="3" Output="ebox_core.o" ro="0" bss="0" rw="0" />
                 <File RelativePath="..\..\..\mcu\stm32f0x\ebox\core\ebox_it.cpp" FileType="3" Output="ebox_it.o" ro="0" bss="0" rw="0" />
             </Filter>

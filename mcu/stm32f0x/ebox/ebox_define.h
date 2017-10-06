@@ -60,9 +60,11 @@ typedef void (*fun_onePara_t)(unsigned int);
 
 #define PI 3.1415926
 
+#define	abs(x)									((x) > 0 ? (x) : -(x))
+
 #define GetEndTime(timeOut)						millis_seconds + timeOut
 // 超时,返回1 否则返回0
-#define IsTimeOut(endTime)					millis_seconds >= endTime
+#define IsTimeOut(endTime)						millis_seconds >= endTime
 
 #define SetBit(data,offset)						((date) |= 1U << (offset))
 #define ResetBit(data,offset)					((date) &= ~(1U << (offset)))
