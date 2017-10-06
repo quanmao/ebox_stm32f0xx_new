@@ -95,18 +95,18 @@ int main(void)
 
 	while (1)
 	{
-		for (i=750;i<=1370000;){
+		for (i=730;i<=740;){
 			if (cap.available()){
 				usart.printf("\r\n capture frq is %.2f Hz \r\n",cap.get_wave_frq());
 				usart.printf("capture period is %.2f us \r\n",cap.get_wave_peroid());
 //				usart.printf("high_duty = %0.2f%%\r\n", cap.get_wave_high_duty());
 //				usart.printf("low duty  = %0.2f%%\r\n\r\n", cap.get_wave_low_duty());
-				i+=1000;
+				i+=1;
 				pwm1.SetFrequency(i);
 			}
 			delay_ms(5000);			
 		}
-		i = 750;
+		i = 730;
 	}
 }
 

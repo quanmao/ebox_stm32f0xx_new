@@ -552,6 +552,7 @@
             <File RelativePath="..\..\..\common\edriver\Driver_LED.cpp" FileType="3" Output="Driver_LED.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\common\edriver\LiquidCrystal_I2C.cpp" FileType="3" Output="LiquidCrystal_I2C.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\..\my-lib\drive\ebox\INA219.cpp" FileType="3" Output="INA219.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\common\edriver\F0\dht11.cpp" FileType="3" Output="dht11.o" ro="0" bss="0" rw="0" />
         </Filter>
         <Filter Name="util">
             <File RelativePath="..\..\..\common\util\calendar.cpp" FileType="3" Output="calendar.o" ro="0" bss="0" rw="0" />
@@ -593,6 +594,7 @@
             <File RelativePath="..\..\..\example\mo ban.cpp" FileType="3" Output="mo ban.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\example\1.capture.cpp" FileType="3" Output="1.capture.o" ro="0" bss="0" rw="0" />
             <File RelativePath="..\..\..\example\5.I2C search add.cpp" FileType="3" Output="5.I2C search add.o" ro="0" bss="0" rw="0" />
+            <File RelativePath="..\..\..\example\21.eDrive\dht11.cpp" FileType="3" Output="dht11.o" ro="0" bss="0" rw="0" />
         </Filter>
         <Filter Name="HAL">
             <File RelativePath="..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Src\stm32f0xx_hal.c" FileType="1" Output="stm32f0xx_hal.o" ro="0" bss="0" rw="0" />

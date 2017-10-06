@@ -154,7 +154,7 @@ int main(){
 //	PA5.mode(OUTPUT_PP);
 	ic.begin(100);
 	ina219.begin();
-	ina219.autoCalibration(16,100,100);
+	ina219.autoCalibration(16,1000,100);
 	displayInit();
 
 

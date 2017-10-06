@@ -37,6 +37,11 @@
 #define dht11_h
 
 #include "ebox.h"
+		#include "ebox_debug.h"
+
+#define LOW 0
+#define HIGH 1
+
 
 /*
  * Dht11
@@ -53,7 +58,8 @@ private:
     int temperature;
 
     // The pin over which we communicate with the sensor
-    Gpio *pin;
+//    Gpio *pin;
+	E_GPIO *pin;
 
 
 public:
@@ -74,9 +80,14 @@ public:
      * Constructs a new Dht11 object that communicates with a DHT11 sensor
      * over the given pin.
      */
-    Dht11(Gpio *p_pin)
+    // Dht11(Gpio *p_pin)
+    // {
+        // pin = p_pin;
+    // }
+	Dht11(E_GPIO *p_pin)
     {
         pin = p_pin;
+				//pin->mode(OUTPUT_PP);
     }
 
     /*
@@ -116,7 +127,7 @@ private:
          * Default value for the maximum number of iterations performed by
          * the waitForPinChange function.
          */
-        MAX_PIN_CHANGE_ITERATIONS = 10000,
+        MAX_PIN_CHANGE_ITERATIONS = 40000,
     };
 
 
@@ -131,12 +142,14 @@ private:
      *
      * This is a private method used only by the Dht11 class.
      */
+
     inline ReadStatus waitForPinChange(const int oldValue,
                                        unsigned  maxIterations =
                                            MAX_PIN_CHANGE_ITERATIONS) const
     {
         while ((--maxIterations > 0) && (pin->read() == oldValue))
         {
+
         }
 
         return (maxIterations > 0) ? OK : ERROR_TIMEOUT;

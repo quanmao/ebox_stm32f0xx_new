@@ -33,6 +33,7 @@
  *       * port from ardunio to eBox
  */
 #include "Dht11.h"
+#include "ebox_debug.h"
 
 #define BITS_IN(object) (8 * sizeof((object)))
 
@@ -59,7 +60,7 @@ enum
      * greater than this (in ms) will be considered a 1; otherwise they'll be
      * considered a 0.
      */
-    ONE_THRESHOLD = 40,
+    ONE_THRESHOLD = 15,
 
     /*
      * The number of bytes we expect from the sensor.  This consists of one
@@ -103,9 +104,10 @@ Dht11::ReadStatus Dht11::read()
     uint8_t    buffer[RESPONSE_SIZE] = { 0 };
     uint8_t    bitIndex              = BYTE_MS_BIT;
     ReadStatus status                = OK;
+		__IO uint32_t	highStart,j,p;
 
     // Request sample
-    pin->mode(OUTPUT_PP);
+    pin->mode(OUTPUT_PP_PU);
     pin->reset();
     delay_ms(START_SIGNAL_WAIT);
 
@@ -116,18 +118,20 @@ Dht11::ReadStatus Dht11::read()
 
     // Acknowledge or timeout
     // Response signal should first be low for 80us...
+		// 等待从低变高
+
     if ((status = this->waitForPinChange(LOW)) != OK)
     {
+				DBG("first low 80us NG \r\n");
         goto done;
     }
-
     // ... then be high for 80us ...
     if ((status = this->waitForPinChange(HIGH)) != OK)
     {
+				DBG("first high 80us NG \r\n");
         goto done;
     }
-
-    /*
+		/*
      * ... then provide 5 bytes of data that include the integral part of the
      * humidity, the fractional part of the humidity, the integral part of the
      * temperature, the fractional part of the temperature, and a checksum
@@ -135,42 +139,55 @@ Dht11::ReadStatus Dht11::read()
      */
     for (size_t i = 0; i < BITS_IN(buffer); i++)
     {
-        if ((status = this->waitForPinChange(LOW)) != OK)
-        {
-            goto done;
-        }
-
-        uint64_t highStart = micros();
-
-        if ((status = this->waitForPinChange(HIGH)) != OK)
-        {
-            goto done;
-        }
-
+				// low to high
+//        if ((status = this->waitForPinChange(LOW)) != OK)
+//        {
+//						DBG("50us NG \r\n");
+//            goto done;
+//        }
+				while(!pin->read());
+				j = 0;
+				while( pin->read() && j++ < 10000){
+					 delay_us(1);					
+				}
+				if(j>10000)
+				{
+						status = ERROR_TIMEOUT;
+						DBG("");
+						goto done;
+				}
+//				if ((status = this->waitForPinChange(1)) != OK)
+//        {
+//						DBG("timeout %d us, index = %d \r\n",(micros() - highStart),bitIndex);
+//            goto done;
+//        }
+				//DBG("j is %d \r\n",j);
         // 26-28 us = 0, 50 us = 1.  40 us is a good threshold between 0 and 1
-        if ((micros() - highStart) > ONE_THRESHOLD)
+				//j = (micros() - highStart);
+        if ( j > ONE_THRESHOLD)
         {
             buffer[i / BITS_PER_BYTE] |= (1 << bitIndex);
         }
-
         // Decrement or reset bitIndex
+				//DBG("%d \r\n",bitIndex);
         bitIndex = (bitIndex > 0) ? bitIndex - 1 : BYTE_MS_BIT;
     }
 
     // Check the checksum.  Only if it's good, record the new values.
-    if (buffer[CHECKSUM_INDEX] == (  buffer[HUMIDITY_INDEX]
-                                     + buffer[TEMPERATURE_INDEX]))
-    {
+//    if (buffer[CHECKSUM_INDEX] == (uint8_t)(  buffer[HUMIDITY_INDEX]
+//                                     + buffer[TEMPERATURE_INDEX]))
+//    {			
         // buffer[1] and buffer[3] should be the fractional parts of the
         // humidity and temperature, respectively, but the DHT11 doesn't
         // provide those values, so we omit them here.
         this->humidity    = buffer[HUMIDITY_INDEX];
         this->temperature = buffer[TEMPERATURE_INDEX];
-    }
-    else
-    {
-        status = ERROR_CHECKSUM;
-    }
+//    }
+//    else
+//    {
+//				DBG("r sum = %d, hum = %d, tem = %d \r\n",buffer[CHECKSUM_INDEX], buffer[HUMIDITY_INDEX],buffer[TEMPERATURE_INDEX]);
+//        status = ERROR_CHECKSUM;
+//    }
 
 done:
     return status;
