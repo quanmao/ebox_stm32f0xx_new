@@ -28,8 +28,9 @@ char ssid[] = "DVmaster";
 char password[] = "dvmaster456";
 
 
-#if 0
-#define ESP_DEBUG(...) uart1.printf(__VA_ARGS__)
+#if 1
+#include "ebox_debug.h"
+#define ESP_DEBUG(...) DBG("[ESP]"),DBG(__VA_ARGS__)
 #else
 #define  ESP_DEBUG(...)
 #endif
@@ -133,7 +134,7 @@ void net_data_state_process(char c)
 void ESP8266::get_char(void)
 {
     char c;
-    c = uart->receive();
+    c = uart->read();
     last_time = millis();
     if(wifi_mode == TRANSPARENT_MODE)
     {
@@ -178,7 +179,7 @@ void ESP8266::clear_rx_cdm_buffer(void)
  *
  * @warning parameter baud depends on the AT firmware. 9600 is an common value.
  */
-bool ESP8266::begin(Gpio *rst, Uart *uart, uint32_t baud)
+bool ESP8266::begin(E_GPIO *rst, E_UART *uart, uint32_t baud)
 {
     bool ret;
     this->rst   = rst;
@@ -186,7 +187,7 @@ bool ESP8266::begin(Gpio *rst, Uart *uart, uint32_t baud)
 
     this->uart->begin(baud);
 //    this->uart->attach_rx_interrupt(uart_interrupt_event);
-	  this->uart->attach(uart_interrupt_event);
+	  this->uart->attach(uart_interrupt_event,RxIrq);
     this->rst->mode(OUTPUT_PP);
 
     wifi_mode = NET_MODE;
@@ -506,9 +507,20 @@ bool ESP8266::get_joined_DeviceIP(char *list)
  *
  * @return the status.
  */
-bool ESP8266::get_IP_status(char *list)
+WIFI_STATUS_T ESP8266::get_IP_status()
 {
-    return exc_AT_CIPSTATUS(list);
+    char buf[100];
+    char status;
+    if( exc_AT_CIPSTATUS(buf)){
+        if(search_str(buf, "STATUS:") != -1){
+            get_str(buf, "STATUS:", 1, "\r\n", 1, &status);
+            status -= 0x30; 
+        }
+        else
+            status = 0;
+
+    }      
+    return (WIFI_STATUS_T)status;    
 }
 
 /**
@@ -1415,7 +1427,6 @@ bool ESP8266::exc_AT_CIPSTATUS(char *list)
     }
     wifi_mode = NET_MODE;
     return ret;
-    //    return recv_find_filter_str("OK", "\r\r\n", "\r\n\r\nOK", list,2000);
 }
 
 
@@ -1690,14 +1701,17 @@ bool ESP8266::set_AT_CIPSEND_single(const uint8_t *buffer, uint32_t len)
         }
         else
             ret = false;
+    }else{
+        ESP_DEBUG("SEND TIMEOUT!");
+        ret = false;
     }
 
     if (state == 1)
     {
         clear_rx_cdm_buffer();
         //       uart->put_string((char *)buffer,len);
-        uart->printf_length((const char *)buffer, len);
-        if(wait_cmd("SEND OK", TIMEOUT_TIME) == RECEIVED)
+        uart->write((const char *)buffer, (int)len);
+				if(wait_cmd("SEND OK", TIMEOUT_TIME) == RECEIVED)
         {
             if(search_str(rx_cmd_buf, "SEND OK") != -1) //
             {
@@ -1745,10 +1759,8 @@ bool ESP8266::set_AT_CIPSEND_multiple(uint8_t mux_id, const uint8_t *buffer, uin
     if (state == 1)
     {
         clear_rx_cdm_buffer();
-        for (uint32_t i = 0; i < len; i++)
-        {
-            uart->put_char(buffer[i]);
-        }
+        uart->write(buffer,len);
+
         if(wait_cmd("SEND OK", TIMEOUT_TIME) == RECEIVED)
         {
             if(search_str(rx_cmd_buf, "SEND OK") != -1) //
@@ -1987,19 +1999,10 @@ CMD_STATE_T ESP8266::wait_cmd(uint32_t wait_time)
     {
         if(millis() - time > wait_time)
         {
-            cmd_state = TIMEOUT;
+            cmd_state = TIME_OUT;
+            ESP_DEBUG("cmd TIMEOUT\r\n");
             break;
         }
-
-        //        if(
-        //            search_str(rx_cmd_buf,">") != -1                ||\
-        //            search_str(rx_cmd_buf,"OK") != -1               ||\
-        //            search_str(rx_cmd_buf,"FAIL") != -1             ||\
-        //            search_str(rx_cmd_buf,"EEROR") != -1            ||\
-        //            search_str(rx_cmd_buf,"ALREADY CONNECT") != -1  ||\
-        //            search_str(rx_cmd_buf,"Link is not") != -1      ||\
-        //            search_str(rx_cmd_buf,"Link is builded") != -1
-        //          )
         if(
             search_str(rx_cmd_buf, "OK"   ) != -1  || \
             search_str(rx_cmd_buf, "FAIL" ) != -1  || \
@@ -2011,7 +2014,7 @@ CMD_STATE_T ESP8266::wait_cmd(uint32_t wait_time)
             break;
         }
     }
-    print_cmd(cmd_state);
+//    print_cmd(cmd_state);
 
     return cmd_state;
 
@@ -2025,7 +2028,8 @@ CMD_STATE_T ESP8266::wait_cmd(const char *spacial_target, uint32_t wait_time)
     {
         if(millis() - time > wait_time)
         {
-            cmd_state = TIMEOUT;
+            cmd_state = TIME_OUT;
+            ESP_DEBUG("cmd TIMEOUT\r\n");
             break;
         }
 
@@ -2041,7 +2045,7 @@ CMD_STATE_T ESP8266::wait_cmd(const char *spacial_target, uint32_t wait_time)
             break;
         }
     }
-    print_cmd(cmd_state);
+//    print_cmd(cmd_state);
 
     return cmd_state;
 
@@ -2072,14 +2076,14 @@ void ESP8266::print_cmd(CMD_STATE_T &cmd)
         case RECEIVED:
             ESP_DEBUG("cmd RECVED\r\n");
             break;
-        case TIMEOUT:
+        case TIME_OUT:
             ESP_DEBUG("cmd TIMEOUT\r\n");
             break;
         }
 }
 void ESP8266::print_rx_buf()
 {
-    uart1.printf("----rx_cmd_buf----\r\n%s\r\n----end----", rx_cmd_buf);
+    uart->printf("----rx_cmd_buf----\r\n%s\r\n----end----", rx_cmd_buf);
 }
 /**
  * check rx ringbuffer status
@@ -2090,6 +2094,17 @@ void ESP8266::print_rx_buf()
 int  ESP8266::available()
 {
     return net_buf.available();
+}
+/**
+ * read one byte.
+ * @note must Coordinate available() use;!!!!!!!!!!!!
+ * @param buffer - the buffer of data to send.
+ * @param buf - the buffer of data to read.
+ * @retval len - the length of data readed.
+ */
+char ESP8266::read_one()
+{
+   return net_buf.read();
 }
 /**
  * Send data based on TCP or UDP builded already in single mode.
@@ -2115,6 +2130,26 @@ uint16_t ESP8266::read(unsigned char *buf)
     }
     return len;
 }
+///**
+// * Send data based on TCP or UDP builded already in single mode.
+// *
+// * @param buffer - the buffer of data to send.
+// * @param buf - the buffer of data to read.
+// * @retval len - the length of data readed.
+// */
+//uint16_t ESP8266::read_until(unsigned char *buf,char ch)
+//{
+//    int i=0;
+//    uint16_t len=0;
+//    while(buf[i] != ch)
+//    {
+//        if(available()){
+//            buf[i] = net_buf.read();
+//            i++;
+//        }
+//    }
+//    return len;
+//}
 
 /**
  * read data based on one of TCP or UDP builded already in multiple mode.

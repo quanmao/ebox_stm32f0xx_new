@@ -24,13 +24,24 @@
 
 #define RX_BUFFER_SIZE 1024
 #define NET_DATA_BUFFER_SIZE 1024
+typedef enum {
+    WIFI_NO_SHIELD        = 255,   // for compatibility with WiFi Shield library
+    WIFI_IDLE_STATUS      = 0,
+    WIFI_NO_SSID_AVAIL    = 1,
+    WIFI_SCAN_COMPLETED   = 2,
+    WIFI_CONNECTED        = 3,
+    WIFI_CONNECT_FAILED   = 4,
+    WIFI_CONNECTION_LOST  = 5,
+    WIFI_DISCONNECTED     = 6
+} WIFI_STATUS_T;
+
 
 typedef enum
 {
     WAITING = 0,
     RECEIVING = 1,
     RECEIVED  = 2,
-    TIMEOUT = 3
+    TIME_OUT = 3
 } CMD_STATE_T;
 #define TIMEOUT_TIME 2000
 
@@ -40,8 +51,6 @@ typedef enum
     CMD_MODE = 1,
     TRANSPARENT_MODE = 2
 } WIFI_MODE_T;
-
-
 typedef enum
 {
     NEED_PLUS = 0,
@@ -63,13 +72,14 @@ class ESP8266
 
 public:
     /////初始化函数///////////////////////////////////////////////////////////////////////
-    bool begin(Gpio *rst, Uart *uart, uint32_t baud);
+    bool begin(E_GPIO *rst, E_UART *uart, uint32_t baud);
     void hard_reset();
     bool join_ap(char *ssid, char *pwd);
     bool join_ap();
 
     ////顶层读写函数/////////////////////////////////////////////////////////////////////
     int         available();
+    char        read_one();
     uint16_t	read(unsigned char *buf);//返回长度信息
     uint16_t	read(uint8_t *mux_id, unsigned char *buf); //返回长度信息
     bool        send(const uint8_t *buffer, uint32_t len);
@@ -90,10 +100,10 @@ public:
     bool query_sta_netmask(char *msg);
     bool set_SoftAP_param(char *ssid, char *pwd, uint8_t chl = 7, uint8_t ecn = 4);
     bool get_joined_DeviceIP(char *list);
-    bool get_IP_status(char *list);
     bool get_local_IP(char *list);
     bool enable_MUX(void);
     bool disable_MUX(void);
+    WIFI_STATUS_T get_IP_status();
 
 
     bool create_TCP(char *addr, uint32_t port, uint32_t loca_port);
@@ -199,8 +209,8 @@ private:
 
 
     //硬件资源
-    Gpio    *rst;
-    Uart   *uart; /* The UART to communicate with ESP8266 */
+    E_GPIO   *rst;
+    E_UART  *uart; /* The UART to communicate with ESP8266 */
 
     friend void uart_interrupt_event(void);
     friend void net_data_state_process(char c);
