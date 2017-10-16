@@ -26,7 +26,7 @@
 
 #if USE_PRINTF
 //是否使用DEBUG,需要在ebox_debug.h文件中定义输出设备 1 使用  0 不使用
-#define EBOX_DEBUG  0
+#define EBOX_DEBUG  1
 #endif
 
 
@@ -43,7 +43,7 @@
 #define FLASH_OVERRIDE	1
 
 //是否使用超时,1 使用  0 不使用
-#define USE_TIMEOUT	1
+#define USE_TIMEOUT	0
 //是否使用内部参考电压 1 使用, 0 不使用
 #define USE_INTERVREF	0
 

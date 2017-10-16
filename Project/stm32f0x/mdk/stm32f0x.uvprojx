@@ -13,16 +13,16 @@
       <pCCUsed>5060300::V5.06 update 3 (build 300)::ARMCC</pCCUsed>
       <TargetOption>
         <TargetCommonOption>
-          <Device>STM32F030F4</Device>
+          <Device>STM32F072RB</Device>
           <Vendor>STMicroelectronics</Vendor>
           <PackID>Keil.STM32F0xx_DFP.1.5.0</PackID>
           <PackURL>http://www.keil.com/pack/</PackURL>
-          <Cpu>IRAM(0x20000000,0x1000) IROM(0x08000000,0x4000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
+          <Cpu>IRAM(0x20000000,0x4000) IROM(0x08000000,0x20000) CPUTYPE("Cortex-M0") CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
-          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F0xx_16 -FS08000000 -FL04000 -FP0($$Device:STM32F030F4$Flash\STM32F0xx_16.FLM))</FlashDriverDll>
+          <FlashDriverDll>UL2CM3(-S0 -C0 -P0 -FD20000000 -FC1000 -FN1 -FF0STM32F0xx_128 -FS08000000 -FL020000 -FP0($$Device:STM32F072RB$Flash\STM32F0xx_128.FLM))</FlashDriverDll>
           <DeviceId>0</DeviceId>
-          <RegisterFile>$$Device:STM32F030F4$Device\Include\stm32f0xx.h</RegisterFile>
+          <RegisterFile>$$Device:STM32F072RB$Device\Include\stm32f0xx.h</RegisterFile>
           <MemoryEnv></MemoryEnv>
           <Cmp></Cmp>
           <Asm></Asm>
@@ -32,7 +32,7 @@
           <SLE66CMisc></SLE66CMisc>
           <SLE66AMisc></SLE66AMisc>
           <SLE66LinkerMisc></SLE66LinkerMisc>
-          <SFDFile>$$Device:STM32F030F4$SVD\STM32F0x0.svd</SFDFile>
+          <SFDFile>$$Device:STM32F072RB$SVD\STM32F0x2.svd</SFDFile>
           <bCustSvd>0</bCustSvd>
           <UseEnv>0</UseEnv>
           <BinPath></BinPath>
@@ -137,7 +137,7 @@
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3>"" ()</Flash3>
+          <Flash3></Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -243,12 +243,12 @@
               <IRAM>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x1000</Size>
+                <Size>0x4000</Size>
               </IRAM>
               <IROM>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x4000</Size>
+                <Size>0x20000</Size>
               </IROM>
               <XRAM>
                 <Type>0</Type>
@@ -273,7 +273,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x4000</Size>
+                <Size>0x20000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -298,7 +298,7 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x1000</Size>
+                <Size>0x4000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
@@ -333,9 +333,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-              <Define>STM32F030x6 USE_FULL_LL_DRIVER</Define>
+              <Define>USE_FULL_LL_DRIVER STM32F072xB</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include;..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc;..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include;..\..\..\mcu\stm32f0x\ebox;..\..\..\mcu\stm32f0x\ebox\core;..\..\..\mcu\stm32f0x\ebox\Peripherals;..\..\..\common\util;..\..\..\common\edriver;..\..\..\common\network;..\..\..\common\fat;..\..\..\common\edriver\WiFi;..\..\..\user;..\..\..\common\util\printf;..\..\..\mcu\stm32f0x\ebox\mcu;..\..\..\common\edriver\F0;..\..\..\..\my-lib\drive\ebox</IncludePath>
+              <IncludePath>..\..\..\mcu\stm32f0x\Libraries\CMSIS\Include;..\..\..\mcu\stm32f0x\Libraries\STM32F0xx_HAL_Driver\Inc;..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Include;..\..\..\mcu\stm32f0x\ebox;..\..\..\mcu\stm32f0x\ebox\core;..\..\..\mcu\stm32f0x\ebox\Peripherals;..\..\..\common\util;..\..\..\common\edriver;..\..\..\common\network;..\..\..\common\fat;..\..\..\common\edriver\WiFi;..\..\..\user;..\..\..\common\util\printf;..\..\..\mcu\stm32f0x\ebox\mcu;..\..\..\common\edriver\F0;..\..\..\..\my-lib\drive\ebox;..\..\..\common\edriver\F0\WiFi</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -436,6 +436,44 @@
               <FileName>startup_stm32f030x6.s</FileName>
               <FileType>2</FileType>
               <FilePath>..\..\..\mcu\stm32f0x\Libraries\CMSIS\Device\ST\STM32F0xx\Source\Templates\arm\startup_stm32f030x6.s</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>0</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>0</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Aads>
+                    <interw>2</interw>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <thumb>2</thumb>
+                    <SplitLS>2</SplitLS>
+                    <SwStkChk>2</SwStkChk>
+                    <NoWarn>2</NoWarn>
+                    <uSurpInc>2</uSurpInc>
+                    <useXO>2</useXO>
+                    <uClangAs>2</uClangAs>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Aads>
+                </FileArmAds>
+              </FileOption>
             </File>
             <File>
               <FileName>startup_stm32f030x8.s</FileName>
@@ -878,7 +916,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
+                  <IncludeInBuild>1</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -1673,7 +1711,7 @@
                   <RVCTZI>0</RVCTZI>
                   <RVCTOtherData>0</RVCTOtherData>
                   <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>1</IncludeInBuild>
+                  <IncludeInBuild>0</IncludeInBuild>
                   <AlwaysBuild>2</AlwaysBuild>
                   <GenerateAssemblyFile>2</GenerateAssemblyFile>
                   <AssembleAssemblyFile>2</AssembleAssemblyFile>
@@ -2071,6 +2109,11 @@
               <FileName>printf.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\..\common\util\printf.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ringbuf.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\common\util\ringbuf.cpp</FilePath>
             </File>
           </Files>
         </Group>
@@ -3204,6 +3247,46 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+            <File>
+              <FileName>1.wifi_basic_at_test.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\example\19.WiFi\1.wifi_basic_at_test.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>wifi</GroupName>
+          <Files>
+            <File>
+              <FileName>ESP8266.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\common\edriver\F0\WiFi\ESP8266.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>ESP8266.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\common\edriver\F0\WiFi\ESP8266.h</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266_tcp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\common\edriver\F0\WiFi\esp8266_tcp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266_tcp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\common\edriver\F0\WiFi\esp8266_tcp.h</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266_udp.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\..\common\edriver\F0\WiFi\esp8266_udp.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266_udp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\..\..\common\edriver\F0\WiFi\esp8266_udp.h</FilePath>
             </File>
           </Files>
         </Group>

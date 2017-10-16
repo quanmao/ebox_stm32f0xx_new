@@ -28,9 +28,6 @@
 
 #include "target_mcu.h"
 #include "ebox_config.h"
-//#include "ebox_core.h"
-//#include "ebox_define.h"
-//#include "ebox_gpio.h"
 #include "stm32f0xx_ll_adc.h"
 #include "stm32f0xx_ll_dma.h"
 
@@ -44,7 +41,6 @@
 extern void ADC1_init(void);
 extern int get_channel(E_PinID pin);
 extern uint16_t analogin_read(uint32_t *channel);
-//extern void analogin_read(uint32_t *channel,uint16_t *buffer, uint16_t size);
 extern uint16_t analogin_read_voltage(uint16_t *channel);
 extern void DMA_configuration(void);
 extern uint16_t analog_read_temperature(void);
