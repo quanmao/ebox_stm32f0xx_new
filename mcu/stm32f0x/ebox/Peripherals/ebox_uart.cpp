@@ -8,6 +8,7 @@
 	1  2017/5/25  移除E_PinBase的构造函数，使用PIN_ID
 	2  2017/5/30	完善uart接口
 	3  2017/7/12	添加printf输出
+	4	 2017/10/16 添加uart2,修复uart2无法使能时钟bug
   ******************************************************************************
   * @attention
   *
@@ -120,9 +121,9 @@ void begin(uint32_t speed,uint8_t data_bit, uint8_t parity, float stop_bit,uint8
 */
 void E_UART::begin(uint32_t speed,uint32_t data_bit, uint32_t parity, uint32_t stop_bit,uint8_t use_dma)
 {
-	uint8_t index = getPeriphIndex((uint32_t)UARTx,UART_INFO);
+	uint8_t index = getPeriphIndex1((uint32_t)UARTx,UART_INFO);
 	// 使能时钟，初始化中断信息
-	LL_APB1_GRP2_EnableClock(UART_INFO[index]._rcc);
+	UART_INFO[index]._EnableClock(UART_INFO[index]._rcc);
 	serial_irq_init(UART_INFO[index]._irqIndex , (&E_UART::_irq_handler), (uint32_t)this);
 	NVIC_SetPriority(UART_INFO[index]._irq, 0);
 	NVIC_EnableIRQ(UART_INFO[index]._irq);
@@ -292,31 +293,29 @@ extern "C" {
 		}
 	}
 
-#if !(defined(STM32F030x6)||defined(STM32F031x6))
-//	void USART2_IRQHandler(void)
-//	{
-//		if (LL_USART_IsActiveFlag_RXNE(USART2) == SET )
-//		{
-//			// 调用接收中断回调函数
-//			if (usart_callback_table[1][0] != 0)
-//				usart_callback_table[1][0]();
-//			// 如果回调函数中没有读取数据，则将当前数据抛弃，准备下一次接收
-//			if (LL_USART_IsActiveFlag_RXNE(USART2) == SET )
-//			{
-//				LL_USART_RequestRxDataFlush(USART2);
-//			}
-//		}
-//		if (LL_USART_IsActiveFlag_TC(USART2) == SET)
-//		{
-//			// 清除忙标志，调用发送结束回调函数
-//			busy[1] = 0;
-//			if (usart_callback_table[1][1] != 0)
-//				usart_callback_table[1][1]();
-//			// 清除发送结束中断标志
-//			LL_USART_ClearFlag_TC(USART2);
-//			LL_DMA_DisableChannel(DMA1, LL_DMA_CHANNEL_4);
-//		}
-//	}
+#ifdef USART2_BASE
+	void USART2_IRQHandler(void)
+	{
+		if (LL_USART_IsActiveFlag_RXNE(USART2) == SET )
+		{
+			// 调用接收中断回调函数
+			irq_handler(serial_irq_ids[Irq2],RxIrq);
+			// 如果回调函数中没有读取数据，则将当前数据抛弃，准备下一次接收
+			if (LL_USART_IsActiveFlag_RXNE(USART2) == SET )
+			{
+				LL_USART_RequestRxDataFlush(USART2);
+			}
+		}
+		if (LL_USART_IsActiveFlag_TC(USART2) == SET)
+		{
+			// 清除忙标志，调用发送结束回调函数
+			//busy[1] = 0;
+			irq_handler(serial_irq_ids[Irq1],TxIrq);
+			// 清除发送结束中断标志
+			LL_USART_ClearFlag_TC(USART2);
+			//LL_DMA_DisableChannel(DMA1, LL_DMA_CHANNEL_4);
+		}
+	}
 #endif
 }
 
