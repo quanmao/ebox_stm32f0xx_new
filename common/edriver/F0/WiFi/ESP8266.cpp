@@ -3,6 +3,7 @@
  * author : shentq&link
  * version: V1.0
  * date   : 2016/03/18
+ * 2017/10/18 移植到eboxF0平台
  *
  * esp8266 library for eBOX.
  *
@@ -24,8 +25,8 @@
 #include <stdlib.h>
 
 
-char ssid[] = "DVmaster";
-char password[] = "dvmaster456";
+char ssid[] = "newifi_61E0";
+char password[] = "1qaz@WSX";
 
 
 #if 1
@@ -188,6 +189,7 @@ bool ESP8266::begin(E_GPIO *rst, E_UART *uart, uint32_t baud)
     this->uart->begin(baud);
 //    this->uart->attach_rx_interrupt(uart_interrupt_event);
 	  this->uart->attach(uart_interrupt_event,RxIrq);
+		this->uart->enable_irq(RxIrq);		// ebox f0 特有
     this->rst->mode(OUTPUT_PP);
 
     wifi_mode = NET_MODE;
@@ -997,7 +999,7 @@ bool ESP8266::set_AT_CWJAP(char *ssid, char *pwd)
     clear_rx_cdm_buffer();
     uart->printf("AT+CWJAP=\"%s\",\"%s\"\r\n", ssid, pwd);
 
-    if(wait_cmd(10000) == RECEIVED)
+    if(wait_cmd(40000) == RECEIVED)
     {
         if (search_str(rx_cmd_buf, "OK") != -1)
         {

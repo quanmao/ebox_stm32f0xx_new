@@ -12,6 +12,9 @@ Copyright 2015 shentq. All Rights Reserved.
 #include "ESP8266.h"
 #include "esp8266_tcp.h"
 
+E_UART usart(USART1,PA_9,PA_10);
+E_UART usart2(USART2,PA_2,PA_3);
+E_GPIO	PA4(PA_4);
 
 WIFI_TCP tcp(&wifi);
 
@@ -29,11 +32,11 @@ uint32_t count = 0;
 void setup()
 {
     ebox_init();
-    uart1.begin(115200);
-    uart1.printf("esp8266 tcp single client test\r\n");
-    uart1.printf("-------------------------------\r\n");
+    usart.begin(115200);
+    usart.printf("esp8266 tcp single client test\r\n");
+    usart.printf("-------------------------------\r\n");
 
-    wifi.begin(&PA4, &uart2, 115200);
+    wifi.begin(&PA4, &usart2, 115200);
     wifi.join_ap();
     tcp.begin();
 
@@ -47,11 +50,11 @@ int main(void)
     ret = tcp.connect(remote_ip, remote_port, local_port);
     if(ret)
     {
-        uart1.printf("connect ok!\r\n");
+        usart.printf("connect ok!\r\n");
     }
     else
     {
-        uart1.printf("connect failed!\r\n");
+        usart.printf("connect failed!\r\n");
 		
     }
 
@@ -61,14 +64,15 @@ int main(void)
         if(len)
         {
 
-            uart1.printf_length((char *)recv_buf, len);
+           // usart.printf_length((char *)recv_buf, len);
+						usart.write((char *)recv_buf, len);
 
         }
         if(count == 0)
         {
             ret = tcp.send((uint8_t *)send_buf, sizeof(send_buf));
             if(ret)
-                uart1.printf("send ok!\r\n");
+                usart.printf("send ok!\r\n");
         }
         count++;
         count %= 500000;

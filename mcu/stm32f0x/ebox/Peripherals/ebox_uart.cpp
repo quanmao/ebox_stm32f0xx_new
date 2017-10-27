@@ -300,6 +300,8 @@ extern "C" {
 		{
 			// 调用接收中断回调函数
 			irq_handler(serial_irq_ids[Irq2],RxIrq);
+			// 临时验证esp8266用，将串口二收到的数据，转发到串口一，方便观察
+		  //LL_USART_TransmitData8(USART1,(uint16_t)(USART2->RDR & (uint16_t)0x01FF));
 			// 如果回调函数中没有读取数据，则将当前数据抛弃，准备下一次接收
 			if (LL_USART_IsActiveFlag_RXNE(USART2) == SET )
 			{
@@ -310,7 +312,7 @@ extern "C" {
 		{
 			// 清除忙标志，调用发送结束回调函数
 			//busy[1] = 0;
-			irq_handler(serial_irq_ids[Irq1],TxIrq);
+			irq_handler(serial_irq_ids[Irq2],TxIrq);
 			// 清除发送结束中断标志
 			LL_USART_ClearFlag_TC(USART2);
 			//LL_DMA_DisableChannel(DMA1, LL_DMA_CHANNEL_4);

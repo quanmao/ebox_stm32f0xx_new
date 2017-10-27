@@ -76,6 +76,7 @@ typedef void (*fun_onePara_t)(unsigned int);
 #define GetUint8_t3(data)						((uint8_t*)(&(data)))[3]
 #define GetUint16_t0(data)						((uint16_t*)(&(data)))[0]
 #define GetUint16_t0(data)						((uint16_t*)(&(data)))[0]
+#define word(a,b)										((a<<8)|b)
 
 #endif
 

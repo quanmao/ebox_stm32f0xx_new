@@ -27,9 +27,7 @@ void setup()
     usart.begin(115200);
     usart.printf("esp8266 basic at cmd test\r\n");
     usart.printf("--------------\r\n");
-		
-		usart2.begin(115200);
-		usart2.printf("test");
+
     wifi.begin(&PA4, &usart2, 115200);
 
 }
