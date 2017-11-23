@@ -22,6 +22,7 @@
 #ifndef __EBOX_RTC_H_
 #define __EBOX_RTC_H_
 #include "ebox_core.h"
+#include "stm32f0xx_ll_rtc.h"
 
 
 /**
@@ -100,7 +101,7 @@ public:
 	void setDate(Date_T date);
 	void setTime(Time_T time);
 	
-	void setAlarm(Time_T time);
+	void setAlarm(Time_T time,uint32_t mask = LL_RTC_ALMA_MASK_DATEWEEKDAY);
 	
 	void getDateTime(date_time_t *datetime);
 	void getTime(Time_T *time);

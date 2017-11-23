@@ -279,10 +279,10 @@ void E_RTC::setTime(Time_T time)
 /**
  *@name     setAlarm
  *@brief    设置闹铃
- *@param    Time_T time 闹铃时间
+ *@param    Time_T time 闹铃时间,mask  ALARMA MASK
  *@retval   none
 */
-void E_RTC::setAlarm(Time_T time)
+void E_RTC::setAlarm(Time_T time,uint32_t mask)
 {
 	/*##-1- Disable RTC registers write protection ############################*/
 	LL_RTC_DisableWriteProtection(RTC);
@@ -292,7 +292,7 @@ void E_RTC::setAlarm(Time_T time)
 	/* Set Alarm to 12:00:25
 	   RTC Alarm Generation: Alarm on Hours, Minutes and Seconds (ignore date/weekday)*/
 	LL_RTC_ALMA_ConfigTime(RTC, __LL_RTC_CONVERT_BIN2BCD(time.Format12_24), __LL_RTC_CONVERT_BIN2BCD(time.Hours), __LL_RTC_CONVERT_BIN2BCD(time.Minutes), __LL_RTC_CONVERT_BIN2BCD(time.Seconds));
-	LL_RTC_ALMA_SetMask(RTC, LL_RTC_ALMA_MASK_DATEWEEKDAY);
+	LL_RTC_ALMA_SetMask(RTC, mask);
 
 	/* Enable Alarm*/
 	LL_RTC_ALMA_Enable(RTC);

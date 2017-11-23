@@ -25,11 +25,11 @@
 #include <stdlib.h>
 
 
-char ssid[] = "newifi_61E0";
-char password[] = "1qaz@WSX";
+char ssid[] = "";
+char password[] = "";
 
 
-#if 1
+#if 0
 #include "ebox_debug.h"
 #define ESP_DEBUG(...) DBG("[ESP]"),DBG(__VA_ARGS__)
 #else

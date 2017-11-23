@@ -113,8 +113,8 @@ static const AF_FUN_S UART_MAP[] ={
 	P_NC
 };
 
-static const Periph_S UART_INFO[] = {
-	USART1_BASE,LL_APB1_GRP2_PERIPH_USART1,USART1_IRQn,Irq1,
+static const Periph_SS UART_INFO[] = {
+	USART1_BASE,LL_APB1_GRP2_EnableClock,LL_APB1_GRP2_PERIPH_USART1,USART1_IRQn,Irq1,
 	NC
 };
 
